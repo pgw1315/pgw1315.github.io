@@ -1,0 +1,64 @@
+# --------------------------------------------------------------------------------
+# File created using 'AnGitIgnored' extensions for Visual Studio Code: 
+# https://marketplace.visualstudio.com/items?itemName=AnAppWiLos.angitignored 
+#-------------------------------------------------------------------------------
+
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,hexo
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,hexo
+
+### Hexo ###
+db.json
+public/
+.deploy_git/
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# Support for Project snippet scope
+!.vscode/*.code-snippets
+
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,hexo
+
+# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+
