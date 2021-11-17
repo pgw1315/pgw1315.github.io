@@ -7,7 +7,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,hexo
 
 ### Hexo ###
-db.json
+
 public/
 .deploy_git/
 
