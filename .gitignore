@@ -10,6 +10,7 @@
 
 public/
 .deploy_git/
+node_modules
 
 ### macOS ###
 # General
