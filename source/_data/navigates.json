@@ -1,0 +1,716 @@
+[
+  {
+    'list': [
+      {
+        'name': 'Google',
+        'url': 'https://www.google.com/ncr'
+      },
+      {
+        'name': 'YouTube',
+        'url': 'https://www.youtube.com/'
+      },
+      {
+        'name': '必应',
+        'url': 'https://cn.bing.com/'
+      },
+      {
+        'name': '测速网 - 在线网速测试,网络测速 - SpeedTest.cn',
+        'url': 'http://www.speedtest.cn/'
+      },
+      {
+        'name': '阿里云盘',
+        'url': 'https://www.aliyundrive.com/drive'
+      },
+      {
+        'name': '欢迎使用本网络',
+        'url': 'http://login.gwifi.com.cn/cmps/admin.php/api/login/?gw_address=172.16.1.1&gw_port=8060&gw_id=GWIFI-shanghaiguangda-1&ip=172.17.15.62&mac=50:1F:C6:C3:A5:BD'
+      },
+      {
+        'name': '优聚集 - 优聚集',
+        'url': 'https://ujuji.com/'
+      },
+      {
+        'name': '阿雷科技 资源导航 | 阿雷科技，阿雷资源导航，从此资源不求人，一个导航站就够了',
+        'url': 'https://aleikeji.com/'
+      },
+      {
+        'name': '阿里小站-阿里云盘资源共享站',
+        'url': 'https://alixiaozhan.net/'
+      }
+    ],
+    'name': '个人收藏'
+  },
+  {
+    'list': [],
+    'name': '书签菜单'
+  },
+  {
+    'list': [
+      {
+        'name': 'Django内置模板标签',
+        'url': 'https://www.liujiangblog.com/course/django/146'
+      },
+      {
+        'name': 'Django运行访问项目出现的问题:DisallowedHost at /Invalid HTTP_HOST header_will5451的博客-CSDN博客_disallowedhost',
+        'url': 'https://blog.csdn.net/will5451/article/details/53861092'
+      },
+      {
+        'name': 'Centos7 上的sqlite3安装及升级',
+        'url': 'https://zhuanlan.zhihu.com/p/110743704'
+      },
+      {
+        'name': 'Django 文档 | Django 文档 | Django',
+        'url': 'https://docs.djangoproject.com/zh-hans/3.2/'
+      },
+      {
+        'name': '关于python：django-urls.py根路径设置',
+        'url': 'https://www.codenong.com/34587009/'
+      },
+      {
+        'name': '阿里小站-阿里云盘资源共享站',
+        'url': 'https://alixiaozhan.net/'
+      },
+      {
+        'name': '第二步、如果能进入到.ssh文件目录下，则证明，之前生成过.ssh秘钥，可以直接使用里面的秘钥。',
+        'url': 'https://www.cnblogs.com/yuqiliu/p/12551258.html'
+      },
+      {
+        'name': '怎么更新升级node版本？',
+        'url': 'https://www.html.cn/qa/node-js/10667.html'
+      },
+      {
+        'name': '爬取Youtube搜索结果',
+        'url': 'https://sci.ci/2021/02/06/%E7%88%AC%E5%8F%96Youtube%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/'
+      },
+      {
+        'name': 'Python一秒钟搭建文件分享网页',
+        'url': 'https://www.jianshu.com/p/f8c31bbbc1ef'
+      },
+      {
+        'name': 'Linux环境变量的设置和查看方法 - 云+社区 - 腾讯云',
+        'url': 'https://cloud.tencent.com/developer/article/1630467'
+      },
+      {
+        'name': "解决NameError: name '__file__' is notdefined的方法_u011727262的博客-CSDN博客",
+        'url': 'https://blog.csdn.net/u011727262/article/details/102594003'
+      },
+      {
+        'name': 'Python:操作dict时避免出现KeyError的几种方法',
+        'url': 'https://www.polarxiong.com/archives/Python-%E6%93%8D%E4%BD%9Cdict%E6%97%B6%E9%81%BF%E5%85%8D%E5%87%BA%E7%8E%B0KeyError%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95.html'
+      },
+      {
+        'name': '实时模板变量',
+        'url': 'https://jetbrains.com.zh.xy2401.com/help/pycharm/template-variables.html'
+      },
+      {
+        'name': '最完美方案！如何防止 Selenium 被检测出来',
+        'url': 'https://jishuin.proginn.com/p/763bfbd33b73'
+      },
+      {
+        'name': '如果我们不设置元素等待，那怎么避免 因元素未加载出来而定位失败 的情况出现呢？',
+        'url': 'https://www.cnblogs.com/poloyy/p/12587729.html'
+      },
+      {
+        'name': 'Selenium（使用python）如何修改元素css样式',
+        'url': 'http://main.net.cn/faq/test-maintain/selenium/selenium-with-python-how-to-modify-an-element-css-style/'
+      },
+      {
+        'name': 'Selenium API-WebElement 属性 - SegmentFault 思否',
+        'url': 'https://segmentfault.com/a/1190000023507197'
+      },
+      {
+        'name': 'Shell 输入/输出重定向',
+        'url': 'https://www.runoob.com/linux/linux-shell-io-redirections.html'
+      },
+      {
+        'name': '如何在Mac上使用pyenv运行多个版本的Python',
+        'url': 'https://os.51cto.com/art/202005/617365.htm'
+      }
+    ],
+    'name': '阅读列表'
+  },
+  {
+    'list': [
+      {
+        'name': '蓝奏·云存储',
+        'url': 'https://pc.woozooo.com/mydisk.php'
+      },
+      {
+        'name': '彩云小译 - 在线翻译',
+        'url': 'https://fanyi.caiyunapp.com/#/'
+      },
+      {
+        'name': '奶牛快传 | 传文件 文件下载不限速',
+        'url': 'https://cowtransfer.com/'
+      }
+    ],
+    'name': '常用'
+  },
+  {
+    'list': [
+      {
+        'name': '精品MAC应用分享',
+        'url': 'http://xclient.info/?t=b56e94acb2d20ef9f50ac5dcebd680f1b7ab99a1'
+      },
+      {
+        'name': '麦氪派(WaitsUn.com | 爱情守望者)_精品Mac应用分享 | 爱情守望者 | Mac软件下载 | Mac游戏下载 | 破解软件| 破解游戏',
+        'url': 'https://www.waitsun.com/'
+      },
+      {
+        'name': 'MacWk - 精品mac软件下载',
+        'url': 'https://www.macwk.com/'
+      },
+      {
+        'name': '马可菠萝 - 分享你喜欢的MAC应用',
+        'url': 'https://www.macbl.com/'
+      },
+      {
+        'name': 'MACno1-提供安全免费的Mac软件_手机软件_部分windows软件分享博客',
+        'url': 'https://www.macno1.com/'
+      },
+      {
+        'name': '知您网(zhinin.com) - Mac软件下载 | Mac游戏下载 | 破解软件 | 破解游戏 | Crack',
+        'url': 'https://www.zhinin.com/'
+      },
+      {
+        'name': 'MacDownload',
+        'url': 'https://macdownload.org/homepage'
+      },
+      {
+        'name': 'MacDrop - Cracked Mac Apps & Games',
+        'url': 'https://macdrop.net/'
+      },
+      {
+        'name': 'Haxmac | Cracked Mac Apps Store',
+        'url': 'https://haxmac.cc/'
+      },
+      {
+        'name': 'Digit77.com | 海量精品Mac应用免费分享',
+        'url': 'https://www.digit77.com/'
+      }
+    ],
+    'name': 'Mac'
+  },
+  {
+    'list': [
+      {
+        'name': 'IPIP.NET_最专业的 IP 地址库_IPIP.NET',
+        'url': 'https://www.ipip.net/'
+      },
+      {
+        'name': '在线工具- 好用的工具箱_爱资料',
+        'url': 'http://tool.apizl.com/'
+      },
+      {
+        'name': '1024程序员开发工具箱 - 1024Tools',
+        'url': 'https://1024tools.com/'
+      },
+      {
+        'name': '在线工具 - 程序员的工具箱',
+        'url': 'https://tool.lu/'
+      },
+      {
+        'name': '优 聚 集 | 优聚集',
+        'url': 'https://ujuji.com/'
+      },
+      {
+        'name': '网盘搜索',
+        'url': 'http://hao.misiai.com/#/'
+      },
+      {
+        'name': 'TraceRoute路由查询_IPIP.NET',
+        'url': 'https://tools.ipip.net/traceroute.php'
+      },
+      {
+        'name': 'Ping查询_IPIP.NET',
+        'url': 'https://tools.ipip.net/newping.php'
+      },
+      {
+        'name': '免费在线抠图 - 一键快速去除图片背景',
+        'url': 'https://www.apowersoft.cn/remove-background-online'
+      },
+      {
+        'name': 'Javascript在线解压缩 - 在线工具',
+        'url': 'https://tool.lu/js/'
+      },
+      {
+        'name': '在线PS | Photopea',
+        'url': 'https://www.photopea.com/'
+      },
+      {
+        'name': 'Bigjpg - AI人工智能图片无损放大 - 使用人工智能深度卷积神经网络(CNN)无损放大图片',
+        'url': 'https://bigjpg.com/'
+      },
+      {
+        'name': 'AI Image Upscaler - Enlarge Images & Photos Online forFree',
+        'url': 'https://icons8.com/upscaler'
+      },
+      {
+        'name': 'Youtube视频下载 - 免费在线 YouTube 下载器',
+        'url': 'https://zh.savefrom.net/7/'
+      },
+      {
+        'name': 'AI智能在线抠图',
+        'url': 'http://matting.deeplor.com/#/'
+      },
+      {
+        'name': 'Convert document, image, video and audio files online',
+        'url': 'https://www.aconvert.com/'
+      },
+      {
+        'name': 'The Best IP Address, Email and Networking Tools - IPAddress.com',
+        'url': 'https://www.ipaddress.com/'
+      },
+      {
+        'name': '在线免费制作Logo，定制专属于你的Logo设计 – DesignEvo',
+        'url': 'https://www.designevo.com/cn/apps/logo/'
+      },
+      {
+        'name': '制作ico图标 | 在线ico图标转换工具 方便制作favicon.ico - 比特虫 - Bitbug.net',
+        'url': 'https://www.bitbug.net/'
+      },
+      {
+        'name': '在线免费制作Logo，定制专属于你的Logo设计 – DesignEvo',
+        'url': 'https://www.designevo.com/cn/logo-maker/'
+      },
+      {
+        'name': '艺术字体转换器 艺术字体在线生成器',
+        'url': 'http://www.akuziti.com/'
+      },
+      {
+        'name': 'Cool Backgrounds | 生成背景图片',
+        'url': 'https://coolbackgrounds.io/?rel=appionn'
+      },
+      {
+        'name': 'PDF转Word | 免费在线PDF转Word | PDF转Word转换器 | PDF转化速度快 | 首页',
+        'url': 'https://www.alltoall.net/'
+      },
+      {
+        'name': '人声伴奏提取 - LALAL.AI: 100% AI-Powered Vocal and Instrumental TracksRemoval',
+        'url': 'https://www.lalal.ai/'
+      },
+      {
+        'name': 'SVG转PNG – 在线将SVG文档转换成至PNG',
+        'url': 'https://svgtopng.com/zh/'
+      },
+      {
+        'name': '色輪、調色盤產生器 | Adobe Color',
+        'url': 'https://color.adobe.com/zh/create/color-wheel'
+      },
+      {
+        'name': '海外网红营销平台-Youtube网红营销-NoxInfluencer',
+        'url': 'https://cn.noxinfluencer.com/'
+      },
+      {
+        'name': 'CrxDL - Chrome浏览器扩展插件CRX下载网',
+        'url': 'https://crxdl.com/'
+      }
+    ],
+    'name': '在线工具'
+  },
+  {
+    'list': [
+      {
+        'name': '恩京的书房',
+        'url': 'https://www.enjing.com/'
+      },
+      {
+        'name': 'Kindlebook|mobi,epub,azw,azw3,pdf格式Kindle电子书下载',
+        'url': 'https://kindlebookfor.me/'
+      },
+      {
+        'name': '淇淇有料 - 一个提供pdf电子书免费下载和分享小说、简历模板、PPT模板、教案教材的网站',
+        'url': 'http://77ebooks.com/'
+      },
+      {
+        'name': '看帮网 - 精品全本电子书在线阅读及txt下载网。',
+        'url': 'https://www.kanbang.cc/'
+      },
+      {
+        'name': '资源分享 | mobi，epub，azw3，蜻蜓，喜马拉雅，得到课程分享',
+        'url': 'http://www.mysharelist.cn/'
+      },
+      {
+        'name': '琳宝书屋 | 精选好书 分享阅读',
+        'url': 'https://linbaoshuwu.com/'
+      }
+    ],
+    'name': '电子书'
+  },
+  {
+    'list': [
+      {
+        'name': '登录 — 牛牛',
+        'url': 'https://xniuniu.xyz/auth/login'
+      },
+      {
+        'name': '登入 — UU☁️',
+        'url': 'https://www.uuyun.one/auth/login'
+      }
+    ],
+    'name': '机场'
+  },
+  {
+    'list': [
+      {
+        'name': 'Greasy Fork - 安全、实用的用户脚本大全',
+        'url': 'https://greasyfork.org/zh-CN'
+      },
+      {
+        'name': '老殁 - 免费推荐优秀软件',
+        'url': 'https://www.mpyit.com/'
+      },
+      {
+        'name': '大眼仔旭 - 专注视频剪辑、解压、录屏、思维导图等办公资源分享',
+        'url': 'http://www.dayanzai.me/'
+      },
+      {
+        'name': 'ZAPRO·杂铺|发现美好，分享快乐！',
+        'url': 'https://tmioe.com/'
+      },
+      {
+        'name': '小众软件 - 分享免费、小巧、实用、有趣、绿色的软件',
+        'url': 'https://www.appinn.com/'
+      },
+      {
+        'name': '异次元软件世界 - 软件改变生活！',
+        'url': 'https://www.iplaysoft.com/'
+      },
+      {
+        'name': '（Chrome插件）谷歌浏览器插件网-提供Chrome插件、扩展、应用下载及安装指南',
+        'url': 'https://www.chajian5.com/'
+      },
+      {
+        'name': 'v1tx - 发现实用工具与软件',
+        'url': 'https://www.v1tx.com/'
+      },
+      {
+        'name': 'Crx4Chrome - Download CRX for Chrome Apps & Extensions',
+        'url': 'https://www.crx4chrome.com/'
+      },
+      {
+        'name': '果核剥壳 - 还原软件的本质',
+        'url': 'https://www.ghxi.com/'
+      }
+    ],
+    'name': '软件'
+  },
+  {
+    'list': [
+      {
+        'name': 'Beautiful Free Images & Pictures | Unsplash',
+        'url': 'https://unsplash.com/'
+      },
+      {
+        'name': '免费素材图片 · Pexels',
+        'url': 'https://www.pexels.com/zh-cn/'
+      },
+      {
+        'name': '壁纸 - wallhaven.cc',
+        'url': 'https://wallhaven.cc/'
+      },
+      {
+        'name': 'CleanPNG - HD png图片和插图。免费无限下载',
+        'url': 'https://www.cleanpng.com/'
+      },
+      {
+        'name': '免费正版高清图片素材库 超过1.9百万张优质图片和视频素材可供免费使用和下载 - Pixabay',
+        'url': 'https://pixabay.com/zh/'
+      },
+      {
+        'name': 'CC零图片网首页',
+        'url': 'https://www.cc0.cn/'
+      },
+      {
+        'name': 'Free high resolution photography - Life of Pix - Home',
+        'url': 'https://www.lifeofpix.com/'
+      },
+      {
+        'name': 'VisualHunt',
+        'url': 'https://visualhunt.com/'
+      },
+      {
+        'name': '【图精灵】_免费PNG图片下载_高清背景图片素材_自由设计',
+        'url': 'http://616pic.com/'
+      },
+      {
+        'name': 'Food Pictures • Foodiesfeed • Free Food Photos',
+        'url': 'https://www.foodiesfeed.com/'
+      },
+      {
+        'name': 'PNG images with transparent background | Free PNG images clipart',
+        'url': 'https://pngimg.com/'
+      }
+    ],
+    'name': '图片'
+  },
+  {
+    'list': [
+      {
+        'name': 'iconfont-阿里巴巴矢量图标库',
+        'url': 'https://www.iconfont.cn/home/index?spm=a313x.7781069.1998910419.2'
+      },
+      {
+        'name': 'iconfinder-图标查找',
+        'url': 'https://www.iconfinder.com/'
+      },
+      {
+        'name': 'LOGO设计神器！人工智能为您在线设计LOGO，设计名片，打造完整企业VI',
+        'url': 'https://www.logosc.cn/'
+      },
+      {
+        'name': 'iconstore-免费的图标',
+        'url': 'https://iconstore.co/'
+      },
+      {
+        'name': 'Free Vectors, Stock Photos & PSD Downloads | Freepik',
+        'url': 'https://www.freepik.com/'
+      },
+      {
+        'name': 'icons8',
+        'url': 'https://icons8.com/'
+      },
+      {
+        'name': 'mac下载素材下载-专业图片素材与设计素材免费打包下载',
+        'url': 'https://sc.macz.com/'
+      },
+      {
+        'name': '字由-设计师必备字体利器',
+        'url': 'https://www.hellofont.cn/home'
+      },
+      {
+        'name': 'DaFont - 免费字体',
+        'url': 'https://www.dafont.com/'
+      },
+      {
+        'name': '100font.com - 免版权字体下载、免费商用字体下载网站',
+        'url': 'https://www.100font.com/'
+      },
+      {
+        'name': '免费矢量艺术，剪贴画',
+        'url': 'https://www.illustac-cn.com/'
+      },
+      {
+        'name': 'unDraw - Open source illustrations for any idea',
+        'url': 'https://undraw.co/'
+      },
+      {
+        'name': '魔音网_背景音乐_音效配乐_短视频BGM_轻音乐纯音乐_免费素材下载',
+        'url': 'http://moyimusic.com/'
+      }
+    ],
+    'name': '素材'
+  },
+  {
+    'list': [
+      {
+        'name': 'bt天堂 - 最新电影磁力下载网站',
+        'url': 'https://www.jsr9.com/'
+      },
+      {
+        'name': '就爱那片儿_BT电影下载',
+        'url': 'https://www.inapian.com/index.html'
+      },
+      {
+        'name': '91美剧网 | 在线美剧天堂,最新美剧资源,高清美剧在线观看',
+        'url': 'https://91mjw.com/'
+      },
+      {
+        'name': '没事影院-YY6042玄天影视-最新电影-热播电视剧-免费在线观看',
+        'url': 'http://www.ythfjs.com/'
+      },
+      {
+        'name': '蒙面大侠影视_超清电影电视剧_最新电影免费在线观看',
+        'url': 'https://www.mengmiandaxia.com/'
+      },
+      {
+        'name': '新奇遇电影网_最新电影电视剧高清视频手机在线观看',
+        'url': 'https://www.newqiyu.com/'
+      },
+      {
+        'name': 'BT电影天堂-迅雷BT种子下载|高清电影下载',
+        'url': 'http://btbtdy3.com/'
+      },
+      {
+        'name': '比特大雄_BT电影天堂_最新720P、1080P高清电影BT种子免注册下载网站',
+        'url': 'https://www.btdx8.com/'
+      },
+      {
+        'name': '高清电台|高清电影|电影字幕|在线播放|在线点播|磁力链|高清美剧|BT种子下载聚合网站',
+        'url': 'https://gaoqing.fm/'
+      },
+      {
+        'name': '飞极速在线-飞极速官网-飞极速快线-飞极速APP',
+        'url': 'http://www.feijisu5.com/'
+      },
+      {
+        'name': '电视直播_全网电影电视剧免费在线观看 - 全视频TV',
+        'url': 'http://www.qsptv.net/'
+      },
+      {
+        'name': '磁力天堂-为您提供超清蓝光、1280高清电影、720p电影下载',
+        'url': 'https://www.clgod.com/'
+      }
+    ],
+    'name': '影片'
+  },
+  {
+    'list': [
+      {
+        'name': 'CSS 参考 - CSS（层叠样式表） | MDN',
+        'url': 'https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference'
+      },
+      {
+        'name': 'css素材 - Google 搜索',
+        'url': 'https://www.google.com/search?sxsrf=ALeKk03-udQIi7UKnE3_NKxTZJHUlKu0BQ%3A1610862098731&source=hp&ei=Es4DYPnDKsK8afKsoJgE&iflsig=AINFCbYAAAAAYAPcIsrpw1sXw-qJa17rBKDHWxmQRCMO&q=css+%E7%B4%A0%E6%9D%90&oq=css+%E7%B4%A0%E6%9D%90&gs_lcp=CgZwc3ktYWIQAzIFCAAQywEyBQgAEMsBMgQIABAMMgIIADIECAAQDDIFCAAQywEyBQgAEMsBMgUIABDLATIECAAQDDIECAAQDDoECCMQJ1CuLVifcmDyc2gLcAB4AIAB3gKIAekZkgEGMi0xMi4xmAEAoAEBqgEHZ3dzLXdpeg&sclient=psy-ab&ved=0ahUKEwj5lLP5oKLuAhVCXhoKHXIWCEMQ4dUDCAc&uact=5'
+      },
+      {
+        'name': '在线HTTP接口测试 - HTTP GET/POST模拟请求测试工具,JSON模拟请求',
+        'url': 'https://www.sojson.com/http/test.html'
+      },
+      {
+        'name': 'PHP: PHP 手册 - Manual',
+        'url': 'https://www.php.net/manual/zh/index.php'
+      },
+      {
+        'name': 'Python 语言参考手册 — Python 3.9.1 文档',
+        'url': 'https://docs.python.org/zh-cn/3/reference/index.html'
+      },
+      {
+        'name': 'Beautiful Soup 4.4.0 文档 — BeautifulSoup 4.2.0 documentation',
+        'url': 'https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/'
+      },
+      {
+        'name': 'Requests: 让 HTTP 服务人类 — Requests 2.18.1 文档',
+        'url': 'https://docs.python-requests.org/zh_CN/latest/'
+      },
+      {
+        'name': 'Python 基础教程 | 菜鸟教程',
+        'url': 'https://www.runoob.com/python/python-tutorial.html'
+      },
+      {
+        'name': 'Pillow — Pillow (PIL Fork) 8.4.0 文档',
+        'url': 'https://www.osgeo.cn/pillow/index.html'
+      },
+      {
+        'name': 'Selenium with Python中文翻译文档 —Selenium-Python中文文档 2 documentation',
+        'url': 'https://selenium-python-zh.readthedocs.io/en/latest/'
+      },
+      {
+        'name': '爬虫工具库-spidertools.cn',
+        'url': 'https://spidertools.cn/#/'
+      },
+      {
+        'name': 'Getting Started —mutagen',
+        'url': 'https://mutagen.readthedocs.io/en/latest/user/gettingstarted.html'
+      },
+      {
+        'name': 'Django 教程 | 菜鸟教程',
+        'url': 'https://www.runoob.com/django/django-tutorial.html'
+      },
+      {
+        'name': 'Bootstrap4 安装使用 | 菜鸟教程',
+        'url': 'https://www.runoob.com/bootstrap4/bootstrap4-install.html'
+      },
+      {
+        'name': 'Django 文档 | Django 文档 | Django',
+        'url': 'https://docs.djangoproject.com/zh-hans/3.2/'
+      },
+      {
+        'name': 'Bootstrap 4 关于_Bootstrap中文网',
+        'url': 'https://getbootstrap.net/docs/getting-started/introduction/'
+      }
+    ],
+    'name': '开发'
+  },
+  {
+    'list': [
+      {
+        'name': 'Freenom-免费域名注册',
+        'url': 'https://my.freenom.com/clientarea.php'
+      },
+      {
+        'name': 'Vultr ',
+        'url': 'https://my.vultr.com/'
+      },
+      {
+        'name': '阿里云-轻量应用服务器管理控制台',
+        'url': 'https://swas.console.aliyun.com/?spm=5176.6660585.774526198.1.59016bf8l34qcD&accounttraceid=506a63f9e60343aab89359eb31e0152bqodf#/servers'
+      },
+      {
+        'name': 'Hostinger-域名注册',
+        'url': 'https://hpanel.hostinger.com/'
+      },
+      {
+        'name': 'Cloudflare - 域名解析',
+        'url': 'https://dash.cloudflare.com/cbc912f8b2821ac6664c39aa0023405e'
+      },
+      {
+        'name': 'Vultr VPS所有机房的测试IP、测试文件和官方演示地址整理汇总 - Vultr中文网',
+        'url': 'https://www.vultrcn.com/2.html'
+      },
+      {
+        'name': 'ImgBB — 免费图片存取/上传图片',
+        'url': 'https://imgbb.com/'
+      }
+    ],
+    'name': '建站'
+  },
+  {
+    'list': [
+      {
+        'name': 'Gmail',
+        'url': 'https://mail.google.com/mail/u/0/#inbox'
+      },
+      {
+        'name': '照片 - Google 照片',
+        'url': 'https://photos.google.com/?pageId=none'
+      },
+      {
+        'name': 'Google 云端硬盘',
+        'url': 'https://drive.google.com/drive/my-drive'
+      },
+      {
+        'name': 'Google 文档',
+        'url': 'https://docs.google.com/document/u/0/'
+      },
+      {
+        'name': 'Google 表格',
+        'url': 'https://docs.google.com/spreadsheets/u/0/'
+      },
+      {
+        'name': 'Google 信息中心',
+        'url': 'https://myaccount.google.com/dashboard?pli=1'
+      },
+      {
+        'name': '下载您的数据',
+        'url': 'https://takeout.google.com/'
+      },
+      {
+        'name': 'API信息中心 - MyYoutube',
+        'url': 'https://console.developers.google.com/apis/dashboard?project=myyoutube-208610&folder&organizationId&duration=PT1H'
+      },
+      {
+        'name': '保存的密码',
+        'url': 'https://passwords.google.com/?rapt=AEjHL4NjaEB2A15w2gAb2yhffGCCqifzWqYW8762b_slbilAp7itzMdEbjM-iZiWYI0I3KGlITyZPtBWOeJInJau27BXKyL5AQ'
+      },
+      {
+        'name': 'SearchConsole新版',
+        'url': 'https://search.google.com/search-console?utm_source=wmx&utm_medium=navigation-panel&resource_id=https://xiaowei.cf/'
+      },
+      {
+        'name': 'Google Keep',
+        'url': 'https://keep.google.com/u/0/'
+      },
+      {
+        'name': 'YouTube',
+        'url': 'https://www.youtube.com/channel/UCHDn7_POz2nDUqCBGUffHNA'
+      },
+      {
+        'name': 'Google 翻译',
+        'url': 'https://translate.google.cn/?hl=zh-CN&tab=wT&authuser=0'
+      }
+    ],
+    'name': 'Google'
+  }
+]
