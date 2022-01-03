@@ -3,13 +3,75 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Title</title>
+    <style>
+        body {
+            padding-top: 3rem;
+
+        }
+        .bookmark-img{
+            width: 25px;
+            height: 25px;
+        }
+    </style>
+    <!-- Web字体 + CSS -->
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
+    </head>
+
+    <!-- SVG + JS框架 -->
+    <head>
+        <script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.11.2/js/v4-shims.js"></script>
+    </head>
+
+
 </head>
 <body>
-$END$
 
-<!-- 新 Bootstrap4 核心 CSS 文件 -->
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<div class="container">
+
+
+    <div class="accordion" id="accordionExample">
+
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+
+                    <i class="fas fa-angle-down"></i>
+                    <span style="margin-left: 0.5rem">常用</span>
+
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+
+                        <a target="_blank" href="https://www.google.com/ncr"
+                           class="list-group-item list-group-item-action">
+                            <img class="bookmark-img" src="https://www.cdnpkg.com/favicon.ico" alt="icon">
+                            <span style="margin-left: 0.5rem">Google</span></a>
+                        <a target="_blank" href="https://www.baidu.com"
+                           class="list-group-item list-group-item-action">
+                            <i class="fab fa-alipay"></i>
+                            <span style="margin-left: 0.5rem">支付宝</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->

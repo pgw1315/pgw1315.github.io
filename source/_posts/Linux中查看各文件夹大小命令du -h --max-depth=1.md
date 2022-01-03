@@ -1,9 +1,10 @@
 ---
 title: Linux中查看各文件夹大小命令du -h --max-depth=1
 author: Will Holmes
-categories: Linux学习
+categories: Linux
 tags:
-  - Linux学习
+  - Linux
+  - 文件管理
 date: 2021-11-21 01:27:07
 ---
 
@@ -70,16 +71,15 @@ du -0h user
 du -s /home/linux
   
 **11>查看各文件夹大小:du -h --max-depth=1**
-![](https://img-blog.csdn.net/20130827191928796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvb3V5YW5nX3Blbmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)  
  查看指定目录：
  代码如下：  其中 /path表示路径
    
-```
+```bash
 du -h --max-depth=1 /path
 ```
  具体如下所示：
   
-```
+```bash
 root@ubuntu4146:~# du -h --max-depth=1 /data/
 1.1G	/data/gitlabDataa
 8.0K	/data/test
@@ -90,10 +90,9 @@ root@ubuntu4146:~# du -h --max-depth=1 /data/
 1.1T	/data/
 ```
   
-![](https://img-blog.csdn.net/20171104150721233?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvb3V5YW5nX3Blbmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
   
-       我们发现  /data/home/ 目录占用最多，因此我们可以继续看那个目录占用的最多，如下所示：
-```
+ 我们发现  /data/home/ 目录占用最多，因此我们可以继续看那个目录占用的最多，如下所示：
+```bash
 root@ubuntu4146:/data/home# du -h --max-depth=1 /data/home/
 141G	/data/home/wzm
 62G	/data/home/lwc
@@ -107,18 +106,7 @@ root@ubuntu4146:/data/home# du -h --max-depth=1 /data/home/
 809G	/data/home/
 root@ubuntu4146:/data/home# 
 ```
-![](https://img-blog.csdn.net/20171104150955170?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvb3V5YW5nX3Blbmc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
   
-  
-  
-                           作者：欧阳鹏 欢迎转载，与人分享是进步的源泉！ 
-  
-                           转载请保留原文地址：http://blog.csdn.net/ouyang\_peng/article/details/10414499
-  
-  
-![](https://img-blog.csdn.net/20150708201910089)
-  
-  
-  
+ 
   
   
