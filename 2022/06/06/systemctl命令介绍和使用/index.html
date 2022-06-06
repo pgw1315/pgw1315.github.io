@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Python3的URL编码解码, Will的博客">
+    <meta name="keywords" content="systemctl命令介绍和使用, Will的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Python3的URL编码解码 | Will的博客</title>
+    <title>systemctl命令介绍和使用 | Will的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -245,12 +245,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s1.ax1x.com/2022/05/17/O5806s.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Python3的URL编码解码</h1>
+                    <h1 class="description center-align post-title">systemctl命令介绍和使用</h1>
                 </div>
             </div>
         </div>
@@ -366,12 +366,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
-                            <a href="/tags/URL%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/">
-                                <span class="chip bg-color">URL编码解码</span>
+                            <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
+                                <span class="chip bg-color">系统管理</span>
                             </a>
                         
                     </div>
@@ -382,8 +382,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Python/" class="post-category">
-                                Python
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
                             </a>
                         
                     </div>
@@ -395,7 +395,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-07
+                    2022-06-06
                 </div>
                 
 
@@ -404,14 +404,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    526
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    8 分
                 </div>
                 
 
@@ -439,53 +439,241 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>博主最近在用python3比较强大的Django开发web的时候，发现一些url的编码问题，在浏览器提交请求api时，如果url中包含汉子，就会被自动编码掉。呈现的结果是<br>==&gt; %xx%xx%xx。如果出现3个百分号为一个原字符则为utf8编码，如果2个百分号则为gb2312编码。下面为大家演示编码和解码的代码。</p>
-<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">
-<span class="token keyword">from</span> urllib<span class="token punctuation">.</span>parse <span class="token keyword">import</span> quote
-text <span class="token operator">=</span> quote<span class="token punctuation">(</span>text<span class="token punctuation">,</span> <span class="token string">'utf-8'</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>注：text为要进行编码的字符串</p>
-<h2 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">
-<span class="token keyword">from</span> urllib<span class="token punctuation">.</span>parse <span class="token keyword">import</span> unquote
-text <span class="token operator">=</span> unquote<span class="token punctuation">(</span>text<span class="token punctuation">,</span> <span class="token string">'utf-8'</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">
-<span class="token keyword">def</span> <span class="token function">unquote</span><span class="token punctuation">(</span>string<span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">,</span> errors<span class="token operator">=</span><span class="token string">'replace'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    _<span class="token triple-quoted-string string">"""Replace %xx escapes by their single-character equivalent. The optional_ _encoding and errors parameters specify how to decode percent-encoded_ _sequences into Unicode characters, as accepted by the bytes.decode()_ _method._ _By default, percent-encoded sequences are decoded with UTF-8, and invalid_ _sequences are replaced by a placeholder character._ ___unquote('abc%20def') - > 'abc def'.
-__"""</span>_ __ <span class="token keyword">if</span> <span class="token string">'%'</span> <span class="token keyword">not</span> <span class="token keyword">in</span> string<span class="token punctuation">:</span>
-        string<span class="token punctuation">.</span>split
-        <span class="token keyword">return</span> string
-    <span class="token keyword">if</span> encoding <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
-        encoding <span class="token operator">=</span> <span class="token string">'utf-8'</span>
-    <span class="token keyword">if</span> errors <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
-        errors <span class="token operator">=</span> <span class="token string">'replace'</span>
-    bits <span class="token operator">=</span> _asciire<span class="token punctuation">.</span>split<span class="token punctuation">(</span>string<span class="token punctuation">)</span>
-    res <span class="token operator">=</span> <span class="token punctuation">[</span>bits<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
-    append <span class="token operator">=</span> res<span class="token punctuation">.</span>append
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>bits<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        append<span class="token punctuation">(</span>unquote_to_bytes<span class="token punctuation">(</span>bits<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span>encoding<span class="token punctuation">,</span> errors<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        append<span class="token punctuation">(</span>bits<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">
-<span class="token keyword">def</span> <span class="token function">quote</span><span class="token punctuation">(</span>string<span class="token punctuation">,</span> safe<span class="token operator">=</span><span class="token string">'/'</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> errors<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    _<span class="token triple-quoted-string string">"""quote('abc def') - > 'abc%20def'
-____Each part of a URL, e.g. the path info, the query, etc., has a_ _different set of reserved characters that must be quoted._ ___RFC 2396 Uniform Resource Identifiers (URI): Generic Syntax lists_ _the following reserved characters._ ___reserved    = ";" | "/" | "?" | ":" | "@" | " &amp;" | "=" | "+" |
-__"$" | ","_ ___Each of these characters is reserved in some component of a URL,_ _but not necessarily in all of them._ ___By default, the quote function is intended for quoting the path_ _section of a URL.  Thus, it will not encode '/'.  This character_ _is reserved, but in typical usage the quote function is being_ _called on a path where the existing slash characters are used as_ _reserved characters._ ___string and safe may be either str or bytes objects. encoding and errors_ _must not be specified if string is a bytes object._ ___The optional encoding and errors parameters specify how to deal with_ _non-ASCII characters, as accepted by the str.encode method._ _By default, encoding='utf-8' (characters are encoded with UTF-8), and_ _errors='strict' (unsupported characters raise a UnicodeEncodeError)._ _"""</span>_ __ <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>string<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> <span class="token keyword">not</span> string<span class="token punctuation">:</span>
-            <span class="token keyword">return</span> string
-        <span class="token keyword">if</span> encoding <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
-            encoding <span class="token operator">=</span> <span class="token string">'utf-8'</span>
-        <span class="token keyword">if</span> errors <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
-            errors <span class="token operator">=</span> <span class="token string">'strict'</span>
-        string <span class="token operator">=</span> string<span class="token punctuation">.</span>encode<span class="token punctuation">(</span>encoding<span class="token punctuation">,</span> errors<span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">if</span> encoding <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
-            <span class="token keyword">raise</span> TypeError<span class="token punctuation">(</span><span class="token string">"quote() doesn't support 'encoding' for bytes"</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> errors <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
-            <span class="token keyword">raise</span> TypeError<span class="token punctuation">(</span><span class="token string">"quote() doesn't support 'errors' for bytes"</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> quote_from_bytes<span class="token punctuation">(</span>string<span class="token punctuation">,</span> safe<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h3 id="Systemd程序"><a href="#Systemd程序" class="headerlink" title="Systemd程序"></a>Systemd程序</h3><p>Systemd其实是Linux系统用来管理系统的一个程序，用来代替原来的init进程(用来管理启动系统其它的服务进程)，现在很多Linux发行版都已经自带Systemd程序了。</p>
+<h3 id="systemctl命令"><a href="#systemctl命令" class="headerlink" title="systemctl命令"></a>systemctl命令</h3><h4 id="1-Unit"><a href="#1-Unit" class="headerlink" title="1. Unit"></a>1. Unit</h4><p>systemctl命令是Systemd中最重要的一个命令，用于对服务进行启动，停止等操作，在Systemd中有Unit的概念，每个进程都是一个Unit，总共有十二种Unit类型。</p>
+<ul>
+<li>Service unit，系统服务</li>
+<li>Target unit，多个 Unit 构成的一个组</li>
+<li>Device Unit，硬件设备</li>
+<li>Mount Unit，文件系统的挂载点</li>
+<li>Automount Unit，自动挂载点</li>
+<li>Path Unit，文件或路径</li>
+<li>Scope Unit，不是由 Systemd 启动的外部进程</li>
+<li>Slice Unit，进程组</li>
+<li>Snapshot Unit，Systemd 快照，可以切回某个快照</li>
+<li>Socket Unit，进程间通信的 socket</li>
+<li>Swap Unit，swap 文件</li>
+<li>Timer Unit，定时器</li>
+</ul>
+<h4 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 列出正在运行的Unit</span>
+systemctl list-units，可以直接使用systemctl
+
+<span class="token comment"># 列出所有Unit，包括没有找到配置文件的或者启动失败的</span>
+systemctl list-units --all
+
+<span class="token comment"># 列出所有没有运行的 Unit</span>
+systemctl list-units --all --state<span class="token operator">=</span>inactive
+
+<span class="token comment"># 列出所有加载失败的 Unit</span>
+systemctl list-units --failed
+
+<span class="token comment"># 列出所有正在运行的、类型为service的Unit</span>
+systemctl list-units --type<span class="token operator">=</span>service
+
+<span class="token comment"># 显示某个 Unit 是否正在运行</span>
+systemctl is-active application.service
+
+<span class="token comment"># 显示某个 Unit 是否处于启动失败状态</span>
+systemctl is-failed application.service
+
+<span class="token comment"># 显示某个 Unit 服务是否建立了启动链接</span>
+systemctl is-enabled application.service
+
+<span class="token comment"># 立即启动一个服务</span>
+<span class="token function">sudo</span> systemctl start apache.service
+
+<span class="token comment"># 立即停止一个服务</span>
+<span class="token function">sudo</span> systemctl stop apache.service
+
+<span class="token comment"># 重启一个服务</span>
+<span class="token function">sudo</span> systemctl restart apache.service
+
+<span class="token comment"># 重新加载一个服务的配置文件</span>
+<span class="token function">sudo</span> systemctl reload apache.service
+
+<span class="token comment"># 重载所有修改过的配置文件</span>
+<span class="token function">sudo</span> systemctl daemon-reload<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="systemctl中Unit的配置文件"><a href="#systemctl中Unit的配置文件" class="headerlink" title="systemctl中Unit的配置文件"></a>systemctl中Unit的配置文件</h3><p>上面说了每个服务都是一个Unit，那每个Unit都会有它的配置文件，这样启动的时候才知道要按照什么方式去启动。Systemd默认从目录<code>/etc/systemd/system/</code>读取配置文件。但是里面存放的大部分文件都是符号链接，指向目录<code>/usr/lib/systemd/system/</code>，真正的配置文件存放在那个目录。</p>
+<h4 id="1-查看Unit的配置文件"><a href="#1-查看Unit的配置文件" class="headerlink" title="1. 查看Unit的配置文件"></a>1. 查看Unit的配置文件</h4><p>可以使用<code>systemctl cat</code>命令来查看服务的配置文件，下面是Mysql的配置文件，很多软件已经支持Systemd程序了，安装的时候会自动配置它的Unit配置文件，例如Mysql和Nginx等等。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@VM_0_11_centos ~<span class="token punctuation">]</span><span class="token comment"># systemctl cat mysqld</span>
+<span class="token comment"># /usr/lib/systemd/system/mysqld.service</span>
+
+<span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span>MySQL Server
+<span class="token assign-left variable">Documentation</span><span class="token operator">=</span>man:mysqld<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+<span class="token assign-left variable">Documentation</span><span class="token operator">=</span>http://dev.mysql.com/doc/refman/en/using-systemd.html
+<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target
+<span class="token assign-left variable">After</span><span class="token operator">=</span>syslog.target
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">User</span><span class="token operator">=</span>mysql
+<span class="token assign-left variable">Group</span><span class="token operator">=</span>mysql
+<span class="token assign-left variable">Type</span><span class="token operator">=</span>forking
+<span class="token assign-left variable">PIDFile</span><span class="token operator">=</span>/var/run/mysqld/mysqld.pid
+<span class="token comment"># Disable service start and stop timeout logic of systemd for mysqld service.</span>
+<span class="token assign-left variable">TimeoutSec</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token comment"># Execute pre and post scripts as root</span>
+<span class="token assign-left variable">PermissionsStartOnly</span><span class="token operator">=</span>true
+<span class="token comment"># Needed to create system tables</span>
+<span class="token assign-left variable">ExecStartPre</span><span class="token operator">=</span>/usr/bin/mysqld_pre_systemd
+<span class="token comment"># Start main service</span>
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/sbin/mysqld --daemonize --pid-file<span class="token operator">=</span>/var/run/mysqld/mysqld.pid <span class="token variable">$MYSQLD_OPTS</span>
+<span class="token comment"># Use this to switch malloc implementation</span>
+<span class="token assign-left variable">EnvironmentFile</span><span class="token operator">=</span>-/etc/sysconfig/mysql
+<span class="token comment"># Sets open_files_limit</span>
+LimitNOFILE <span class="token operator">=</span> <span class="token number">5000</span>
+<span class="token assign-left variable">Restart</span><span class="token operator">=</span>on-failure
+<span class="token assign-left variable">RestartPreventExitStatus</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token assign-left variable">PrivateTmp</span><span class="token operator">=</span>false
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h4 id="2-Unit配置文件的含义"><a href="#2-Unit配置文件的含义" class="headerlink" title="2. Unit配置文件的含义"></a>2. Unit配置文件的含义</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
+可以看到Unit配置文件有很多标签，不同的标签都代表了不同的意思，这里只列出部分介绍，可以去官网查看Unit配置文件文档介绍，https://www.freedesktop.org/software/systemd/man/systemd.unit.html。
+
+- Unit
+   - Description，服务的描述
+   - Documentation，文档介绍
+   - After，该服务要在什么服务启动之后启动，比如Mysql需要在network和syslog启动之后再启动
+- Install
+   - WantedBy，值是一个或多个Target，当前Unit激活时<span class="token punctuation">(</span>enable<span class="token punctuation">)</span>符号链接会放入/etc/systemd/system目录下面以Target名+.wants后缀构成的子目录中
+   - RequiredBy，它的值是一个或多个Target，当前Unit激活<span class="token punctuation">(</span>enable<span class="token punctuation">)</span>时，符号链接会放入/etc/systemd/system目录下面以Target名+.required后缀构成的子目录中
+   - Alias，当前Unit可用于启动的别名
+   - Also，当前Unit激活<span class="token punctuation">(</span>enable<span class="token punctuation">)</span>时，会被同时激活的其他Unit
+- Service
+   - Type，定义启动时的进程行为。它有以下几种值。
+   - <span class="token assign-left variable">Type</span><span class="token operator">=</span>simple，默认值，执行ExecStart指定的命令，启动主进程
+   - <span class="token assign-left variable">Type</span><span class="token operator">=</span>forking，以 fork 方式从父进程创建子进程，创建后父进程会立即退出
+   - <span class="token assign-left variable">Type</span><span class="token operator">=</span>oneshot，一次性进程，Systemd 会等当前服务退出，再继续往下执行
+   - <span class="token assign-left variable">Type</span><span class="token operator">=</span>dbus，当前服务通过D-Bus启动
+   - <span class="token assign-left variable">Type</span><span class="token operator">=</span>notify，当前服务启动完毕，会通知Systemd，再继续往下执行
+   - <span class="token assign-left variable">Type</span><span class="token operator">=</span>idle，若有其他任务执行完毕，当前服务才会运行
+   - ExecStart，启动当前服务的命令
+   - ExecStartPre，启动当前服务之前执行的命令
+   - ExecStartPost，启动当前服务之后执行的命令
+   - ExecReload，重启当前服务时执行的命令
+   - ExecStop，停止当前服务时执行的命令
+   - ExecStopPost，停止当其服务之后执行的命令
+   - RestartSec，自动重启当前服务间隔的秒数
+   - Restart，定义何种情况 Systemd 会自动重启当前服务，可能的值包括always（总是重启）、on-success、on-failure、on-abnormal、on-abort、on-watchdog
+   - TimeoutSec，定义 Systemd 停止当前服务之前等待的秒数
+   - Environment，指定环境变量
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="自定义服务启动"><a href="#自定义服务启动" class="headerlink" title="自定义服务启动"></a>自定义服务启动</h3><p>既然Systemd的作用就是控制服务的启动，那么就可以把自己的服务添加进去，就可以直接使用systemctl命令来控制服务的启动，或者是设置开机自动启动等等。</p>
+<h4 id="1-创建Unit配置文件"><a href="#1-创建Unit配置文件" class="headerlink" title="1. 创建Unit配置文件"></a>1. 创建Unit配置文件</h4><p>在<code>/usr/lib/systemd/system</code>目录中创建自己的配置文件，一般都是<code>.service</code>结尾，例如这里创建了一个<code>test-sh.service</code>配置文件，这个Unit是为了启动我们自己的一个shell脚本。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># /usr/lib/systemd/system/test-sh.service</span>
+<span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span> <span class="token builtin class-name">test</span> <span class="token function">sh</span> log
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/dev/shell/test.sh
+<span class="token assign-left variable">Type</span><span class="token operator">=</span>forking
+<span class="token assign-left variable">KillMode</span><span class="token operator">=</span>process
+<span class="token assign-left variable">Restart</span><span class="token operator">=</span>on-failure
+<span class="token assign-left variable">RestartSec</span><span class="token operator">=</span>30s
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h4 id="2-创建脚本"><a href="#2-创建脚本" class="headerlink" title="2. 创建脚本"></a>2. 创建脚本</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
+在上面配置文件指定的启动路径<span class="token variable"><span class="token variable">`</span>/opt/dev/shell/<span class="token variable">`</span></span>下创建shell脚本，这里只是每秒打印当前时间，并输出到一个文本中。
+
+<span class="token comment">#!/bin/bash</span>
+<span class="token keyword">while</span> <span class="token boolean">true</span>
+<span class="token keyword">do</span>
+<span class="token function">sleep</span> <span class="token number">1</span>
+ <span class="token assign-left variable">date</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> -d today +<span class="token string">"%Y-%m-%d %T"</span><span class="token variable">`</span></span>
+ <span class="token builtin class-name">echo</span> <span class="token variable">$&#123;date&#125;</span> <span class="token operator">>></span> /opt/dev/shell/test.txt
+<span class="token keyword">done</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h4 id="3-载入配置文件并启动"><a href="#3-载入配置文件并启动" class="headerlink" title="3. 载入配置文件并启动"></a>3. 载入配置文件并启动</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
+使用<span class="token variable"><span class="token variable">`</span>systemctl daemon-reload<span class="token variable">`</span></span>命令来载入新添加的配置文件，然后使用<span class="token variable"><span class="token variable">`</span>systemctl start test-sh.service<span class="token variable">`</span></span>命令启动，再使用<span class="token variable"><span class="token variable">`</span>systemctl status test-sh.service<span class="token variable">`</span></span>命令来查看状态，可以看到已经启动，<span class="token variable"><span class="token variable">`</span>/opt/dev/shell/test.txt<span class="token variable">`</span></span>也确实在不停的写入内容，最后使用<span class="token variable"><span class="token variable">`</span>systemctl stop test-sh.service<span class="token variable">`</span></span>命令停止服务，可以看到状态也是停止了。
+
+注意的是修改配置文件后一定要使用<span class="token variable"><span class="token variable">`</span>systemctl daemon-reload<span class="token variable">`</span></span>命令来载入新添加的配置文件，然后再启动服务。
+
+<span class="token punctuation">[</span>root@VM_0_11_centos ~<span class="token punctuation">]</span><span class="token comment"># systemctl start test-sh.service</span>
+^C
+<span class="token punctuation">[</span>root@VM_0_11_centos ~<span class="token punctuation">]</span><span class="token comment"># systemctl status test-sh.service</span>
+● test-sh.service - <span class="token builtin class-name">test</span> <span class="token function">sh</span> log
+   Loaded: loaded <span class="token punctuation">(</span>/usr/lib/systemd/system/test-sh.service<span class="token punctuation">;</span> enabled<span class="token punctuation">;</span> vendor preset: disabled<span class="token punctuation">)</span>
+   Active: activating <span class="token punctuation">(</span>start<span class="token punctuation">)</span> since Fri <span class="token number">2020</span>-06-26 05:46:45 CST<span class="token punctuation">;</span> 11s ago
+   Control: <span class="token number">9295</span> <span class="token punctuation">(</span>test.sh<span class="token punctuation">)</span>
+   CGroup: /system.slice/test-sh.service
+       ├─9295 /bin/bash /opt/dev/shell/test.sh
+       └─9343 <span class="token function">sleep</span> <span class="token number">1</span>
+
+Jun <span class="token number">26</span> 05:46:45 VM_0_11_centos systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Starting <span class="token builtin class-name">test</span> <span class="token function">sh</span> log<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>root@VM_0_11_centos ~<span class="token punctuation">]</span><span class="token comment"># systemctl stop test-sh.service</span>
+<span class="token punctuation">[</span>root@VM_0_11_centos ~<span class="token punctuation">]</span><span class="token comment"># systemctl status test-sh.service</span>
+● test-sh.service - <span class="token builtin class-name">test</span> <span class="token function">sh</span> log
+   Loaded: loaded <span class="token punctuation">(</span>/usr/lib/systemd/system/test-sh.service<span class="token punctuation">;</span> enabled<span class="token punctuation">;</span> vendor preset: disabled<span class="token punctuation">)</span>
+   Active: inactive <span class="token punctuation">(</span>dead<span class="token punctuation">)</span> since Fri <span class="token number">2020</span>-06-26 05:47:52 CST<span class="token punctuation">;</span> 2s ago
+  Process: <span class="token number">9295</span> <span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/opt/dev/shell/test.sh <span class="token punctuation">(</span>code<span class="token operator">=</span>killed, <span class="token assign-left variable">signal</span><span class="token operator">=</span><span class="token environment constant">TERM</span><span class="token punctuation">)</span>
+
+Jun <span class="token number">26</span> 05:46:45 VM_0_11_centos systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Starting <span class="token builtin class-name">test</span> <span class="token function">sh</span> log<span class="token punctuation">..</span>.
+Jun <span class="token number">26</span> 05:47:52 VM_0_11_centos systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Stopped <span class="token builtin class-name">test</span> <span class="token function">sh</span> log.
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="查看Unit启动日志"><a href="#查看Unit启动日志" class="headerlink" title="查看Unit启动日志"></a>查看Unit启动日志</h3><p>Systemd统一管理了所有Unit的启动日志，因此只需要使用journalctl命令就可以查看到服务的日志</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看所有日志（默认情况下 ，只保存本次启动的日志）</span>
+journalctl
+
+<span class="token comment"># 查看指定时间的日志</span>
+journalctl --since<span class="token operator">=</span><span class="token string">"2012-10-30 18:17:16"</span>
+journalctl --since <span class="token string">"20 min ago"</span>
+journalctl --since yesterday
+journalctl --since <span class="token string">"2015-01-10"</span> --until <span class="token string">"2015-01-11 03:00"</span>
+journalctl --since 09:00 --until <span class="token string">"1 hour ago"</span>
+
+<span class="token comment"># 显示尾部的最新10行日志</span>
+journalctl -n
+
+<span class="token comment"># 显示尾部指定行数的日志</span>
+journalctl -n <span class="token number">20</span>
+
+<span class="token comment"># 实时滚动显示最新日志</span>
+journalctl -f
+
+<span class="token comment"># 查看指定服务的日志</span>
+journalctl /usr/lib/systemd/systemd
+
+<span class="token comment"># 查看指定进程的日志</span>
+journalctl <span class="token assign-left variable">_PID</span><span class="token operator">=</span><span class="token number">1</span>
+
+<span class="token comment"># 查看某个路径的脚本的日志</span>
+journalctl /usr/bin/bash
+
+<span class="token comment"># 查看指定用户的日志</span>
+journalctl <span class="token assign-left variable">_UID</span><span class="token operator">=</span><span class="token number">33</span> --since today
+
+<span class="token comment"># 查看某个 Unit 的日志</span>
+journalctl -u nginx.service
+journalctl -u nginx.service --since today
+
+<span class="token comment"># 实时滚动显示某个 Unit 的最新日志</span>
+journalctl -u nginx.service -f
+
+<span class="token comment"># 合并显示多个 Unit 的日志</span>
+$ journalctl -u nginx.service -u php-fpm.service --since today
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -500,12 +688,12 @@ __"$" | ","_ ___Each of these characters is reserved in some component of a URL,
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
-                                <a href="/tags/URL%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/">
-                                    <span class="chip bg-color">URL编码解码</span>
+                                <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
+                                    <span class="chip bg-color">系统管理</span>
                                 </a>
                             
                         </div>
@@ -677,17 +865,17 @@ __"$" | ","_ ___Each of these characters is reserved in some component of a URL,
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/11/07/CentOS%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85ffmpeg%E5%B7%A5%E5%85%B7/">
+                <a href="/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
+                        <img src="https://s1.ax1x.com/2022/05/17/O5806s.jpg" class="responsive-img" alt="systemctl命令介绍和使用">
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="CentOS使用yum安装ffmpeg工具">
-                        
-                        <span class="card-title">CentOS使用yum安装ffmpeg工具</span>
+                        <span class="card-title">systemctl命令介绍和使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -697,9 +885,9 @@ __"$" | ","_ ___Each of these characters is reserved in some component of a URL,
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -712,6 +900,7 @@ __"$" | ","_ ___Each of these characters is reserved in some component of a URL,
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -719,16 +908,8 @@ __"$" | ","_ ___Each of these characters is reserved in some component of a URL,
                         <span class="chip bg-color">Linux</span>
                     </a>
                     
-                    <a href="/tags/%E8%BD%AF%E4%BB%B6/">
-                        <span class="chip bg-color">软件</span>
-                    </a>
-                    
-                    <a href="/tags/Yum/">
-                        <span class="chip bg-color">Yum</span>
-                    </a>
-                    
-                    <a href="/tags/FFmpeg/">
-                        <span class="chip bg-color">FFmpeg</span>
+                    <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
+                        <span class="chip bg-color">系统管理</span>
                     </a>
                     
                 </div>
@@ -742,13 +923,13 @@ __"$" | ","_ ___Each of these characters is reserved in some component of a URL,
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/">
+                <a href="/2021/11/23/PyCharm%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E5%92%8C%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="IDEA导入/导出Live templates或者其他设置">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="PyCharm 自定义文件和代码模板">
                         
-                        <span class="card-title">IDEA导入/导出Live templates或者其他设置</span>
+                        <span class="card-title">PyCharm 自定义文件和代码模板</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -759,7 +940,7 @@ __"$" | ","_ ___Each of these characters is reserved in some component of a URL,
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-23
                             </span>
                         <span class="publish-author">
                             
@@ -776,16 +957,8 @@ __"$" | ","_ ___Each of these characters is reserved in some component of a URL,
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
-                    </a>
-                    
-                    <a href="/tags/Tools/">
-                        <span class="chip bg-color">Tools</span>
-                    </a>
-                    
-                    <a href="/tags/IDEA/">
-                        <span class="chip bg-color">IDEA</span>
+                    <a href="/tags/PyCharm/">
+                        <span class="chip bg-color">PyCharm</span>
                     </a>
                     
                 </div>
