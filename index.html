@@ -109,17 +109,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/friends" class="waves-effect waves-light">
       
       <i class="fas fa-address-book" style="zoom: 0.6;"></i>
@@ -210,17 +199,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/friends" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-address-book"></i>
@@ -243,239 +221,113 @@
 </header>
     
     <!-- 删除covers -->
-    <!-- <style>
-    .carousel-control {
-        width: 45px;
-        height: 45px;
-        line-height: 55px;
-        border-radius: 45px;
-        background: transparent;
-        cursor: pointer;
-        z-index: 100;
-    }
+    <style>
 
-    #prev-cover {
-        position: absolute;
-        top: 48%;
-        left: 8px;
-    }
-
-    #next-cover {
-        position: absolute;
-        top: 48%;
-        right: 8px;;
-    }
-
-    #prev-cover i {
-        margin-right: 3px;
-    }
-
-    #next-cover i {
-        margin-left: 3px;
-    }
-
-    .carousel-control:hover {
-        background-color: rgba(0, 0, 0, .4);
-    }
-
-    .carousel-control i {
-        color: #fff;
-        font-size: 2.4rem;
-    }
 </style>
 
 
 
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
-    
+    <div class="">
 
-    <div class="carousel-item red white-text bg-cover about-cover">
-        <div class="container">
-            <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                 
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "人固有一死，或重于泰山，或轻于鸿毛",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 150,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
-
-
-
-            <div class="cover-btns">
-                <a href="#articles" class="waves-effect waves-light btn">
-                    <i class="fa fa-angle-double-down"></i>开始阅读
-                </a>
-
-                
-            </div>
-            <div class="cover-social-link">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-
-
-
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
-</div>
-        </div>
     </div>
 
-    
-</div>
+    <script>
+        $(function() {
+            let coverSlider = $('.carousel');
 
-<script>
-    $(function () {
-        let coverSlider = $('.carousel');
+            //用户触摸轮播自动 restartPlay 是否生效
+            let initUserPressedOrDraggedActive = false
 
-        //用户触摸轮播自动 restartPlay 是否生效
-        let initUserPressedOrDraggedActive = false
+            //用户触摸轮播自动 restartPlay
+            function initUserPressedOrDragged(instance) {
+                setInterval(() => {
+                    if (instance.pressed || instance.dragged) {
+                        // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
+                        restartPlay()
+                    }
+                }, 1000)
+            }
 
-        //用户触摸轮播自动 restartPlay
-        function initUserPressedOrDragged(instance) {
-            setInterval(() => {
-                if (instance.pressed || instance.dragged) {
-                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
-                    restartPlay()
-                }
-            }, 1000)
-        }
+            coverSlider.carousel({
+                duration: Number('120'),
+                fullWidth: true,
+                indicators: 'true' === 'true',
+                onCycleTo() {
+                    if (!initUserPressedOrDraggedActive) {
+                        // console.log('initUserPressedOrDraggedActive')
+                        initUserPressedOrDragged(this)
+                        initUserPressedOrDraggedActive = true
+                    }
+                },
+            })
 
-        coverSlider.carousel({
-            duration: Number('120'),
-            fullWidth: true,
-            indicators: 'true' === 'true',
-            onCycleTo() {
-                if (!initUserPressedOrDraggedActive) {
-                    // console.log('initUserPressedOrDraggedActive')
-                    initUserPressedOrDragged(this)
-                    initUserPressedOrDraggedActive = true
-                }
-            },
-        })
-
-        let carouselIntervalId;
-        
-        // Loop to call the next cover article picture.
-        let autoCarousel = function () {
-            carouselIntervalId = setInterval(function () {
-                coverSlider.carousel('next');
-            }, 5000);
-        };
-        autoCarousel();
-        
-
-        function restartPlay() {
+            let carouselIntervalId;
             
-            clearInterval(carouselIntervalId);
+            // Loop to call the next cover article picture.
+            let autoCarousel = function() {
+                carouselIntervalId = setInterval(function() {
+                    coverSlider.carousel('next');
+                }, 5000);
+            };
             autoCarousel();
             
-        };
 
-        
-        // prev and next cover post.
-        $('#prev-cover').click(function () {
-            coverSlider.carousel('prev');
-            restartPlay();
+            function restartPlay() {
+                
+                clearInterval(carouselIntervalId);
+                autoCarousel();
+                
+            };
+
+            
+            // prev and next cover post.
+            $('#prev-cover').click(function() {
+                coverSlider.carousel('prev');
+                restartPlay();
+            });
+            $('#next-cover').click(function() {
+                coverSlider.carousel('next');
+                restartPlay();
+            });
+            
         });
-        $('#next-cover').click(function () {
-            coverSlider.carousel('next');
-            restartPlay();
-        });
+    </script>
         
-    });
-</script>
- -->
-    
 
-                <main class="content">
+                    <main class="content">
 
-                    
+                        
 
-                            
+                                
 
-                                <!-- 所有文章卡片 -->
-                                <article id="articles" class="container articles">
-                                    <div class="row article-row">
-                                        
+                                    <!-- 所有文章卡片 -->
+                                    <article id="articles" class="container articles">
+                                        <div class="row article-row">
                                             
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
-                                                            <div class="card-image">
-                                                                
-                                                                    <img src="/images/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg" class="responsive-img" alt="virtualenvwrapper：Python_环境管理工具">
+                                                
+                                                    <!-- 隐藏某个文章 -->
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+                                                                <div class="card-image">
                                                                     
-                                                                                <span class="card-title">virtualenvwrapper：Python_环境管理工具</span>
-                                                            </div>
-                                                        </a>
+                                                                        <img src="/images/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg" class="responsive-img" alt="virtualenvwrapper：Python_环境管理工具">
+                                                                        
+                                                                                    <span class="card-title">virtualenvwrapper：Python_环境管理工具</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    概况在使用 Python 开发的过程中，工程一多，难免会碰到不同的工程依赖不同版本的库的问题；亦或者是在开发过程中不想让物理环境里充斥各种各样的库，引发未来的依赖灾难。如果我们要同时开发多个应用程序，那这些应用程序都会共用一个 Python
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        概况在使用 Python 开发的过程中，工程一多，难免会碰到不同的工程依赖不同版本的库的问题；亦或者是在开发过程中不想让物理环境里充斥各种各样的库，引发未来的依赖灾难。如果我们要同时开发多个应用程序，那这些应用程序都会共用一个 Python
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-06-08
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -485,53 +337,53 @@
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/Python/">
-                                                                        <span class="chip bg-color">Python</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-                                                                        <span class="chip bg-color">开发环境</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/Python/">
+                                                                            <span class="chip bg-color">Python</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+                                                                            <span class="chip bg-color">开发环境</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/">
-                                                            <div class="card-image">
-                                                                
-                                                                    <img src="https://s1.ax1x.com/2022/05/17/Ohh7kT.jpg" class="responsive-img" alt="Linux用netstat查看服务及监听端口详解">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/">
+                                                                <div class="card-image">
                                                                     
-                                                                                <span class="card-title">Linux用netstat查看服务及监听端口详解</span>
-                                                            </div>
-                                                        </a>
+                                                                        <img src="https://s1.ax1x.com/2022/05/17/Ohh7kT.jpg" class="responsive-img" alt="Linux用netstat查看服务及监听端口详解">
+                                                                        
+                                                                                    <span class="card-title">Linux用netstat查看服务及监听端口详解</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    在Linux使用过程中，需要了解当前系统开放了哪些端口，并且要查看开放这些端口的具体进程和用户，可以通过netstat命令进行简单查询
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        在Linux使用过程中，需要了解当前系统开放了哪些端口，并且要查看开放这些端口的具体进程和用户，可以通过netstat命令进行简单查询
 netstat命令各个参数说明如下：
 -a   或–all                       
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-06-07
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -541,52 +393,52 @@ netstat命令各个参数说明如下：
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/Linux/">
-                                                                        <span class="chip bg-color">Linux</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E7%BD%91%E7%BB%9C/">
-                                                                        <span class="chip bg-color">网络</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/Linux/">
+                                                                            <span class="chip bg-color">Linux</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                                                            <span class="chip bg-color">网络</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/">
-                                                            <div class="card-image">
-                                                                
-                                                                    <img src="https://s1.ax1x.com/2022/05/17/O5806s.jpg" class="responsive-img" alt="systemctl命令介绍和使用">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/">
+                                                                <div class="card-image">
                                                                     
-                                                                                <span class="card-title">systemctl命令介绍和使用</span>
-                                                            </div>
-                                                        </a>
+                                                                        <img src="https://s1.ax1x.com/2022/05/17/O5806s.jpg" class="responsive-img" alt="systemctl命令介绍和使用">
+                                                                        
+                                                                                    <span class="card-title">systemctl命令介绍和使用</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    Systemd程序Systemd其实是Linux系统用来管理系统的一个程序，用来代替原来的init进程(用来管理启动系统其它的服务进程)，现在很多Linux发行版都已经自带Systemd程序了。
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        Systemd程序Systemd其实是Linux系统用来管理系统的一个程序，用来代替原来的init进程(用来管理启动系统其它的服务进程)，现在很多Linux发行版都已经自带Systemd程序了。
 systemctl命令1. Unitsyst
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2022-06-06
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -596,54 +448,54 @@ systemctl命令1. Unitsyst
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/Linux/">
-                                                                        <span class="chip bg-color">Linux</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
-                                                                        <span class="chip bg-color">系统管理</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/Linux/">
+                                                                            <span class="chip bg-color">Linux</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
+                                                                            <span class="chip bg-color">系统管理</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/23/PyCharm%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E5%92%8C%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="PyCharm 自定义文件和代码模板">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/23/PyCharm%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E5%92%8C%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">PyCharm 自定义文件和代码模板</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="PyCharm 自定义文件和代码模板">
+                                                                                
+                                                                                    <span class="card-title">PyCharm 自定义文件和代码模板</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    　　PyCharm提供了文件和代码模板功能，可以利用此模板来快捷新建代码或文件。比如在PyCharm中新建一个html文件，新的文件并不是空的，而是会自动填充了一些基础的必备的内容，就像这样:
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        　　PyCharm提供了文件和代码模板功能，可以利用此模板来快捷新建代码或文件。比如在PyCharm中新建一个html文件，新的文件并不是空的，而是会自动填充了一些基础的必备的内容，就像这样:
 &lt;!DOCTYPE html>
 &lt;
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-23
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -653,48 +505,48 @@ systemctl命令1. Unitsyst
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/PyCharm/">
-                                                                        <span class="chip bg-color">PyCharm</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/PyCharm/">
+                                                                            <span class="chip bg-color">PyCharm</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Linux中查看各文件夹大小命令du -h --max-depth=1">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">Linux中查看各文件夹大小命令du -h --max-depth=1</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Linux中查看各文件夹大小命令du -h --max-depth=1">
+                                                                                
+                                                                                    <span class="card-title">Linux中查看各文件夹大小命令du -h --max-depth=1</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    du [-abcDhHklmsSx] [-L &lt;符号连接&gt;][-X &lt;文件&gt;][–block-size][–exclude=&lt;目录或文件&gt;] [–max-depth=&lt;目录层数&gt;][–help
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        du [-abcDhHklmsSx] [-L &lt;符号连接&gt;][-X &lt;文件&gt;][–block-size][–exclude=&lt;目录或文件&gt;] [–max-depth=&lt;目录层数&gt;][–help
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-21
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -704,55 +556,55 @@ systemctl命令1. Unitsyst
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/Linux/">
-                                                                        <span class="chip bg-color">Linux</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
-                                                                        <span class="chip bg-color">文件管理</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/Linux/">
+                                                                            <span class="chip bg-color">Linux</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+                                                                            <span class="chip bg-color">文件管理</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/21/CentOS7%E8%AE%BE%E7%BD%AEnginx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="CentOS7设置nginx开机自启动">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/21/CentOS7%E8%AE%BE%E7%BD%AEnginx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">CentOS7设置nginx开机自启动</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="CentOS7设置nginx开机自启动">
+                                                                                
+                                                                                    <span class="card-title">CentOS7设置nginx开机自启动</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        
 服务器每次重启，都需要手动启动一些服务，这不是一个程序员可以忍受的，难怪大家都喜欢写脚本。接下来三篇文章，分别记录一下nginx、tomcat和mysql的开机自启动配置。
 
 SystemdSystemd简介CentOS7已不再使用chk
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-21
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -762,59 +614,59 @@ SystemdSystemd简介CentOS7已不再使用chk
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/Linux/">
-                                                                        <span class="chip bg-color">Linux</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/">
-                                                                        <span class="chip bg-color">开机启动</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/Centos/">
-                                                                        <span class="chip bg-color">Centos</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/Linux/">
+                                                                            <span class="chip bg-color">Linux</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/">
+                                                                            <span class="chip bg-color">开机启动</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/Centos/">
+                                                                            <span class="chip bg-color">Centos</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/18/Intellij%20IDEA%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B%EF%BC%8CIDEA%E7%A0%B4%E8%A7%A3%E8%A1%A5%E4%B8%81FineAgent%EF%BC%8C%E5%8F%AF%E7%A0%B4%E8%A7%A3%E8%87%B3%202099%20%E5%B9%B4/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Intellij IDEA破解补丁FineAgent，可破解至2099">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/18/Intellij%20IDEA%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B%EF%BC%8CIDEA%E7%A0%B4%E8%A7%A3%E8%A1%A5%E4%B8%81FineAgent%EF%BC%8C%E5%8F%AF%E7%A0%B4%E8%A7%A3%E8%87%B3%202099%20%E5%B9%B4/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">Intellij IDEA破解补丁FineAgent，可破解至2099</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Intellij IDEA破解补丁FineAgent，可破解至2099">
+                                                                                
+                                                                                    <span class="card-title">Intellij IDEA破解补丁FineAgent，可破解至2099</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    有网友问我，IDEA 产品能否永久激活呢？目前，我在网上逛了一圈，又发现某大佬开发了一款新的破解补丁，叫FineAgent，如下图所示：
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        有网友问我，IDEA 产品能否永久激活呢？目前，我在网上逛了一圈，又发现某大佬开发了一款新的破解补丁，叫FineAgent，如下图所示：
 说明
 本教程适用于**JetBrains 全系列产品，可放心使用；
 本教程适用于 Windows/Ma
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-18
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -824,49 +676,49 @@ SystemdSystemd简介CentOS7已不再使用chk
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/IDEA/">
-                                                                        <span class="chip bg-color">IDEA</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E7%A0%B4%E8%A7%A3/">
-                                                                        <span class="chip bg-color">破解</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E6%95%99%E7%A8%8B/">
-                                                                        <span class="chip bg-color">教程</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/IDEA/">
+                                                                            <span class="chip bg-color">IDEA</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E7%A0%B4%E8%A7%A3/">
+                                                                            <span class="chip bg-color">破解</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E6%95%99%E7%A8%8B/">
+                                                                            <span class="chip bg-color">教程</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/17/Mac%E4%B8%8BPyCharm%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Mac下PyCharm快捷键大全">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/17/Mac%E4%B8%8BPyCharm%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">Mac下PyCharm快捷键大全</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Mac下PyCharm快捷键大全">
+                                                                                
+                                                                                    <span class="card-title">Mac下PyCharm快捷键大全</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    Mac键盘符号和修饰键说明
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        Mac键盘符号和修饰键说明
 ⌘ Command
 ⇧ Shift
 ⌥ Option
@@ -879,13 +731,13 @@ SystemdSystemd简介CentOS7已不再使用chk
 ← 左箭头
 → 右箭头
 ⇞
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -895,65 +747,65 @@ SystemdSystemd简介CentOS7已不再使用chk
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/PyCharm/">
-                                                                        <span class="chip bg-color">PyCharm</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
-                                                                        <span class="chip bg-color">工具</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/">
-                                                                        <span class="chip bg-color">快捷键</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/MacOS/">
-                                                                        <span class="chip bg-color">MacOS</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/PyCharm/">
+                                                                            <span class="chip bg-color">PyCharm</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                                                                            <span class="chip bg-color">工具</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                                                                            <span class="chip bg-color">快捷键</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/MacOS/">
+                                                                            <span class="chip bg-color">MacOS</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/15/MacOS%E6%8F%90%E7%A4%BA%E2%80%9C%E6%89%93%E4%B8%8D%E5%BC%80xxx,%E5%9B%A0%E4%B8%BAApple%E6%97%A0%E6%B3%95%E6%A3%80%E6%9F%A5%E5%85%B6%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6...%E2%80%9D/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="MacOS提示“打不开xxx,因为Apple无法检查其是否包含恶意软件...”">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/15/MacOS%E6%8F%90%E7%A4%BA%E2%80%9C%E6%89%93%E4%B8%8D%E5%BC%80xxx,%E5%9B%A0%E4%B8%BAApple%E6%97%A0%E6%B3%95%E6%A3%80%E6%9F%A5%E5%85%B6%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6...%E2%80%9D/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">MacOS提示“打不开xxx,因为Apple无法检查其是否包含恶意软件...”</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="MacOS提示“打不开xxx,因为Apple无法检查其是否包含恶意软件...”">
+                                                                                
+                                                                                    <span class="card-title">MacOS提示“打不开xxx,因为Apple无法检查其是否包含恶意软件...”</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        
 当你的mac提示“打不开xxx,因为Apple无法检查其是否包含恶意软件…”时，一般是由于你下载了非App Store且不受苹果信任的开发者的软件，怎么解决呢？
 
 
 
 其实很简单，只需要在设置-安全性与隐私-通用-允许从以下位置下载的应用
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-15
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -963,48 +815,48 @@ SystemdSystemd简介CentOS7已不再使用chk
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/MacOS/">
-                                                                        <span class="chip bg-color">-MacOS</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/MacOS/">
+                                                                            <span class="chip bg-color">-MacOS</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Hexo 博客备份与恢复">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">Hexo 博客备份与恢复</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Hexo 博客备份与恢复">
+                                                                                
+                                                                                    <span class="card-title">Hexo 博客备份与恢复</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    Hexo 博客备份与恢复本文旨在解决在不同电脑上都能维护博客或配置、发布的内容丢失可恢复的问题。观察部署到仓库的内容，我们可以看到上传的内容是 public 文件夹下的所有内容。事实上 hexo-deploy-git 插件是通过拷贝 pub
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        Hexo 博客备份与恢复本文旨在解决在不同电脑上都能维护博客或配置、发布的内容丢失可恢复的问题。观察部署到仓库的内容，我们可以看到上传的内容是 public 文件夹下的所有内容。事实上 hexo-deploy-git 插件是通过拷贝 pub
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-15
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -1014,53 +866,53 @@ SystemdSystemd简介CentOS7已不再使用chk
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/Hexo/">
-                                                                        <span class="chip bg-color">Hexo</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E5%A4%87%E4%BB%BD/">
-                                                                        <span class="chip bg-color">备份</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/Hexo/">
+                                                                            <span class="chip bg-color">Hexo</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E5%A4%87%E4%BB%BD/">
+                                                                            <span class="chip bg-color">备份</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/07/Python%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%BA%93PIL%E4%B8%AD%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%EF%BC%88%E4%B8%80%EF%BC%89/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Python图像处理库PIL中图像格式转换（一）">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/07/Python%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%BA%93PIL%E4%B8%AD%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%EF%BC%88%E4%B8%80%EF%BC%89/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">Python图像处理库PIL中图像格式转换（一）</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Python图像处理库PIL中图像格式转换（一）">
+                                                                                
+                                                                                    <span class="card-title">Python图像处理库PIL中图像格式转换（一）</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    在数字图像处理中，针对不同的图像格式有其特定的处理算法。所以，在做图像处理之前，我们需要考虑清楚自己要基于哪种格式的图像进行算法设计及其实现。本文基于这个需求，使用python中的图像处理库PIL来实现不同图像格式的转换。
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        在数字图像处理中，针对不同的图像格式有其特定的处理算法。所以，在做图像处理之前，我们需要考虑清楚自己要基于哪种格式的图像进行算法设计及其实现。本文基于这个需求，使用python中的图像处理库PIL来实现不同图像格式的转换。
 对于彩色图像，不
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-07
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -1070,68 +922,68 @@ SystemdSystemd简介CentOS7已不再使用chk
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/Python/">
-                                                                        <span class="chip bg-color">Python</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
-                                                                        <span class="chip bg-color">图像处理</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/PIL%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">
-                                                                        <span class="chip bg-color">PIL从入门到精通</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/PIL/">
-                                                                        <span class="chip bg-color">PIL</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">
-                                                                        <span class="chip bg-color">格式转换</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%BD%AC%E6%8D%A2/">
-                                                                        <span class="chip bg-color">模式转换</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/Python/">
+                                                                            <span class="chip bg-color">Python</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                                                                            <span class="chip bg-color">图像处理</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/PIL%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/">
+                                                                            <span class="chip bg-color">PIL从入门到精通</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/PIL/">
+                                                                            <span class="chip bg-color">PIL</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">
+                                                                            <span class="chip bg-color">格式转换</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%BD%AC%E6%8D%A2/">
+                                                                            <span class="chip bg-color">模式转换</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    
+                                                        <!-- 隐藏某个文章 -->
+                                                        
                                                 
                                                     <!-- 隐藏某个文章 -->
-                                                    
-                                            
-                                                <!-- 隐藏某个文章 -->
-                                                <div class="article col s12 m6 l4" data-aos="zoom-in">
-                                                    <div class="card">
-                                                        <a href="/2021/11/07/CentOS7-%E5%AE%9A%E6%97%B6%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E8%AE%BE%E7%BD%AE/">
-                                                            <div class="card-image">
-                                                                
-                                                                        
-                                                                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="CentOS7 定时计划任务设置">
+                                                    <div class="article col s12 m6 l4" data-aos="zoom-in">
+                                                        <div class="card">
+                                                            <a href="/2021/11/07/CentOS7-%E5%AE%9A%E6%97%B6%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E8%AE%BE%E7%BD%AE/">
+                                                                <div class="card-image">
+                                                                    
                                                                             
-                                                                                <span class="card-title">CentOS7 定时计划任务设置</span>
-                                                            </div>
-                                                        </a>
+                                                                                <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="CentOS7 定时计划任务设置">
+                                                                                
+                                                                                    <span class="card-title">CentOS7 定时计划任务设置</span>
+                                                                </div>
+                                                            </a>
 
-                                                        <div class="card-content article-content">
-                                                            <div class="summary block-with-text">
-                                                                
-                                                                                    概述就像再windows上有计划任务一样，centos7 自然也有计划任务，而且设置更为灵活，好用。再centos7 上可以利用crontab 来执行计划任务，依赖与 crond 的系统服务，这个服务是系统自带的，可以直接查看状态，启动，停
-                                                                                        
-                                                            </div>
-                                                            <div class="publish-info">
-                                                                <span class="publish-date">
+                                                            <div class="card-content article-content">
+                                                                <div class="summary block-with-text">
+                                                                    
+                                                                                        概述就像再windows上有计划任务一样，centos7 自然也有计划任务，而且设置更为灵活，好用。再centos7 上可以利用crontab 来执行计划任务，依赖与 crond 的系统服务，这个服务是系统自带的，可以直接查看状态，启动，停
+                                                                                            
+                                                                </div>
+                                                                <div class="publish-info">
+                                                                    <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-11-07
                             </span>
-                                                                <span class="publish-author">
+                                                                    <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
@@ -1141,38 +993,38 @@ SystemdSystemd简介CentOS7已不再使用chk
                                 
                                 
                             </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        
-                                                            <div class="card-action article-tags">
-                                                                
-                                                                    <a href="/tags/CentOS7/">
-                                                                        <span class="chip bg-color">CentOS7</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">
-                                                                        <span class="chip bg-color">定时任务</span>
-                                                                    </a>
-                                                                    
-                                                                    <a href="/tags/Crontabs/">
-                                                                        <span class="chip bg-color">Crontabs</span>
-                                                                    </a>
-                                                                    
-                                                            </div>
                                                             
+                                                                <div class="card-action article-tags">
+                                                                    
+                                                                        <a href="/tags/CentOS7/">
+                                                                            <span class="chip bg-color">CentOS7</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">
+                                                                            <span class="chip bg-color">定时任务</span>
+                                                                        </a>
+                                                                        
+                                                                        <a href="/tags/Crontabs/">
+                                                                            <span class="chip bg-color">Crontabs</span>
+                                                                        </a>
+                                                                        
+                                                                </div>
+                                                                
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                
-                                                    <!-- 隐藏某个文章 -->
                                                     
-                                    </div>
-                                </article>
+                                                        <!-- 隐藏某个文章 -->
+                                                        
+                                        </div>
+                                    </article>
 
-                </main>
+                    </main>
 
-                
-                    <div class="container paging">
+                    
+                        <div class="container paging">
     <div class="row">
         <div class="col s6 m4 l4">
             
@@ -1195,7 +1047,7 @@ SystemdSystemd简介CentOS7已不再使用chk
     </div>
 </div>
 
-                        
+                            
 
     <footer class="page-footer bg-color">
     
