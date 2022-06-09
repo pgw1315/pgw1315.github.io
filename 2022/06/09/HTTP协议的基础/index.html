@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="virtualenvwrapper：Python_环境管理工具, Will的博客">
+    <meta name="keywords" content="HTTP协议的基础, Will的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>virtualenvwrapper：Python_环境管理工具 | Will的博客</title>
+    <title>HTTP协议的基础 | Will的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -223,12 +223,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/http.awebp')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">virtualenvwrapper：Python_环境管理工具</h1>
+                    <h1 class="description center-align post-title">HTTP协议的基础</h1>
                 </div>
             </div>
         </div>
@@ -344,12 +344,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">网络</span>
                             </a>
                         
-                            <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-                                <span class="chip bg-color">开发环境</span>
+                            <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                <span class="chip bg-color">协议</span>
                             </a>
                         
                     </div>
@@ -360,8 +360,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Python/" class="post-category">
-                                Python
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                网络
                             </a>
                         
                     </div>
@@ -373,7 +373,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-06-08
+                    2022-06-09
                 </div>
                 
 
@@ -382,14 +382,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    656
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    7 分
                 </div>
                 
 
@@ -417,70 +417,45 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>在使用 Python 开发的过程中，工程一多，难免会碰到不同的工程依赖不同版本的库的问题；亦或者是在开发过程中不想让物理环境里充斥各种各样的库，引发未来的依赖灾难。如果我们要同时开发多个应用程序，那这些应用程序都会共用一个 Python，就是安装在系统的 Python 3。如果应用 A 需要  jinja 2.7，而应用 B 需要 jinja 2.6 怎么办？此时，我们需要对于不同的工程使用不同的虚拟环境来保持开发环境以及宿主环境的清洁。为了不污染全局环境，通常都会使用环境隔离管理工具 <code>virtualenv</code> 与 <code>virtualenvwrapper</code>。<br><code>virtualenv</code> 是在项目底下执行生成 <code>venv</code> 环境目录以此来进行管理，这非常适合使用诸如 <code>VSCode</code> 这种集成环境配置的开发工具；那么当通过 shell 来运行 <code>virtualenv</code> 时便会显得非常麻烦，因为每次 shell 关闭再打开后都需要重新配置环境参数。<br><code>virtualenv</code> 需要每次使用 source 命令导入虚拟机运行环境，这一点非常麻烦，另外开发者还有可能忘记虚拟环境目录的建立位置，<code>virtualenvwrapper</code> 这一命令行工具就是通过对 <code>virtualenv</code> 进行封装，解决了上述问题。<code>virtualenvwrapper</code> 是将所有的 Python 项目虚拟环境环境都存放在一起，在使用 shell 配合小型开发工具就会非常方便。</p>
-<h2 id="virtualenvwrapper-安装配置（Mac）"><a href="#virtualenvwrapper-安装配置（Mac）" class="headerlink" title="virtualenvwrapper 安装配置（Mac）"></a>virtualenvwrapper 安装配置（Mac）</h2><ul>
-<li>使用 pip3 安装，<code>virtualenv</code> 也会在此期间安装完毕</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> pip3 <span class="token function">install</span> virtualenvwrapper<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<ul>
-<li>新建存放环境目录</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">mkdir</span> -p ~/.virtualenvs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<ul>
-<li>配置 <code>virtualenvwrapper</code> 环境（使用 python 3），打开 .zshrc，执行 <code>vim ~/.zshrc</code> 并写入(如果有安装<code>item2</code>与<code>oh-my-zsh</code>)</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 设置virtualenvwrapper    </span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable">WORKON_HOME</span><span class="token operator">=</span><span class="token string">"~/.virtualenvs"</span>    
-<span class="token builtin class-name">export</span> <span class="token assign-left variable">VIRTUALENVWRAPPER_PYTHON</span><span class="token operator">=</span><span class="token string">"/usr/local/bin/python3"</span>    
-<span class="token comment"># 打开终端自动启用    </span>
-<span class="token builtin class-name">source</span> /usr/local/bin/virtualenvwrapper.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<ul>
-<li>使配置生效</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">source</span> ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="virtualenvwrapper-使用"><a href="#virtualenvwrapper-使用" class="headerlink" title="virtualenvwrapper 使用"></a>virtualenvwrapper 使用</h2><ul>
-<li>新建虚拟环境 <code>Test</code> 并指定 Python 版本为 Python3：</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ mkvirtualenv Test --python<span class="token operator">=</span>python3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>执行 <code>lsvirtualenv</code> 指令查看所有环境，环境 <code>Test</code> 位于 ~/Envs/test</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ lsvirtualenv    
-Test    
-<span class="token operator">==</span><span class="token operator">==</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-<ul>
-<li>在项目底下激活虚拟环境 <code>Test</code>：</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ workon Test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<ul>
-<li>其他指令：</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">## 退出环境 Test    </span>
-deactivate    
-<span class="token comment">## 删除环境 Test    </span>
-rmvirtualenv <span class="token builtin class-name">test</span>    
-<span class="token comment">## 更多指令可以在 shell 中输入 virtualenv 回车会有提示</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="在-VSCode-中使用虚拟环境"><a href="#在-VSCode-中使用虚拟环境" class="headerlink" title="在 VSCode 中使用虚拟环境"></a>在 VSCode 中使用虚拟环境</h2><ul>
-<li>进入工作环境设置文件 <code>settings.json</code>，加入如下配置： </li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token string">"python.venvPath"</span><span class="token builtin class-name">:</span> <span class="token string">"~/.virtualenvs"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>具体操作界面如图所示：<br><img src="https://pic2.zhimg.com/v2-c5f1899d69458d38919bc1a966085a79_b.jpg"></p>
-<ul>
-<li>重启 <code>VSCode</code> 即可看到配置已经成功被识别，便可以选择刚才新建的虚拟环境 <code>Test</code>：</li>
-</ul>
-<p><img src="https://pic3.zhimg.com/v2-df2a4b75440a6b3d5df15277651dafd6_b.jpg"></p>
+                <p>小编是一个非典型面试官，对于HTTP协议的第一个问题，一般人会问常用的状态码有哪些。小编不这么问，小编的问题是HTTP的全称是什么，把英语给我说出来！</p>
+<h3 id="HTTP的全称是什么？"><a href="#HTTP的全称是什么？" class="headerlink" title="HTTP的全称是什么？"></a>HTTP的全称是什么？</h3><p>超文本传输协议，HyperText Transfer Protocol，这几个单词可别发走音了。所谓的超文本就是带标记的文本，刚开始的时候是指HTML。现在HTTP协议传输的东西可不只是HTML了，什么表单啊JSON啊XML啊文件啊都可以传输。</p>
+<h3 id="HTTP常用的状态码有哪些？"><a href="#HTTP常用的状态码有哪些？" class="headerlink" title="HTTP常用的状态码有哪些？"></a>HTTP常用的状态码有哪些？</h3><p>大部分同学都知道200、404、500、302状态码。如果连404都不知道，是要被小编鄙视的。500错误为什么这么常见呢，因为在开发的时候老是出bug，一个大异常抛出来，浏览器就500了。500表示InternalServerError，也就是内部服务器错误，如果不是bug，一般就是数据库挂了。</p>
+<p>再多问几个状态码很多人就不知道了，因为大多数公司的软件服务没有走标准的HTTP状态码，很多状态码从来就不会出现，同学们自然也不会知道。</p>
+<p>400 Bad Request 用于参数验证，少了一个参数或者参数类型错误之类的。</p>
+<p>502 Bad Gateway 后端服务挂掉或者压力过大的时候， Nginx接到的请求无法及时传递给后端的服务进行处理，这个时候就会出现502错误。这个也非常常见，知乎豆瓣网站经常开小差的时候发生的错误就是这个。</p>
+<p>304 Not Modified 极少人知道这个状态码，因为大部分后端开发者的前端Javascript开发经验都严重不足。当你用Chrome打开一个经常访问的网站，看看Network传输的静态资源就可以看到很多304状态码。它表示该资源被浏览器缓存了不需要重新请求服务器。</p>
+<p>401 Unauthorized 权限不足，这个很好理解，就是资源存在但是不让你访问。</p>
+<p>403 Forbidden 资源禁止访问，如果你的IP列为黑名单了，就会发生这种错误。</p>
+<p>其实还有很多状态码，小编也没去好好研究了，因为实在不会在工作中用到。感兴趣的请继续阅读维基百科</p>
+<h3 id="HTTP有哪些Method？"><a href="#HTTP有哪些Method？" class="headerlink" title="HTTP有哪些Method？"></a>HTTP有哪些Method？</h3><p>GET 不解释，如果读者不知道，建议别在IT圈混了。</p>
+<p>POST 一般用于创建或者修改资源，在RESTFUL规范里面POST只用来创建资源，并返回201 Created状态码表示创建成功。不过大多数网站都不遵循严格的RESTFUL规范，POST拿来做修改资源的事也是非常常见的。</p>
+<p>PUT 对应于POST表示创建资源，PUT用于修改资源，PUT的参数必须是对象的全部属性，修改是覆盖式全部修改。</p>
+<p>PATCH 对应于PUT的参数是对象的全部属性，PATCH的参数是部分属性，修改是局部字段修改。</p>
+<p>DELETE 用于删除资源。</p>
+<p>HEAD 不常用，跟GET差不多，区别就是不返回Body内容，只返回HTTP头信息。一般用于获取资源的元信息，比如长度，修改时间等</p>
+<p>OPTIONS 跨域相关，后面再讲。</p>
+<p>TRACE 小编没用过。</p>
+<p>CONNECT 小编没用过。</p>
+<p>后面三个感兴趣的去阅读一下RPC规范。小编大概看了一下，表示没怎么看懂，你行你上去挑战一下。</p>
+<h3 id="HTTP协议格式是怎样的？"><a href="#HTTP协议格式是怎样的？" class="headerlink" title="HTTP协议格式是怎样的？"></a>HTTP协议格式是怎样的？</h3><p>HTTP的请求和响应的消息协议是一样的，分为三个部分，起始行、消息头和消息体。这三个部分以CRLF作为分隔符。最后一个消息头有两个CRLF，用来表示消息头部的结束。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5c36af78b26~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<p>HTTP请求的起始行称为请求行，形如GET /index.html HTTP/1.1</p>
+<p>HTTP响应的起始行称为状态行，形如200 ok</p>
+<p>消息头部有很多键值对组成，多个键值对之间使用CRLF作为分隔符，也可以完全没有键值对。形如Content-Encoding: gzip</p>
+<p>消息体是一个字符串，字符串的长度是由消息头部的Content-Length键指定的。如果没有Content-Length字段说明没有消息体，譬如GET请求就是没有消息体的，POST请求的消息体一般用来放置表单数据。GET请求的响应返回的页面内容也是放在消息体里面的。我们平时调用API返回的JSON内容都是放在消息体里面的。</p>
+<h3 id="什么是分块传送？"><a href="#什么是分块传送？" class="headerlink" title="什么是分块传送？"></a>什么是分块传送？</h3><p>当浏览器向服务器请求一个资源时，这个资源是一个动态资源，服务器无法提前预知资源的大小，这个时候就可以使用分块传输。</p>
+<p>服务器先生成一个thunk，发送这个chunk，再生成一个chunk，再发送一个chunk，直到全部资源传送完成。</p>
+<p>分块传送需要在请求头增加一个特殊的键值对transfer-encoding: thunked，那么消息体的内容便是分块传送的。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5cb48c82960~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"><br>chunked传输格式如图所示，由一段一段的分块组合而成，每个块由一个长度行和一个分块体组成，最后一个分块长度为0表示结束。</p>
+<h3 id="持久连接的机制是怎样的？"><a href="#持久连接的机制是怎样的？" class="headerlink" title="持久连接的机制是怎样的？"></a>持久连接的机制是怎样的？</h3><p>HTTP早期版本中每个请求都会发起一个连接，一个网页除了页面的HTML之外还会有很多静态资源以及诸多的API调用，如果每个请求都一个连接，势必网页的一次加载就会和服务器创建多次连接，这是非常浪费服务器资源的，同时也让客户端的访问速度慢了不少。HTTP1.0之后引入了Keep-Alive持久连接，在HTTP1.1版本中成为默认选项。它使得HTTP的一个连接可以连续服务多个请求，有效节省了资源，增加了客户端页面的加载速度。</p>
+<p>持久连接也不宜一直保持，毕竟每个连接都会占用服务器资源，如果打开网页的人太多，那服务器资源也会紧张，所以一般服务器都会配置一个KeepAlive Timeout参数和KeepAlive Requests参数限制单个连接持续时长和最多服务的请求次数。</p>
+<p>如果服务器设置的timeout时长为0，就退化到非持久连接。非持久连接会在响应头部增加一个头信息Connection: Close通知客户端在接受完当前响应后连接需要立即关闭。</p>
+<p>同样浏览器也不会因为服务器将KeepAlive Timeout配置了无限长就不管不问一直持续保持连接。每个浏览器都有它自己的内置限制，具体限制浏览器厂商各有不同。</p>
+<h3 id="什么叫Pipeline管线化？"><a href="#什么叫Pipeline管线化？" class="headerlink" title="什么叫Pipeline管线化？"></a>什么叫Pipeline管线化？</h3><p>HTTP1.0不支持管线化，同一个连接处理请求的顺序是逐个应答模式，处理一个请求就需要耗费一个TTL，也就是客户端到服务器的往返时间，处理N个请求就是N个TTL时长。当页面的请求非常多时，页面加载速度就会非常缓慢。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5d4da2f676a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<p>从HTTP1.1开始要求服务器支持管线化，可以同时将多个请求发送到服务器，然后逐个读取响应。这个管线化和Redis的管线化原理是一样的，响应的顺序必须和请求的顺序保持一致。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5d65430fe94~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"><br>如何理解HTTP协议的无状态性？</p>
+<p>所谓HTTP协议的无状态性是指服务器的协议层无需为不同的请求之间建立任何相关关系，它特指的是协议层的无状态性。但是这并不代表建立在HTTP协议之上的应用程序就无法维持状态。应用层可以通过会话Session来跟踪用户请求之间的相关性，服务器会为每个会话对象绑定一个唯一的会话ID，浏览器可以将会话ID记录在本地缓存LocalStorage或者Cookie，在后续的请求都带上这个会话ID，服务器就可以为每个请求找到相应的会话状态。</p>
 
                 
             </div>
@@ -495,12 +470,12 @@ rmvirtualenv <span class="token builtin class-name">test</span>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">网络</span>
                                 </a>
                             
-                                <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-                                    <span class="chip bg-color">开发环境</span>
+                                <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                                    <span class="chip bg-color">协议</span>
                                 </a>
                             
                         </div>
@@ -672,16 +647,17 @@ rmvirtualenv <span class="token builtin class-name">test</span>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/">
+                <a href="/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/">
                     <div class="card-image">
                         
-                        <img src="/images/http.awebp" class="responsive-img" alt="鲜为人知的HTTP协议头字段详解大全「原创」">
+                        <img src="/images/http.awebp" class="responsive-img" alt="HTTP协议的基础">
                         
-                        <span class="card-title">鲜为人知的HTTP协议头字段详解大全「原创」</span>
+                        <span class="card-title">HTTP协议的基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -691,9 +667,9 @@ rmvirtualenv <span class="token builtin class-name">test</span>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -706,6 +682,7 @@ rmvirtualenv <span class="token builtin class-name">test</span>
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -728,12 +705,12 @@ rmvirtualenv <span class="token builtin class-name">test</span>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/">
+                <a href="/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/">
                     <div class="card-image">
                         
-                        <img src="https://s1.ax1x.com/2022/05/17/Ohh7kT.jpg" class="responsive-img" alt="Linux用netstat查看服务及监听端口详解">
+                        <img src="/images/http.awebp" class="responsive-img" alt="鲜为人知的HTTP协议头字段详解大全「原创」">
                         
-                        <span class="card-title">Linux用netstat查看服务及监听端口详解</span>
+                        <span class="card-title">鲜为人知的HTTP协议头字段详解大全「原创」</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -744,14 +721,14 @@ rmvirtualenv <span class="token builtin class-name">test</span>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux/" class="post-category">
-                                    Linux
+                            <a href="/categories/%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    网络
                                 </a>
                             
                             
@@ -761,12 +738,12 @@ rmvirtualenv <span class="token builtin class-name">test</span>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
                     <a href="/tags/%E7%BD%91%E7%BB%9C/">
                         <span class="chip bg-color">网络</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">协议</span>
                     </a>
                     
                 </div>
