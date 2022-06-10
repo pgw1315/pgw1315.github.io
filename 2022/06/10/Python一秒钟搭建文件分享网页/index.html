@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="最完美方案！模拟浏览器如何正确隐藏特征, Will的博客">
+    <meta name="keywords" content="Python一秒钟搭建文件分享网页, Will的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>最完美方案！模拟浏览器如何正确隐藏特征 | Will的博客</title>
+    <title>Python一秒钟搭建文件分享网页 | Will的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -223,12 +223,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/072c-iryninw3301998.jpeg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/share.jpeg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">最完美方案！模拟浏览器如何正确隐藏特征</h1>
+                    <h1 class="description center-align post-title">Python一秒钟搭建文件分享网页</h1>
                 </div>
             </div>
         </div>
@@ -348,8 +348,8 @@
                                 <span class="chip bg-color">Python</span>
                             </a>
                         
-                            <a href="/tags/%E7%88%AC%E8%99%AB/">
-                                <span class="chip bg-color">爬虫</span>
+                            <a href="/tags/%E6%96%87%E4%BB%B6/">
+                                <span class="chip bg-color">文件</span>
                             </a>
                         
                     </div>
@@ -382,14 +382,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    721
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    2 分
                 </div>
                 
 
@@ -417,41 +417,23 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在前天的公众号文章<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI2MzEwNTY3OQ==&mid=2648979700&idx=1&sn=ec98a4dd7ad660ad8af664942c25072f&scene=21#wechat_redirect">《别去送死了。Selenium 与 Puppeteer 能被网站探测的几十个特征》</a>中，我们提到目前网上的反检测方法几乎都是掩耳盗铃，因为模拟浏览器有几十个特征可以被检测，仅仅隐藏 webdriver 这一个值是没有任何意义的。</p>
-<p>今天我们就来说说应该如何正确解决这个问题。我们首先给出解决方案。然后再说明这个解决方案，我是通过什么方式找到的。<br>解决这个问题的关键，就是一个 js 文件，叫做<code>stealth.min.js</code>。稍后我会说明如何生成这个文件。<br>我们需要设定，让 Selenium 或者 Pyppeteer 在打开任何页面<strong>之前</strong>，先运行这个 Js 文件。具体的做法和原理，大家可以参考我这两篇文章：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI2MzEwNTY3OQ==&mid=2648978304&idx=1&sn=bff6a1f03b29702f2393a9fef9a50452&scene=21#wechat_redirect">（最新版）如何正确移除Selenium中的 window.navigator.webdriver</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI2MzEwNTY3OQ==&mid=2648978312&idx=1&sn=516564fbb02aca47a1e8b19e1ed9a167&chksm=f2506e68c527e77eca1c987af90c427bdb1c746f0bff6973d1f1a8dcb7d41c814b74af745c87&token=465047301&lang=zh_CN&scene=21#wechat_redirect">（最新版）如何正确移除 Pyppeteer 中的window.navigator.webdriver</a><br>这里，我以 Selenium 为例来说明如何操作，我们编写如下代码：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> time
-<span class="token keyword">from</span> selenium<span class="token punctuation">.</span>webdriver <span class="token keyword">import</span> Chrome
-<span class="token keyword">from</span> selenium<span class="token punctuation">.</span>webdriver<span class="token punctuation">.</span>chrome<span class="token punctuation">.</span>options <span class="token keyword">import</span> Options
-
-chrome_options <span class="token operator">=</span> Options<span class="token punctuation">(</span><span class="token punctuation">)</span>
-chrome_options<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">"--headless"</span><span class="token punctuation">)</span>
-chrome_options<span class="token punctuation">.</span>add_argument<span class="token punctuation">(</span><span class="token string">'user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'</span><span class="token punctuation">)</span>
-
-driver <span class="token operator">=</span> Chrome<span class="token punctuation">(</span><span class="token string">'./chromedriver'</span><span class="token punctuation">,</span> options<span class="token operator">=</span>chrome_options<span class="token punctuation">)</span>
-
-<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'/Users/kingname/test_pyppeteer/stealth.min.js'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    js <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-driver<span class="token punctuation">.</span>execute_cdp_cmd<span class="token punctuation">(</span><span class="token string">"Page.addScriptToEvaluateOnNewDocument"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
-  <span class="token string">"source"</span><span class="token punctuation">:</span> js
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-driver<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'https://bot.sannysoft.com/'</span><span class="token punctuation">)</span>
-time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
-driver<span class="token punctuation">.</span>save_screenshot<span class="token punctuation">(</span><span class="token string">'walkaround.png'</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 你可以保存源代码为 html 再双击打开，查看完整结果</span>
-source <span class="token operator">=</span> driver<span class="token punctuation">.</span>page_source
-<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'result.html'</span><span class="token punctuation">,</span> <span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>source<span class="token punctuation">)</span>
- 
- <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>运行截图如下：<br><img src="/images/640.png"><br>可以看到，虽然我使用的是无头模式，但是能够被识别的特征都被成功隐藏。大家还可以双击打开保存下来的 html 文件，看看是不是结果跟普通浏览器几乎一样。<br>如果你使用的是 Pyppeteer，那么可以根据我上面文章中给出的方法，试着加载一下这个 js 文件，看看是不是也能成功隐藏特征。<br>那么，这个<code>stealth.min.js</code>文件是怎么来的呢？这就要说到<code>puppeteer</code>了。我们知道，Python 版本的<code>pyppeteer</code>已经很久没有人维护了，但是Node.js 版本的 <code>puppeteer</code>持续有人维护，并且在持续更新，生态也越来越好。<br>有开发者给 puppeteer 写了一套插件，叫做<code>puppeteer-extra</code>。其中，就有一个插件叫做puppeteer-extra-plugin-stealth[1]。这个东西，就来专门用来让 puppeteer 隐藏模拟浏览器的指纹特征。<br>这个东西是专门给 puppeteer 用的。所以，如果你使用的是 puppeteer，那么你可以根据它的 Readme说明，直接使用。<br>那么，我们用 Python 的人怎么办呢？实际上也有办法。就是把其中的隐藏特征的脚本提取出来，做成一个单独的 js 文件。然后让 Selenium 或者 Pyppeteer 在打开任意网页之前，先运行一下这个 js 文件里面的内容。<br>puppeteer-extra-plugin-stealth的作者还写了另外一个工具，叫做extract-stealth-evasions[2]。这个东西就是用来生成<code>stealth.min.js</code>文件的。<br>如果你在国外，并且网速足够快的话。那么你根据它的 Readme，首先安装 Node.js，然后安装 Npm，接着运行如下命令：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npx extract-stealth-evasions
- <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>就会在你执行命令的文件夹下面生成一个<code>stealth.min.js</code>文件。然后你就可以正常使用了。<br>如果你在国内，那么执行这个命令的过程中，会有一个下载 Chromium 的过程，速度非常慢，虽然只有130MB，但是可能会下载好几个小时。<br>此时，你需要把它的<code>package.json</code>和<code>index.js</code>两个文件保存到本地。然后打开<code>package.json</code>文件，修改其中的<code>dependencies</code>这一项，把里面的<code>puppeteer</code>改成<code>puppeteer-core</code>，如下图所示：<br><img src="/images/641.png"><br>然后修改<code>index.js</code>，给<code>.launch()</code>函数增加一个参数<code>executablePath</code>，指向你电脑上的 Chrome 浏览器，如下图所示：<br><img src="/images/642.png"><br>修改完成以后。首先执行<code>yarn install</code>安装依赖包。然后执行<code>node index.js</code>运行程序。1秒钟以后就会生成<code>stealth.min.js</code>了。<br>如果你对 Node.js 的工具链不熟悉，不知道如何使用。那么你可以关注公众号未闻 Code，回复<code>stealth</code>获取这个 js 文件。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI2MzEwNTY3OQ==&mid=2648979719&idx=1&sn=71fe9932ae38f2f630f9c817033401dd&chksm=f25064e7c527edf17d617ef28928982c7df6e248d8980758c22a9e0cac67993d51f42da21031&cur_album_id=1318368205836189696&scene=189#wechat_redirect">最完美方案！模拟浏览器如何正确隐藏特征</a></p>
+                <p>    Python的库是十分丰富的。在局域网内分享文件时，Python的http.server可以创建一个非常基本的Web服务器，相对于当前目录提供文件。http.server模块定义用于实现 HTTP 服务器（Web 服务器）的类。</p>
+<h3 id="一、运行简单网页"><a href="#一、运行简单网页" class="headerlink" title="一、运行简单网页"></a>一、运行简单网页</h3><p>    先来试验一下，在cmd运行：python -m http.server，如果时linux平台的化，注意python版本3 。在浏览器输入IP地址:8000，即可获得的当前目录下的所有文件列表，以提供下载。需要注意的是防火墙要关闭或添加规则。<br>    在局域网内暂时分享文件的话是十分方便的，比U盘拷贝省心很多。</p>
+<p><img src="/images/24447700-a76e1d33147b6118.webp"></p>
+<p><img src="/images/24447700-e9440b8b295e43e1.webp"></p>
+<h4 id="分享网页"><a href="#分享网页" class="headerlink" title="分享网页"></a>分享网页</h4><p>查看官方文档：http请求映射到目录，检查目录中是否有index.html或index.htm文件（按顺序）。如果有，文件的内容将返回：否则，目录列表将通过调用list_directory()方法生成，此方法使用os.listdir()扫描目录。</p>
+<h3 id="二、http-server具体使用方法"><a href="#二、http-server具体使用方法" class="headerlink" title="二、http.server具体使用方法"></a>二、http.server具体使用方法</h3><p> 使用 python -m http.server –help 再来看一下具体的使用方法。</p>
+<p><img src="/images/24447700-acbebe374b8d8c3c.webp"></p>
+<p>port指定端口号，而不是默认的8000。<br>–bind ADDRESS, -b ADDRESS此方式是针对多网卡设备，绑定特定的网卡可以访问，而不是全部网卡。<br>–directory DIRECTORY, -d DIRECTORY指定特定的目录，而不是当前目录。<br>下面的命令指定E:\download目录并通过端口8888运行http.server ，所有网卡组成的局域网IP地址都可以访问。<br>python -m http.server –directory E:\download 8888</p>
+<p><img src="/images/24447700-a9f48c4af6cbc7aa.webp"></p>
+<p>   下面的命令指定E:\download目录并通过端口8888运行http.server ，特定网卡的局域网IP地址可以访问。    <br>    python -m http.server –directory E:\download –bind 192.168.15.219 8888</p>
+<p><img src="/images/24447700-e5a3b5d7ac736f8e.webp"></p>
+<h3 id="三、底层实现server-py"><a href="#三、底层实现server-py" class="headerlink" title="三、底层实现server.py"></a>三、底层实现server.py</h3><p>    上面的帮助信息里面有提示：usage: server.py [-h] [–cgi] [–bind ADDRESS] [–directory DIRECTORY] [port]  ，既是此种方法的底层调用的是server.py  （<a href="https://github.com%2Fpython%2Fcpython%2Ftree%2F3.3%2FLib%2Fhttp%2Fserver.py">github上也有托管</a>）。下面笔者通过进入到server.py的目录，直接使用底层server.py来运行http服务，效果是一样的。</p>
+<p><img src="/images/24447700-fd7af4ded14cafe7.webp"><br>你也可以使用__pycache__目录下的已经编译好的.pyc文件。<br>![]/images/24447700-2daa0e093f417a40.webp)</p>
+<h3 id="四、Linux系统上实践"><a href="#四、Linux系统上实践" class="headerlink" title="四、Linux系统上实践"></a>四、Linux系统上实践</h3><p>        在Llinux系统上，如果要远程拷贝文件可以使用scp命令，或者在windows上使用可视化程序winscp。笔者使用腾讯云服务器来测试（哈哈，忽略前面的登陆显示的狮子），需要注意的是腾讯云服务器密钥开启firewall防火墙，但是NAT转换服务器是有防火墙的，需要在控制台中开启TCP/8000端口。<br>    但是，官方不推荐在生产环境中使用 <a href="https://docs.python.org%2Fzh-cn%2F3%2Flibrary%2Fhttp.server.html%23module-http.server">http.server</a> ，它只实现了基本的安全检查功能。所有临时搭建分享文件或者调试是可以的。</p>
+<p><img src="/images/24447700-13b0f21eda21d9e8.webp"></p>
+<p><img src="/images/24447700-c31081ae3279e5d7.webp"></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f8c31bbbc1ef">Python一秒钟搭建文件分享网页</a></p>
 
                 
             </div>
@@ -470,8 +452,8 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
                                     <span class="chip bg-color">Python</span>
                                 </a>
                             
-                                <a href="/tags/%E7%88%AC%E8%99%AB/">
-                                    <span class="chip bg-color">爬虫</span>
+                                <a href="/tags/%E6%96%87%E4%BB%B6/">
+                                    <span class="chip bg-color">文件</span>
                                 </a>
                             
                         </div>
@@ -643,9 +625,10 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/06/10/Python%E4%B8%80%E7%A7%92%E9%92%9F%E6%90%AD%E5%BB%BA%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E7%BD%91%E9%A1%B5/">
                     <div class="card-image">
@@ -662,9 +645,9 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -677,6 +660,7 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -699,12 +683,12 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/">
+                <a href="/2022/06/10/%E6%9C%80%E5%AE%8C%E7%BE%8E%E6%96%B9%E6%A1%88%EF%BC%81%E6%A8%A1%E6%8B%9F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E9%9A%90%E8%97%8F%E7%89%B9%E5%BE%81/">
                     <div class="card-image">
                         
-                        <img src="/images/linux-command.png" class="responsive-img" alt="Linux_运维必会的150个常用命令，你都会用吗？">
+                        <img src="/images/072c-iryninw3301998.jpeg" class="responsive-img" alt="最完美方案！模拟浏览器如何正确隐藏特征">
                         
-                        <span class="card-title">Linux_运维必会的150个常用命令，你都会用吗？</span>
+                        <span class="card-title">最完美方案！模拟浏览器如何正确隐藏特征</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -721,8 +705,8 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux/" class="post-category">
-                                    Linux
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
                                 </a>
                             
                             
@@ -732,12 +716,12 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
                     </a>
                     
-                    <a href="/tags/%E5%91%BD%E4%BB%A4/">
-                        <span class="chip bg-color">命令</span>
+                    <a href="/tags/%E7%88%AC%E8%99%AB/">
+                        <span class="chip bg-color">爬虫</span>
                     </a>
                     
                 </div>
