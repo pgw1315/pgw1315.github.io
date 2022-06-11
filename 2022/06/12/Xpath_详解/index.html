@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="python读取配置文件方式(ini、yaml、xml), Will的博客">
+    <meta name="keywords" content="Xpath_详解, Will的博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>python读取配置文件方式(ini、yaml、xml) | Will的博客</title>
+    <title>Xpath_详解 | Will的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -223,12 +223,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/banner/Python-Learning.webp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/banner/XPath.jpeg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">python读取配置文件方式(ini、yaml、xml)</h1>
+                    <h1 class="description center-align post-title">Xpath_详解</h1>
                 </div>
             </div>
         </div>
@@ -348,6 +348,10 @@
                                 <span class="chip bg-color">Python</span>
                             </a>
                         
+                            <a href="/tags/Xpath/">
+                                <span class="chip bg-color">Xpath</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -369,7 +373,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-06-11
+                    2022-06-12
                 </div>
                 
 
@@ -378,14 +382,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    8 分
                 </div>
                 
 
@@ -413,207 +417,280 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>python代码中配置文件是必不可少的内容。常见的配置文件格式有很多中：ini、yaml、xml、properties、txt、py等。</p>
-<h2 id="一、ini文件"><a href="#一、ini文件" class="headerlink" title="一、ini文件"></a>一、ini文件</h2><h3 id="1-1-ini文件的格式"><a href="#1-1-ini文件的格式" class="headerlink" title="1.1 ini文件的格式"></a>1.1 ini文件的格式</h3><pre class="line-numbers language-ini" data-language="ini"><code class="language-ini"><span class="token comment">; 注释内容</span>
- <span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">url</span><span class="token punctuation">]</span></span> ; section名称
- <span class="token key attr-name">baidu</span> <span class="token punctuation">=</span> <span class="token value attr-value">https://www.zalou.cn</span>
- <span class="token key attr-name">port</span> <span class="token punctuation">=</span> <span class="token value attr-value">80</span>
- <span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">email</span><span class="token punctuation">]</span></span>
- <span class="token key attr-name">sender</span> <span class="token punctuation">=</span> <span class="token value attr-value">‘xxx@qq.com’</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>注意section的名称不可以重复，注释用分号开头。</p>
-<h3 id="1-2-读取-configparser"><a href="#1-2-读取-configparser" class="headerlink" title="1.2 读取 configparser"></a>1.2 读取 configparser</h3><p>python自带的configparser模块可以读取.ini文件，注意：在python2中是ConfigParser</p>
-<p>创建文件的时候，只需要在pychrame中创建一个扩展名为.ini的文件即可。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> configparser
-
-<span class="token builtin">file</span> <span class="token operator">=</span> <span class="token string">'config.ini'</span>
-
-<span class="token comment"># 创建配置文件对象</span>
-con <span class="token operator">=</span> configparser<span class="token punctuation">.</span>ConfigParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 读取文件</span>
-con<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 获取所有section</span>
-sections <span class="token operator">=</span> con<span class="token punctuation">.</span>sections<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token comment"># ['url', 'email']</span>
-
-
-<span class="token comment"># 获取特定section</span>
-items <span class="token operator">=</span> con<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token string">'url'</span><span class="token punctuation">)</span> <span class="token comment"># 返回结果为元组</span>
-<span class="token comment"># [('baidu','https://www.zalou.cn'),('port', '80')] # 数字也默认读取为字符串</span>
-
-<span class="token comment"># 可以通过dict方法转换为字典</span>
-items <span class="token operator">=</span> <span class="token builtin">dict</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="二、yaml配置文件"><a href="#二、yaml配置文件" class="headerlink" title="二、yaml配置文件"></a>二、yaml配置文件</h2><h3 id="2-1-yaml文件格式"><a href="#2-1-yaml文件格式" class="headerlink" title="2.1 yaml文件格式"></a>2.1 yaml文件格式</h3><p>yaml文件是用来方便读写的一种格式。它实质上是一种通用的数据串行话格式。</p>
-<p>它的基本语法如下：</p>
+                <h2 id="什么是-Xpath？"><a href="#什么是-Xpath？" class="headerlink" title="什么是 Xpath？"></a>什么是 Xpath？</h2><p>Xpath 是一种用在 XML 文档中定位元素的语言，同样也支持 HTML 元素的解析。</p>
+<p>所谓 Xpath，是指 XML path language。path 就是路径，那么 Xpath 主要是通过路径来查找元素。</p>
+<p>我们通过下面一张小图来了解一下 HTML 中的结构：</p>
+<p><img src="/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-1d5d648e03370891.png"></p>
+<p>HTML 的结构就是树形结构，HTML 是根节点，所有的其他元素节点都是从根节点发出的。其他的元素都是这棵树上的节点<code>Node</code>，每个节点还可能有属性和文本。</p>
 <ul>
-<li>大小写敏感</li>
-<li>缩进表示层级关系</li>
-<li>缩进时不允许使用Tab，仅允许空格</li>
-<li>空格的多少不重要，关键是相同层级的元素要对齐</li>
-<li>#表示注释，#后面的字符都会被忽略</li>
+<li>而路径就是指某个节点到另一个节点的路线。</li>
 </ul>
-<p>yaml支持的数据格式包括:</p>
+<p>节点之间存在各种关系：</p>
 <ul>
-<li>字典</li>
-<li>数组</li>
-<li>纯量：单个的，不可再次分割的值</li>
+<li><p>父节点(Parent)： HTML 是 body 和 head 节点的父节点；</p>
+</li>
+<li><p>子节点(Child)：head 和 body 是 HTML 的子节点；</p>
+</li>
+<li><p>兄弟节点(Sibling)：拥有相同的父节点，head 和 body 就是兄弟节点。title 和 div 不是兄弟，因为他们不是同一个父节点。</p>
+</li>
+<li><p>祖先节点(Ancestor)：body 是 form 的祖先节点，爷爷辈及以上👴；</p>
+</li>
+<li><p>后代节点(Descendant)：form 是 HTML 的后代节点，孙子辈及以下👶。</p>
+</li>
 </ul>
-<h3 id="2-1-2-对象"><a href="#2-1-2-对象" class="headerlink" title="2.1.2 对象"></a>2.1.2 对象</h3><p>对象是一组组的键值对，使用冒号表示结构</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">url</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//www.zalou.cn
-<span class="token key atrule">log</span><span class="token punctuation">:</span> 
- <span class="token key atrule">file_name</span><span class="token punctuation">:</span> test.log
- <span class="token key atrule">backup_count</span><span class="token punctuation">:</span> <span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Xpath 中的绝对路径从 HTML 根节点开始算，相对路径从任意节点开始。</p>
+<p>通过开发者工具，我们可以拷贝到 Xpath 的绝对路径和相对路径代码：</p>
+<p><img src="/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-3ce3a8737955cffe.png"></p>
+<p>但是由于拷贝出来的代码缺乏灵活性，也不全然准确。大部分情况下，都需要自己定义 Xpath 语句，因此 Xpath 语法还是有必要学习。</p>
+<h2 id="绝对路径："><a href="#绝对路径：" class="headerlink" title="绝对路径："></a>绝对路径：</h2><p>Xpath 中最直观的定位策略就是绝对路径。</p>
+<p>以百度中的输入框和按钮为例，通过拷贝出来的 full Xpath：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">/</span>html<span class="token operator">/</span>body<span class="token operator">/</span>div<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">/</span>div<span class="token operator">/</span>div<span class="token operator">/</span>div<span class="token operator">/</span>div<span class="token operator">/</span>form<span class="token operator">/</span>span<span class="token operator">/</span><span class="token builtin">input</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>yaml也允许另外一种写法，将所有的键值对写成一个行内对象</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">log</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token key atrule">file_name</span><span class="token punctuation">:</span> test.log<span class="token punctuation">,</span> <span class="token key atrule">backup_count</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="2-1-3-数组"><a href="#2-1-3-数组" class="headerlink" title="2.1.3 数组"></a>2.1.3 数组</h3><p>一组横线开头的行，组成一个数组。</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">– cat
-– Dog
-– Goldfish<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>转换成python对象是</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token punctuation">[</span>‘cat’<span class="token punctuation">,</span> ‘Dog’<span class="token punctuation">,</span> ‘Goldfish’<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>数组也可以采用行内写法：</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">animal</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>cat<span class="token punctuation">,</span> dog<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>转行成python对象是</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token punctuation">&#123;</span>‘animal’<span class="token punctuation">:</span> <span class="token punctuation">[</span>‘cat’<span class="token punctuation">,</span> ‘dog’<span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这就是一个绝对路径我们可以看出，绝对路径是从根节点<code>/html</code>开始往下，一层层的表示出来直到需要的节点为止。</p>
+<p>这明显不是理智的选项，因此了解以下即可，不用往心里去。</p>
+<h2 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h2><p>除了绝对路径，Xpath 中更常用的方式是相对路径定位方法，以“//”开头。</p>
+<p>相对路径可以从任意节点开始，一般我们会选取一个可以唯一定位到的元素开始写，可以增加查找的准确性。</p>
+<p>相对路径可以通过以下的方式来定位元素：</p>
+<h3 id="基本定位语法"><a href="#基本定位语法" class="headerlink" title="基本定位语法"></a>基本定位语法</h3><p>定位语法主要依赖于以下特殊符号：</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/</code></td>
+<td>从根节点开始选取</td>
+<td>/html/div/span</td>
+</tr>
+<tr>
+<td><code>//</code></td>
+<td>从任意节点开始选取</td>
+<td>//input</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>选取当前节点</td>
+<td></td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td>选取当前节点的父节点</td>
+<td>//input/.. 会选取 input 的父节点</td>
+</tr>
+<tr>
+<td><code>@</code></td>
+<td>选取属性，或者根据属性选取</td>
+<td>//input[@data] 选取具备 data 属性的 input 元素 //@data 选取所有 data 属性</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>通配符，表示任意节点或任意属性</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="元素属性定位"><a href="#元素属性定位" class="headerlink" title="元素属性定位"></a>元素属性定位</h3><p>属性定位是通过 @ 符号指定需要使用的属性。</p>
+<ul>
+<li>根据元素是否具备某个属性查找元素</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span><span class="token operator">*</span><span class="token punctuation">[</span>@data<span class="token operator">-</span>recordid<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="2-1-4-纯量"><a href="#2-1-4-纯量" class="headerlink" title="2.1.4 纯量"></a>2.1.4 纯量</h3><p>纯量是最基本，不可分割的值。<br>数字和字符串直接书写即可：</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">number</span><span class="token punctuation">:</span> <span class="token number">12.30</span>
-<span class="token key atrule">name</span><span class="token punctuation">:</span> zhangsan<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>布尔值用true和false表示</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">isSet</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
-<span class="token key atrule">flag</span><span class="token punctuation">:</span> <span class="token boolean important">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>null用~表示</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">parent</span><span class="token punctuation">:</span> <span class="token null important">~</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>yaml允许用两个感叹号表示强制转换</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">e</span><span class="token punctuation">:</span> <span class="token tag">!!str</span> <span class="token number">123</span>
-<span class="token key atrule">f</span><span class="token punctuation">:</span> <span class="token tag">!!str</span> <span class="token boolean important">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="2-1-5-引用"><a href="#2-1-5-引用" class="headerlink" title="2.1.5 引用"></a>2.1.5 引用</h3><p>锚点&amp;和别名*，可以用来引用</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">defaults</span><span class="token punctuation">:</span> <span class="token important">&amp;defaults</span>
- <span class="token key atrule">adapter</span><span class="token punctuation">:</span> postgres
- <span class="token key atrule">host</span><span class="token punctuation">:</span> localhost
- 
-<span class="token key atrule">development</span><span class="token punctuation">:</span> 
- <span class="token key atrule">databases</span><span class="token punctuation">:</span> myapp_deveploment
- <span class="token key atrule">&lt;&lt;</span><span class="token punctuation">:</span> <span class="token important">*defaults</span>
+<p>选取包含data-recordid属性的所有节点。可以定位到以下元素：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&lt;</span>tr role<span class="token operator">=</span><span class="token string">"row"</span> data<span class="token operator">-</span>boundview<span class="token operator">=</span><span class="token string">"gridview-1029"</span> data<span class="token operator">-</span>recordid<span class="token operator">=</span><span class="token string">"B36BCA33"</span> <span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token key atrule">test</span><span class="token punctuation">:</span>
- <span class="token key atrule">databases</span><span class="token punctuation">:</span> myapp_test
- <span class="token key atrule">&lt;&lt;</span><span class="token punctuation">:</span> <span class="token important">*defaults</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>根据属性是否等于某值查找元素</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>span<span class="token punctuation">[</span>@role<span class="token operator">=</span><span class="token string">'img'</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>等同于以下代码</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">defaults</span><span class="token punctuation">:</span> 
- <span class="token key atrule">adapter</span><span class="token punctuation">:</span> postgres
- <span class="token key atrule">host</span><span class="token punctuation">:</span> localhost
- 
-<span class="token key atrule">development</span><span class="token punctuation">:</span> 
- <span class="token key atrule">databases</span><span class="token punctuation">:</span> myapp_deveploment
- <span class="token key atrule">adapter</span><span class="token punctuation">:</span> postgres
- <span class="token key atrule">host</span><span class="token punctuation">:</span> localhost
+<p>选取属性 role 的属性值为 img 的所有节点。可以定位到以下元素：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&lt;</span>span role<span class="token operator">=</span><span class="token string">"img"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"x-btn-icon-el"</span> unselectable<span class="token operator">=</span><span class="token string">"on"</span> style<span class="token operator">=</span><span class="token string">""</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token key atrule">test</span><span class="token punctuation">:</span>
- <span class="token key atrule">databases</span><span class="token punctuation">:</span> myapp_test
- <span class="token key atrule">adapter</span><span class="token punctuation">:</span> postgres
- <span class="token key atrule">host</span><span class="token punctuation">:</span> localhost<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，属性值必须要加引号，单双引号都可以。</p>
+<h3 id="层级属性结合定位"><a href="#层级属性结合定位" class="headerlink" title="层级属性结合定位"></a>层级属性结合定位</h3><p>遇到某些元素无法精确定位的时候，可以查找其父级及其祖先节点，找到有确定的祖先节点后通过层级依次向下定位。</p>
+<p>以下面的结构为例：</p>
+<ul>
+<li><img src="/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-1187d4bb553f53c6.png"></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&lt;</span>form action<span class="token operator">=</span><span class="token string">"search"</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span> method<span class="token operator">=</span><span class="token string">"post"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"bg"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"soutu"</span><span class="token operator">></span>搜索<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+    <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"soutu"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token builtin">input</span> <span class="token builtin">type</span><span class="token operator">=</span><span class="token string">"text"</span> name<span class="token operator">=</span><span class="token string">"key"</span> <span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"su"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>&amp;用来建立锚点（defaults），&lt;&lt;表示合并到当前数据，*用来引用锚点<br>下面是另外一个例子：</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">– <span class="token important">&amp;abc</span> st
-– cat
-– dog
-– <span class="token important">*abc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>转换成python代码是：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token punctuation">[</span>‘st’<span class="token punctuation">,</span> ‘cat’<span class="token punctuation">,</span> ‘dog’<span class="token punctuation">,</span> ‘st’<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="2-2-yaml文件的读取"><a href="#2-2-yaml文件的读取" class="headerlink" title="2.2 yaml文件的读取"></a>2.2 yaml文件的读取</h3><p>读取yaml文件需要先安装相应模块。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">pip <span class="token function">install</span> yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>yaml文件内容如下：</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">url</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//www.baidu.com
-<span class="token key atrule">email</span><span class="token punctuation">:</span>
- <span class="token key atrule">send</span><span class="token punctuation">:</span> xxx@qq.com
- <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">25</span>
+<ul>
+<li>根据层级向下找，从 form 找到绿色的 span：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">/</span>span<span class="token operator">/</span>span
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token punctuation">---</span>
-<span class="token key atrule">url</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//www.sina.com.cn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>查找某元素内部的所有元素，选取 form 元素内部的所有 span：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">//</span>span
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>读取代码如下：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># coding:utf-8</span>
-<span class="token function">import</span> yaml
+<p>第二个双斜杠，表示选取内部所有的 span，不管层级关系</p>
+<ul>
+<li>使用星号找不特定的元素</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span><span class="token operator">*</span><span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">//</span><span class="token operator">*</span><span class="token punctuation">[</span>@<span class="token builtin">type</span><span class="token operator">=</span><span class="token string">"text"</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token comment"># 获取yaml文件路径</span>
-yamlPath <span class="token operator">=</span> <span class="token string">'config.yaml'</span>
+<p>选取 id 属性为 form 的任意属性内部，并且 type 属性为 text 的任意元素。这里会找到 input。</p>
+<ul>
+<li>使用<code>..</code>从下往上找，根据 input 查找其父节点 span：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span><span class="token builtin">input</span><span class="token punctuation">[</span>@name<span class="token operator">=</span><span class="token string">"key"</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-with open<span class="token punctuation">(</span>yamlPath,<span class="token string">'rb'</span><span class="token punctuation">)</span> as f:
- <span class="token comment"># yaml文件通过---分节，多个节组合成一个列表</span>
- <span class="token function">date</span> <span class="token operator">=</span> yaml.safe_load_all<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
- <span class="token comment"># salf_load_all方法得到的是一个迭代器，需要使用list()方法转换为列表</span>
- print<span class="token punctuation">(</span>list<span class="token punctuation">(</span>date<span class="token punctuation">))</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意最后的两个点，找到 input 节点的上级节点，如果还要再往上再加 <code>/..</code></p>
+<ul>
+<li>找同级节点：</li>
+<li>比如我们想通过第一个 span 标签去 找 div 标签。树形结构中，兄弟节点之间的关系是通过父节点建立起来的。所以可以先找到父节点，再通过父节点找同级节点。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>span<span class="token punctuation">[</span>@<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"bg"</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span>div
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="三、xml配置文件读取"><a href="#三、xml配置文件读取" class="headerlink" title="三、xml配置文件读取"></a>三、xml配置文件读取</h2><p>xml文件内容如下：</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;collection shelf="New Arrivals" 
-&lt;movie title="Enemy Behind" 
- &lt;type War, Thriller&lt;/type 
- &lt;format DVD&lt;/format 
- &lt;year 2003&lt;/year 
- &lt;rating PG&lt;/rating 
- &lt;stars 10&lt;/stars 
- &lt;description Talk about a US-Japan war&lt;/description 
-&lt;/movie 
-&lt;movie title="Transformers" 
- &lt;type Anime, Science Fiction&lt;/type 
- &lt;format DVD&lt;/format 
- &lt;year 1989&lt;/year 
- &lt;rating R&lt;/rating 
- &lt;stars 8&lt;/stars 
- &lt;description A schientific fiction&lt;/description 
-&lt;/movie 
- &lt;movie title="Trigun" 
- &lt;type Anime, Action&lt;/type 
- &lt;format DVD&lt;/format 
- &lt;episodes 4&lt;/episodes 
- &lt;rating PG&lt;/rating 
- &lt;stars 10&lt;/stars 
- &lt;description Vash the Stampede!&lt;/description 
-&lt;/movie 
-&lt;movie title="Ishtar" 
- &lt;type Comedy&lt;/type 
- &lt;format VHS&lt;/format 
- &lt;rating PG&lt;/rating 
- &lt;stars 2&lt;/stars 
- &lt;description Viewable boredom&lt;/description 
-&lt;/movie 
-&lt;/collection <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>先通过<code>/..</code>找到 span 的父节点，再通过父节点找到 div。</p>
+<h3 id="使用谓语定位"><a href="#使用谓语定位" class="headerlink" title="使用谓语定位"></a>使用谓语定位</h3><p>谓语是 Xpath 中用于描述元素位置。主要有数字下标、最后一个子元素<code>last()</code>、元素下标函数<code>position()</code>。</p>
+<ul>
+<li>使用下标的方式，从 form 找到 input ：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">/</span>span<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token builtin">input</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>读取代码如下：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># coding=utf-8</span>
-<span class="token keyword">import</span> xml<span class="token punctuation">.</span>dom<span class="token punctuation">.</span>minidom
-<span class="token keyword">from</span> xml<span class="token punctuation">.</span>dom<span class="token punctuation">.</span>minidom <span class="token keyword">import</span> parse
+<p>Xpath 中的下标从 <code>1</code> 开始。</p>
+<ul>
+<li>查找最后一个子元素，选取 form 下的最后一个 span：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">/</span>span<span class="token punctuation">[</span>last<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-DOMTree <span class="token operator">=</span> parse<span class="token punctuation">(</span><span class="token string">'config.xml'</span><span class="token punctuation">)</span>
-collection <span class="token operator">=</span> DOMTree<span class="token punctuation">.</span>documentElement
-<span class="token keyword">if</span> collection<span class="token punctuation">.</span>hasAttribute<span class="token punctuation">(</span><span class="token string">"shelf"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
- <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Root element : %s"</span> <span class="token operator">%</span> collection<span class="token punctuation">.</span>getAttribute<span class="token punctuation">(</span><span class="token string">"shelf"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<ul>
+<li>查找倒数第几个子元素，选取 form 下的倒数第一个 span：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">/</span>span<span class="token punctuation">[</span>last<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token comment"># 在集合中获取所有电影</span>
-movies <span class="token operator">=</span> collection<span class="token punctuation">.</span>getElementsByTagName<span class="token punctuation">(</span><span class="token string">"movie"</span><span class="token punctuation">)</span>
+<ul>
+<li>使用 position() 函数，选取 from 下第二个 span：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">/</span>span<span class="token punctuation">[</span>position<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token comment"># 打印每部电影的详细信息</span>
-<span class="token keyword">for</span> movie <span class="token keyword">in</span> movies<span class="token punctuation">:</span>
- <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"*****Movie*****"</span><span class="token punctuation">)</span>
- <span class="token keyword">if</span> movie<span class="token punctuation">.</span>hasAttribute<span class="token punctuation">(</span><span class="token string">"title"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Title: %s"</span> <span class="token operator">%</span> movie<span class="token punctuation">.</span>getAttribute<span class="token punctuation">(</span><span class="token string">"title"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<ul>
+<li>使用 position() 函数，选取下标大于 2 的 span：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">/</span>span<span class="token punctuation">[</span>position<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">2</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
- <span class="token builtin">type</span> <span class="token operator">=</span> movie<span class="token punctuation">.</span>getElementsByTagName<span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
- <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Type: %s"</span> <span class="token operator">%</span> <span class="token builtin">type</span><span class="token punctuation">.</span>childNodes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span>
- <span class="token builtin">format</span> <span class="token operator">=</span> movie<span class="token punctuation">.</span>getElementsByTagName<span class="token punctuation">(</span><span class="token string">'format'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
- <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Format: %s"</span> <span class="token operator">%</span> <span class="token builtin">format</span><span class="token punctuation">.</span>childNodes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span>
- rating <span class="token operator">=</span> movie<span class="token punctuation">.</span>getElementsByTagName<span class="token punctuation">(</span><span class="token string">'rating'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
- <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Rating: %s"</span> <span class="token operator">%</span> rating<span class="token punctuation">.</span>childNodes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span>
- description <span class="token operator">=</span> movie<span class="token punctuation">.</span>getElementsByTagName<span class="token punctuation">(</span><span class="token string">'description'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
- <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Description: %s"</span> <span class="token operator">%</span> description<span class="token punctuation">.</span>childNodes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="使用逻辑运算符"><a href="#使用逻辑运算符" class="headerlink" title="使用逻辑运算符"></a>使用逻辑运算符</h3><p>如果元素的某个属性无法精确定位到这个元素，我们还可以用逻辑运算符 and 连接多个属性进行定位，以百度输入框为例。</p>
+<ul>
+<li>使用 <code>and</code> ：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span><span class="token operator">*</span><span class="token punctuation">[</span>@name<span class="token operator">=</span><span class="token string">'wd'</span> <span class="token keyword">and</span> @<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">'s_ipt'</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>以上这篇python读取配置文件方式(ini、yaml、xml)就是小编分享给大家的全部内容了，希望能给大家一个参考。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1740527">python读取配置文件方式(ini、yaml、xml)</a></p>
+<p>查找 name 属性为 wd 并且 class 属性为 s_ipt 的任意元素</p>
+<ul>
+<li>使用 <code>or</code>：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span><span class="token operator">*</span><span class="token punctuation">[</span>@name<span class="token operator">=</span><span class="token string">'wd'</span> <span class="token keyword">or</span> @<span class="token keyword">class</span><span class="token operator">=</span><span class="token string">'s_ipt'</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查找 name 属性为 wd 或者 class 属性为 s_ipt 的任意元素，取其中之一满足即可。</p>
+<ul>
+<li>使用<code>|</code>，同时查找多个路径，取或：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">//</span>span <span class="token operator">|</span> <span class="token operator">//</span>form<span class="token punctuation">[</span>@<span class="token builtin">id</span><span class="token operator">=</span><span class="token string">"form"</span><span class="token punctuation">]</span><span class="token operator">//</span><span class="token builtin">input</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>选取 form 下所有的 span 和所有的 input。</p>
+<h3 id="使用文本定位"><a href="#使用文本定位" class="headerlink" title="使用文本定位"></a>使用文本定位</h3><p>使用文本定位，是 Xpath 中的一大特色。在自动化测试中，为了让代码的可读性更高，可以使用文本的方式。</p>
+<p>以下一个案例：</p>
+<p><img src="/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-466743dbeb77cb6f.png"></p>
+<p>部分网页结构如下：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&lt;</span>tr<span class="token operator">></span>
+  <span class="token operator">&lt;</span>td valign<span class="token operator">=</span><span class="token string">"top"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token builtin">input</span> <span class="token builtin">type</span><span class="token operator">=</span><span class="token string">"radio"</span> name<span class="token operator">=</span><span class="token string">"payment"</span> value<span class="token operator">=</span><span class="token string">"1"</span> checked<span class="token operator">=</span><span class="token string">""</span> iscod<span class="token operator">=</span><span class="token string">"0"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
+  <span class="token operator">&lt;</span>td valign<span class="token operator">=</span><span class="token string">"top"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>strong<span class="token operator">></span>支付宝<span class="token operator">&lt;</span><span class="token operator">/</span>strong<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>td<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>tr<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其实我们需要点的是前的单选框，但是单选框没有任何特殊的标识，不够灵活。我们可以通过后面的名称，如(支付宝、余额支付等)来找到其对应行的 radio，再去点击。</p>
+<p>我们就需要先通过文本定位到“支付宝”，再去找其同一行(tr)的 input 节点。如果理不清楚，我们可以先画一个结构图：</p>
+<p><img src="/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-443ad23bb513cce3.png"></p>
+<p>红色箭头表示查找路径，先定位到“支付宝”所在的 strong，再定位 <code>td -&gt; tr -&gt; td - &gt;input</code> 。那么要定位“支付宝”文本，就需要用到 Xpath 中的函数 <code>text()</code> 或 <code>string()</code>，注意是函数，所以括号不能少。</p>
+<p><code>text()</code>：当前元素节点包含的文本内容；</p>
+<ul>
+<li>表达式<code>//div[text()=&quot;文本&quot;]</code>，能找到：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&lt;</span>div<span class="token operator">></span>文本<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>不能找到：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token operator">&lt;</span>span<span class="token operator">></span>文本<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>string()</code>：当前元素节点内部所有节点元素的文本内容。表达式<code>//div[string()=&quot;文本&quot;]</code>上述两种情况都能找到。</p>
+<p>好，接着写上面的内容。先通过 <code>//strong[text()=&quot;支付宝&quot;]</code>定位到“支付宝”所在的元素 strong，再找上级 td -&gt; tr，再向下找：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>strong<span class="token punctuation">[</span>text<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"支付宝"</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span>td<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token builtin">input</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也可以写为：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token operator">//</span>td<span class="token punctuation">[</span>string<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">"支付宝"</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span>td<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">/</span><span class="token builtin">input</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="使用部分匹配函数"><a href="#使用部分匹配函数" class="headerlink" title="使用部分匹配函数"></a>使用部分匹配函数</h3><p>Xpath 中有提供了几个函数，用来进行部分匹配。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>contains</td>
+<td>选取属性或者文本包含某些字符</td>
+<td>//div[contains(@id, ‘data’)] 选取 id 属性包含 data 的 div 元素  //div[contains(string(), ‘支付宝’)] 选取内部文本包含“支付宝”的 div 元素</td>
+</tr>
+<tr>
+<td>starts-with</td>
+<td>选取属性或者文本以某些字符开头</td>
+<td>//div[starts-with(@id, ‘data’)] 选取 id 属性以 data 开头的 div 元素  //div[starts-with(string(), ‘银联’)] 选取内部文本以“银联”开头的 div 元素</td>
+</tr>
+<tr>
+<td>ends-with</td>
+<td>选取属性或者文本以某些字符开头</td>
+<td>//div[ends-with(@id, ‘require’)] 选取 id 属性以 require 结尾的 div 元素  //div[ends-with(string(), ‘支付’)] 选取内部文本以“支付”结尾的 div 元素</td>
+</tr>
+</tbody></table>
+<h2 id="验证-Xpath"><a href="#验证-Xpath" class="headerlink" title="验证 Xpath"></a>验证 Xpath</h2><p>验证 xpath 有两种方法：</p>
+<ul>
+<li>在开发者工具的 Elements 中按<code>Ctrl + F</code>，在搜索框中输入 Xpath：</li>
+</ul>
+<p><img src="/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-a9ed19d1dffab883.png"></p>
+<ul>
+<li>在开发者工具的 Console 中使用 <code>$x()</code></li>
+</ul>
+<p><img src="/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-1d6c86e9e1723c6a.png"></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6a0dbb4e246a">Xpath_详解</a></p>
 
                 
             </div>
@@ -630,6 +707,10 @@ movies <span class="token operator">=</span> collection<span class="token punctu
                             
                                 <a href="/tags/Python/">
                                     <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/Xpath/">
+                                    <span class="chip bg-color">Xpath</span>
                                 </a>
                             
                         </div>
@@ -801,9 +882,10 @@ movies <span class="token operator">=</span> collection<span class="token punctu
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/">
                     <div class="card-image">
@@ -820,9 +902,9 @@ movies <span class="token operator">=</span> collection<span class="token punctu
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -835,6 +917,7 @@ movies <span class="token operator">=</span> collection<span class="token punctu
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -857,12 +940,12 @@ movies <span class="token operator">=</span> collection<span class="token punctu
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/06/10/Python%E4%B8%80%E7%A7%92%E9%92%9F%E6%90%AD%E5%BB%BA%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E7%BD%91%E9%A1%B5/">
+                <a href="/2022/06/11/python%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F(ini%E3%80%81yaml%E3%80%81xml)/">
                     <div class="card-image">
                         
-                        <img src="/images/banner/share.jpeg" class="responsive-img" alt="Python一秒钟搭建文件分享网页">
+                        <img src="/images/banner/Python-Learning.webp" class="responsive-img" alt="python读取配置文件方式(ini、yaml、xml)">
                         
-                        <span class="card-title">Python一秒钟搭建文件分享网页</span>
+                        <span class="card-title">python读取配置文件方式(ini、yaml、xml)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -873,7 +956,7 @@ movies <span class="token operator">=</span> collection<span class="token punctu
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-11
                             </span>
                         <span class="publish-author">
                             
@@ -892,10 +975,6 @@ movies <span class="token operator">=</span> collection<span class="token punctu
                     
                     <a href="/tags/Python/">
                         <span class="chip bg-color">Python</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%96%87%E4%BB%B6/">
-                        <span class="chip bg-color">文件</span>
                     </a>
                     
                 </div>
