@@ -223,7 +223,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/http.awebp')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/banner/http.awebp')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -438,7 +438,7 @@
 <p>CONNECT 小编没用过。</p>
 <p>后面三个感兴趣的去阅读一下RPC规范。小编大概看了一下，表示没怎么看懂，你行你上去挑战一下。</p>
 <h3 id="HTTP协议格式是怎样的？"><a href="#HTTP协议格式是怎样的？" class="headerlink" title="HTTP协议格式是怎样的？"></a>HTTP协议格式是怎样的？</h3><p>HTTP的请求和响应的消息协议是一样的，分为三个部分，起始行、消息头和消息体。这三个部分以CRLF作为分隔符。最后一个消息头有两个CRLF，用来表示消息头部的结束。</p>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5c36af78b26~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<p><img src="/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942891.695849.webp"></p>
 <p>HTTP请求的起始行称为请求行，形如GET /index.html HTTP/1.1</p>
 <p>HTTP响应的起始行称为状态行，形如200 ok</p>
 <p>消息头部有很多键值对组成，多个键值对之间使用CRLF作为分隔符，也可以完全没有键值对。形如Content-Encoding: gzip</p>
@@ -446,16 +446,16 @@
 <h3 id="什么是分块传送？"><a href="#什么是分块传送？" class="headerlink" title="什么是分块传送？"></a>什么是分块传送？</h3><p>当浏览器向服务器请求一个资源时，这个资源是一个动态资源，服务器无法提前预知资源的大小，这个时候就可以使用分块传输。</p>
 <p>服务器先生成一个thunk，发送这个chunk，再生成一个chunk，再发送一个chunk，直到全部资源传送完成。</p>
 <p>分块传送需要在请求头增加一个特殊的键值对transfer-encoding: thunked，那么消息体的内容便是分块传送的。</p>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5cb48c82960~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"><br>chunked传输格式如图所示，由一段一段的分块组合而成，每个块由一个长度行和一个分块体组成，最后一个分块长度为0表示结束。</p>
+<p><img src="/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942891.876003.webp"><br>chunked传输格式如图所示，由一段一段的分块组合而成，每个块由一个长度行和一个分块体组成，最后一个分块长度为0表示结束。</p>
 <h3 id="持久连接的机制是怎样的？"><a href="#持久连接的机制是怎样的？" class="headerlink" title="持久连接的机制是怎样的？"></a>持久连接的机制是怎样的？</h3><p>HTTP早期版本中每个请求都会发起一个连接，一个网页除了页面的HTML之外还会有很多静态资源以及诸多的API调用，如果每个请求都一个连接，势必网页的一次加载就会和服务器创建多次连接，这是非常浪费服务器资源的，同时也让客户端的访问速度慢了不少。HTTP1.0之后引入了Keep-Alive持久连接，在HTTP1.1版本中成为默认选项。它使得HTTP的一个连接可以连续服务多个请求，有效节省了资源，增加了客户端页面的加载速度。</p>
 <p>持久连接也不宜一直保持，毕竟每个连接都会占用服务器资源，如果打开网页的人太多，那服务器资源也会紧张，所以一般服务器都会配置一个KeepAlive Timeout参数和KeepAlive Requests参数限制单个连接持续时长和最多服务的请求次数。</p>
 <p>如果服务器设置的timeout时长为0，就退化到非持久连接。非持久连接会在响应头部增加一个头信息Connection: Close通知客户端在接受完当前响应后连接需要立即关闭。</p>
 <p>同样浏览器也不会因为服务器将KeepAlive Timeout配置了无限长就不管不问一直持续保持连接。每个浏览器都有它自己的内置限制，具体限制浏览器厂商各有不同。</p>
 <h3 id="什么叫Pipeline管线化？"><a href="#什么叫Pipeline管线化？" class="headerlink" title="什么叫Pipeline管线化？"></a>什么叫Pipeline管线化？</h3><p>HTTP1.0不支持管线化，同一个连接处理请求的顺序是逐个应答模式，处理一个请求就需要耗费一个TTL，也就是客户端到服务器的往返时间，处理N个请求就是N个TTL时长。当页面的请求非常多时，页面加载速度就会非常缓慢。</p>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5d4da2f676a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
-<p>从HTTP1.1开始要求服务器支持管线化，可以同时将多个请求发送到服务器，然后逐个读取响应。这个管线化和Redis的管线化原理是一样的，响应的顺序必须和请求的顺序保持一致。</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5d65430fe94~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"><br>如何理解HTTP协议的无状态性？</p>
-<p>所谓HTTP协议的无状态性是指服务器的协议层无需为不同的请求之间建立任何相关关系，它特指的是协议层的无状态性。但是这并不代表建立在HTTP协议之上的应用程序就无法维持状态。应用层可以通过会话Session来跟踪用户请求之间的相关性，服务器会为每个会话对象绑定一个唯一的会话ID，浏览器可以将会话ID记录在本地缓存LocalStorage或者Cookie，在后续的请求都带上这个会话ID，服务器就可以为每个请求找到相应的会话状态。</p>
+<p><img src="/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942892.10225.webp"></p>
+<p>从HTTP1.1开始要求服务器支持管线化，可以同时将多个请求发送到服务器，然后逐个读取响应。这个管线化和Redis的管线化原理是一样的，响应的顺序必须和请求的顺序保持一致。<br><img src="/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942892.30924.webp"></p>
+<h3 id="如何理解HTTP协议的无状态性？"><a href="#如何理解HTTP协议的无状态性？" class="headerlink" title="如何理解HTTP协议的无状态性？"></a>如何理解HTTP协议的无状态性？</h3><p>所谓HTTP协议的无状态性是指服务器的协议层无需为不同的请求之间建立任何相关关系，它特指的是协议层的无状态性。但是这并不代表建立在HTTP协议之上的应用程序就无法维持状态。应用层可以通过会话Session来跟踪用户请求之间的相关性，服务器会为每个会话对象绑定一个唯一的会话ID，浏览器可以将会话ID记录在本地缓存LocalStorage或者Cookie，在后续的请求都带上这个会话ID，服务器就可以为每个请求找到相应的会话状态。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903581431103502">天下无难试之HTTP协议面试刁难大全（上）</a></p>
 
                 
             </div>
@@ -654,7 +654,7 @@
                 <a href="/2022/06/09/Selenium%E8%B6%85%E7%BA%A7%E8%AF%A6%E7%BB%86%E7%9A%84%E6%95%99%E7%A8%8B/">
                     <div class="card-image">
                         
-                        <img src="/images/web-scraping-with-selenium-aind-python.png" class="responsive-img" alt="Selenium超级详细的教程">
+                        <img src="/images/banner/web-scraping-with-selenium-aind-python.png" class="responsive-img" alt="Selenium超级详细的教程">
                         
                         <span class="card-title">Selenium超级详细的教程</span>
                     </div>
@@ -710,7 +710,7 @@
                 <a href="/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/">
                     <div class="card-image">
                         
-                        <img src="/images/http.awebp" class="responsive-img" alt="鲜为人知的HTTP协议头字段详解大全「原创」">
+                        <img src="/images/banner/http.awebp" class="responsive-img" alt="鲜为人知的HTTP协议头字段详解大全「原创」">
                         
                         <span class="card-title">鲜为人知的HTTP协议头字段详解大全「原创」</span>
                     </div>

@@ -223,7 +223,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/banner/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -382,7 +382,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    656
+                    668
                 </div>
                 
 
@@ -418,21 +418,15 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>在使用 Python 开发的过程中，工程一多，难免会碰到不同的工程依赖不同版本的库的问题；亦或者是在开发过程中不想让物理环境里充斥各种各样的库，引发未来的依赖灾难。如果我们要同时开发多个应用程序，那这些应用程序都会共用一个 Python，就是安装在系统的 Python 3。如果应用 A 需要  jinja 2.7，而应用 B 需要 jinja 2.6 怎么办？此时，我们需要对于不同的工程使用不同的虚拟环境来保持开发环境以及宿主环境的清洁。为了不污染全局环境，通常都会使用环境隔离管理工具 <code>virtualenv</code> 与 <code>virtualenvwrapper</code>。<br><code>virtualenv</code> 是在项目底下执行生成 <code>venv</code> 环境目录以此来进行管理，这非常适合使用诸如 <code>VSCode</code> 这种集成环境配置的开发工具；那么当通过 shell 来运行 <code>virtualenv</code> 时便会显得非常麻烦，因为每次 shell 关闭再打开后都需要重新配置环境参数。<br><code>virtualenv</code> 需要每次使用 source 命令导入虚拟机运行环境，这一点非常麻烦，另外开发者还有可能忘记虚拟环境目录的建立位置，<code>virtualenvwrapper</code> 这一命令行工具就是通过对 <code>virtualenv</code> 进行封装，解决了上述问题。<code>virtualenvwrapper</code> 是将所有的 Python 项目虚拟环境环境都存放在一起，在使用 shell 配合小型开发工具就会非常方便。</p>
-<h2 id="virtualenvwrapper-安装配置（Mac）"><a href="#virtualenvwrapper-安装配置（Mac）" class="headerlink" title="virtualenvwrapper 安装配置（Mac）"></a>virtualenvwrapper 安装配置（Mac）</h2><ul>
-<li>使用 pip3 安装，<code>virtualenv</code> 也会在此期间安装完毕</li>
-</ul>
+<h2 id="virtualenvwrapper-安装配置（Mac）"><a href="#virtualenvwrapper-安装配置（Mac）" class="headerlink" title="virtualenvwrapper 安装配置（Mac）"></a>virtualenvwrapper 安装配置（Mac）</h2><p>使用 pip3 安装，<code>virtualenv</code> 也会在此期间安装完毕</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> pip3 <span class="token function">install</span> virtualenvwrapper<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
-<ul>
-<li>新建存放环境目录</li>
-</ul>
+<p>新建存放环境目录</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">mkdir</span> -p ~/.virtualenvs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
-<ul>
-<li>配置 <code>virtualenvwrapper</code> 环境（使用 python 3），打开 .zshrc，执行 <code>vim ~/.zshrc</code> 并写入(如果有安装<code>item2</code>与<code>oh-my-zsh</code>)</li>
-</ul>
+<p>配置 <code>virtualenvwrapper</code> 环境（使用 python 3），打开 .zshrc，执行 <code>vim ~/.zshrc</code> 并写入(如果有安装<code>item2</code>与<code>oh-my-zsh</code>)</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 设置virtualenvwrapper    </span>
 <span class="token builtin class-name">export</span> <span class="token assign-left variable">WORKON_HOME</span><span class="token operator">=</span><span class="token string">"~/.virtualenvs"</span>    
 <span class="token builtin class-name">export</span> <span class="token assign-left variable">VIRTUALENVWRAPPER_PYTHON</span><span class="token operator">=</span><span class="token string">"/usr/local/bin/python3"</span>    
@@ -440,14 +434,10 @@
 <span class="token builtin class-name">source</span> /usr/local/bin/virtualenvwrapper.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<ul>
-<li>使配置生效</li>
-</ul>
+<p>使配置生效</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">source</span> ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="virtualenvwrapper-使用"><a href="#virtualenvwrapper-使用" class="headerlink" title="virtualenvwrapper 使用"></a>virtualenvwrapper 使用</h2><ul>
-<li>新建虚拟环境 <code>Test</code> 并指定 Python 版本为 Python3：</li>
-</ul>
+<h2 id="virtualenvwrapper-使用"><a href="#virtualenvwrapper-使用" class="headerlink" title="virtualenvwrapper 使用"></a>virtualenvwrapper 使用</h2><p>新建虚拟环境 <code>Test</code> 并指定 Python 版本为 Python3：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ mkvirtualenv Test --python<span class="token operator">=</span>python3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>执行 <code>lsvirtualenv</code> 指令查看所有环境，环境 <code>Test</code> 位于 ~/Envs/test</p>
@@ -456,31 +446,24 @@ Test
 <span class="token operator">==</span><span class="token operator">==</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 
-<ul>
-<li>在项目底下激活虚拟环境 <code>Test</code>：</li>
-</ul>
+<p>在项目底下激活虚拟环境 <code>Test</code>：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ workon Test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
-<ul>
-<li>其他指令：</li>
-</ul>
+<p>其他指令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">## 退出环境 Test    </span>
 deactivate    
 <span class="token comment">## 删除环境 Test    </span>
 rmvirtualenv <span class="token builtin class-name">test</span>    
 <span class="token comment">## 更多指令可以在 shell 中输入 virtualenv 回车会有提示</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="在-VSCode-中使用虚拟环境"><a href="#在-VSCode-中使用虚拟环境" class="headerlink" title="在 VSCode 中使用虚拟环境"></a>在 VSCode 中使用虚拟环境</h2><ul>
-<li>进入工作环境设置文件 <code>settings.json</code>，加入如下配置： </li>
-</ul>
+<h2 id="在-VSCode-中使用虚拟环境"><a href="#在-VSCode-中使用虚拟环境" class="headerlink" title="在 VSCode 中使用虚拟环境"></a>在 VSCode 中使用虚拟环境</h2><p>进入工作环境设置文件 <code>settings.json</code>，加入如下配置： </p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token string">"python.venvPath"</span><span class="token builtin class-name">:</span> <span class="token string">"~/.virtualenvs"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>具体操作界面如图所示：<br><img src="https://pic2.zhimg.com/v2-c5f1899d69458d38919bc1a966085a79_b.jpg"></p>
-<ul>
-<li>重启 <code>VSCode</code> 即可看到配置已经成功被识别，便可以选择刚才新建的虚拟环境 <code>Test</code>：</li>
-</ul>
-<p><img src="https://pic3.zhimg.com/v2-df2a4b75440a6b3d5df15277651dafd6_b.jpg"></p>
+<p>具体操作界面如图所示：<br><img src="/images/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/1654943943.082001.jpg"></p>
+<p>重启 <code>VSCode</code> 即可看到配置已经成功被识别，便可以选择刚才新建的虚拟环境 <code>Test</code>：</p>
+<p><img src="/images/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/1654943943.202436.jpg"></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/70389886">virtualenvwrapper：Python_环境管理工具</a></p>
 
                 
             </div>
@@ -679,7 +662,7 @@ rmvirtualenv <span class="token builtin class-name">test</span>
                 <a href="/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/">
                     <div class="card-image">
                         
-                        <img src="/images/http.awebp" class="responsive-img" alt="鲜为人知的HTTP协议头字段详解大全「原创」">
+                        <img src="/images/banner/http.awebp" class="responsive-img" alt="鲜为人知的HTTP协议头字段详解大全「原创」">
                         
                         <span class="card-title">鲜为人知的HTTP协议头字段详解大全「原创」</span>
                     </div>

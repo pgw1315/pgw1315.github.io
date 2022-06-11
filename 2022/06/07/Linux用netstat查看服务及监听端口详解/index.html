@@ -452,7 +452,7 @@
 <span class="token punctuation">[</span>root@localhost ~<span class="token punctuation">]</span><span class="token comment"># netstat -nlp |grep LISTEN   //查看当前所有监听端口·</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<h3 id="查看当前所有tcp端口使用情况："><a href="#查看当前所有tcp端口使用情况：" class="headerlink" title="查看当前所有tcp端口使用情况："></a>查看当前所有tcp端口使用情况：</h3><p><img src="/images/1654661375.593722.jpg"></p>
+<h3 id="查看当前所有tcp端口使用情况："><a href="#查看当前所有tcp端口使用情况：" class="headerlink" title="查看当前所有tcp端口使用情况："></a>查看当前所有tcp端口使用情况：</h3><p><img src="/images/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/1654944231.708832.jpg"></p>
 <p>这里解释一下：</p>
 <ul>
 <li>1、0.0.0.0代表本机上可用的任意地址。 比如0.0.0.0:135 表示本机上所有地址的135端口，这样多ip计算机就不用重复显示了。</li>
@@ -479,7 +479,7 @@
 <li>CLOSED：(Connection is closed.)没有任何连接状态</li>
 </ul>
 <p>例如要查看当前Mysql默认端口80是否启动可以做如下操作</p>
-<p><img src="/images/1654661375.774797.jpg"></p>
+<p><img src="/images/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/1654944231.880319.jpg"></p>
 <p>netstat -ano来显示协议统计信息和TCP/IP网络连接</p>
 <p>netstat -t/-u/-l/-r/-n【显示网络相关信息,-t:TCP协议,-u:UDP协议,-l:监听,-r:路由,-n:显示IP地址和端口号】</p>
 <p>netstat -tlun【查看本机监听的端口】</p>
@@ -511,7 +511,7 @@ tcpdump -i eth0 -tnn dst port <span class="token number">80</span> -c <span clas
 <span class="token number">5</span>.根据端口列进程
 <span class="token function">netstat</span> -ntlp <span class="token operator">|</span> <span class="token function">grep</span> <span class="token number">80</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'&#123;print $7&#125;'</span> <span class="token operator">|</span> <span class="token function">cut</span> -d/ -f1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wade3015/article/details/90779669">Linux用netstat查看服务及监听端口详解</a></p>
 <p> </p>
 
                 
@@ -711,7 +711,7 @@ tcpdump -i eth0 -tnn dst port <span class="token number">80</span> -c <span clas
                 <a href="/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
                     <div class="card-image">
                         
-                        <img src="/images/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg" class="responsive-img" alt="virtualenvwrapper：Python_环境管理工具">
+                        <img src="/images/banner/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg" class="responsive-img" alt="virtualenvwrapper：Python_环境管理工具">
                         
                         <span class="card-title">virtualenvwrapper：Python_环境管理工具</span>
                     </div>

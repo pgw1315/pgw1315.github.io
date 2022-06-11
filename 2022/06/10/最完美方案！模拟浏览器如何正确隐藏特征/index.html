@@ -223,7 +223,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/images/072c-iryninw3301998.jpeg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/images/banner/072c-iryninw3301998.jpeg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -446,11 +446,11 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
  
  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>运行截图如下：<br><img src="/images/640.png"><br>可以看到，虽然我使用的是无头模式，但是能够被识别的特征都被成功隐藏。大家还可以双击打开保存下来的 html 文件，看看是不是结果跟普通浏览器几乎一样。<br>如果你使用的是 Pyppeteer，那么可以根据我上面文章中给出的方法，试着加载一下这个 js 文件，看看是不是也能成功隐藏特征。<br>那么，这个<code>stealth.min.js</code>文件是怎么来的呢？这就要说到<code>puppeteer</code>了。我们知道，Python 版本的<code>pyppeteer</code>已经很久没有人维护了，但是Node.js 版本的 <code>puppeteer</code>持续有人维护，并且在持续更新，生态也越来越好。<br>有开发者给 puppeteer 写了一套插件，叫做<code>puppeteer-extra</code>。其中，就有一个插件叫做puppeteer-extra-plugin-stealth[1]。这个东西，就来专门用来让 puppeteer 隐藏模拟浏览器的指纹特征。<br>这个东西是专门给 puppeteer 用的。所以，如果你使用的是 puppeteer，那么你可以根据它的 Readme说明，直接使用。<br>那么，我们用 Python 的人怎么办呢？实际上也有办法。就是把其中的隐藏特征的脚本提取出来，做成一个单独的 js 文件。然后让 Selenium 或者 Pyppeteer 在打开任意网页之前，先运行一下这个 js 文件里面的内容。<br>puppeteer-extra-plugin-stealth的作者还写了另外一个工具，叫做extract-stealth-evasions[2]。这个东西就是用来生成<code>stealth.min.js</code>文件的。<br>如果你在国外，并且网速足够快的话。那么你根据它的 Readme，首先安装 Node.js，然后安装 Npm，接着运行如下命令：</p>
+<p>运行截图如下：<br><img src="/images/%E6%9C%80%E5%AE%8C%E7%BE%8E%E6%96%B9%E6%A1%88%EF%BC%81%E6%A8%A1%E6%8B%9F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E9%9A%90%E8%97%8F%E7%89%B9%E5%BE%81/1654940870.049451.jpg"><br>可以看到，虽然我使用的是无头模式，但是能够被识别的特征都被成功隐藏。大家还可以双击打开保存下来的 html 文件，看看是不是结果跟普通浏览器几乎一样。<br>如果你使用的是 Pyppeteer，那么可以根据我上面文章中给出的方法，试着加载一下这个 js 文件，看看是不是也能成功隐藏特征。<br>那么，这个<code>stealth.min.js</code>文件是怎么来的呢？这就要说到<code>puppeteer</code>了。我们知道，Python 版本的<code>pyppeteer</code>已经很久没有人维护了，但是Node.js 版本的 <code>puppeteer</code>持续有人维护，并且在持续更新，生态也越来越好。<br>有开发者给 puppeteer 写了一套插件，叫做<code>puppeteer-extra</code>。其中，就有一个插件叫做puppeteer-extra-plugin-stealth[1]。这个东西，就来专门用来让 puppeteer 隐藏模拟浏览器的指纹特征。<br>这个东西是专门给 puppeteer 用的。所以，如果你使用的是 puppeteer，那么你可以根据它的 Readme说明，直接使用。<br>那么，我们用 Python 的人怎么办呢？实际上也有办法。就是把其中的隐藏特征的脚本提取出来，做成一个单独的 js 文件。然后让 Selenium 或者 Pyppeteer 在打开任意网页之前，先运行一下这个 js 文件里面的内容。<br>puppeteer-extra-plugin-stealth的作者还写了另外一个工具，叫做extract-stealth-evasions[2]。这个东西就是用来生成<code>stealth.min.js</code>文件的。<br>如果你在国外，并且网速足够快的话。那么你根据它的 Readme，首先安装 Node.js，然后安装 Npm，接着运行如下命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">npx extract-stealth-evasions
  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>就会在你执行命令的文件夹下面生成一个<code>stealth.min.js</code>文件。然后你就可以正常使用了。<br>如果你在国内，那么执行这个命令的过程中，会有一个下载 Chromium 的过程，速度非常慢，虽然只有130MB，但是可能会下载好几个小时。<br>此时，你需要把它的<code>package.json</code>和<code>index.js</code>两个文件保存到本地。然后打开<code>package.json</code>文件，修改其中的<code>dependencies</code>这一项，把里面的<code>puppeteer</code>改成<code>puppeteer-core</code>，如下图所示：<br><img src="/images/641.png"><br>然后修改<code>index.js</code>，给<code>.launch()</code>函数增加一个参数<code>executablePath</code>，指向你电脑上的 Chrome 浏览器，如下图所示：<br><img src="/images/642.png"><br>修改完成以后。首先执行<code>yarn install</code>安装依赖包。然后执行<code>node index.js</code>运行程序。1秒钟以后就会生成<code>stealth.min.js</code>了。<br>如果你对 Node.js 的工具链不熟悉，不知道如何使用。那么你可以关注公众号未闻 Code，回复<code>stealth</code>获取这个 js 文件。</p>
+<p>就会在你执行命令的文件夹下面生成一个<code>stealth.min.js</code>文件。然后你就可以正常使用了。<br>如果你在国内，那么执行这个命令的过程中，会有一个下载 Chromium 的过程，速度非常慢，虽然只有130MB，但是可能会下载好几个小时。<br>此时，你需要把它的<code>package.json</code>和<code>index.js</code>两个文件保存到本地。然后打开<code>package.json</code>文件，修改其中的<code>dependencies</code>这一项，把里面的<code>puppeteer</code>改成<code>puppeteer-core</code>，如下图所示：<br><img src="/images/%E6%9C%80%E5%AE%8C%E7%BE%8E%E6%96%B9%E6%A1%88%EF%BC%81%E6%A8%A1%E6%8B%9F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E9%9A%90%E8%97%8F%E7%89%B9%E5%BE%81/1654940870.356005.jpg"><br>然后修改<code>index.js</code>，给<code>.launch()</code>函数增加一个参数<code>executablePath</code>，指向你电脑上的 Chrome 浏览器，如下图所示：<br><img src="/images/%E6%9C%80%E5%AE%8C%E7%BE%8E%E6%96%B9%E6%A1%88%EF%BC%81%E6%A8%A1%E6%8B%9F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E9%9A%90%E8%97%8F%E7%89%B9%E5%BE%81/1654940870.654757.jpg"><br>修改完成以后。首先执行<code>yarn install</code>安装依赖包。然后执行<code>node index.js</code>运行程序。1秒钟以后就会生成<code>stealth.min.js</code>了。<br>如果你对 Node.js 的工具链不熟悉，不知道如何使用。那么你可以关注公众号未闻 Code，回复<code>stealth</code>获取这个 js 文件。</p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI2MzEwNTY3OQ==&mid=2648979719&idx=1&sn=71fe9932ae38f2f630f9c817033401dd&chksm=f25064e7c527edf17d617ef28928982c7df6e248d8980758c22a9e0cac67993d51f42da21031&cur_album_id=1318368205836189696&scene=189#wechat_redirect">最完美方案！模拟浏览器如何正确隐藏特征</a></p>
 
                 
@@ -650,7 +650,7 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
                 <a href="/2022/06/10/Python%E4%B8%80%E7%A7%92%E9%92%9F%E6%90%AD%E5%BB%BA%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E7%BD%91%E9%A1%B5/">
                     <div class="card-image">
                         
-                        <img src="/images/share.jpeg" class="responsive-img" alt="Python一秒钟搭建文件分享网页">
+                        <img src="/images/banner/share.jpeg" class="responsive-img" alt="Python一秒钟搭建文件分享网页">
                         
                         <span class="card-title">Python一秒钟搭建文件分享网页</span>
                     </div>
@@ -702,7 +702,7 @@ source <span class="token operator">=</span> driver<span class="token punctuatio
                 <a href="/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/">
                     <div class="card-image">
                         
-                        <img src="/images/linux-command.png" class="responsive-img" alt="Linux_运维必会的150个常用命令，你都会用吗？">
+                        <img src="/images/banner/linux-command.png" class="responsive-img" alt="Linux_运维必会的150个常用命令，你都会用吗？">
                         
                         <span class="card-title">Linux_运维必会的150个常用命令，你都会用吗？</span>
                     </div>
