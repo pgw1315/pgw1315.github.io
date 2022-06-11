@@ -3,7 +3,7 @@
 title: HTTP协议的基础
 date: 2022-06-09 11:01:07
 author: Will
-img: /images/http.awebp
+img: /images/banner/http.awebp
 categories: 网络
 tags:
   - 网络
@@ -23,7 +23,6 @@ tags:
 
 
 大部分同学都知道200、404、500、302状态码。如果连404都不知道，是要被小编鄙视的。500错误为什么这么常见呢，因为在开发的时候老是出bug，一个大异常抛出来，浏览器就500了。500表示InternalServerError，也就是内部服务器错误，如果不是bug，一般就是数据库挂了。
-
 
 
 再多问几个状态码很多人就不知道了，因为大多数公司的软件服务没有走标准的HTTP状态码，很多状态码从来就不会出现，同学们自然也不会知道。
@@ -69,7 +68,7 @@ CONNECT 小编没用过。
 HTTP的请求和响应的消息协议是一样的，分为三个部分，起始行、消息头和消息体。这三个部分以CRLF作为分隔符。最后一个消息头有两个CRLF，用来表示消息头部的结束。
 
 
-![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5c36af78b26~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
+![](/images/HTTP协议的基础/1654942891.695849.webp)
 
 
 HTTP请求的起始行称为请求行，形如GET /index.html HTTP/1.1
@@ -90,7 +89,7 @@ HTTP响应的起始行称为状态行，形如200 ok
 分块传送需要在请求头增加一个特殊的键值对transfer-encoding: thunked，那么消息体的内容便是分块传送的。
 
 
-![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5cb48c82960~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
+![](/images/HTTP协议的基础/1654942891.876003.webp)
 chunked传输格式如图所示，由一段一段的分块组合而成，每个块由一个长度行和一个分块体组成，最后一个分块长度为0表示结束。
 
 
@@ -111,17 +110,16 @@ HTTP早期版本中每个请求都会发起一个连接，一个网页除了页�
 HTTP1.0不支持管线化，同一个连接处理请求的顺序是逐个应答模式，处理一个请求就需要耗费一个TTL，也就是客户端到服务器的往返时间，处理N个请求就是N个TTL时长。当页面的请求非常多时，页面加载速度就会非常缓慢。
 
 
-![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5d4da2f676a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
+![](/images/HTTP协议的基础/1654942892.10225.webp)
 
 
 从HTTP1.1开始要求服务器支持管线化，可以同时将多个请求发送到服务器，然后逐个读取响应。这个管线化和Redis的管线化原理是一样的，响应的顺序必须和请求的顺序保持一致。
-
-### 
-![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/22/1624b5d65430fe94~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp)
-如何理解HTTP协议的无状态性？
+![](/images/HTTP协议的基础/1654942892.30924.webp)
+### 如何理解HTTP协议的无状态性？
 
 
 所谓HTTP协议的无状态性是指服务器的协议层无需为不同的请求之间建立任何相关关系，它特指的是协议层的无状态性。但是这并不代表建立在HTTP协议之上的应用程序就无法维持状态。应用层可以通过会话Session来跟踪用户请求之间的相关性，服务器会为每个会话对象绑定一个唯一的会话ID，浏览器可以将会话ID记录在本地缓存LocalStorage或者Cookie，在后续的请求都带上这个会话ID，服务器就可以为每个请求找到相应的会话状态。
 
 
-
+## 参考文章
+[天下无难试之HTTP协议面试刁难大全（上）](https://juejin.cn/post/6844903581431103502)

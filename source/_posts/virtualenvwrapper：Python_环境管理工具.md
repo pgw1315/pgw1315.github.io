@@ -3,7 +3,7 @@
 title: virtualenvwrapper：Python_环境管理工具
 date: 2022-06-08 12:18:21
 author: Will
-img: /images/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg
+img: /images/banner/1_FjqLQ08MEk6jSKxpzjCcVw.jpeg
 categories: Python
 tags:
   - Python
@@ -18,21 +18,21 @@ tags:
 ## virtualenvwrapper 安装配置（Mac）
 
 
-+ 使用 pip3 安装，`virtualenv` 也会在此期间安装完毕
+使用 pip3 安装，`virtualenv` 也会在此期间安装完毕
 
 ```bash
 $ sudo pip3 install virtualenvwrapper
 ```
 
 
-+ 新建存放环境目录
+新建存放环境目录
 
 ```bash
 $ mkdir -p ~/.virtualenvs
 ```
 
 
-+ 配置 `virtualenvwrapper` 环境（使用 python 3），打开 .zshrc，执行 `vim ~/.zshrc` 并写入(如果有安装`item2`与`oh-my-zsh`)
+配置 `virtualenvwrapper` 环境（使用 python 3），打开 .zshrc，执行 `vim ~/.zshrc` 并写入(如果有安装`item2`与`oh-my-zsh`)
 
 ```bash
 # 设置virtualenvwrapper    
@@ -43,7 +43,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 ```
 
 
-+ 使配置生效
+使配置生效
 
 ```bash
 $ source ~/.zshrc
@@ -52,7 +52,7 @@ $ source ~/.zshrc
 ## virtualenvwrapper 使用
 
 
-+ 新建虚拟环境 `Test` 并指定 Python 版本为 Python3：
+新建虚拟环境 `Test` 并指定 Python 版本为 Python3：
 
 ```bash
 $ mkvirtualenv Test --python=python3
@@ -66,14 +66,14 @@ Test
 ```
 
 
-+ 在项目底下激活虚拟环境 `Test`：
+在项目底下激活虚拟环境 `Test`：
 
 ```bash
 $ workon Test
 ```
 
 
-+ 其他指令：
+其他指令：
 
 ```bash
 ## 退出环境 Test    
@@ -86,17 +86,19 @@ rmvirtualenv test
 ## 在 VSCode 中使用虚拟环境
 
 
-+ 进入工作环境设置文件 `settings.json`，加入如下配置： 
+进入工作环境设置文件 `settings.json`，加入如下配置： 
 
 ```bash
 "python.venvPath": "~/.virtualenvs"
 ```
 
 具体操作界面如图所示：
-![](https://pic2.zhimg.com/v2-c5f1899d69458d38919bc1a966085a79_b.jpg)
+![](/images/virtualenvwrapper：Python_环境管理工具/1654943943.082001.jpg)
 
 
-+ 重启 `VSCode` 即可看到配置已经成功被识别，便可以选择刚才新建的虚拟环境 `Test`：
+重启 `VSCode` 即可看到配置已经成功被识别，便可以选择刚才新建的虚拟环境 `Test`：
 
-![](https://pic3.zhimg.com/v2-df2a4b75440a6b3d5df15277651dafd6_b.jpg)
+![](/images/virtualenvwrapper：Python_环境管理工具/1654943943.202436.jpg)
 
+## 参考文章
+[virtualenvwrapper：Python_环境管理工具](https://zhuanlan.zhihu.com/p/70389886)

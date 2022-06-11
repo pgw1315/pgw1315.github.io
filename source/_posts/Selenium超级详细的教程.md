@@ -3,7 +3,7 @@
 title: Selenium超级详细的教程
 date: 2022-06-09 11:18:11
 author: Will
-img: /images/web-scraping-with-selenium-aind-python.png
+img: /images/banner/web-scraping-with-selenium-aind-python.png
 categories: Python
 tags:
   - Python

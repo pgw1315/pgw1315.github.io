@@ -1,6 +1,7 @@
 ---
 title: CentOS7 yum安装python3.6
 author: Will Holmes
+img: /images/banner/default.jpeg
 categories: Linux
 tags:
   - Linux

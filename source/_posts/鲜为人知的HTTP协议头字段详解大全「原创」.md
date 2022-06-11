@@ -3,7 +3,7 @@
 title: 鲜为人知的HTTP协议头字段详解大全「原创」
 date: 2022-06-09 10:44:31
 author: Will
-img: /images/http.awebp
+img: /images/banner/http.awebp
 categories: 网络
 tags:
   - 网络

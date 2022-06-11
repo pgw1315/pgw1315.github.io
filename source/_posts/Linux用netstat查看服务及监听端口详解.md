@@ -55,7 +55,7 @@ tags:
 
 ### 查看当前所有tcp端口使用情况：
 
-![](/images/1654661375.593722.jpg)
+![](/images/Linux用netstat查看服务及监听端口详解/1654944231.708832.jpg)
 
 这里解释一下：
 
@@ -93,7 +93,7 @@ tags:
 例如要查看当前Mysql默认端口80是否启动可以做如下操作
 
 
-![](/images/1654661375.774797.jpg)
+![](/images/Linux用netstat查看服务及监听端口详解/1654944231.880319.jpg)
 
 netstat -ano来显示协议统计信息和TCP/IP网络连接
 
@@ -142,5 +142,7 @@ netstat -an | grep SYN | awk '{print $5}' | awk -F: '{print $1}' | sort | uniq -
 netstat -ntlp | grep 80 | awk '{print $7}' | cut -d/ -f1
 ```
 
+## 参考文章
+[Linux用netstat查看服务及监听端口详解](https://blog.csdn.net/wade3015/article/details/90779669)
 
  
