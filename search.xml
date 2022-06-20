@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>python获取当前文件所在目录和当前工作目录</title>
+      <link href="/2022/06/20/python%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E6%89%80%E5%9C%A8%E7%9B%AE%E5%BD%95%E5%92%8C%E5%BD%93%E5%89%8D%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95/"/>
+      <url>/2022/06/20/python%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E6%89%80%E5%9C%A8%E7%9B%AE%E5%BD%95%E5%92%8C%E5%BD%93%E5%89%8D%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一、当前工作目录"><a href="#一、当前工作目录" class="headerlink" title="一、当前工作目录"></a>一、当前工作目录</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span>  os<span class="token keyword">print</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 获取当前工作目录路径</span><span class="token keyword">print</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 获取当前工作目录路径</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h3 id="二、当前文件路径"><a href="#二、当前文件路径" class="headerlink" title="二、当前文件路径"></a>二、当前文件路径</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> oscurrent_work_dir <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span>  <span class="token comment"># 当前文件所在的目录</span>weight_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>current_work_dir<span class="token punctuation">,</span> weight_path<span class="token punctuation">)</span>  <span class="token comment"># 再加上它的相对路径，这样可以动态生成绝对路径</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p> </p><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/jizhidexiaoming/article/details/102930885">python获取当前文件所在目录和当前工作目录</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>VScode中使用git合并分支</title>
+      <link href="/2022/06/20/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/"/>
+      <url>/2022/06/20/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>首先我们有两个分支，一个是test分支，一个是main分支。我们现在要把test分支合并到main分支里面去。（就是说，test分支是比main分支早一个版本的）<br>另外，<strong>我们默认本地分支和线上分支版本是一样的</strong>，如果不一样要先pull一下。</p><p>test分支的内容<br><img src="/images/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/20210719182820105.png"><br>main分支的内容<br><img src="/images/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/20210719182844500.png"></p><h3 id="1-把分支切换到本地的main分支"><a href="#1-把分支切换到本地的main分支" class="headerlink" title="1.把分支切换到本地的main分支"></a>1.把分支切换到本地的main分支</h3><p><img src="/images/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/20210719182939631.png"><br>注意，本地的main分支是没有origin开头的。</p><h3 id="2-点击合并分支"><a href="#2-点击合并分支" class="headerlink" title="2. 点击合并分支"></a>2. 点击合并分支</h3><p><img src="/images/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/20210719183028248.png"></p><h3 id="3-选择开发的分支"><a href="#3-选择开发的分支" class="headerlink" title="3. 选择开发的分支"></a>3. 选择开发的分支</h3><p><img src="/images/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/20210719183138645.png"><br>这里需要选择分支，我们选择本地的test分支。</p><p><img src="/images/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/20210719183234835.png"><br>然后，我们看到main分支里面，就会出现刚刚test的内容了。而这时，只是本地的main分支合并了，线上的main分支还没被合并。我们需要再推送一下。</p><h3 id="4-将main分支推送到线上"><a href="#4-将main分支推送到线上" class="headerlink" title="4. 将main分支推送到线上"></a>4. 将main分支推送到线上</h3><p><img src="/images/vscode%E4%B8%AD%E4%BD%BF%E7%94%A8git%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF/20210719183358597.png"></p><h3 id="5-合并完成"><a href="#5-合并完成" class="headerlink" title="5.合并完成"></a>5.合并完成</h3><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://blog.csdn.net/weixin_44004835/article/details/118908695">vscode中使用git合并分支</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> VScode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>YAML中多行字符串的配置方法</title>
       <link href="/2022/06/18/YAML%E4%B8%AD%E5%A4%9A%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/"/>
       <url>/2022/06/18/YAML%E4%B8%AD%E5%A4%9A%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/</url>
