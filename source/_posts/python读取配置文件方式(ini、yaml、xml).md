@@ -171,7 +171,7 @@ test:
 ### 2.2 yaml文件的读取
 读取yaml文件需要先安装相应模块。
 ```shell
-pip install yaml
+pip install pyyaml
 ```
 yaml文件内容如下：
 ```yaml

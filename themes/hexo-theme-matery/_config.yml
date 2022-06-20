@@ -51,6 +51,7 @@ time:
 # 首页封面轮播图的相关配置.
 cover:
 
+  enable: false #是否开启轮播图
   showPrevNext: true # 是否显示左右切换按钮. Whether to display the left and right toggle buttons.
   showIndicators: true # 是否显示指示器. # Whether to display the indicators
   autoLoop: true # 是否自动轮播. Whether it is automatically rotated.
