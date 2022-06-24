@@ -2,7 +2,7 @@
 title: python获取当前文件所在目录和当前工作目录
 date: 2022-06-20 12:05:06
 author: Will
-img: /images/banner/default.jpeg
+img: /images/banner/python-path.jpeg
 categories: Python
 tags:
   - Python
