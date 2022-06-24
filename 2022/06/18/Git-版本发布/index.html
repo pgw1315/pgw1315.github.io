@@ -376,14 +376,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-06-18
+                    2022-06-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    215
+                    248
                 </div>
                 
 
@@ -423,12 +423,22 @@
 <h3 id="github-release"><a href="#github-release" class="headerlink" title="github release"></a>github release</h3><p>查看releases，会有很多版本，这些版本其实就是Git中的标签。<br>Git标签可以将现有或过去的提交点（Commit Point）打上标签，这个标签<br>可能是项目的一个里程碑或者一个重要节点。</p>
 <p><img src="/images/Git-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83/20181213180038917.png"></p>
 <p>创建Github一个版本发布：</p>
-<p><img src="/images/Git-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83/20181213180111885.png"><br>-a 证明这个标签是注解的<br>-m 标签消息</p>
+<p><img src="/images/Git-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83/20181213180111885.png"></p>
+<ul>
+<li>-a 证明这个标签是注解的</li>
+<li>-m 标签消息</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> tag -a v1.0.1 -m <span class="token string">'msg'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在本地打上标签后，还要推送到远程库中，在Git术语中称之为Sharing Tag<br>使用命令<code>git show v1.0.0</code>（v1.0.0是标签名），来查看某标签的信息</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> show v1.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="/images/Git-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83/20181213194224114.png"></p>
 <p>确认无误后，可以将其通过<code>git push origin v1.0.0</code>命令推送到远程库，当然，较为罕见的情况，<br>你需要推送多个标签 <code>git push origin --tags</code>来代替</p>
 <p><img src="/images/Git-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83/20181213194503568.png" alt="git同步远程库标签"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> push origin v1.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="删除标签并推送到远端"><a href="#删除标签并推送到远端" class="headerlink" title="删除标签并推送到远端"></a>删除标签并推送到远端</h3><p><img src="/images/Git-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83/201812132001379.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> tag -d v1.0.0 
+<span class="token function">git</span> push origin :refs/tags/v1.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33745102/article/details/84992778">Git-版本发布</a></p>
 
                 
