@@ -140,12 +140,14 @@
       
       <categories>
           
-          <category> 工具 </category>
+          <category> Git </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> Git </tag>
             
             <tag> VScode </tag>
             
@@ -1014,7 +1016,7 @@
       
       <categories>
           
-          <category> 正则表达式 </category>
+          <category> 其他 </category>
           
       </categories>
       
