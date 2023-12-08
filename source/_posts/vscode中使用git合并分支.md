@@ -3,9 +3,10 @@ title: VScode中使用git合并分支
 date: 2022-06-20 11:58:18
 author: Will
 img: /images/banner/vscode.png
-categories: 工具
+categories: Git
 tags:
   - VScode
+  - Git
 ---
 
 

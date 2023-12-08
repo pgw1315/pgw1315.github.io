@@ -2,6 +2,7 @@
 title: Python 正则表达式笔记
 author: Will Holmes
 categories: Python
+img: /images/banner/regexp2.png
 tags:
   - Python
   - 正则表达式
