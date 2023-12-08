@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>virtualenvwrapper：Python_环境管理工具 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,开发环境">
+    <meta name="description" content="概况在使用 Python 开发的过程中，工程一多，难免会碰到不同的工程依赖不同版本的库的问题；亦或者是在开发过程中不想让物理环境里充斥各种各样的库，引发未来的依赖灾难。如果我们要同时开发多个应用程序，那这些应用程序都会共用一个 Python，就是安装在系统的 Python 3。如果应用 A 需要  jinja 2.7，而应用 B 需要 jinja 2.6 怎么办？此时，我们需要对于不同的工程使用不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="virtualenvwrapper：Python_环境管理工具">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="概况在使用 Python 开发的过程中，工程一多，难免会碰到不同的工程依赖不同版本的库的问题；亦或者是在开发过程中不想让物理环境里充斥各种各样的库，引发未来的依赖灾难。如果我们要同时开发多个应用程序，那这些应用程序都会共用一个 Python，就是安装在系统的 Python 3。如果应用 A 需要  jinja 2.7，而应用 B 需要 jinja 2.6 怎么办？此时，我们需要对于不同的工程使用不">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pgw1315.github.io/images/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/1654943943.082001.jpg">
+<meta property="og:image" content="http://pgw1315.github.io/images/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/1654943943.202436.jpg">
+<meta property="article:published_time" content="2022-06-08T04:18:21.000Z">
+<meta property="article:modified_time" content="2022-06-11T10:50:03.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="开发环境">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pgw1315.github.io/images/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/1654943943.082001.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">virtualenvwrapper：Python_环境管理工具</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">virtualenvwrapper：Python_环境管理工具</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-08T04:18:21.000Z" itemprop="datePublished" class="page-time">
+  2022-06-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概况"><span class="post-toc-number">1.</span> <span class="post-toc-text">概况</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#virtualenvwrapper-安装配置（Mac）"><span class="post-toc-number">2.</span> <span class="post-toc-text">virtualenvwrapper 安装配置（Mac）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#virtualenvwrapper-使用"><span class="post-toc-number">3.</span> <span class="post-toc-text">virtualenvwrapper 使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在-VSCode-中使用虚拟环境"><span class="post-toc-number">4.</span> <span class="post-toc-text">在 VSCode 中使用虚拟环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-virtualenvwrapper：Python_环境管理工具"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">virtualenvwrapper：Python_环境管理工具</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-08 12:18:21" datetime="2022-06-08T04:18:21.000Z"  itemprop="datePublished">2022-06-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>在使用 Python 开发的过程中，工程一多，难免会碰到不同的工程依赖不同版本的库的问题；亦或者是在开发过程中不想让物理环境里充斥各种各样的库，引发未来的依赖灾难。如果我们要同时开发多个应用程序，那这些应用程序都会共用一个 Python，就是安装在系统的 Python 3。如果应用 A 需要  jinja 2.7，而应用 B 需要 jinja 2.6 怎么办？此时，我们需要对于不同的工程使用不同的虚拟环境来保持开发环境以及宿主环境的清洁。为了不污染全局环境，通常都会使用环境隔离管理工具 <code>virtualenv</code> 与 <code>virtualenvwrapper</code>。<br><code>virtualenv</code> 是在项目底下执行生成 <code>venv</code> 环境目录以此来进行管理，这非常适合使用诸如 <code>VSCode</code> 这种集成环境配置的开发工具；那么当通过 shell 来运行 <code>virtualenv</code> 时便会显得非常麻烦，因为每次 shell 关闭再打开后都需要重新配置环境参数。<br><code>virtualenv</code> 需要每次使用 source 命令导入虚拟机运行环境，这一点非常麻烦，另外开发者还有可能忘记虚拟环境目录的建立位置，<code>virtualenvwrapper</code> 这一命令行工具就是通过对 <code>virtualenv</code> 进行封装，解决了上述问题。<code>virtualenvwrapper</code> 是将所有的 Python 项目虚拟环境环境都存放在一起，在使用 shell 配合小型开发工具就会非常方便。</p>
+<h2 id="virtualenvwrapper-安装配置（Mac）"><a href="#virtualenvwrapper-安装配置（Mac）" class="headerlink" title="virtualenvwrapper 安装配置（Mac）"></a>virtualenvwrapper 安装配置（Mac）</h2><p>使用 pip3 安装，<code>virtualenv</code> 也会在此期间安装完毕</p>
+<pre><code class="bash">$ sudo pip3 install virtualenvwrapper
+</code></pre>
+<p>新建存放环境目录</p>
+<pre><code class="bash">$ mkdir -p ~/.virtualenvs
+</code></pre>
+<p>配置 <code>virtualenvwrapper</code> 环境（使用 python 3），打开 .zshrc，执行 <code>vim ~/.zshrc</code> 并写入(如果有安装<code>item2</code>与<code>oh-my-zsh</code>)</p>
+<pre><code class="bash"># 设置virtualenvwrapper    
+export WORKON_HOME=&quot;~/.virtualenvs&quot;    
+export VIRTUALENVWRAPPER_PYTHON=&quot;/usr/local/bin/python3&quot;    
+# 打开终端自动启用    
+source /usr/local/bin/virtualenvwrapper.sh
+</code></pre>
+<p>使配置生效</p>
+<pre><code class="bash">$ source ~/.zshrc
+</code></pre>
+<h2 id="virtualenvwrapper-使用"><a href="#virtualenvwrapper-使用" class="headerlink" title="virtualenvwrapper 使用"></a>virtualenvwrapper 使用</h2><p>新建虚拟环境 <code>Test</code> 并指定 Python 版本为 Python3：</p>
+<pre><code class="bash">$ mkvirtualenv Test --python=python3
+</code></pre>
+<p>执行 <code>lsvirtualenv</code> 指令查看所有环境，环境 <code>Test</code> 位于 ~/Envs/test</p>
+<pre><code class="bash">$ lsvirtualenv    
+Test    
+==== 
+</code></pre>
+<p>在项目底下激活虚拟环境 <code>Test</code>：</p>
+<pre><code class="bash">$ workon Test
+</code></pre>
+<p>其他指令：</p>
+<pre><code class="bash">## 退出环境 Test    
+deactivate    
+## 删除环境 Test    
+rmvirtualenv test    
+## 更多指令可以在 shell 中输入 virtualenv 回车会有提示
+</code></pre>
+<h2 id="在-VSCode-中使用虚拟环境"><a href="#在-VSCode-中使用虚拟环境" class="headerlink" title="在 VSCode 中使用虚拟环境"></a>在 VSCode 中使用虚拟环境</h2><p>进入工作环境设置文件 <code>settings.json</code>，加入如下配置： </p>
+<pre><code class="bash">&quot;python.venvPath&quot;: &quot;~/.virtualenvs&quot;
+</code></pre>
+<p>具体操作界面如图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/virtualenvwrapper：Python_环境管理工具/1654943943.082001.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+<p>重启 <code>VSCode</code> 即可看到配置已经成功被识别，便可以选择刚才新建的虚拟环境 <code>Test</code>：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/virtualenvwrapper：Python_环境管理工具/1654943943.202436.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://zhuanlan.zhihu.com/p/70389886" target="_blank" rel="noopener">virtualenvwrapper：Python_环境管理工具</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-11T10:50:03.000Z" itemprop="dateUpdated">2022-06-11 18:50:03</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="tag">开发环境</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/&title=《virtualenvwrapper：Python_环境管理工具》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/&title=《virtualenvwrapper：Python_环境管理工具》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《virtualenvwrapper：Python_环境管理工具》 — Will的博客&url=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">鲜为人知的HTTP协议头字段详解大全「原创」</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux用netstat查看服务及监听端口详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/&title=《virtualenvwrapper：Python_环境管理工具》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/&title=《virtualenvwrapper：Python_环境管理工具》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《virtualenvwrapper：Python_环境管理工具》 — Will的博客&url=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

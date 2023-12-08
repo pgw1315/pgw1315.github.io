@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>【万字长文详解】Python库collections，让你击败99%的Pythoner | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python">
+    <meta name="description" content="Python的集合（collections）模块，为很多用其他方法很难实现的场景提供了解决方案。本文我们将会学习该模块的抽象概念是如何产生的，日后处理不同问题的过程中迟早会用得到这些知识。免责声明：这篇文章是关于Python的一个相当高级的特性，如果你刚入门，建议先收藏，请等一等再学！没想到这篇文章这么受欢迎， 修改优化下。 一、模块概述1、模块作用官方说法：collections模块实现了特定目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【万字长文详解】Python库collections，让你击败99%的Pythoner">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="Python的集合（collections）模块，为很多用其他方法很难实现的场景提供了解决方案。本文我们将会学习该模块的抽象概念是如何产生的，日后处理不同问题的过程中迟早会用得到这些知识。免责声明：这篇文章是关于Python的一个相当高级的特性，如果你刚入门，建议先收藏，请等一等再学！没想到这篇文章这么受欢迎， 修改优化下。 一、模块概述1、模块作用官方说法：collections模块实现了特定目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-efa2efb16a4e3a24b191bf866281836b_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-de3e2a13b4a1524a0b3cb42d18346ad4_b.jpeg">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-6feda1c80a14993793c335c93d667262_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-e8975db7e7c2f9d0de2e1faa7427ba83_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-168252851c2344011745913d8b8330b7_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-ba1c11aa62529004b8b20b5507c8b371_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-0c90981e53acc01aac99f161467407cf_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-6d8e3cd1dbf4186e0e24620b884bcf3c_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-8f982aebadbbea91fffd8b63922813e3_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-e9411272b33c99cdfe9b78c9d03f9b90_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-520a3b53ca349a4c1e821d044d850dce_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-76d68d5bc235feea862299e4159a0ce5_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-520a3b53ca349a4c1e821d044d850dce_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-3c82b2b94a06a00daee8ee56f0a3b722_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-dfc8d0750c881756d3bd6c6335c5e08f_b.octet-stream">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-ef4f16054ebda651b702ca60191c880f_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-61edd6a75a4588ea47ffb8bce558f4cd_b.jpeg">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-d679e081f5420e6fb13b2daef2feaee4_b.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-c69ecbd6433f66bb29a25079a89ad8fb_b.jpeg">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-0f9bcf49cd958ec597af013c8b5bc7bd_b.octet-stream">
+<meta property="article:published_time" content="2022-06-13T04:17:35.000Z">
+<meta property="article:modified_time" content="2022-06-13T04:30:05.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pgw1315.github.io/images/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%%E7%9A%84Pythoner/v2-efa2efb16a4e3a24b191bf866281836b_b.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【万字长文详解】Python库collections，让你击败99%的Pythoner</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【万字长文详解】Python库collections，让你击败99%的Pythoner</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-13T04:17:35.000Z" itemprop="datePublished" class="page-time">
+  2022-06-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、模块概述"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、模块概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、模块作用"><span class="post-toc-number">2.</span> <span class="post-toc-text">1、模块作用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、模块资料"><span class="post-toc-number">3.</span> <span class="post-toc-text">2、模块资料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、模块子类"><span class="post-toc-number">4.</span> <span class="post-toc-text">3、模块子类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、计数器-Counter"><span class="post-toc-number">5.</span> <span class="post-toc-text">二、计数器-Counter</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、基础介绍"><span class="post-toc-number">6.</span> <span class="post-toc-text">1、基础介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、elements"><span class="post-toc-number">7.</span> <span class="post-toc-text">1、elements()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、most-common"><span class="post-toc-number">8.</span> <span class="post-toc-text">2、most_common()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、subtract"><span class="post-toc-number">9.</span> <span class="post-toc-text">3、subtract()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、字典方法"><span class="post-toc-number">10.</span> <span class="post-toc-text">4、字典方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、数学操作"><span class="post-toc-number">11.</span> <span class="post-toc-text">5、数学操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、双向队列-deque"><span class="post-toc-number">12.</span> <span class="post-toc-text">二、双向队列-deque</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、append"><span class="post-toc-number">13.</span> <span class="post-toc-text">1、append()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、appendleft"><span class="post-toc-number">14.</span> <span class="post-toc-text">2、appendleft()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、clear"><span class="post-toc-number">15.</span> <span class="post-toc-text">3、clear()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、copy"><span class="post-toc-number">16.</span> <span class="post-toc-text">4、copy()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、count"><span class="post-toc-number">17.</span> <span class="post-toc-text">5、count()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6、extend"><span class="post-toc-number">18.</span> <span class="post-toc-text">6、extend()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7、extendleft"><span class="post-toc-number">19.</span> <span class="post-toc-text">7、extendleft()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8、index"><span class="post-toc-number">20.</span> <span class="post-toc-text">8、index()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9、insert"><span class="post-toc-number">21.</span> <span class="post-toc-text">9、insert()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10、pop"><span class="post-toc-number">22.</span> <span class="post-toc-text">10、pop()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11、popleft"><span class="post-toc-number">23.</span> <span class="post-toc-text">11、popleft()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12、remove-value"><span class="post-toc-number">24.</span> <span class="post-toc-text">12、remove(value)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13、reverse"><span class="post-toc-number">25.</span> <span class="post-toc-text">13、reverse()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#14、rotate-n-1"><span class="post-toc-number">26.</span> <span class="post-toc-text">14、rotate(n&#x3D;1)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#15、maxlen"><span class="post-toc-number">27.</span> <span class="post-toc-text">15、maxlen</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、有序字典-OrderedDict"><span class="post-toc-number">28.</span> <span class="post-toc-text">三、有序字典-OrderedDict</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、popitem"><span class="post-toc-number">29.</span> <span class="post-toc-text">1、popitem</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、move-to-end"><span class="post-toc-number">30.</span> <span class="post-toc-text">2、move_to_end</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、reversed"><span class="post-toc-number">31.</span> <span class="post-toc-text">3、reversed()</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、可命名元组-namedtuple"><span class="post-toc-number">32.</span> <span class="post-toc-text">四、可命名元组-namedtuple</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、参数介绍"><span class="post-toc-number">33.</span> <span class="post-toc-text">1、参数介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、应用案例"><span class="post-toc-number">34.</span> <span class="post-toc-text">2、应用案例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、三个方法"><span class="post-toc-number">35.</span> <span class="post-toc-text">3、三个方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#make-iterable"><span class="post-toc-number">35.1.</span> <span class="post-toc-text">_make(iterable)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#asdict"><span class="post-toc-number">35.2.</span> <span class="post-toc-text">_asdict()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#replace-kwargs"><span class="post-toc-number">35.3.</span> <span class="post-toc-text">_replace(**kwargs)</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、两个属性"><span class="post-toc-number">36.</span> <span class="post-toc-text">4、两个属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、其他函数"><span class="post-toc-number">37.</span> <span class="post-toc-text">5、其他函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、默认字典-defaultdict"><span class="post-toc-number">38.</span> <span class="post-toc-text">五、默认字典-defaultdict</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、基础介绍-1"><span class="post-toc-number">39.</span> <span class="post-toc-text">1、基础介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、示例介绍"><span class="post-toc-number">40.</span> <span class="post-toc-text">2、示例介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、映射链-ChainMap"><span class="post-toc-number">41.</span> <span class="post-toc-text">六、映射链-ChainMap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、ChainMap是什么"><span class="post-toc-number">42.</span> <span class="post-toc-text">1、ChainMap是什么</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、特性"><span class="post-toc-number">43.</span> <span class="post-toc-text">2、特性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、应用案例-基础案例"><span class="post-toc-number">44.</span> <span class="post-toc-text">3、应用案例-基础案例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#new-child-方法"><span class="post-toc-number">44.1.</span> <span class="post-toc-text">new_child()方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#parents属性"><span class="post-toc-number">44.2.</span> <span class="post-toc-text">parents属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、应用案例-购物清单"><span class="post-toc-number">45.</span> <span class="post-toc-text">4、应用案例-购物清单</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、应用案例-CLI配置"><span class="post-toc-number">46.</span> <span class="post-toc-text">5、应用案例-CLI配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6、我为什么关心？"><span class="post-toc-number">47.</span> <span class="post-toc-text">6、我为什么关心？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7、总结"><span class="post-toc-number">48.</span> <span class="post-toc-text">7、总结</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#七、UserDict"><span class="post-toc-number">49.</span> <span class="post-toc-text">七、UserDict</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#八、UserList"><span class="post-toc-number">50.</span> <span class="post-toc-text">八、UserList</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#九、UserString"><span class="post-toc-number">51.</span> <span class="post-toc-text">九、UserString</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">52.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-【万字长文详解】Python库collections，让你击败99的Pythoner"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【万字长文详解】Python库collections，让你击败99%的Pythoner</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-13 12:17:35" datetime="2022-06-13T04:17:35.000Z"  itemprop="datePublished">2022-06-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Python的集合（collections）模块，为很多用其他方法很难实现的场景提供了解决方案。本文我们将会学习该模块的抽象概念是如何产生的，日后处理不同问题的过程中迟早会用得到这些知识。<br>免责声明：这篇文章是关于Python的一个相当高级的特性，如果你刚入门，建议先收藏，请等一等再学！<br>没想到这篇文章这么受欢迎， 修改优化下。</p>
+<h3 id="一、模块概述"><a href="#一、模块概述" class="headerlink" title="一、模块概述"></a>一、模块概述</h3><h3 id="1、模块作用"><a href="#1、模块作用" class="headerlink" title="1、模块作用"></a>1、模块作用</h3><p><strong>官方说法：</strong>collections模块实现了特定目标的容器，以提供Python标准内建容器dict ,list , set , 和tuple的替代选择。<br><strong>通俗说法：</strong>Python内置的数据类型和方法，collections模块在这些内置类型的基础提供了额外的高性能数据类型，比如基础的字典是不支持顺序的，collections模块的OrderedDict类构建的字典可以支持顺序，collections模块的这些扩展的类用处非常大，熟练掌握该模块，可以大大简化Python代码，提高Python代码逼格和效率，<strong>高手入门必备。</strong></p>
+<h3 id="2、模块资料"><a href="#2、模块资料" class="headerlink" title="2、模块资料"></a>2、模块资料</h3><p>关于该模块，官方的参考资料写的非常详细，也很有价值，大家可以参考<br>中文文档：<a href="https://link.zhihu.com/?target=https://docs.python.org/zh-cn/3/library/collections.html%23module-collections">https://docs.python.org/zh-cn/3/library/collections.html#module-collections</a><br>英文文档：<a href="https://link.zhihu.com/?target=https://docs.python.org/3/library/collections.html%23module-collections">https://docs.python.org/3/library/collections.html#module-collections</a></p>
+<h3 id="3、模块子类"><a href="#3、模块子类" class="headerlink" title="3、模块子类"></a>3、模块子类</h3><p>用collections.__all__查看所有的子类，一共包含9个</p>
+<pre><code class="python">import collections
+print(collections.__all__)
+[&#39;deque&#39;, &#39;defaultdict&#39;, &#39;namedtuple&#39;, &#39;UserDict&#39;, &#39;UserList&#39;, 
+&#39;UserString&#39;, &#39;Counter&#39;, &#39;OrderedDict&#39;, &#39;ChainMap&#39;]
+</code></pre>
+<p>这个模块实现了特定目标的容器，以提供Python标准内建容器dict , list , set , 和tuple 的替代选择。 </p>
+<table>
+<thead>
+<tr>
+<th>namedtuple()</th>
+<th>创建命名元组子类的工厂函数，生成可以使用名字来访问元素内容的tuple子类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>deque</td>
+<td>类似列表(list)的容器，实现了在两端快速添加(append)和弹出(pop)</td>
+</tr>
+<tr>
+<td>ChainMap</td>
+<td>类似字典(dict)的容器类，将多个映射集合到一个视图里面</td>
+</tr>
+<tr>
+<td>Counter</td>
+<td>字典的子类，提供了可哈希对象的计数功能</td>
+</tr>
+<tr>
+<td>OrderedDict</td>
+<td>字典的子类，保存了他们被添加的顺序，有序字典</td>
+</tr>
+<tr>
+<td>defaultdict</td>
+<td>字典的子类，提供了一个工厂函数，为字典查询提供一个默认值</td>
+</tr>
+<tr>
+<td>UserDict</td>
+<td>封装了字典对象，简化了字典子类化</td>
+</tr>
+<tr>
+<td>UserList</td>
+<td>封装了列表对象，简化了列表子类化</td>
+</tr>
+<tr>
+<td>UserString</td>
+<td>封装了字符串对象，简化了字符串子类化（中文版翻译有误）</td>
+</tr>
+</tbody></table>
+<h3 id="二、计数器-Counter"><a href="#二、计数器-Counter" class="headerlink" title="二、计数器-Counter"></a>二、计数器-Counter</h3><h3 id="1、基础介绍"><a href="#1、基础介绍" class="headerlink" title="1、基础介绍"></a>1、基础介绍</h3><p>一个计数器工具提供快速和方便的计数，Counter是一个dict的子类，用于<strong>计数可哈希对象</strong>。它是一个集合，元素像字典键(key)一样存储，它们的计数存储为值。计数可以是任何整数值，包括0和负数，Counter类有点像其他语言中的bags或multisets。简单说，就是可以统计计数，来几个例子看看就清楚了，比如</p>
+<pre><code class="python">#计算top10的单词
+from collections import Counter
+import re
+text = &#39;remove an existing key one level down remove an existing key one level down&#39;
+words = re.findall(r&#39;\w+&#39;, text)
+Counter(words).most_common(10)
+[(&#39;remove&#39;, 2),(&#39;an&#39;, 2),(&#39;existing&#39;, 2),(&#39;key&#39;, 2),(&#39;one&#39;, 2)(&#39;level&#39;, 2),(&#39;down&#39;, 2)] 
+
+
+#计算列表中单词的个数
+cnt = Counter()
+for word in [&#39;red&#39;, &#39;blue&#39;, &#39;red&#39;, &#39;green&#39;, &#39;blue&#39;, &#39;blue&#39;]:
+    cnt[word] += 1
+cnt
+Counter({&#39;red&#39;: 2, &#39;blue&#39;: 3, &#39;green&#39;: 1})
+
+
+#上述这样计算有点嘛，下面的方法更简单，直接计算就行
+L = [&#39;red&#39;, &#39;blue&#39;, &#39;red&#39;, &#39;green&#39;, &#39;blue&#39;, &#39;blue&#39;] 
+Counter(L)
+Counter({&#39;red&#39;: 2, &#39;blue&#39;: 3, &#39;green&#39;: 1}
+</code></pre>
+<p>元素从一个iterable 被计数或从其他的mapping (or counter)初始化：</p>
+<pre><code class="python">from collections import Counter
+
+#字符串计数
+Counter(&#39;gallahad&#39;) 
+Counter({&#39;g&#39;: 1, &#39;a&#39;: 3, &#39;l&#39;: 2, &#39;h&#39;: 1, &#39;d&#39;: 1})
+
+#字典计数
+Counter({&#39;red&#39;: 4, &#39;blue&#39;: 2})  
+Counter({&#39;red&#39;: 4, &#39;blue&#39;: 2})
+
+#是个啥玩意计数
+Counter(cats=4, dogs=8)
+Counter({&#39;cats&#39;: 4, &#39;dogs&#39;: 8})
+
+Counter([&#39;red&#39;, &#39;blue&#39;, &#39;red&#39;, &#39;green&#39;, &#39;blue&#39;, &#39;blue&#39;])
+Counter({&#39;red&#39;: 2, &#39;blue&#39;: 3, &#39;green&#39;: 1})
+</code></pre>
+<p>计数器对象除了字典方法以外，还提供了三个其他的方法：</p>
+<h3 id="1、elements"><a href="#1、elements" class="headerlink" title="1、elements()"></a>1、elements()</h3><p><strong>描述：</strong>返回一个迭代器，其中每个元素将重复出现计数值所指定次。 元素会按首次出现的顺序返回。 如果一个元素的计数值小于1，elements() 将会忽略它。<br><strong>语法：</strong>elements(  )<br><strong>参数：</strong>无</p>
+<pre><code class="python">c = Counter(a=4, b=2, c=0, d=-2)
+list(c.elements())
+[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;]
+
+sorted(c.elements())
+[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;]
+
+c = Counter(a=4, b=2, c=0, d=5)
+list(c.elements())
+[&#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;, &#39;d&#39;]
+</code></pre>
+<h3 id="2、most-common"><a href="#2、most-common" class="headerlink" title="2、most_common()"></a>2、most_common()</h3><p>返回一个列表，其中包含n个最常见的元素及出现次数，按常见程度由高到低排序。 如果 n 被省略或为None，most_common() 将返回计数器中的所有元素，计数值相等的元素按首次出现的顺序排序，经常用来计算top词频的词语。</p>
+<pre><code class="python">Counter(&#39;abracadabra&#39;).most_common(3)
+[(&#39;a&#39;, 5), (&#39;b&#39;, 2), (&#39;r&#39;, 2)]
+
+Counter(&#39;abracadabra&#39;).most_common(5)
+[(&#39;a&#39;, 5), (&#39;b&#39;, 2), (&#39;r&#39;, 2), (&#39;c&#39;, 1), (&#39;d&#39;, 1)]
+</code></pre>
+<h3 id="3、subtract"><a href="#3、subtract" class="headerlink" title="3、subtract()"></a>3、subtract()</h3><p>从迭代对象或映射对象减去元素。像dict.update() 但是是减去，而不是替换。输入和输出都可以是0或者负数。</p>
+<pre><code class="python">c = Counter(a=4, b=2, c=0, d=-2)
+d = Counter(a=1, b=2, c=3, d=4)
+c.subtract(d)
+c
+Counter({&#39;a&#39;: 3, &#39;b&#39;: 0, &#39;c&#39;: -3, &#39;d&#39;: -6})
+
+#减去一个abcd
+str0 = Counter(&#39;aabbccdde&#39;)
+str0
+Counter({&#39;a&#39;: 2, &#39;b&#39;: 2, &#39;c&#39;: 2, &#39;d&#39;: 2, &#39;e&#39;: 1})
+
+str0.subtract(&#39;abcd&#39;)
+str0
+Counter({&#39;a&#39;: 1, &#39;b&#39;: 1, &#39;c&#39;: 1, &#39;d&#39;: 1, &#39;e&#39;: 1}
+</code></pre>
+<h3 id="4、字典方法"><a href="#4、字典方法" class="headerlink" title="4、字典方法"></a>4、字典方法</h3><p>通常字典方法都可用于Counter对象，除了有两个方法工作方式与字典并不相同。<br><strong>fromkeys(iterable)</strong><br>这个类方法没有在Counter中实现。<br><strong>update([iterable-or-mapping])</strong><br>从迭代对象计数元素或者从另一个映射对象 (或计数器) 添加。 像 dict.update() 但是是加上，而不是替换。另外，迭代对象应该是序列元素，而不是一个 (key, value) 对。</p>
+<pre><code class="python">sum(c.values())                 # total of all counts
+c.clear()                       # reset all counts
+list(c)                         # list unique elements
+set(c)                          # convert to a set
+dict(c)                         # convert to a regular dictionary
+c.items()                       # convert to a list of (elem, cnt) pairs
+Counter(dict(list_of_pairs))    # convert from a list of (elem, cnt) pairs
+c.most_common()[:-n-1:-1]       # n least common elements
++c                              # remove zero and negative counts
+</code></pre>
+<h3 id="5、数学操作"><a href="#5、数学操作" class="headerlink" title="5、数学操作"></a>5、数学操作</h3><p>这个功能非常强大，提供了几个数学操作，可以结合 Counter 对象，以生产 multisets (计数器中大于0的元素）。 加和减，结合计数器，通过加上或者减去元素的相应计数。交集和并集返回相应计数的最小或最大值。每种操作都可以接受带符号的计数，但是输出会忽略掉结果为零或者小于零的计数。</p>
+<pre><code class="python">c = Counter(a=3, b=1)
+d = Counter(a=1, b=2)
+c + d                       # add two counters together:  c[x] + d[x]
+Counter({&#39;a&#39;: 4, &#39;b&#39;: 3})
+c - d                       # subtract (keeping only positive counts)
+Counter({&#39;a&#39;: 2})
+c &amp; d                       # intersection:  min(c[x], d[x]) 
+Counter({&#39;a&#39;: 1, &#39;b&#39;: 1})
+c | d                       # union:  max(c[x], d[x])
+Counter({&#39;a&#39;: 3, &#39;b&#39;: 2})
+</code></pre>
+<p>单目加和减（一元操作符）意思是从空计数器加或者减去。</p>
+<pre><code class="python">c = Counter(a=2, b=-4)
++c
+Counter({&#39;a&#39;: 2})
+-c
+Counter({&#39;b&#39;: 4})
+</code></pre>
+<p>写一个计算文本相似的算法，加权相似</p>
+<pre><code class="python">def str_sim(str_0,str_1,topn):
+    topn = int(topn)
+    collect0 = Counter(dict(Counter(str_0).most_common(topn)))
+    collect1 = Counter(dict(Counter(str_1).most_common(topn)))       
+    jiao = collect0 &amp; collect1
+    bing = collect0 | collect1       
+    sim = float(sum(jiao.values()))/float(sum(bing.values()))        
+    return(sim)         
+
+str_0 = &#39;定位手机定位汽车定位GPS定位人定位位置查询&#39;         
+str_1 = &#39;导航定位手机定位汽车定位GPS定位人定位位置查询&#39;         
+
+str_sim(str_0,str_1,5)    
+0.75       
+</code></pre>
+<h3 id="二、双向队列-deque"><a href="#二、双向队列-deque" class="headerlink" title="二、双向队列-deque"></a>二、双向队列-deque</h3><p>双端队列，可以快速的从另外一侧追加和推出对象,deque是一个双向链表，针对list连续的数据结构插入和删除进行优化。它提供了两端都可以操作的序列，这表示在序列的前后你都可以执行添加或删除操作。双向队列(deque)对象支持以下方法：</p>
+<h3 id="1、append"><a href="#1、append" class="headerlink" title="1、append()"></a>1、append()</h3><p>添加 x 到右端。</p>
+<pre><code class="python">d = deque(&#39;ghi&#39;)  
+d.append(&#39;j&#39;) 
+d
+deque([&#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;])
+</code></pre>
+<h3 id="2、appendleft"><a href="#2、appendleft" class="headerlink" title="2、appendleft()"></a>2、appendleft()</h3><p>添加 x 到左端。</p>
+<pre><code class="python">d.appendleft(&#39;f&#39;)
+d
+deque([&#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;])
+</code></pre>
+<h3 id="3、clear"><a href="#3、clear" class="headerlink" title="3、clear()"></a>3、clear()</h3><p>移除所有元素，使其长度为0.</p>
+<pre><code class="python">d = deque(&#39;ghi&#39;)
+d.clear()
+d
+deque([])
+</code></pre>
+<h3 id="4、copy"><a href="#4、copy" class="headerlink" title="4、copy()"></a>4、copy()</h3><p>创建一份浅拷贝。</p>
+<pre><code class="python">d = deque(&#39;xiaoweuge&#39;)
+y = d.copy()
+print(y)
+deque([&#39;x&#39;, &#39;i&#39;, &#39;a&#39;, &#39;o&#39;, &#39;w&#39;, &#39;e&#39;, &#39;u&#39;, &#39;g&#39;, &#39;e&#39;])
+</code></pre>
+<h3 id="5、count"><a href="#5、count" class="headerlink" title="5、count()"></a>5、count()</h3><p>计算 deque 中元素等于 x 的个数。</p>
+<pre><code class="python">d = deque(&#39;xiaoweuge-shuai&#39;)
+d.count(&#39;a&#39;)
+2
+</code></pre>
+<h3 id="6、extend"><a href="#6、extend" class="headerlink" title="6、extend()"></a>6、extend()</h3><p>扩展deque的右侧，通过添加iterable参数中的元素。</p>
+<pre><code class="python">a = deque(&#39;abc&#39;)
+b = deque(&#39;cd&#39;)
+a.extend(b)
+a
+deque([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;c&#39;, &#39;d&#39;])
+
+#与append 的区别
+a = deque(&#39;abc&#39;)
+b = deque(&#39;cd&#39;)
+a.append(b)
+deque([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, deque([&#39;c&#39;, &#39;d&#39;])])
+</code></pre>
+<h3 id="7、extendleft"><a href="#7、extendleft" class="headerlink" title="7、extendleft()"></a>7、extendleft()</h3><p>扩展deque的左侧，通过添加iterable参数中的元素。注意，左添加时，在结果中iterable参数中的顺序将被反过来添加。</p>
+<pre><code class="python">a = deque(&#39;abc&#39;)
+b = deque(&#39;cd&#39;)
+a.extendleft(b)
+a
+deque([&#39;d&#39;, &#39;c&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
+</code></pre>
+<h3 id="8、index"><a href="#8、index" class="headerlink" title="8、index()"></a>8、index()</h3><p>返回 x 在 deque 中的位置（在索引 start 之后，索引 stop 之前）。 返回第一个匹配项，如果未找到则引发 ValueError。</p>
+<pre><code class="python">d = deque(&#39;xiaoweuge&#39;)
+d.index(&#39;w&#39;)
+4
+</code></pre>
+<h3 id="9、insert"><a href="#9、insert" class="headerlink" title="9、insert()"></a>9、insert()</h3><p>在位置 i 插入 x 。<br>如果插入会导致一个限长 deque 超出长度 maxlen 的话，就引发一个 IndexError。</p>
+<pre><code class="python">a = deque(&#39;abc&#39;)
+a.insert(1,&#39;X&#39;)
+deque([&#39;a&#39;, &#39;X&#39;, &#39;b&#39;, &#39;c&#39;])
+</code></pre>
+<h3 id="10、pop"><a href="#10、pop" class="headerlink" title="10、pop()"></a>10、pop()</h3><p>移去并且返回一个元素，deque 最右侧的那一个。 如果没有元素的话，就引发一个 IndexError。</p>
+<pre><code class="python">d.pop()      
+&#39;j&#39;
+</code></pre>
+<h3 id="11、popleft"><a href="#11、popleft" class="headerlink" title="11、popleft()"></a>11、popleft()</h3><p>移去并且返回一个元素，deque 最左侧的那一个。 如果没有元素的话，就引发 IndexError。</p>
+<pre><code class="python">d.popleft()
+&#39;f&#39;
+</code></pre>
+<h3 id="12、remove-value"><a href="#12、remove-value" class="headerlink" title="12、remove(value)"></a>12、remove(value)</h3><p>移除找到的第一个 value。 如果没有的话就引发 ValueError。</p>
+<pre><code class="python">a = deque(&#39;abca&#39;)
+a.remove(&#39;a&#39;)
+a
+deque([&#39;b&#39;, &#39;c&#39;, &#39;a&#39;])
+</code></pre>
+<h3 id="13、reverse"><a href="#13、reverse" class="headerlink" title="13、reverse()"></a>13、reverse()</h3><p>将deque逆序排列。返回 None 。</p>
+<pre><code class="python">#逆序排列
+d = deque(&#39;ghi&#39;) # 创建一个deque
+list(reversed(d))
+[&#39;i&#39;, &#39;h&#39;, &#39;g&#39;]
+
+deque(reversed(d))
+deque([&#39;i&#39;, &#39;h&#39;, &#39;g&#39;])
+</code></pre>
+<h3 id="14、rotate-n-1"><a href="#14、rotate-n-1" class="headerlink" title="14、rotate(n=1)"></a>14、rotate(n=1)</h3><p>向右循环移动 n 步。 如果 n 是负数，就向左循环。<br>如果deque不是空的，向右循环移动一步就等价于 d.appendleft(d.pop()) ， 向左循环一步就等价于 d.append(d.popleft()) 。</p>
+<pre><code class="python"># 向右边挤一挤
+d = deque(&#39;ghijkl&#39;)
+d.rotate(1)                      
+d
+deque([&#39;l&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;])
+
+# 向左边挤一挤
+d.rotate(-1)                     
+d
+deque([&#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;])
+
+#看一个更明显的
+x = deque(&#39;12345&#39;)
+x
+deque([&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;])
+x.rotate()
+x
+deque([&#39;5&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;])
+
+d = deque([&#39;12&#39;,&#39;av&#39;,&#39;cd&#39;])
+d.rotate(1)
+deque([&#39;cd&#39;, &#39;12&#39;, &#39;av&#39;
+</code></pre>
+<h3 id="15、maxlen"><a href="#15、maxlen" class="headerlink" title="15、maxlen"></a>15、maxlen</h3><p>Deque的最大尺寸，如果没有限定的话就是 None 。</p>
+<pre><code class="python">from collections import deque
+d=deque(maxlen=10)
+for i in range(20):
+   d.append(i)
+d  
+deque([10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+</code></pre>
+<p>除了以上操作，deque还支持迭代、封存、len(d)、reversed(d)、copy.deepcopy(d)、copy.copy(d)、成员检测运算符 in 以及下标引用例如通过 d[0] 访问首个元素等。 索引访问在两端的复杂度均为 O(1) 但在中间则会低至 O(n)。 如需快速随机访问，请改用列表。<br>Deque从版本3.5开始支持 <strong>add</strong>(), <strong>mul</strong>(), 和 <strong>imul</strong>() 。 </p>
+<pre><code class="python">from collections import deque
+d = deque(&#39;ghi&#39;)                 # 创建一个deque
+
+for elem in d:
+    print(elem.upper())
+G
+H
+I
+
+#从右边添加一个元素
+d.append(&#39;j&#39;)
+d   
+deque([&#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;])
+
+#从左边添加一个元素
+d.appendleft(&#39;f&#39;)
+d 
+deque([&#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;])
+
+
+#右边删除
+d.pop()                          
+&#39;j&#39;
+#左边边删除
+d.popleft()
+&#39;f&#39;
+#看看还剩下啥
+list(d)                          # 
+[&#39;g&#39;, &#39;h&#39;, &#39;i&#39;]
+#成员检测
+&#39;h&#39; in d                         
+True
+#添加多个元素
+d.extend(&#39;jkl&#39;)              
+d
+deque([&#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;])
+
+
+d.clear()                        # empty the deque
+d.pop()                          # cannot pop from an empty deque
+Traceback (most recent call last):
+    File &quot;&lt;pyshell#6&gt;&quot;, line 1, in -toplevel-
+        d.pop()
+IndexError: pop from an empty deque
+
+
+d.extendleft(&#39;abc&#39;)              # extendleft() reverses the input order
+d
+deque([&#39;c&#39;, &#39;b&#39;, 
+</code></pre>
+<h3 id="三、有序字典-OrderedDict"><a href="#三、有序字典-OrderedDict" class="headerlink" title="三、有序字典-OrderedDict"></a>三、有序字典-OrderedDict</h3><p>有序词典就像常规词典一样，但有一些与排序操作相关的额外功能,popitem() 方法有不同的签名。它接受一个可选参数来指定弹出哪个元素。move_to_end() 方法，可以有效地将元素移动到任一端。<br>有序词典就像常规词典一样，但有一些与排序操作相关的额外功能。由于内置的 dict 类获得了记住插入顺序的能力（在 Python 3.7 中保证了这种新行为），它们变得不那么重要了。<br>一些与 dict 的不同仍然存在：</p>
+<ul>
+<li>常规的 dict 被设计为非常擅长映射操作。 跟踪插入顺序是次要的。</li>
+<li>OrderedDict 旨在擅长重新排序操作。 空间效率、迭代速度和更新操作的性能是次要的。</li>
+<li>算法上， OrderedDict 可以比 dict 更好地处理频繁的重新排序操作。 这使其适用于跟踪最近的访问（例如在 <a href="https://link.zhihu.com/?target=https://medium.com/@krishankantsinghal/my-first-blog-on-medium-583159139237">LRU cache</a> 中）。</li>
+<li>对于 OrderedDict ，相等操作检查匹配顺序。</li>
+<li>OrderedDict 类的 popitem() 方法有不同的签名。它接受一个可选参数来指定弹出哪个元素。</li>
+<li>OrderedDict 类有一个 move_to_end() 方法，可以有效地将元素移动到任一端。</li>
+<li>Python 3.8之前， dict 缺少 <strong>reversed</strong>() 方法。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>传统字典方法</th>
+<th>OrderedDict方法</th>
+<th>差异</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clear</td>
+<td>clear</td>
+<td></td>
+</tr>
+<tr>
+<td>copy</td>
+<td>copy</td>
+<td></td>
+</tr>
+<tr>
+<td>fromkeys</td>
+<td>fromkeys</td>
+<td></td>
+</tr>
+<tr>
+<td>get</td>
+<td>get</td>
+<td></td>
+</tr>
+<tr>
+<td>items</td>
+<td>items</td>
+<td></td>
+</tr>
+<tr>
+<td>keys</td>
+<td>keys</td>
+<td></td>
+</tr>
+<tr>
+<td>pop</td>
+<td>pop</td>
+<td></td>
+</tr>
+<tr>
+<td>popitem</td>
+<td>popitem</td>
+<td>OrderedDict   类的 popitem() 方法有不同的签名。它接受一个可选参数来指定弹出哪个元素。</td>
+</tr>
+<tr>
+<td>setdefault</td>
+<td>setdefault</td>
+<td></td>
+</tr>
+<tr>
+<td>update</td>
+<td>update</td>
+<td></td>
+</tr>
+<tr>
+<td>values</td>
+<td>values</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>move_to_end</td>
+<td>可以有效地将元素移动到任一端。</td>
+</tr>
+</tbody></table>
+<h3 id="1、popitem"><a href="#1、popitem" class="headerlink" title="1、popitem"></a>1、popitem</h3><p>语法：popitem(last=True)<br>功能：有序字典的 popitem() 方法移除并返回一个 (key, value) 键值对。 如果 last 值为真，则按 LIFO 后进先出的顺序返回键值对，否则就按 FIFO 先进先出的顺序返回键值对。</p>
+<pre><code class="python">from collections import OrderedDict
+d = OrderedDict.fromkeys(&#39;abcde&#39;)
+d.popitem()
+ (&#39;e&#39;, None)
+d
+OrderedDict([(&#39;a&#39;, None), (&#39;b&#39;, None), (&#39;c&#39;, None), (&#39;d&#39;, None)])
+#last=False时，弹出第一个
+d = OrderedDict.fromkeys(&#39;abcde&#39;)
+&#39;&#39;.join(d.keys())
+&#39;abcde&#39;
+d.popitem(last=False)
+&#39;&#39;.join(d.keys())
+&#39;bcde&#39;
+</code></pre>
+<h3 id="2、move-to-end"><a href="#2、move-to-end" class="headerlink" title="2、move_to_end"></a>2、move_to_end</h3><pre><code class="python">from collections import OrderedDict
+d = OrderedDict.fromkeys(&#39;abcde&#39;)
+d.move_to_end(&#39;b&#39;)
+&#39;&#39;.join(d.keys())
+&#39;acdeb&#39;
+d
+OrderedDict([(&#39;a&#39;, None), (&#39;c&#39;, None), (&#39;d&#39;, None), (&#39;e&#39;, None), (&#39;b&#39;, None)])
+
+
+d.move_to_end(&#39;b&#39;, last=False)
+&#39;&#39;.join(d.keys())
+&#39;bacde&#39;
+</code></pre>
+<h3 id="3、reversed"><a href="#3、reversed" class="headerlink" title="3、reversed()"></a>3、reversed()</h3><p>相对于通常的映射方法，有序字典还另外提供了逆序迭代的支持，通过reversed() 。 </p>
+<pre><code class="python">d = OrderedDict.fromkeys(&#39;abcde&#39;)
+list(reversed(d))
+[&#39;e&#39;, &#39;d&#39;, &#39;c&#39;, &#39;b&#39;, &#39;a&#39;]
+</code></pre>
+<h3 id="四、可命名元组-namedtuple"><a href="#四、可命名元组-namedtuple" class="headerlink" title="四、可命名元组-namedtuple"></a>四、可命名元组-namedtuple</h3><p>生成可以使用名字来访问元素内容的tuple子类，命名元组赋予每个位置一个含义，提供可读性和自文档性。它们可以用于任何普通元组，并添加了通过名字获取值的能力，通过索引值也是可以的。</p>
+<h3 id="1、参数介绍"><a href="#1、参数介绍" class="headerlink" title="1、参数介绍"></a>1、参数介绍</h3><p>namedtuple(typename,field_names,*,verbose=False, rename=False, module=None)<br>1）typename：该参数指定所创建的tuple子类的类名，相当于用户定义了一个新类。<br>2）field_names：该参数是一个字符串序列，如 [‘x’，’y’]。此外，field_names 也可直接使用单个字符串代表所有字段名，多个字段名用空格、逗号隔开，如 ‘x y’ 或 ‘x,y’。任何有效的 Python 标识符都可作为字段名（不能以下画线开头）。有效的标识符可由字母、数字、下画线组成，但不能以数字、下面线开头，也不能是关键字（如 return、global、pass、raise 等）。<br>3）rename：如果将该参数设为 True，那么无效的字段名将会被自动替换为位置名。例如指定 [‘abc’,’def’,’ghi’,’abc’]，它将会被替换为 [‘abc’, ‘_1’,’ghi’,’_3’]，这是因为 def 字段名是关键字，而 abc 字段名重复了。<br>4）verbose：如果该参数被设为 True，那么当该子类被创建后，该类定义就被立即打印出来。<br>5）module：如果设置了该参数，那么该类将位于该模块下，因此该自定义类的 <strong>module</strong> 属性将被设为该参数值。</p>
+<h3 id="2、应用案例"><a href="#2、应用案例" class="headerlink" title="2、应用案例"></a>2、应用案例</h3><p>1）水族箱案例<br>Python元组是一个不可变的，或不可改变的，有序的元素序列。元组经常用来表示纵列数据;例如，一个CSV文件中的行数或一个SQL数据库中的行数。一个水族箱可以用一系列元组来记录它的鱼类的库存。<br>一个单独的鱼类元组:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-efa2efb16a4e3a24b191bf866281836b_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>这个元组由三个字符串元素组成。<br>虽然在某些方面很有用，但是这个元组并没有清楚地指明它的每个字段代表什么。实际上，元素0是一个名称，元素1是一个物种，元素2是一个饲养箱。<br>鱼类元组字段说明:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-de3e2a13b4a1524a0b3cb42d18346ad4_b.jpeg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>这个表清楚地表明，该元组的三个元素都有明确的含义。<br>来自collections模块的namedtuple允许你向一个元组的每个元素添加显式名称，以便在你的Python程序中明确这些元素的含义。<br>让我们使用namedtuple来生成一个类，从而明确地命名鱼类元组的每个元素:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-6feda1c80a14993793c335c93d667262_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<pre><code class="python">from collections import namedtuple 
+</code></pre>
+<p>可以让你的Python程序访问namedtuple工厂函数。namedtuple()函数调用会返回一个绑定到名称Fish的类。namedtuple()函数有两个参数:我们的新类“Fish”的期望名称和命名元素[“name”、”species”、“tank”]的一个列表。<br>我们可以使用Fish类来表示前面的鱼类元组:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-e8975db7e7c2f9d0de2e1faa7427ba83_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>如果我们运行这段代码，我们将看到以下输出:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-168252851c2344011745913d8b8330b7_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>sammy是使用Fish类进行实例化的。sammy是一个具有三个明确命名元素的元组。<br>sammy的字段可以通过它们的名称或者一个传统的元组索引来访问:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-ba1c11aa62529004b8b20b5507c8b371_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>如果我们运行这两个print调用，我们将看到以下输出:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-0c90981e53acc01aac99f161467407cf_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>访问.species会返回与使用[1]访问sammy的第二个元素相同的值。<br>使用collections模块中的namedtuple可以在维护元组(即它们是不可变的、有序的)的重要属性的同时使你的程序更具可读性。<br>此外，namedtuple工厂函数还会向Fish实例添加几个额外的方法。<br>使用._asdict()将一个实例转换为字典:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-6d8e3cd1dbf4186e0e24620b884bcf3c_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>如果我们运行print，你会看到如下输出:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-8f982aebadbbea91fffd8b63922813e3_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>在sammy上调用.asdict()将返回一个字典，该字典会将三个字段名称分别映射到它们对应的值。<br>大于3.8的Python版本输出这一行的方式可能略有不同。例如，你可能会看到一个OrderedDict，而不是这里显示的普通字典。<br>2）加法器案例</p>
+<pre><code class="python">from collections import namedtuple
+# 定义命名元组类：Point
+Point = namedtuple(&#39;Point&#39;, [&#39;x&#39;, &#39;y&#39;])
+# 初始化Point对象，即可用位置参数，也可用命名参数
+p = Point(11, y=22)
+# 像普通元组一样用根据索引访问元素
+print(p[0] + p[1]) 
+33
+#执行元组解包，按元素的位置解包
+a, b = p
+print(a, b) 
+11, 22
+#根据字段名访问各元素
+print(p.x + p.y) 
+33
+print(p) 
+Point(x=11, y=22)
+</code></pre>
+<h3 id="3、三个方法"><a href="#3、三个方法" class="headerlink" title="3、三个方法"></a>3、三个方法</h3><p>备注: 在Python中，带有前导下划线的方法通常被认为是“私有的”。但是，namedtuple提供的其他方法(如._asdict()、._make()、._replace()等)是公开的。<br>除了继承元组的方法，命名元组还支持三个额外的方法和两个属性。为了防止字段名冲突，方法和属性以下划线开始。</p>
+<h4 id="make-iterable"><a href="#make-iterable" class="headerlink" title="_make(iterable)"></a>_make(iterable)</h4><p>类方法从存在的序列或迭代实例创建一个新实例。</p>
+<pre><code class="python">t = [14, 55]
+Point._make(t)
+</code></pre>
+<h4 id="asdict"><a href="#asdict" class="headerlink" title="_asdict()"></a>_asdict()</h4><p>返回一个新的 dict ，它将字段名称映射到它们对应的值：</p>
+<pre><code class="python">p = Point(x=11, y=22)
+p._asdict()
+OrderedDict([(&#39;x&#39;, 11), (&#39;y&#39;, 22)])
+</code></pre>
+<h4 id="replace-kwargs"><a href="#replace-kwargs" class="headerlink" title="_replace(**kwargs)"></a>_replace(**kwargs)</h4><p>返回一个新的命名元组实例，并将指定域替换为新的值</p>
+<pre><code class="python">p = Point(x=11, y=22)
+p._replace(x=33)
+
+Point(x=33, y=22)
+</code></pre>
+<h3 id="4、两个属性"><a href="#4、两个属性" class="headerlink" title="4、两个属性"></a>4、两个属性</h3><p><strong>_fields</strong><br>字符串元组列出了字段名。用于提醒和从现有元组创建一个新的命名元组类型。</p>
+<pre><code class="python">p._fields            # view the field names
+(&#39;x&#39;, &#39;y&#39;)
+Color = namedtuple(&#39;Color&#39;, &#39;red green blue&#39;)
+Pixel = namedtuple(&#39;Pixel&#39;, Point._fields + Color._fields)
+Pixel(11, 22, 128, 255, 0)
+Pixel(x=11, y=22, red=128, green=255, blue=0)
+</code></pre>
+<p><strong>_field_defaults</strong><br>字典将字段名称映射到默认值。</p>
+<pre><code class="python">Account = namedtuple(&#39;Account&#39;, [&#39;type&#39;, &#39;balance&#39;], defaults=[0])
+Account._field_defaults
+{&#39;balance&#39;: 0}
+Account(&#39;premium&#39;)
+Account(type=&#39;premium&#39;, balance=0)
+</code></pre>
+<h3 id="5、其他函数"><a href="#5、其他函数" class="headerlink" title="5、其他函数"></a>5、其他函数</h3><p><strong>getattr()</strong><br>要获取这个名字域的值，使用 getattr() 函数 : </p>
+<pre><code class="python">getattr(p, &#39;x&#39;)
+11
+</code></pre>
+<p>转换一个字典到命名元组，使用 ** 两星操作符</p>
+<pre><code class="python">d = {&#39;x&#39;: 11, &#39;y&#39;: 22}
+Point(**d)
+Point(x=11, y=22)
+</code></pre>
+<p>因为一个命名元组是一个正常的Python类，它可以很容易的通过子类更改功能。这里是如何添加一个计算域和定宽输出打印格式:</p>
+<pre><code class="python">class Point(namedtuple(&#39;Point&#39;, [&#39;x&#39;, &#39;y&#39;])):
+    __slots__ = ()
+    @property
+    def hypot(self):        
+        return (self.x ** 2 + self.y ** 2) ** 0.5
+    def __str__(self):
+        return &#39;Point: x=%6.3f  y=%6.3f  hypot=%6.3f&#39; % (self.x, self.y, self.hypot)
+for p in Point(3, 4), Point(14, 5/7):
+     print(p)
+Point: x= 3.000  y= 4.000  hypot= 5.000
+Point: x=14.000  y= 0.714  hypot=14.018
+</code></pre>
+<h3 id="五、默认字典-defaultdict"><a href="#五、默认字典-defaultdict" class="headerlink" title="五、默认字典-defaultdict"></a>五、默认字典-defaultdict</h3><p>在Python字典中收集数据通常是很有用的。<br>在字典中获取一个 key 有两种方法, 第一种 get , 第二种 通过 [] 获取.<br><strong>使用dict时，如果引用的Key不存在，就会抛出KeyError。如果希望key不存在时，返回一个默认值，就可以用defaultdict。</strong><br>当我使用普通的字典时，用法一般是dict={},添加元素的只需要dict[element] =value即，调用的时候也是如此，dict[element] = xxx,但前提是element字典里，如果不在字典里就会报错<br>这时defaultdict就能排上用场了，defaultdict的作用是在于，当字典里的key不存在但被查找时，返回的不是keyError而是一个默认值，这个默认值是什么呢，下面会说</p>
+<h3 id="1、基础介绍-1"><a href="#1、基础介绍-1" class="headerlink" title="1、基础介绍"></a>1、基础介绍</h3><p><strong>defaultdict([default_factory[, …]])</strong><br>返回一个新的类似字典的对象。 defaultdict是内置dict类的子类。它重载了一个方法并添加了一个可写的实例变量。其余的功能与dict类相同，此处不再重复说明。<br>本对象包含一个名为default_factory的属性，构造时，第一个参数用于为该属性提供初始值，默认为 None。所有其他参数（包括关键字参数）都相当于传递给 dict 的构造函数。<br>defaultdict 对象除了支持标准 dict 的操作，还支持以下方法作为扩展：<br><strong><strong>missing</strong>(key)</strong><br>如果 default_factory 属性为 None，则调用本方法会抛出 KeyError 异常，附带参数 key。<br>如果 default_factory 不为 None，则它会被（不带参数地）调用来为 key 提供一个默认值，这个值和 key 作为一对键值对被插入到字典中，并作为本方法的返回值返回。<br>如果调用 default_factory 时抛出了异常，这个异常会原封不动地向外层传递。<br>在无法找到所需键值时，本方法会被 dict 中的 <strong>getitem</strong>() 方法调用。无论本方法返回了值还是抛出了异常，都会被 <strong>getitem</strong>() 传递。<br>注意，<strong>missing</strong>() 不会 被 <strong>getitem</strong>() 以外的其他方法调用。意味着 get() 会像正常的 dict 那样返回 None，而不是使用 default_factory。</p>
+<h3 id="2、示例介绍"><a href="#2、示例介绍" class="headerlink" title="2、示例介绍"></a>2、示例介绍</h3><p>使用 list 作为 default_factory，很轻松地将（键-值对组成的）序列转换为（键-列表组成的）字典 </p>
+<pre><code class="python">s  = [(&#39;yellow&#39;, 1), (&#39;blue&#39;, 2), (&#39;yellow&#39;, 3), (&#39;blue&#39;, 4), (&#39;red&#39;, 1)]
+d = defaultdict(list)
+for k, v in s:
+    d[k].append(v)
+
+
+sorted(d.items())
+[(&#39;blue&#39;, [2, 4]), (&#39;red&#39;, [1]), (&#39;yellow&#39;, [1, 3])]
+</code></pre>
+<p>当每个键第一次遇见时，它还没有在字典里面，所以自动创建该条目，即调用default_factory方法，返回一个空的 list。 list.append() 操作添加值到这个新的列表里。当再次存取该键时，就正常操作，list.append() 添加另一个值到列表中。这个计数比它的等价方法dict.setdefault()要快速和简单： </p>
+<pre><code class="python">s = [(&#39;yellow&#39;, 1), (&#39;blue&#39;, 2), (&#39;yellow&#39;, 3), (&#39;blue&#39;, 4), (&#39;red&#39;, 1)]
+d = {}
+for k, v in s:
+    d.setdefault(k, []).append(v)
+
+
+sorted(d.items())
+[(&#39;blue&#39;, [2, 4]), (&#39;red&#39;, [1]), (&#39;yellow&#39;, [1, 3])]
+</code></pre>
+<p>设置 default_factory为int，使defaultdict用于计数（类似其他语言中的 bag或multiset）： </p>
+<pre><code class="python">s = &#39;mississippi&#39;
+d = defaultdict(int)
+for k in s:
+    d[k] += 1
+sorted(d.items())
+ [(&#39;i&#39;, 4), (&#39;m&#39;, 1), (&#39;p&#39;, 2), (&#39;s&#39;, 4)]
+</code></pre>
+<p>设置 default_factory 为 set 使 defaultdict 用于构建 set 集合： </p>
+<pre><code class="python">s = [(&#39;red&#39;, 1), (&#39;blue&#39;, 2), (&#39;red&#39;, 3), (&#39;blue&#39;, 4), (&#39;red&#39;, 1), (&#39;blue&#39;, 4)]
+d = defaultdict(set)
+for k, v in s:
+    d[k].add(v)
+
+
+sorted(d.items())
+[(&#39;blue&#39;, {2, 4}), (&#39;red&#39;, {1, 3})]
+</code></pre>
+<p>defaultdict绝不会引发一个KeyError。如果一个键不存在，defaultdict会插入并返回一个占位符值来代替:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-e9411272b33c99cdfe9b78c9d03f9b90_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>如果我们运行这段代码，我们将看到如下输出:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-520a3b53ca349a4c1e821d044d850dce_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>defaultdict会插入并返回一个占位符值，而不是引发一个KeyError。在本例中，我们将占位符值指定为一个列表。<br>相比之下，常规字典会在缺失的键上引发一个KeyError:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-76d68d5bc235feea862299e4159a0ce5_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>如果我们运行这段代码，我们将看到如下输出:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-520a3b53ca349a4c1e821d044d850dce_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>当我们试图访问一个不存在的键时，常规字典my_regular_dict会引发一个KeyError。<br>defaultdict的行为与常规字典不同。defaultdict会不带任何参数调用占位符值来创建一个新对象，而不是在缺失的键上引发一个KeyError。在本例中，是调用list()创建一个空列表。<br>继续我们虚构的水族箱示例，假设我们有一个表示水族箱清单的鱼类元组列表:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-3c82b2b94a06a00daee8ee56f0a3b722_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>水族箱中有三种鱼——它们的名字、种类和饲养箱在这三个元组中都有指出。<br>我们的目标是按饲养箱组织我们的清单—我们想知道每个饲养箱中存在的鱼的列表。换句话说，我们需要一个能将“tank-a”映射到[“Jamie”, “Mary”] ，并且将“tank-b”映射到[“Jamie”]的字典。<br>我们可以使用defaultdict来按饲养箱对鱼进行分组:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-dfc8d0750c881756d3bd6c6335c5e08f_b.octet-stream" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>运行这段代码，我们将看到以下输出:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-ef4f16054ebda651b702ca60191c880f_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>fish_names_by_tank被声明为一个defaultdict，它默认会插入list()而不是引发一个KeyError。由于这保证了fish_names_by_tank中的每个键都将指向一个list，所以我们可以自由地调用.append()来将名称添加到每个饲养箱的列表中。<br>这里，defaultdict帮助你减少了出现未预期的KeyErrors的机会。减少未预期的KeyErrors意味着你可以用更少的行更清晰地编写你的程序。更具体地说，defaultdict习惯用法让你避免了手动地为每个饲养箱实例化一个空列表。<br>如果没有 defaultdict, for循环体可能看起来更像这样:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-61edd6a75a4588ea47ffb8bce558f4cd_b.jpeg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>使用常规字典(而不是defaultdict)意味着for循环体总是必须检查fish_names_by_tank中给定的tank是否存在。只有在验证了fish_names_by_tank中已经存在tank，或者已经使用一个[]初始化了tank之后，我们才可以添加鱼类名称。<br>在填充字典时，defaultdict可以帮助我们减少样板代码，因为它从不引发KeyError。</p>
+<h3 id="六、映射链-ChainMap"><a href="#六、映射链-ChainMap" class="headerlink" title="六、映射链-ChainMap"></a>六、映射链-ChainMap</h3><h3 id="1、ChainMap是什么"><a href="#1、ChainMap是什么" class="headerlink" title="1、ChainMap是什么"></a>1、ChainMap是什么</h3><p>ChainMap最基本的使用，可以用来合并两个或者更多个字典，当查询的时候，从前往后依次查询。<br><strong>ChainMap：将多个字典视为一个，解锁Python超能力。</strong><br>ChainMap是由Python标准库提供的一种数据结构，允许你将多个字典视为一个。换句话说:<strong>ChainMap是一个基于多dict的可更新的视图，它的行为就像一个普通的dict。</strong><br>ChainMap类用于快速链接多个映射，以便将它们视为一个单元。它通常比创建新字典和多次调用update()快得多。<br>你以前可能从来没有听说过ChainMap，你可能会认为ChainMap的使用情况是非常特定的。坦率地说，你是对的。<br>我知道的用例包括：</p>
+<ul>
+<li>通过多个字典搜索</li>
+<li>提供链缺省值</li>
+<li>经常计算字典子集的性能关键的应用程序</li>
+</ul>
+<h3 id="2、特性"><a href="#2、特性" class="headerlink" title="2、特性"></a>2、特性</h3><p>1）找到一个就不找了：这个列表是按照第一次搜索到最后一次搜索的顺序组织的，搜索查询底层映射，直到一个键被找到。<br>2）更新原始映射：不同的是，写，更新和删除只操作第一个映射。<br>3）支持所有常用字典方法。<br>简而言之ChainMap：将多个字典视为一个，解锁Python超能力。<br>Python标准库中的集合模块包含许多为性能而设计的实用的数据结构。著名的包括命名元组或计数器。<br>今天，通过实例，我们来看看鲜为人知的<strong>ChainMap</strong>。通过浏览具体的示例，我希望给你一个提示，关于在更高级的Python工作中使用ChainMap将如何从中受益。</p>
+<h3 id="3、应用案例-基础案例"><a href="#3、应用案例-基础案例" class="headerlink" title="3、应用案例-基础案例"></a>3、应用案例-基础案例</h3><pre><code class="python">from collections import ChainMap 
+baseline = {&#39;music&#39;: &#39;bach&#39;, &#39;art&#39;: &#39;rembrandt&#39;}
+adjustments = {&#39;art&#39;: &#39;van gogh&#39;, &#39;opera&#39;: &#39;carmen&#39;}
+ChainMap(adjustments, baseline)
+ChainMap({&#39;art&#39;: &#39;van gogh&#39;, &#39;opera&#39;: &#39;carmen&#39;}, {&#39;music&#39;: &#39;bach&#39;, &#39;art&#39;: &#39;rembrandt&#39;})
+list(ChainMap(adjustments, baseline))
+[&#39;music&#39;, &#39;art&#39;, &#39;opera&#39;]
+#存在重复元素时，也不会去重
+dcic1 = {&#39;label1&#39;: &#39;11&#39;, &#39;label2&#39;: &#39;22&#39;}
+dcic2 = {&#39;label2&#39;: &#39;22&#39;, &#39;label3&#39;: &#39;33&#39;}
+dcic3 = {&#39;label4&#39;: &#39;44&#39;, &#39;label5&#39;: &#39;55&#39;}
+last  = ChainMap(dcic1, dcic2,dcic3)
+last  
+ChainMap({&#39;label1&#39;: &#39;11&#39;, &#39;label2&#39;: &#39;22&#39;}, {&#39;label2&#39;: &#39;22&#39;, &#39;label3&#39;: &#39;33&#39;}, {&#39;label4&#39;: &#39;44&#39;, &#39;label5&#39;: &#39;55&#39;})
+</code></pre>
+<h4 id="new-child-方法"><a href="#new-child-方法" class="headerlink" title="new_child()方法"></a>new_child()方法</h4><p>用法：new_child(m=None)<br>返回一个新的ChainMap类，包含了一个新映射(map)，后面跟随当前实例的全部映射map。如果m被指定，它就成为不同新的实例，就是在所有映射前加上 m，如果没有指定，就加上一个空字典，这样的话一个 d.new_child() 调用等价于ChainMap({}, *d.maps) 。这个方法用于创建子上下文，不改变任何父映射的值。</p>
+<pre><code class="python">last.new_child(m={&#39;key_new&#39;:888})
+ChainMap({&#39;key_new&#39;: 888}, {&#39;label1&#39;: &#39;11&#39;, &#39;label2&#39;: &#39;22&#39;}, {&#39;label2&#39;: &#39;22&#39;, &#39;label3&#39;: &#39;33&#39;},
+ {&#39;label4&#39;: &#39;44&#39;, &#39;label5&#39;: &#39;55&#39;})
+</code></pre>
+<h4 id="parents属性"><a href="#parents属性" class="headerlink" title="parents属性"></a>parents属性</h4><p>属性返回一个新的ChainMap包含所有的当前实例的映射，除了第一个。这样可以在搜索的时候跳过第一个映射。使用的场景类似在 <a href="https://link.zhihu.com/?target=https://docs.python.org/zh-cn/3/glossary.html%23term-nested-scope">nested scopes</a> 嵌套作用域中使用nonlocal关键词。用例也可以类比内建函数super() 。一个d.parents 的引用等价于ChainMap(*d.maps[1:]) 。</p>
+<pre><code class="python">last.parents
+ChainMap({&#39;label2&#39;: &#39;22&#39;, &#39;label3&#39;: &#39;33&#39;}, {&#39;label4&#39;: &#39;44&#39;, &#39;label5&#39;: &#39;55&#39;})
+</code></pre>
+<h3 id="4、应用案例-购物清单"><a href="#4、应用案例-购物清单" class="headerlink" title="4、应用案例-购物清单"></a>4、应用案例-购物清单</h3><p>作为使用ChainMap的第一个例子，让我们考虑一张购物清单。我们的清单可能包含玩具，电脑，甚至衣服。所有这些条目都有价格，所以我们将把我们的条目存储在名称价格映射中。</p>
+<pre><code class="python">toys = {&#39;Blocks&#39;:30,&#39;Monopoly&#39;:20}
+computers = {&#39;iMac&#39;:1000,&#39;Chromebook&#39;:1000,&#39;PC&#39;:400}
+clothing = {&#39;Jeans&#39;:40,&#39;T-shirt&#39;:10}
+</code></pre>
+<p>现在我们可以使用ChainMap在这些不同的集合上建立一个单一的视图：</p>
+<pre><code class="python">from collections import ChainMap
+inventory = ChainMap(toys,computers,clothing)
+</code></pre>
+<p>这使得我们可以查询清单，就像它是一个单一的字典：</p>
+<pre><code class="python">inventory[&#39;Monopoly&#39;]
+20
+inventory[&#39;Jeans&#39;]40
+</code></pre>
+<p>正如官方文档所述，ChainMap支持所有常用的字典方法。我们可以使用.get()来搜索可能不存在的条目，或者使用 .pop()删除条目。</p>
+<pre><code class="python">inventory.get(&#39;Blocks-1&#39;)
+None
+inventory.get(&#39;Chromebook&#39;)
+1000
+inventory.pop(&#39;Blocks&#39;)
+inventory
+ChainMap({&#39;Monopoly&#39;: 20}, {&#39;iMac&#39;: 1000, &#39;Chromebook&#39;: 1000, &#39;PC&#39;: 400}, {&#39;Jeans&#39;: 40, &#39;T-shirt&#39;: 10})
+</code></pre>
+<p>如果我们现在把玩具添加到toys字典里，它也将在清单中可用。这是ChainMap的可更新的方面。</p>
+<pre><code class="python">toys[&#39;Nintendo&#39;] = 20
+inventory[&#39;Nintendo&#39;]
+20
+</code></pre>
+<p>Oh和ChainMap有一个恰当的字符串表示形式：</p>
+<pre><code class="python">str(inventory)
+&quot;ChainMap({&#39;Monopoly&#39;: 20, &#39;Nintendo&#39;: 20}, {&#39;iMac&#39;: 1000, &#39;Chromebook&#39;: 1000, &#39;PC&#39;: 400}, {&#39;Jeans&#39;: 40, &#39;T-shirt&#39;: 10})&quot;
+</code></pre>
+<p>一个很好的特点是，在我们的例子中，toys, computers和clothing都是在相同的上下文中（解释器），它们可以来自完全不同的模块或包。这是因为ChainMap通过引用存储底层字典。<br>第一个例子是使用ChainMap一次搜索多个字典。<br>事实上，当构建ChainMap时，我们所做的就是有效地构建一系列字典。当查找清单中的一个项时，toys首先被查找，然后是computers，最后是clothing。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-d679e081f5420e6fb13b2daef2feaee4_b.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+<p>ChainMap真的只是一个映射链！<br><strong>实际上，ChainMap的另一个任务是维护链的默认值。</strong><br>我们将以一个命令行应用程序的例子来说明这是什么意思。</p>
+<h3 id="5、应用案例-CLI配置"><a href="#5、应用案例-CLI配置" class="headerlink" title="5、应用案例-CLI配置"></a>5、应用案例-CLI配置</h3><p>让我们面对现实，管理命令行应用程序的配置可能是困难的。配置来自多个源：命令行参数、环境变量、本地文件等。<br>我们通常实施<strong>优先级</strong>的概念：如果A和B都定义参数P，A的P值将被使用，因为它的优先级高于B。<br>例如，如果传递了命令行参数，我们可能希望在环境变量上使用命令行参数。如何轻松地管理配置源的优先级？<br>一个答案是将所有配置源存储在ChainMap中。<br><strong>因为ChainMap中的查找是按顺序连续地对每个底层映射执行的</strong>（按照他们传给构造函数的顺序），所以我们可以很容易地实现我们寻找的优先级。<br>下面是一个简单的命令行应用程序。调试参数从命令行参数、环境变量或硬编码默认值中提取：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-c69ecbd6433f66bb29a25079a89ad8fb_b.jpeg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>在执行脚本时，我们可以检查是否首先在命令行参数中查找debug，然后是环境变量，最后是默认值：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/【万字长文详解】Python库collections，让你击败99%的Pythoner/v2-0f9bcf49cd958ec597af013c8b5bc7bd_b.octet-stream" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+<p>这样看上去就非常整洁，对吧？</p>
+<h3 id="6、我为什么关心？"><a href="#6、我为什么关心？" class="headerlink" title="6、我为什么关心？"></a>6、我为什么关心？</h3><p>坦率地说，ChainMap是那些你可以忽略的Python特性之一。<br>还有其他ChainMap的替代方案。例如，使用更新循环—例如创建一个dict并用字典update()它—可能奏效。但是，这只有在您不需要跟踪项目的起源时才有效，就像我们的多源CLI配置示例中的情况一样。<strong>但是，当你知道ChainMap存在的时候，ChainMap可以让你更轻松，你的代码更优雅。</strong></p>
+<h3 id="7、总结"><a href="#7、总结" class="headerlink" title="7、总结"></a>7、总结</h3><p>总而言之，我们一起看了ChainMap是什么，一些具体的使用示例，以及如何在现实生活中，性能关键的应用程序中使用ChainMap。如果您想了解更多关于Python的高性能数据容器的信息，请务必从Python的标准库中collections模块中查看其他出色类和函数。</p>
+<h3 id="七、UserDict"><a href="#七、UserDict" class="headerlink" title="七、UserDict"></a>七、UserDict</h3><p>UserDict类是用作字典对象的外包装。对这个类的需求已部分由直接创建dict的子类的功能所替代；不过这个类处理起来更容易，因为底层的字典可以作为属性来访问。<br>模拟一个字典类。这个实例的内容保存为一个正常字典，可以通过UserDict实例的data属性存取。如果提供了initialdata 值， data 就被初始化为它的内容，注意一个 initialdata 的引用不会被保留作为其他用途。<br>UserDict 实例提供了以下属性作为扩展方法和操作的支持:data一个真实的字典，用于保存 UserDict 类的内容。</p>
+<h3 id="八、UserList"><a href="#八、UserList" class="headerlink" title="八、UserList"></a>八、UserList</h3><p>这个类封装了列表对象。它是一个有用的基础类，对于你想自定义的类似列表的类，可以继承和覆盖现有的方法，也可以添加新的方法。这样我们可以对列表添加新的行为。<br>对这个类的需求已部分由直接创建 list 的子类的功能所替代；不过，这个类处理起来更容易，因为底层的列表可以作为属性来访问。<br>模拟一个列表。这个实例的内容被保存为一个正常列表，通过 UserList 的 data 属性存取。实例内容被初始化为一个 list 的copy，默认为 [] 空列表。 list可以是迭代对象，比如一个Python列表，或者一个UserList 对象。<br>UserList 提供了以下属性作为可变序列的方法和操作的扩展:data<br>一个 list 对象用于存储 UserList 的内容。<br>子类化的要求: UserList 的子类需要提供一个构造器，可以无参数调用，或者一个参数调用。返回一个新序列的列表操作需要创建一个实现类的实例。它假定了构造器可以以一个参数进行调用，这个参数是一个序列对象，作为数据源。<br>如果一个分离的类不希望依照这个需求，所有的特殊方法就必须重写；请参照源代码进行修改。 </p>
+<h3 id="九、UserString"><a href="#九、UserString" class="headerlink" title="九、UserString"></a>九、UserString</h3><p>UserString类是用作字符串对象的外包装。对这个类的需求已部分由直接创建str的子类的功能所替代，不过这个类处理起来更容易，因为底层的字符串可以作为属性来访问。<br>模拟一个字符串对象。这个实例对象的内容保存为一个正常字符串，通过UserString的data属性存取。实例内容初始化设置为seq的copy。seq 参数可以是任何可通过内建str()函数转换为字符串的对象。<br>UserString 提供了以下属性作为字符串方法和操作的额外支持：data一个真正的str对象用来存放 UserString 类的内容。</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://zhuanlan.zhihu.com/p/343747724" target="_blank" rel="noopener">【万字长文详解】Python库collections，让你击败99%的Pythoner</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-13T04:30:05.000Z" itemprop="dateUpdated">2022-06-13 12:30:05</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/&title=《【万字长文详解】Python库collections，让你击败99%的Pythoner》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/&title=《【万字长文详解】Python库collections，让你击败99%的Pythoner》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【万字长文详解】Python库collections，让你击败99%的Pythoner》 — Will的博客&url=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/13/Python%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AF%A6%E8%A7%A3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python中的字符串详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/13/Python%E7%9A%84list%E5%88%97%E8%A1%A8%E8%AF%A6%E8%A7%A3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python的list列表详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/&title=《【万字长文详解】Python库collections，让你击败99%的Pythoner》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/&title=《【万字长文详解】Python库collections，让你击败99%的Pythoner》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【万字长文详解】Python库collections，让你击败99%的Pythoner》 — Will的博客&url=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/13/%E3%80%90%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%E8%AF%A6%E8%A7%A3%E3%80%91Python%E5%BA%93collections%EF%BC%8C%E8%AE%A9%E4%BD%A0%E5%87%BB%E8%B4%A599%E7%9A%84Pythoner/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

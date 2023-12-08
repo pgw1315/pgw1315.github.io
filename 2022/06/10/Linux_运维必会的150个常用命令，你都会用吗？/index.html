@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Linux_运维必会的150个常用命令，你都会用吗？ | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,命令">
+    <meta name="description" content="linux 命令是对 Linux 系统进行管理的命令。对于 Linux 系统来说，无论是中央处理器、内存、磁盘驱动器、键盘、鼠标，还是用户等都是文件， Linux 系统管理的命令是它正常运行的核心，与之前的 DOS 命令类似。linux 命令在系统中有两种类型：内置 Shell 命令和 Linux 命令。 线上查询及帮助命令 (2 个)   命令 功能说明    man 查看命令帮助，命令的词典，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux_运维必会的150个常用命令，你都会用吗？">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="linux 命令是对 Linux 系统进行管理的命令。对于 Linux 系统来说，无论是中央处理器、内存、磁盘驱动器、键盘、鼠标，还是用户等都是文件， Linux 系统管理的命令是它正常运行的核心，与之前的 DOS 命令类似。linux 命令在系统中有两种类型：内置 Shell 命令和 Linux 命令。 线上查询及帮助命令 (2 个)   命令 功能说明    man 查看命令帮助，命令的词典，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-10T03:31:18.000Z">
+<meta property="article:modified_time" content="2022-06-11T10:50:03.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="命令">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux_运维必会的150个常用命令，你都会用吗？</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux_运维必会的150个常用命令，你都会用吗？</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-10T03:31:18.000Z" itemprop="datePublished" class="page-time">
+  2022-06-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线上查询及帮助命令-2-个"><span class="post-toc-number">1.</span> <span class="post-toc-text">线上查询及帮助命令 (2 个)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件和目录操作命令-18-个"><span class="post-toc-number">2.</span> <span class="post-toc-text">文件和目录操作命令 (18 个)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看文件及内容处理命令（21-个）"><span class="post-toc-number">3.</span> <span class="post-toc-text">查看文件及内容处理命令（21 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件压缩及解压缩命令（4-个）"><span class="post-toc-number">4.</span> <span class="post-toc-text">文件压缩及解压缩命令（4 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#信息显示命令（11-个）"><span class="post-toc-number">5.</span> <span class="post-toc-text">信息显示命令（11 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#搜索文件命令（4-个）"><span class="post-toc-number">6.</span> <span class="post-toc-text">搜索文件命令（4 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户管理命令（10-个）"><span class="post-toc-number">7.</span> <span class="post-toc-text">用户管理命令（10 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基础网络操作命令（11-个）"><span class="post-toc-number">8.</span> <span class="post-toc-text">基础网络操作命令（11 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深入网络操作命令（9-个）"><span class="post-toc-number">9.</span> <span class="post-toc-text">深入网络操作命令（9 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有关磁盘与文件系统的命令（16-个）"><span class="post-toc-number">10.</span> <span class="post-toc-text">有关磁盘与文件系统的命令（16 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统权限及用户授权相关命令（4-个）"><span class="post-toc-number">11.</span> <span class="post-toc-text">系统权限及用户授权相关命令（4 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看系统用户登陆信息的命令（7-个）"><span class="post-toc-number">12.</span> <span class="post-toc-text">查看系统用户登陆信息的命令（7 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内置命令及其它（19-个）"><span class="post-toc-number">13.</span> <span class="post-toc-text">内置命令及其它（19 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#系统管理与性能监视命令-9-个"><span class="post-toc-number">14.</span> <span class="post-toc-text">系统管理与性能监视命令 (9 个)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关机-重启-注销和查看系统信息的命令（6-个）"><span class="post-toc-number">15.</span> <span class="post-toc-text">关机 &#x2F; 重启 &#x2F; 注销和查看系统信息的命令（6 个）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#进程管理相关命令（15-个）"><span class="post-toc-number">16.</span> <span class="post-toc-text">进程管理相关命令（15 个）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number"></span> <span class="post-toc-text">参考文章</span></a>
+        </nav>
+    </aside>
+
+
+<article id="post-Linux_运维必会的150个常用命令，你都会用吗？"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux_运维必会的150个常用命令，你都会用吗？</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-10 11:31:18" datetime="2022-06-10T03:31:18.000Z"  itemprop="datePublished">2022-06-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>linux 命令是对 Linux 系统进行管理的命令。对于 Linux 系统来说，无论是中央处理器、内存、磁盘驱动器、键盘、鼠标，还是用户等都是文件， Linux 系统管理的命令是它正常运行的核心，与之前的 DOS 命令类似。linux 命令在系统中有两种类型：内置 Shell 命令和 Linux 命令。</p>
+<h3 id="线上查询及帮助命令-2-个"><a href="#线上查询及帮助命令-2-个" class="headerlink" title="线上查询及帮助命令 (2 个)"></a>线上查询及帮助命令 (2 个)</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>man</td>
+<td>查看命令帮助，命令的词典，更复杂的还有 info，但不常用。</td>
+</tr>
+<tr>
+<td>help</td>
+<td>查看 Linux 内置命令的帮助，比如 cd 命令。</td>
+</tr>
+</tbody></table>
+<h3 id="文件和目录操作命令-18-个"><a href="#文件和目录操作命令-18-个" class="headerlink" title="文件和目录操作命令 (18 个)"></a>文件和目录操作命令 (18 个)</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ls</td>
+<td>全拼 list，功能是列出目录的内容及其内容属性信息。</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>全拼 change directory，功能是从当前工作目录切换到指定的工作目录。</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>全拼 copy，其功能为复制文件或目录。</td>
+</tr>
+<tr>
+<td>find</td>
+<td>查找的意思，用于查找目录及目录下的文件。</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>全拼 make directories，其功能是创建目录。</td>
+</tr>
+<tr>
+<td>mv</td>
+<td>全拼 move，其功能是移动或重命名文件。</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>全拼 print working directory，其功能是显示当前工作目录的绝对路径。</td>
+</tr>
+<tr>
+<td>rename</td>
+<td>用于重命名文件。</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>全拼 remove，其功能是删除一个或多个文件或目录。</td>
+</tr>
+<tr>
+<td>rmdir</td>
+<td>全拼 remove empty directories，功能是删除空目录。</td>
+</tr>
+<tr>
+<td>touch</td>
+<td>创建新的空文件，改变已有文件的时间戳属性。</td>
+</tr>
+<tr>
+<td>tree</td>
+<td>功能是以树形结构显示目录下的内容。</td>
+</tr>
+<tr>
+<td>basename</td>
+<td>显示文件名或目录名。</td>
+</tr>
+<tr>
+<td>dirname</td>
+<td>显示文件或目录路径。</td>
+</tr>
+<tr>
+<td>chattr</td>
+<td>改变文件的扩展属性。</td>
+</tr>
+<tr>
+<td>lsattr</td>
+<td>查看文件扩展属性。</td>
+</tr>
+<tr>
+<td>file</td>
+<td>显示文件的类型。</td>
+</tr>
+<tr>
+<td>md5sum</td>
+<td>计算和校验文件的 MD5 值。</td>
+</tr>
+</tbody></table>
+<h3 id="查看文件及内容处理命令（21-个）"><a href="#查看文件及内容处理命令（21-个）" class="headerlink" title="查看文件及内容处理命令（21 个）"></a>查看文件及内容处理命令（21 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cat</td>
+<td>全拼 concatenate，功能是用于连接多个文件并且打印到屏幕输出或重定向到指定文件中。</td>
+</tr>
+<tr>
+<td>tac</td>
+<td>tac 是 cat 的反向拼写，因此命令的功能为反向显示文件内容。</td>
+</tr>
+<tr>
+<td>more</td>
+<td>分页显示文件内容。</td>
+</tr>
+<tr>
+<td>less</td>
+<td>分页显示文件内容，more 命令的相反用法。</td>
+</tr>
+<tr>
+<td>head</td>
+<td>显示文件内容的头部。</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>显示文件内容的尾部。</td>
+</tr>
+<tr>
+<td>cut</td>
+<td>将文件的每一行按指定分隔符分割并输出。</td>
+</tr>
+<tr>
+<td>split</td>
+<td>分割文件为不同的小片段。</td>
+</tr>
+<tr>
+<td>paste</td>
+<td>按行合并文件内容。</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>对文件的文本内容排序。</td>
+</tr>
+<tr>
+<td>uniq</td>
+<td>去除重复行。oldboy</td>
+</tr>
+<tr>
+<td>wc</td>
+<td>统计文件的行数、单词数或字节数。</td>
+</tr>
+<tr>
+<td>iconv</td>
+<td>转换文件的编码格式。</td>
+</tr>
+<tr>
+<td>dos2unix</td>
+<td>将 DOS 格式文件转换成 UNIX 格式。</td>
+</tr>
+<tr>
+<td>diff</td>
+<td>全拼 difference，比较文件的差异，常用于文本文件。</td>
+</tr>
+<tr>
+<td>vimdiff</td>
+<td>命令行可视化文件比较工具，常用于文本文件。</td>
+</tr>
+<tr>
+<td>rev</td>
+<td>反向输出文件内容。</td>
+</tr>
+<tr>
+<td>grep/egrep</td>
+<td>过滤字符串，三剑客老三。</td>
+</tr>
+<tr>
+<td>join</td>
+<td>按两个文件的相同字段合并。</td>
+</tr>
+<tr>
+<td>tr</td>
+<td>替换或删除字符。</td>
+</tr>
+<tr>
+<td>vi/vim</td>
+<td>命令行文本编辑器。</td>
+</tr>
+</tbody></table>
+<h3 id="文件压缩及解压缩命令（4-个）"><a href="#文件压缩及解压缩命令（4-个）" class="headerlink" title="文件压缩及解压缩命令（4 个）"></a>文件压缩及解压缩命令（4 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tar</td>
+<td>打包压缩。oldboy</td>
+</tr>
+<tr>
+<td>unzip</td>
+<td>解压文件。</td>
+</tr>
+<tr>
+<td>gzip</td>
+<td>gzip 压缩工具。</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>压缩工具。</td>
+</tr>
+</tbody></table>
+<h3 id="信息显示命令（11-个）"><a href="#信息显示命令（11-个）" class="headerlink" title="信息显示命令（11 个）"></a>信息显示命令（11 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>uname</td>
+<td>显示操作系统相关信息的命令。</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td>显示或者设置当前系统的主机名。</td>
+</tr>
+<tr>
+<td>dmesg</td>
+<td>显示开机信息，用于诊断系统故障。</td>
+</tr>
+<tr>
+<td>uptime</td>
+<td>显示系统运行时间及负载。</td>
+</tr>
+<tr>
+<td>stat</td>
+<td>显示文件或文件系统的状态。</td>
+</tr>
+<tr>
+<td>du</td>
+<td>计算磁盘空间使用情况。</td>
+</tr>
+<tr>
+<td>df</td>
+<td>报告文件系统磁盘空间的使用情况。</td>
+</tr>
+<tr>
+<td>top</td>
+<td>实时显示系统资源使用情况。</td>
+</tr>
+<tr>
+<td>free</td>
+<td>查看系统内存。</td>
+</tr>
+<tr>
+<td>date</td>
+<td>显示与设置系统时间。</td>
+</tr>
+<tr>
+<td>cal</td>
+<td>查看日历等时间信息。</td>
+</tr>
+</tbody></table>
+<h3 id="搜索文件命令（4-个）"><a href="#搜索文件命令（4-个）" class="headerlink" title="搜索文件命令（4 个）"></a>搜索文件命令（4 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>which</td>
+<td>查找二进制命令，按环境变量 PATH 路径查找。</td>
+</tr>
+<tr>
+<td>find</td>
+<td>从磁盘遍历查找文件或目录。</td>
+</tr>
+<tr>
+<td>whereis</td>
+<td>查找二进制命令，按环境变量 PATH 路径查找。</td>
+</tr>
+<tr>
+<td>locate</td>
+<td>从数据库 (/var/lib/mlocate/mlocate.db) 查找命令，使用 updatedb 更新库。</td>
+</tr>
+</tbody></table>
+<h3 id="用户管理命令（10-个）"><a href="#用户管理命令（10-个）" class="headerlink" title="用户管理命令（10 个）"></a>用户管理命令（10 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>useradd</td>
+<td>添加用户。</td>
+</tr>
+<tr>
+<td>usermod</td>
+<td>修改系统已经存在的用户属性。</td>
+</tr>
+<tr>
+<td>userdel</td>
+<td>删除用户。</td>
+</tr>
+<tr>
+<td>groupadd</td>
+<td>添加用户组。</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td>修改用户密码。</td>
+</tr>
+<tr>
+<td>chage</td>
+<td>修改用户密码有效期限。</td>
+</tr>
+<tr>
+<td>id</td>
+<td>查看用户的 uid,gid 及归属的用户组。</td>
+</tr>
+<tr>
+<td>su</td>
+<td>切换用户身份。</td>
+</tr>
+<tr>
+<td>visudo</td>
+<td>编辑 / etc/sudoers 文件的专属命令。</td>
+</tr>
+<tr>
+<td>sudo</td>
+<td>以另外一个用户身份（默认 root 用户）执行事先在 sudoers 文件允许的命令。</td>
+</tr>
+</tbody></table>
+<h3 id="基础网络操作命令（11-个）"><a href="#基础网络操作命令（11-个）" class="headerlink" title="基础网络操作命令（11 个）"></a>基础网络操作命令（11 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>telnet</td>
+<td>使用 TELNET 协议远程登录。</td>
+</tr>
+<tr>
+<td>ssh</td>
+<td>使用 SSH 加密协议远程登录。</td>
+</tr>
+<tr>
+<td>scp</td>
+<td>全拼 secure copy，用于不同主机之间复制文件。</td>
+</tr>
+<tr>
+<td>wget</td>
+<td>命令行下载文件。</td>
+</tr>
+<tr>
+<td>ping</td>
+<td>测试主机之间网络的连通性。</td>
+</tr>
+<tr>
+<td>route</td>
+<td>显示和设置 linux 系统的路由表。</td>
+</tr>
+<tr>
+<td>ifconfig</td>
+<td>查看、配置、启用或禁用网络接口的命令。</td>
+</tr>
+<tr>
+<td>ifup</td>
+<td>启动网卡。</td>
+</tr>
+<tr>
+<td>ifdown</td>
+<td>关闭网卡。</td>
+</tr>
+<tr>
+<td>netstat</td>
+<td>查看网络状态。</td>
+</tr>
+<tr>
+<td>ss</td>
+<td>查看网络状态。</td>
+</tr>
+</tbody></table>
+<h3 id="深入网络操作命令（9-个）"><a href="#深入网络操作命令（9-个）" class="headerlink" title="深入网络操作命令（9 个）"></a>深入网络操作命令（9 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nmap</td>
+<td>网络扫描命令。</td>
+</tr>
+<tr>
+<td>lsof</td>
+<td>全名 list open files，也就是列举系统中已经被打开的文件。</td>
+</tr>
+<tr>
+<td>mail</td>
+<td>发送和接收邮件。</td>
+</tr>
+<tr>
+<td>mutt</td>
+<td>邮件管理命令。</td>
+</tr>
+<tr>
+<td>nslookup</td>
+<td>交互式查询互联网 DNS 服务器的命令。</td>
+</tr>
+<tr>
+<td>dig</td>
+<td>查找 DNS 解析过程。</td>
+</tr>
+<tr>
+<td>host</td>
+<td>查询 DNS 的命令。</td>
+</tr>
+<tr>
+<td>traceroute</td>
+<td>追踪数据传输路由状况。</td>
+</tr>
+<tr>
+<td>tcpdump</td>
+<td>命令行的抓包工具。</td>
+</tr>
+</tbody></table>
+<h3 id="有关磁盘与文件系统的命令（16-个）"><a href="#有关磁盘与文件系统的命令（16-个）" class="headerlink" title="有关磁盘与文件系统的命令（16 个）"></a>有关磁盘与文件系统的命令（16 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mount</td>
+<td>挂载文件系统。</td>
+</tr>
+<tr>
+<td>umount</td>
+<td>卸载文件系统。</td>
+</tr>
+<tr>
+<td>fsck</td>
+<td>检查并修复 Linux 文件系统。</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>转换或复制文件。</td>
+</tr>
+<tr>
+<td>dumpe2fs</td>
+<td>导出 ext2/ext3/ext4 文件系统信息。</td>
+</tr>
+<tr>
+<td>dump</td>
+<td>ext2/3/4 文件系统备份工具。</td>
+</tr>
+<tr>
+<td>fdisk</td>
+<td>磁盘分区命令，适用于 2TB 以下磁盘分区。</td>
+</tr>
+<tr>
+<td>parted</td>
+<td>磁盘分区命令，没有磁盘大小限制，常用于 2TB 以下磁盘分区。</td>
+</tr>
+<tr>
+<td>mkfs</td>
+<td>格式化创建 Linux 文件系统。</td>
+</tr>
+<tr>
+<td>partprobe</td>
+<td>更新内核的硬盘分区表信息。</td>
+</tr>
+<tr>
+<td>e2fsck</td>
+<td>检查 ext2/ext3/ext4 类型文件系统。</td>
+</tr>
+<tr>
+<td>mkswap</td>
+<td>创建 Linux 交换分区。</td>
+</tr>
+<tr>
+<td>swapon</td>
+<td>启用交换分区。</td>
+</tr>
+<tr>
+<td>swapoff</td>
+<td>关闭交换分区。</td>
+</tr>
+<tr>
+<td>sync</td>
+<td>将内存缓冲区内的数据写入磁盘。</td>
+</tr>
+<tr>
+<td>resize2fs</td>
+<td>调整 ext2/ext3/ext4 文件系统大小。</td>
+</tr>
+</tbody></table>
+<h3 id="系统权限及用户授权相关命令（4-个）"><a href="#系统权限及用户授权相关命令（4-个）" class="headerlink" title="系统权限及用户授权相关命令（4 个）"></a>系统权限及用户授权相关命令（4 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>chmod</td>
+<td>改变文件或目录权限。</td>
+</tr>
+<tr>
+<td>chown</td>
+<td>改变文件或目录的属主和属组。</td>
+</tr>
+<tr>
+<td>chgrp</td>
+<td>更改文件用户组。</td>
+</tr>
+<tr>
+<td>umask</td>
+<td>显示或设置权限掩码。</td>
+</tr>
+</tbody></table>
+<h3 id="查看系统用户登陆信息的命令（7-个）"><a href="#查看系统用户登陆信息的命令（7-个）" class="headerlink" title="查看系统用户登陆信息的命令（7 个）"></a>查看系统用户登陆信息的命令（7 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>whoami</td>
+<td>显示当前有效的用户名称，相当于执行 id -un 命令。</td>
+</tr>
+<tr>
+<td>who</td>
+<td>显示目前登录系统的用户信息。</td>
+</tr>
+<tr>
+<td>w</td>
+<td>显示已经登陆系统的用户列表，并显示用户正在执行的指令。</td>
+</tr>
+<tr>
+<td>last</td>
+<td>显示登入系统的用户。</td>
+</tr>
+<tr>
+<td>lastlog</td>
+<td>显示系统中所有用户最近一次登录信息。</td>
+</tr>
+<tr>
+<td>users</td>
+<td>显示当前登录系统的所有用户的用户列表。</td>
+</tr>
+<tr>
+<td>finger</td>
+<td>查找并显示用户信息。</td>
+</tr>
+</tbody></table>
+<h3 id="内置命令及其它（19-个）"><a href="#内置命令及其它（19-个）" class="headerlink" title="内置命令及其它（19 个）"></a>内置命令及其它（19 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>echo</td>
+<td>打印变量，或直接输出指定的字符串</td>
+</tr>
+<tr>
+<td>printf</td>
+<td>将结果格式化输出到标准输出。</td>
+</tr>
+<tr>
+<td>rpm</td>
+<td>管理 rpm 包的命令。</td>
+</tr>
+<tr>
+<td>yum</td>
+<td>自动化简单化地管理 rpm 包的命令。</td>
+</tr>
+<tr>
+<td>watch</td>
+<td>周期性的执行给定的命令，并将命令的输出以全屏方式显示。</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>设置系统别名。</td>
+</tr>
+<tr>
+<td>unalias</td>
+<td>取消系统别名。</td>
+</tr>
+<tr>
+<td>date</td>
+<td>查看或设置系统时间。</td>
+</tr>
+<tr>
+<td>clear</td>
+<td>清除屏幕，简称清屏。</td>
+</tr>
+<tr>
+<td>history</td>
+<td>查看命令执行的历史纪录。</td>
+</tr>
+<tr>
+<td>eject</td>
+<td>弹出光驱。</td>
+</tr>
+<tr>
+<td>time</td>
+<td>计算命令执行时间。</td>
+</tr>
+<tr>
+<td>nc</td>
+<td>功能强大的网络工具。</td>
+</tr>
+<tr>
+<td>xargs</td>
+<td>将标准输入转换成命令行参数。</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>调用并执行指令的命令。</td>
+</tr>
+<tr>
+<td>export</td>
+<td>设置或者显示环境变量。</td>
+</tr>
+<tr>
+<td>unset</td>
+<td>删除变量或函数。</td>
+</tr>
+<tr>
+<td>type</td>
+<td>用于判断另外一个命令是否是内置命令。</td>
+</tr>
+<tr>
+<td>bc</td>
+<td>命令行科学计算器</td>
+</tr>
+</tbody></table>
+<h3 id="系统管理与性能监视命令-9-个"><a href="#系统管理与性能监视命令-9-个" class="headerlink" title="系统管理与性能监视命令 (9 个)"></a>系统管理与性能监视命令 (9 个)</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>chkconfig</td>
+<td>管理 Linux 系统开机启动项。</td>
+</tr>
+<tr>
+<td>vmstat</td>
+<td>虚拟内存统计。</td>
+</tr>
+<tr>
+<td>mpstat</td>
+<td>显示各个可用 CPU 的状态统计。</td>
+</tr>
+<tr>
+<td>iostat</td>
+<td>统计系统 IO。</td>
+</tr>
+<tr>
+<td>sar</td>
+<td>全面地获取系统的 CPU、运行队列、磁盘 I/O、分页（交换区）、内存、 CPU 中断和网络等性能数据。</td>
+</tr>
+<tr>
+<td>ipcs</td>
+<td>用于报告 Linux 中进程间通信设施的状态，显示的信息包括消息列表、共享内存和信号量的信息。</td>
+</tr>
+<tr>
+<td>ipcrm</td>
+<td>用来删除一个或更多的消息队列、信号量集或者共享内存标识。</td>
+</tr>
+<tr>
+<td>strace</td>
+<td>用于诊断、调试 Linux 用户空间跟踪器。我们用它来监控用户空间进程和内核的交互，比如系统调用、信号传递、进程状态变更等。</td>
+</tr>
+<tr>
+<td>ltrace</td>
+<td>命令会跟踪进程的库函数调用, 它会显现出哪个库函数被调用。</td>
+</tr>
+</tbody></table>
+<h3 id="关机-重启-注销和查看系统信息的命令（6-个）"><a href="#关机-重启-注销和查看系统信息的命令（6-个）" class="headerlink" title="关机 / 重启 / 注销和查看系统信息的命令（6 个）"></a>关机 / 重启 / 注销和查看系统信息的命令（6 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shutdown</td>
+<td>关机。</td>
+</tr>
+<tr>
+<td>halt</td>
+<td>关机。</td>
+</tr>
+<tr>
+<td>poweroff</td>
+<td>关闭电源。</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>退出当前登录的 Shell。</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>退出当前登录的 Shell。</td>
+</tr>
+<tr>
+<td>Ctrl+d</td>
+<td>退出当前登录的 Shell 的快捷键。</td>
+</tr>
+</tbody></table>
+<h3 id="进程管理相关命令（15-个）"><a href="#进程管理相关命令（15-个）" class="headerlink" title="进程管理相关命令（15 个）"></a>进程管理相关命令（15 个）</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bg</td>
+<td>将一个在后台暂停的命令，变成继续执行  （在后台执行）。</td>
+</tr>
+<tr>
+<td>fg</td>
+<td>将后台中的命令调至前台继续运行。</td>
+</tr>
+<tr>
+<td>jobs</td>
+<td>查看当前有多少在后台运行的命令。</td>
+</tr>
+<tr>
+<td>kill</td>
+<td>终止进程。</td>
+</tr>
+<tr>
+<td>killall</td>
+<td>通过进程名终止进程。</td>
+</tr>
+<tr>
+<td>pkill</td>
+<td>通过进程名终止进程。</td>
+</tr>
+<tr>
+<td>crontab</td>
+<td>定时任务命令。</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>显示进程的快照。</td>
+</tr>
+<tr>
+<td>pstree</td>
+<td>树形显示进程。</td>
+</tr>
+<tr>
+<td>nice/renice</td>
+<td>调整程序运行的优先级。</td>
+</tr>
+<tr>
+<td>nohup</td>
+<td>忽略挂起信号运行指定的命令。</td>
+</tr>
+<tr>
+<td>pgrep</td>
+<td>查找匹配条件的进程。</td>
+</tr>
+<tr>
+<td>runlevel</td>
+<td>查看系统当前运行级别。</td>
+</tr>
+<tr>
+<td>init</td>
+<td>切换运行级别。</td>
+</tr>
+<tr>
+<td>service</td>
+<td>启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。</td>
+</tr>
+</tbody></table>
+<p>Linux，全称GNU/Linux，是一套免费使用和自由传播的类UNIX操作系统，其内核由林纳斯·本纳第克特·托瓦兹于1991年第一次释出，它主要受到Minix和Unix思想的启发，是一个基于POSIX和Unix的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的Unix工具软件、应用程序和网络协议。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://z.itpub.net/article/detail/E8C122A4CA07F3EC5952EE9F0B233DD4" target="_blank" rel="noopener">Linux_运维必会的150个常用命令，你都会用吗？</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-11T10:50:03.000Z" itemprop="dateUpdated">2022-06-11 18:50:03</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/&title=《Linux_运维必会的150个常用命令，你都会用吗？》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/&title=《Linux_运维必会的150个常用命令，你都会用吗？》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux_运维必会的150个常用命令，你都会用吗？》 — Will的博客&url=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/10/%E6%9C%80%E5%AE%8C%E7%BE%8E%E6%96%B9%E6%A1%88%EF%BC%81%E6%A8%A1%E6%8B%9F%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E9%9A%90%E8%97%8F%E7%89%B9%E5%BE%81/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">最完美方案！模拟浏览器如何正确隐藏特征</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/09/Selenium%E8%B6%85%E7%BA%A7%E8%AF%A6%E7%BB%86%E7%9A%84%E6%95%99%E7%A8%8B/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Selenium超级详细的教程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/&title=《Linux_运维必会的150个常用命令，你都会用吗？》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/&title=《Linux_运维必会的150个常用命令，你都会用吗？》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux_运维必会的150个常用命令，你都会用吗？》 — Will的博客&url=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/10/Linux_%E8%BF%90%E7%BB%B4%E5%BF%85%E4%BC%9A%E7%9A%84150%E4%B8%AA%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%BD%A0%E9%83%BD%E4%BC%9A%E7%94%A8%E5%90%97%EF%BC%9F/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

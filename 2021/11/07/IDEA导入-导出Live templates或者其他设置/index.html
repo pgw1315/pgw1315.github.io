@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>IDEA导入/导出Live templates或者其他设置 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java,Tools,IDEA">
+    <meta name="description" content="IDEA导入&#x2F;导出live templates或者其他设置导出 在菜单栏选择 File | Manage IDE Settings | Export Settings  在打开的导出弹窗中，选择需要导出的项目，如果我们只需要导出 Live templates ，那就只选择 Live templates 即可，然后选择一个需要导出的位置并设置一个存储的文件名（默认是settings.zip）  点击">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDEA导入&#x2F;导出Live templates或者其他设置">
+<meta property="og:url" content="http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="IDEA导入&#x2F;导出live templates或者其他设置导出 在菜单栏选择 File | Manage IDE Settings | Export Settings  在打开的导出弹窗中，选择需要导出的项目，如果我们只需要导出 Live templates ，那就只选择 Live templates 即可，然后选择一个需要导出的位置并设置一个存储的文件名（默认是settings.zip）  点击">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-06T20:21:42.000Z">
+<meta property="article:modified_time" content="2022-06-06T03:10:35.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="Tools">
+<meta property="article:tag" content="IDEA">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">IDEA导入/导出Live templates或者其他设置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">IDEA导入/导出Live templates或者其他设置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-11-06T20:21:42.000Z" itemprop="datePublished" class="page-time">
+  2021-11-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#IDEA导入-导出live-templates或者其他设置"><span class="post-toc-number">1.</span> <span class="post-toc-text">IDEA导入&#x2F;导出live templates或者其他设置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#导出"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">导出</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#导入"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">导入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">参考</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-IDEA导入-导出Live templates或者其他设置"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">IDEA导入/导出Live templates或者其他设置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-11-07 04:21:42" datetime="2021-11-06T20:21:42.000Z"  itemprop="datePublished">2021-11-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="IDEA导入-导出live-templates或者其他设置"><a href="#IDEA导入-导出live-templates或者其他设置" class="headerlink" title="IDEA导入/导出live templates或者其他设置"></a>IDEA导入/导出live templates或者其他设置</h1><h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><ol>
+<li><p>在菜单栏选择 <code>File</code> | <code>Manage IDE Settings</code> | <code>Export Settings</code></p>
+</li>
+<li><p>在打开的导出弹窗中，选择需要导出的项目，如果我们只需要导出 <strong>Live templates</strong> ，那就只选择 <strong>Live templates</strong> 即可，然后选择一个需要导出的位置并设置一个存储的文件名（默认是settings.zip）</p>
+</li>
+<li><p>点击 <strong>OK</strong> 进行导出，导出的文件可以导入到其他IDEA中进行使用</p>
+</li>
+</ol>
+<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><ol>
+<li><p>在菜单栏选择 <code>File</code> | <code>Manage IDE Settings</code> | <code>Import Settings</code></p>
+</li>
+<li><p>选择之前导出的配置文件，点击 <strong>OK</strong></p>
+</li>
+<li><p>在弹出的窗口中选择需要导入的项目，例如 <strong>Live templates</strong> 然后点击 <strong>OK</strong></p>
+</li>
+<li><p>重启IDEA使新配置生效</p>
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<p>[Share live templates](<a href="https://www.jetbrains.com/help/idea/sharing-live-" target="_blank" rel="noopener">https://www.jetbrains.com/help/idea/sharing-live-</a><br>templates.html#export)</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-06T03:10:35.000Z" itemprop="dateUpdated">2022-06-06 11:10:35</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/" target="_blank" rel="external">http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/&title=《IDEA导入/导出Live templates或者其他设置》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/&title=《IDEA导入/导出Live templates或者其他设置》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《IDEA导入/导出Live templates或者其他设置》 — Will的博客&url=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/11/07/CentOS%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85ffmpeg%E5%B7%A5%E5%85%B7/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">CentOS使用yum安装ffmpeg工具</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/11/03/CentOS7-yum%E5%AE%89%E8%A3%85python3-6/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CentOS7 yum安装python3.6</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/&title=《IDEA导入/导出Live templates或者其他设置》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/&title=《IDEA导入/导出Live templates或者其他设置》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《IDEA导入/导出Live templates或者其他设置》 — Will的博客&url=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

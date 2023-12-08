@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Xpath_详解 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Xpath">
+    <meta name="description" content="什么是 Xpath？Xpath 是一种用在 XML 文档中定位元素的语言，同样也支持 HTML 元素的解析。 所谓 Xpath，是指 XML path language。path 就是路径，那么 Xpath 主要是通过路径来查找元素。 我们通过下面一张小图来了解一下 HTML 中的结构：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xpath_详解">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="什么是 Xpath？Xpath 是一种用在 XML 文档中定位元素的语言，同样也支持 HTML 元素的解析。 所谓 Xpath，是指 XML path language。path 就是路径，那么 Xpath 主要是通过路径来查找元素。 我们通过下面一张小图来了解一下 HTML 中的结构：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pgw1315.github.io/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-1d5d648e03370891.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-3ce3a8737955cffe.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-1187d4bb553f53c6.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-466743dbeb77cb6f.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-443ad23bb513cce3.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-a9ed19d1dffab883.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-1d6c86e9e1723c6a.png">
+<meta property="article:published_time" content="2022-06-11T21:30:43.000Z">
+<meta property="article:modified_time" content="2022-06-11T21:47:54.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Xpath">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pgw1315.github.io/images/Xpath_%E8%AF%A6%E8%A7%A3/8178525-1d5d648e03370891.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Xpath_详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Xpath_详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-11T21:30:43.000Z" itemprop="datePublished" class="page-time">
+  2022-06-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是-Xpath？"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是 Xpath？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#绝对路径："><span class="post-toc-number">2.</span> <span class="post-toc-text">绝对路径：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相对路径"><span class="post-toc-number">3.</span> <span class="post-toc-text">相对路径</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本定位语法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">基本定位语法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#元素属性定位"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">元素属性定位</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#层级属性结合定位"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">层级属性结合定位</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用谓语定位"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">使用谓语定位</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用逻辑运算符"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">使用逻辑运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用文本定位"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">使用文本定位</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用部分匹配函数"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">使用部分匹配函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#验证-Xpath"><span class="post-toc-number">4.</span> <span class="post-toc-text">验证 Xpath</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Xpath_详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Xpath_详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-12 05:30:43" datetime="2022-06-11T21:30:43.000Z"  itemprop="datePublished">2022-06-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="什么是-Xpath？"><a href="#什么是-Xpath？" class="headerlink" title="什么是 Xpath？"></a>什么是 Xpath？</h2><p>Xpath 是一种用在 XML 文档中定位元素的语言，同样也支持 HTML 元素的解析。</p>
+<p>所谓 Xpath，是指 XML path language。path 就是路径，那么 Xpath 主要是通过路径来查找元素。</p>
+<p>我们通过下面一张小图来了解一下 HTML 中的结构：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Xpath_详解/8178525-1d5d648e03370891.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>HTML 的结构就是树形结构，HTML 是根节点，所有的其他元素节点都是从根节点发出的。其他的元素都是这棵树上的节点<code>Node</code>，每个节点还可能有属性和文本。</p>
+<ul>
+<li>而路径就是指某个节点到另一个节点的路线。</li>
+</ul>
+<p>节点之间存在各种关系：</p>
+<ul>
+<li><p>父节点(Parent)： HTML 是 body 和 head 节点的父节点；</p>
+</li>
+<li><p>子节点(Child)：head 和 body 是 HTML 的子节点；</p>
+</li>
+<li><p>兄弟节点(Sibling)：拥有相同的父节点，head 和 body 就是兄弟节点。title 和 div 不是兄弟，因为他们不是同一个父节点。</p>
+</li>
+<li><p>祖先节点(Ancestor)：body 是 form 的祖先节点，爷爷辈及以上👴；</p>
+</li>
+<li><p>后代节点(Descendant)：form 是 HTML 的后代节点，孙子辈及以下👶。</p>
+</li>
+</ul>
+<p>Xpath 中的绝对路径从 HTML 根节点开始算，相对路径从任意节点开始。</p>
+<p>通过开发者工具，我们可以拷贝到 Xpath 的绝对路径和相对路径代码：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Xpath_详解/8178525-3ce3a8737955cffe.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>但是由于拷贝出来的代码缺乏灵活性，也不全然准确。大部分情况下，都需要自己定义 Xpath 语句，因此 Xpath 语法还是有必要学习。</p>
+<h2 id="绝对路径："><a href="#绝对路径：" class="headerlink" title="绝对路径："></a>绝对路径：</h2><p>Xpath 中最直观的定位策略就是绝对路径。</p>
+<p>以百度中的输入框和按钮为例，通过拷贝出来的 full Xpath：</p>
+<pre><code class="python">/html/body/div[2]/div/div/div/div/form/span/input
+</code></pre>
+<p>这就是一个绝对路径我们可以看出，绝对路径是从根节点<code>/html</code>开始往下，一层层的表示出来直到需要的节点为止。</p>
+<p>这明显不是理智的选项，因此了解以下即可，不用往心里去。</p>
+<h2 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h2><p>除了绝对路径，Xpath 中更常用的方式是相对路径定位方法，以“//”开头。</p>
+<p>相对路径可以从任意节点开始，一般我们会选取一个可以唯一定位到的元素开始写，可以增加查找的准确性。</p>
+<p>相对路径可以通过以下的方式来定位元素：</p>
+<h3 id="基本定位语法"><a href="#基本定位语法" class="headerlink" title="基本定位语法"></a>基本定位语法</h3><p>定位语法主要依赖于以下特殊符号：</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/</code></td>
+<td>从根节点开始选取</td>
+<td>/html/div/span</td>
+</tr>
+<tr>
+<td><code>//</code></td>
+<td>从任意节点开始选取</td>
+<td>//input</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>选取当前节点</td>
+<td></td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td>选取当前节点的父节点</td>
+<td>//input/.. 会选取 input 的父节点</td>
+</tr>
+<tr>
+<td><code>@</code></td>
+<td>选取属性，或者根据属性选取</td>
+<td>//input[@data] 选取具备 data 属性的 input 元素 //@data 选取所有 data 属性</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>通配符，表示任意节点或任意属性</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="元素属性定位"><a href="#元素属性定位" class="headerlink" title="元素属性定位"></a>元素属性定位</h3><p>属性定位是通过 @ 符号指定需要使用的属性。</p>
+<ul>
+<li>根据元素是否具备某个属性查找元素</li>
+</ul>
+<pre><code class="python">//*[@data-recordid]
+</code></pre>
+<p>选取包含data-recordid属性的所有节点。可以定位到以下元素：</p>
+<pre><code class="python">&lt;tr role=&quot;row&quot; data-boundview=&quot;gridview-1029&quot; data-recordid=&quot;B36BCA33&quot; &gt;&lt;/tr&gt;
+</code></pre>
+<ul>
+<li>根据属性是否等于某值查找元素</li>
+</ul>
+<pre><code class="python">//span[@role=&#39;img&#39;]
+</code></pre>
+<p>选取属性 role 的属性值为 img 的所有节点。可以定位到以下元素：</p>
+<pre><code class="python">&lt;span role=&quot;img&quot; class=&quot;x-btn-icon-el&quot; unselectable=&quot;on&quot; style=&quot;&quot;&gt;&lt;/span&gt;
+</code></pre>
+<p>注意，属性值必须要加引号，单双引号都可以。</p>
+<h3 id="层级属性结合定位"><a href="#层级属性结合定位" class="headerlink" title="层级属性结合定位"></a>层级属性结合定位</h3><p>遇到某些元素无法精确定位的时候，可以查找其父级及其祖先节点，找到有确定的祖先节点后通过层级依次向下定位。</p>
+<p>以下面的结构为例：</p>
+<ul>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Xpath_详解/8178525-1187d4bb553f53c6.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+</ul>
+<pre><code class="python">&lt;form action=&quot;search&quot; id=&quot;form&quot; method=&quot;post&quot;&gt;
+    &lt;span class=&quot;bg&quot;&gt;
+        &lt;span class=&quot;soutu&quot;&gt;搜索&lt;/span&gt;
+    &lt;/span&gt;
+    &lt;span class=&quot;soutu&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;key&quot; id=&quot;su&quot;&gt;
+    &lt;/span&gt;
+&lt;/form&gt;
+</code></pre>
+<ul>
+<li>根据层级向下找，从 form 找到绿色的 span：</li>
+</ul>
+<pre><code class="python">//form[@id=&quot;form&quot;]/span/span
+</code></pre>
+<ul>
+<li>查找某元素内部的所有元素，选取 form 元素内部的所有 span：</li>
+</ul>
+<pre><code class="python">//form[@id=&quot;form&quot;]//span
+</code></pre>
+<p>第二个双斜杠，表示选取内部所有的 span，不管层级关系</p>
+<ul>
+<li>使用星号找不特定的元素</li>
+</ul>
+<pre><code class="python">//*[@id=&quot;form&quot;]//*[@type=&quot;text&quot;]
+</code></pre>
+<p>选取 id 属性为 form 的任意属性内部，并且 type 属性为 text 的任意元素。这里会找到 input。</p>
+<ul>
+<li>使用<code>..</code>从下往上找，根据 input 查找其父节点 span：</li>
+</ul>
+<pre><code class="python">//input[@name=&quot;key&quot;]/..
+</code></pre>
+<p>注意最后的两个点，找到 input 节点的上级节点，如果还要再往上再加 <code>/..</code></p>
+<ul>
+<li>找同级节点：</li>
+<li>比如我们想通过第一个 span 标签去 找 div 标签。树形结构中，兄弟节点之间的关系是通过父节点建立起来的。所以可以先找到父节点，再通过父节点找同级节点。</li>
+</ul>
+<pre><code class="python">//span[@class=&quot;bg&quot;]/../div
+</code></pre>
+<p>先通过<code>/..</code>找到 span 的父节点，再通过父节点找到 div。</p>
+<h3 id="使用谓语定位"><a href="#使用谓语定位" class="headerlink" title="使用谓语定位"></a>使用谓语定位</h3><p>谓语是 Xpath 中用于描述元素位置。主要有数字下标、最后一个子元素<code>last()</code>、元素下标函数<code>position()</code>。</p>
+<ul>
+<li>使用下标的方式，从 form 找到 input ：</li>
+</ul>
+<pre><code class="python">//form[@id=&quot;form&quot;]/span[2]/input
+</code></pre>
+<p>Xpath 中的下标从 <code>1</code> 开始。</p>
+<ul>
+<li>查找最后一个子元素，选取 form 下的最后一个 span：</li>
+</ul>
+<pre><code class="python">//form[@id=&quot;form&quot;]/span[last()]
+</code></pre>
+<ul>
+<li>查找倒数第几个子元素，选取 form 下的倒数第一个 span：</li>
+</ul>
+<pre><code class="python">//form[@id=&quot;form&quot;]/span[last()-1]
+</code></pre>
+<ul>
+<li>使用 position() 函数，选取 from 下第二个 span：</li>
+</ul>
+<pre><code class="python">//form[@id=&quot;form&quot;]/span[position()=2]
+</code></pre>
+<ul>
+<li>使用 position() 函数，选取下标大于 2 的 span：</li>
+</ul>
+<pre><code class="python">//form[@id=&quot;form&quot;]/span[position()&gt;2]
+</code></pre>
+<h3 id="使用逻辑运算符"><a href="#使用逻辑运算符" class="headerlink" title="使用逻辑运算符"></a>使用逻辑运算符</h3><p>如果元素的某个属性无法精确定位到这个元素，我们还可以用逻辑运算符 and 连接多个属性进行定位，以百度输入框为例。</p>
+<ul>
+<li>使用 <code>and</code> ：</li>
+</ul>
+<pre><code class="python">//*[@name=&#39;wd&#39; and @class=&#39;s_ipt&#39;]
+</code></pre>
+<p>查找 name 属性为 wd 并且 class 属性为 s_ipt 的任意元素</p>
+<ul>
+<li>使用 <code>or</code>：</li>
+</ul>
+<pre><code class="python">//*[@name=&#39;wd&#39; or @class=&#39;s_ipt&#39;]
+</code></pre>
+<p>查找 name 属性为 wd 或者 class 属性为 s_ipt 的任意元素，取其中之一满足即可。</p>
+<ul>
+<li>使用<code>|</code>，同时查找多个路径，取或：</li>
+</ul>
+<pre><code class="python">//form[@id=&quot;form&quot;]//span | //form[@id=&quot;form&quot;]//input
+</code></pre>
+<p>选取 form 下所有的 span 和所有的 input。</p>
+<h3 id="使用文本定位"><a href="#使用文本定位" class="headerlink" title="使用文本定位"></a>使用文本定位</h3><p>使用文本定位，是 Xpath 中的一大特色。在自动化测试中，为了让代码的可读性更高，可以使用文本的方式。</p>
+<p>以下一个案例：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Xpath_详解/8178525-466743dbeb77cb6f.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>部分网页结构如下：</p>
+<pre><code class="python">&lt;tr&gt;
+  &lt;td valign=&quot;top&quot;&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;payment&quot; value=&quot;1&quot; checked=&quot;&quot; iscod=&quot;0&quot;&gt;
+  &lt;/td&gt;
+  &lt;td valign=&quot;top&quot;&gt;
+    &lt;strong&gt;支付宝&lt;/strong&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
+<p>其实我们需要点的是前的单选框，但是单选框没有任何特殊的标识，不够灵活。我们可以通过后面的名称，如(支付宝、余额支付等)来找到其对应行的 radio，再去点击。</p>
+<p>我们就需要先通过文本定位到“支付宝”，再去找其同一行(tr)的 input 节点。如果理不清楚，我们可以先画一个结构图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Xpath_详解/8178525-443ad23bb513cce3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>红色箭头表示查找路径，先定位到“支付宝”所在的 strong，再定位 <code>td -&gt; tr -&gt; td - &gt;input</code> 。那么要定位“支付宝”文本，就需要用到 Xpath 中的函数 <code>text()</code> 或 <code>string()</code>，注意是函数，所以括号不能少。</p>
+<p><code>text()</code>：当前元素节点包含的文本内容；</p>
+<ul>
+<li>表达式<code>//div[text()=&quot;文本&quot;]</code>，能找到：</li>
+</ul>
+<pre><code class="python">&lt;div&gt;文本&lt;/div&gt;
+</code></pre>
+<p>不能找到：</p>
+<pre><code class="python">&lt;div&gt;&lt;span&gt;文本&lt;/span&gt;&lt;/div&gt;
+</code></pre>
+<p><code>string()</code>：当前元素节点内部所有节点元素的文本内容。表达式<code>//div[string()=&quot;文本&quot;]</code>上述两种情况都能找到。</p>
+<p>好，接着写上面的内容。先通过 <code>//strong[text()=&quot;支付宝&quot;]</code>定位到“支付宝”所在的元素 strong，再找上级 td -&gt; tr，再向下找：</p>
+<pre><code class="python">//strong[text()=&quot;支付宝&quot;]/../../td[1]/input
+</code></pre>
+<p>也可以写为：</p>
+<pre><code class="python">//td[string()=&quot;支付宝&quot;]/../td[1]/input
+</code></pre>
+<h3 id="使用部分匹配函数"><a href="#使用部分匹配函数" class="headerlink" title="使用部分匹配函数"></a>使用部分匹配函数</h3><p>Xpath 中有提供了几个函数，用来进行部分匹配。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>contains</td>
+<td>选取属性或者文本包含某些字符</td>
+<td>//div[contains(@id, ‘data’)] 选取 id 属性包含 data 的 div 元素  //div[contains(string(), ‘支付宝’)] 选取内部文本包含“支付宝”的 div 元素</td>
+</tr>
+<tr>
+<td>starts-with</td>
+<td>选取属性或者文本以某些字符开头</td>
+<td>//div[starts-with(@id, ‘data’)] 选取 id 属性以 data 开头的 div 元素  //div[starts-with(string(), ‘银联’)] 选取内部文本以“银联”开头的 div 元素</td>
+</tr>
+<tr>
+<td>ends-with</td>
+<td>选取属性或者文本以某些字符开头</td>
+<td>//div[ends-with(@id, ‘require’)] 选取 id 属性以 require 结尾的 div 元素  //div[ends-with(string(), ‘支付’)] 选取内部文本以“支付”结尾的 div 元素</td>
+</tr>
+</tbody></table>
+<h2 id="验证-Xpath"><a href="#验证-Xpath" class="headerlink" title="验证 Xpath"></a>验证 Xpath</h2><p>验证 xpath 有两种方法：</p>
+<ul>
+<li>在开发者工具的 Elements 中按<code>Ctrl + F</code>，在搜索框中输入 Xpath：</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Xpath_详解/8178525-a9ed19d1dffab883.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ul>
+<li>在开发者工具的 Console 中使用 <code>$x()</code></li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Xpath_详解/8178525-1d6c86e9e1723c6a.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.jianshu.com/p/6a0dbb4e246a" target="_blank" rel="noopener">Xpath_详解</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-11T21:47:54.000Z" itemprop="dateUpdated">2022-06-12 05:47:54</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xpath/" rel="tag">Xpath</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/&title=《Xpath_详解》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/&title=《Xpath_详解》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Xpath_详解》 — Will的博客&url=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/13/Python%E7%9A%84list%E5%88%97%E8%A1%A8%E8%AF%A6%E8%A7%A3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python的list列表详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/11/python%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F(ini%E3%80%81yaml%E3%80%81xml)/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">python读取配置文件方式(ini、yaml、xml)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/&title=《Xpath_详解》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/&title=《Xpath_详解》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Xpath_详解》 — Will的博客&url=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/12/Xpath_%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

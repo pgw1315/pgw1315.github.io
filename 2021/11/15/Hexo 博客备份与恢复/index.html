@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Hexo 博客备份与恢复 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Hexo,备份">
+    <meta name="description" content="Hexo 博客备份与恢复本文旨在解决在不同电脑上都能维护博客或配置、发布的内容丢失可恢复的问题。观察部署到仓库的内容，我们可以看到上传的内容是 public 文件夹下的所有内容。事实上 hexo-deploy-git 插件是通过拷贝 public 文件夹内容到 .deploy_git 文件夹下，然后提交推送到远程分支上实现了网站文件的部署。那我们的备份思路也可以这样，上传目录下的其他所有文件就可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客备份与恢复">
+<meta property="og:url" content="http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="Hexo 博客备份与恢复本文旨在解决在不同电脑上都能维护博客或配置、发布的内容丢失可恢复的问题。观察部署到仓库的内容，我们可以看到上传的内容是 public 文件夹下的所有内容。事实上 hexo-deploy-git 插件是通过拷贝 public 文件夹内容到 .deploy_git 文件夹下，然后提交推送到远程分支上实现了网站文件的部署。那我们的备份思路也可以这样，上传目录下的其他所有文件就可以">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-15T04:55:46.000Z">
+<meta property="article:modified_time" content="2022-06-06T03:10:35.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="备份">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Hexo 博客备份与恢复</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Hexo 博客备份与恢复</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-11-15T04:55:46.000Z" itemprop="datePublished" class="page-time">
+  2021-11-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hexo/">Hexo</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hexo-博客备份与恢复"><span class="post-toc-number">1.</span> <span class="post-toc-text">Hexo 博客备份与恢复</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#备份"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">备份</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#备份的文件列表"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">备份的文件列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#具体操作"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">具体操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#恢复"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">恢复</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Hexo 博客备份与恢复"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Hexo 博客备份与恢复</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-11-15 12:55:46" datetime="2021-11-15T04:55:46.000Z"  itemprop="datePublished">2021-11-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hexo/">Hexo</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Hexo-博客备份与恢复"><a href="#Hexo-博客备份与恢复" class="headerlink" title="Hexo 博客备份与恢复"></a>Hexo 博客备份与恢复</h1><p>本文旨在解决在不同电脑上都能维护博客或配置、发布的内容丢失可恢复的问题。<br>观察部署到仓库的内容，我们可以看到上传的内容是 <code>public</code> 文件夹下的所有内容。事实上 <code>hexo-deploy-git</code> 插件是通过拷贝 <code>public</code> 文件夹内容到 <code>.deploy_git</code> 文件夹下，然后提交推送到远程分支上实现了网站文件的部署。<br>那我们的备份思路也可以这样，上传目录下的其他所有文件就可以了，同时我们不能修改博客的发布分支，因此考虑备份其他所有文件到新分支中。<br>最简单直接的方法就是在仓库创建一个新的分支，把本地所有的内容都上传到该分支上。但这样会备份一部分不必要的文件，例如 <code>public</code> 文件夹内容，它可以再次生成，就没有必要备份。<br>那具体要备份哪些文件呢？</p>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><h3 id="备份的文件列表"><a href="#备份的文件列表" class="headerlink" title="备份的文件列表"></a>备份的文件列表</h3><p>我们先看下，现在博客文件夹都有什么内容：</p>
+<pre><code>.
+├──_config.yml
+├── db.json
+├── node_modules
+├── package.json
+├── package-lock.json
+├── public
+├── scaffolds
+├── source
+└── themes 
+    ├── next 
+    └── landscape
+</code></pre>
+<p>这几个文件或文件夹的内容分别是：</p>
+<ol>
+<li><code>_config.yml</code> 文件：站点配置文件，很多功能、插件需要修改该配置文件应用生效。</li>
+<li><code>node_modules</code> 文件夹：包含依赖的模块。</li>
+<li><code>package.json</code> 文件：依赖的模块列表。说明见：<a href="https://www.npmjs.cn/files/package.json/" target="_blank" rel="noopener">package.json:Specifics of npm’s package.json handling</a></li>
+<li><code>package-lock.json</code> 文件：依赖的模块安装记录。说明见：<a href="https://www.npmjs.cn/files/package-locks/" target="_blank" rel="noopener">npm-package-locks:An explanation of npm lockfiles</a></li>
+<li><code>public</code> 文件夹：包含生成的网页静态文件。</li>
+<li><code>scaffolds</code> 文件夹：包含创建的文章、分类、标签界面的模板。博客的定制修改会对模板进行修改。</li>
+<li><code>source</code> 文件夹：包含生成网页所需要的源文件，包括包含我们心血的 Markdown 文稿，这也是最重要的内容。</li>
+<li><code>themes</code> 文件夹：其中 <code>landscape</code> 是默认的主题，其他文件夹是克隆下来时的主题。<br>我们可以参考 Hexo 初始化使用的仓库的备份列表，它的仓库是 <a href="https://github.com/hexojs/hexo-starter" target="_blank" rel="noopener">hexojs/hexo-starter</a>。我们看下它备份了哪些内容：</li>
+</ol>
+<pre><code>scaffolds
+source
+themes
+.gitignore
+.gitmodules
+_config.yml
+package.json
+</code></pre>
+<p>比对一下，它抛弃了：</p>
+<ol>
+<li><code>node_modules</code> &amp; <code>package-lock.json</code>：这两部分内容，只要保留 <code>package.json</code>，执行 <code>npm install</code> 就可以下载、生成。</li>
+<li><code>public</code>：执行 <code>hexo g</code> 即可根据源文件生成网页内容。<br>这些可重新生成的文件都可以不上传，因为它们只要使用特定的命令操作即可恢复。<br>它增加了 <code>.gitmodules</code>，那它的作用又是什么呢？其实 <code>hexojs/hexo-starter</code> 是通过 Git 的 Submodule 功能来下载主题模块，本身仓库并不备份主题文件。考虑下我们需要如何备份主题文件目录，有两个方案：</li>
+<li>一个方案是将其内容全部上传进行备份，这样可以保证原主题的更新不会影响你原先配置的效果。</li>
+<li>另一个方案是像 <code>hexo-starter</code> 仓库一样通过 Git 的 Submodule 功能来管理，这样可以进行主题的更新。<br>这里我选择和 Hexo 初始化仓库一样使用 Git 子模块的方式进行主题的备份处理。不过通过子模块管理的方式我们恢复时仅会同步到 Next 主题的原文件，没法直接同步我们对主题配置文件或其他文件的修改，因为我们没有权限提交修改到 Next 仓库中。因此我创建了了个 <code>themes_custom</code> 文件夹来存放对应主题的修改的备份，这样子我们同步之后，只需要对比一下内容手动把这些配置应用过去就可以快速完成对主题的配置。<br>最终备份文件列表如下：</li>
+</ol>
+<pre><code>scaffolds
+source
+themes
+themes_custom/next
+.gitignore
+.gitmodules
+_config.yml
+package.json
+</code></pre>
+<h3 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h3><p>有了方案之后，我们备份的具体操作如下：</p>
+<ol>
+<li>先修改 <code>.gitignore</code> 文件，查看之后由于原文件已经忽略了 <code>public</code> 和 <code>node_modules</code> 文件夹，因此仅需要添加 <code>package-lock.json</code> 到忽略清单中。</li>
+<li>我们可以删除不使用的主题 <code>landscape</code> 或者把主题路径添加到忽略列表中。</li>
+<li>创建 <code>themes_custom/next</code> 文件夹，将对主题进行的配件修改的文件拷贝一份到这里</li>
+<li>执行以下命令，在本地创建备份仓库：</li>
+</ol>
+<pre><code class="bash">$ cd blog
+$ git init
+#已初始化空的 Git 仓库于 blog/.git/
+$ git submodule add https://github.com/theme-next/hexo-theme-next.git themes/next
+#添加位于 &#39;themes/next&#39; 的现存仓库到索引
+$ git add .$ git commit -m &quot;init blog backup&quot;
+</code></pre>
+<ol>
+<li>将备份内容 push 到远程仓库的备份分支 <code>hexo</code> 上：</li>
+</ol>
+<pre><code class="bash">$ git branch -m master hexo
+$ git remote add origin https://github.com/Mupceet/mupceet.github.io.git
+$ git push -u origin hexo:hexo
+</code></pre>
+<p> 这里，我对分支进行了重命名以减少记忆负担<br>经过以上步骤，我们就备份了所有必要的文件。后续更新博客也要及时地将这些文件进行提交并上传完成备份。</p>
+<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><p>有了备份之后，在另一台电脑上创建博客，或者是恢复备份时，就可以直接使用我们备份的内容进行操作。</p>
+<ol>
+<li>环境准备<br>具体见 <a href="https://mupceet.com/2019/08/build-blog-based-on-hexo/" target="_blank" rel="noopener">Hexo 博客搭建与主题配置（零基础版）</a>一文。</li>
+<li>克隆备份的内容</li>
+</ol>
+<pre><code class="bash">$ git clone --recursive -b hexo https://github.com/Mupceet/mupceet.github.io.git blog
+</code></pre>
+<ol>
+<li>下载 npm 依赖模块</li>
+</ol>
+<pre><code class="bash">$ cd blog$ npm install
+</code></pre>
+<ol>
+<li>恢复主题配置<br>将 <code>themes_custom</code> 文件夹中对主题的配置的修改恢复到对应的主题文件夹中，这里建议使用对比的方式对其进行修改，而不是直接覆盖，这样就完成了主题的配置。</li>
+<li>克隆原博客内容</li>
+</ol>
+<pre><code class="bash">$ cd blog$ git clone https://github.com/Mupceet/mupceet.github.io.git .deploy\_git
+</code></pre>
+<ol>
+<li>正常更新博客</li>
+</ol>
+<pre><code class="bash">$ hexo g
+$ hexo s
+$ hexo d
+</code></pre>
+<p>可以看到，使用备份文件恢复博客的环境是非常简单的，强烈建议大家搭建好博客之后增加一个备份操作。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-06T03:10:35.000Z" itemprop="dateUpdated">2022-06-06 11:10:35</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" target="_blank" rel="external">http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%87%E4%BB%BD/" rel="tag">备份</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/&title=《Hexo 博客备份与恢复》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/&title=《Hexo 博客备份与恢复》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hexo 博客备份与恢复》 — Will的博客&url=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/11/15/MacOS%E6%8F%90%E7%A4%BA%E2%80%9C%E6%89%93%E4%B8%8D%E5%BC%80xxx,%E5%9B%A0%E4%B8%BAApple%E6%97%A0%E6%B3%95%E6%A3%80%E6%9F%A5%E5%85%B6%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6...%E2%80%9D/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">MacOS提示“打不开xxx,因为Apple无法检查其是否包含恶意软件...”</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/11/07/Python%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%BA%93PIL%E4%B8%AD%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%EF%BC%88%E4%B8%80%EF%BC%89/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python图像处理库PIL中图像格式转换（一）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/&title=《Hexo 博客备份与恢复》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/&title=《Hexo 博客备份与恢复》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hexo 博客备份与恢复》 — Will的博客&url=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

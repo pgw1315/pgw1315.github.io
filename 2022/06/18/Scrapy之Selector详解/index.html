@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Scrapy之Selector详解 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Scrapy">
+    <meta name="description" content="一、简介前面介绍了scrapy命令和Scrapy处理流程与重要组件  这里介绍一下Scrapy的Selector，Scrapy的Selector和Beautifulsoup非常像，关于Beautifulsoup可以参考BeautifuSoup实用方法属性总结 和BeautifulSoup详解 先来看一下Selector的知识点：    二、xpath我们先介绍一下xpath，因为xpath语法比较">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrapy之Selector详解">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="一、简介前面介绍了scrapy命令和Scrapy处理流程与重要组件  这里介绍一下Scrapy的Selector，Scrapy的Selector和Beautifulsoup非常像，关于Beautifulsoup可以参考BeautifuSoup实用方法属性总结 和BeautifulSoup详解 先来看一下Selector的知识点：    二、xpath我们先介绍一下xpath，因为xpath语法比较">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pgw1315.github.io/images/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/20191128183547553.png">
+<meta property="article:published_time" content="2022-06-18T04:14:43.000Z">
+<meta property="article:modified_time" content="2022-06-18T04:21:25.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Scrapy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pgw1315.github.io/images/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/20191128183547553.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Scrapy之Selector详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Scrapy之Selector详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-18T04:14:43.000Z" itemprop="datePublished" class="page-time">
+  2022-06-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、xpath"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、xpath</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、获取值"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、获取值</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、css选择"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、css选择</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、xpath扩展"><span class="post-toc-number">5.</span> <span class="post-toc-text">五、xpath扩展</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Scrapy之Selector详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Scrapy之Selector详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-18 12:14:43" datetime="2022-06-18T04:14:43.000Z"  itemprop="datePublished">2022-06-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>前面介绍了<a href="https://blog.csdn.net/trayvontang/article/details/103286889" target="_blank" rel="noopener">scrapy命令</a>和<a href="https://blog.csdn.net/trayvontang/article/details/103286971" target="_blank" rel="noopener">Scrapy处理流程与重要组件 </a></p>
+<p>这里介绍一下Scrapy的Selector，Scrapy的Selector和Beautifulsoup非常像，关于Beautifulsoup可以参考<a href="https://blog.csdn.net/trayvontang/article/details/103263086" target="_blank" rel="noopener">BeautifuSoup实用方法属性总结 </a>和<a href="https://blog.csdn.net/trayvontang/article/details/102811735" target="_blank" rel="noopener">BeautifulSoup详解</a></p>
+<p>先来看一下Selector的知识点：</p>
+<ul>
+<li><img src="/images/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/20191128183547553.png" alt="Selector知识点"></li>
+</ul>
+<h2 id="二、xpath"><a href="#二、xpath" class="headerlink" title="二、xpath"></a>二、xpath</h2><p>我们先介绍一下xpath，因为xpath语法比较简洁，并且如果能够灵活应用的话，可以简化我们提取HTML内容的复杂度。</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/</td>
+<td>从根节点选取，使用绝对路径，路径必须完全匹配</td>
+</tr>
+<tr>
+<td>//</td>
+<td>从整个文档中选取，使用相对路径</td>
+</tr>
+<tr>
+<td>.</td>
+<td>从当前节点开始选取</td>
+</tr>
+<tr>
+<td>…</td>
+<td>从当前节点父节点开始选取</td>
+</tr>
+<tr>
+<td>@</td>
+<td>选取属性</td>
+</tr>
+</tbody></table>
+<p>光看说明有些抽象，我们通过一个例子来简单说明一下：</p>
+<pre><code class="python"># -*- coding:utf-8 -*-
+from scrapy import Selector
+
+content = &#39;&#39;&#39;
+&lt;div&gt;
+    &lt;p&gt;out inner div p&lt;/p&gt;
+    &lt;div id=&quot;inner&quot;&gt;&lt;p&gt;in inner div p&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;out div p&lt;/p&gt;
+&#39;&#39;&#39;
+
+selector = Selector(text=content)
+
+# 在整个文档中选取id为inner的div节点
+inner_div_sel = selector.xpath(&quot;//div[@id=&#39;inner&#39;]&quot;)
+# 获取整个文档中的p节点的文本
+print(inner_div_sel.xpath(&#39;//p/text()&#39;).getall())
+# 从inner div节点的父节点开始获取所有p节点的文本
+print(inner_div_sel.xpath(&#39;..//p/text()&#39;).getall())
+# 从inner div节点开始获取所有p节点的文本
+print(inner_div_sel.xpath(&#39;.//p/text()&#39;).getall())
+</code></pre>
+<p>Scrapy的Selector和BeautifulSoup一样，可以通过字符串来构造相应的对象，然后就可以使用xpath相关的语法来解析HTML。</p>
+<pre><code class="python">inner_div_sel = selector.xpath(&quot;//div[@id=&#39;inner&#39;]&quot;)
+</code></pre>
+<p>首先@在xpath中表示选取属性，@id就表示选取id属性，//div[@id=‘inner’]就表示，选取id属性值为inner的div标签。</p>
+<pre><code class="python">inner_div_sel.xpath(&#39;//p/text()&#39;).getall()
+</code></pre>
+<p>上面的语句的输出是：</p>
+<pre><code class="python">[&#39;out inner div p&#39;, &#39;in inner div p&#39;, &#39;out div p&#39;]
+</code></pre>
+<p>很奇怪，我们已经在inner的div节点选取p，为什么获取到了所有的p？</p>
+<p><strong>因为在xpath中，//表示从整个文档中选取，只要相对路径匹配就可以</strong></p>
+<p>所有选取了文档中的所有p节点。</p>
+<p>.和…就非常容易理解了，就是当前路径，和当前路径的上一级路径，路径必须完全匹配。</p>
+<h2 id="三、获取值"><a href="#三、获取值" class="headerlink" title="三、获取值"></a>三、获取值</h2><pre><code class="python"># -*- coding:utf-8 -*-
+
+from scrapy import Selector
+
+content = &#39;&#39;&#39;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt;selector css&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+    &lt;ul&gt;
+        &lt;li&gt;ul 1 li 1&lt;/li&gt;
+        &lt;li&gt;ul 1 li 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ul&gt;
+        &lt;li&gt;ul 2 li 1&lt;/li&gt;
+        &lt;li&gt;ul 2 li 2&lt;/li&gt;
+    &lt;/ul&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+&#39;&#39;&#39;
+
+selector = Selector(text=content)
+
+# get获取第一个
+print(selector.css(&#39;li::text&#39;).get())
+print(selector.css(&#39;li::text&#39;).extract_first())
+
+# getall获取列表
+print(selector.css(&#39;li::text&#39;).getall())
+print(selector.css(&#39;li::text&#39;).c())
+
+# [&#39;&lt;li&gt;ul 1 li 1&lt;/li&gt;&#39;, &#39;&lt;li&gt;ul 2 li 1&lt;/li&gt;&#39;]
+print(selector.xpath(&#39;//li[1]&#39;).getall())
+# [&#39;&lt;li&gt;ul 1 li 1&lt;/li&gt;&#39;]
+print(selector.xpath(&#39;(//li)[1]&#39;).getall())
+
+# 没找到返回None
+print(selector.xpath(&#39;//div[@id=&quot;ne&quot;]/text()&#39;).get())
+# 给定默认值
+print(selector.xpath(&#39;//div[@id=&quot;ne&quot;]/text()&#39;).get(default=&#39;default-value&#39;))
+</code></pre>
+<p>获取值使用get,getall,extract_first,extract方法，其中get与extract_first是获取第一个元素，getall和extract方法是获取所有元素，返回的是一个列表。</p>
+<h2 id="四、css选择"><a href="#四、css选择" class="headerlink" title="四、css选择"></a>四、css选择</h2><pre><code class="python"># -*- coding:utf-8 -*-
+
+from scrapy import Selector
+
+content = &#39;&#39;&#39;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt;attribute&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+  &lt;div id=&#39;images&#39;&gt;
+   &lt;a href=&#39;image1.html&#39;&gt;a text 1&lt;img src=&#39;img1.png&#39; /&gt;&lt;/a&gt;
+   &lt;a href=&#39;image2.html&#39;&gt;a text 2&lt;img src=&#39;img2.png&#39; /&gt;&lt;/a&gt;
+   &lt;a href=&#39;image3.html&#39;&gt;a text 3&lt;img src=&#39;img3.png&#39;&gt;img3 text&lt;/img&gt;&lt;/a&gt;
+   &lt;a href=&#39;image4.html&#39;&gt;a text 4&lt;img /&gt;&lt;/a&gt;
+   &lt;a href=&#39;http://mycollege.vip&#39;&gt;a text 5&lt;img src=&#39;img5.jpg&#39; /&gt;&lt;/a&gt;
+  &lt;/div&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+&#39;&#39;&#39;
+
+selector = Selector(text=content)
+
+# 获取第一个img标签的src属性
+print(selector.css(&#39;img&#39;).attrib[&#39;src&#39;])
+
+# 获取所有a标签的href属性
+print(selector.css(&#39;a::attr(href)&#39;).getall())
+# 选择有href属性并且href属性中包含image的a标签
+print(selector.css(&#39;a[href*=image]::attr(href)&#39;).getall())
+# 选择href属性包含image的a标签下的属性包含src的标签
+print(selector.css(&#39;a[href*=image] img::attr(src)&#39;).getall())
+
+# 获取img的文本
+print(selector.css(&#39;img::text&#39;).getall())
+print(selector.css(&#39;img::text&#39;).get(default=&#39;default-value&#39;))
+
+# 获取id为imgages节点下的所有文本
+print(selector.css(&#39;#images *::text&#39;).getall())
+print(selector.css(&#39;title::text&#39;).get())
+
+# xpath获取属性
+print(selector.xpath(&#39;//a/@href&#39;).getall())
+print(selector.xpath(&#39;//img/@src&#39;).getall())
+</code></pre>
+<p>Scrapy的css就是实现了css选择器，并且做了一定的扩展，可以更加方便的获取我们最常用的文本和属性。</p>
+<h2 id="五、xpath扩展"><a href="#五、xpath扩展" class="headerlink" title="五、xpath扩展"></a>五、xpath扩展</h2><pre><code class="python"># -*- coding:utf-8 -*-
+
+&quot;&quot;&quot;
+test()
+starts-with()
+contains()
+&quot;&quot;&quot;
+
+from scrapy import Selector
+
+content = &#39;&#39;&#39;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt;selector css&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+    &lt;ul&gt;
+        &lt;li class=&quot;nav1&quot;&gt;&lt;a href=&quot;http://www.mycollege.vip&quot;&gt;&lt;/a&gt;nav1 text&lt;/li&gt;
+        &lt;li class=&quot;nav2&quot;&gt;&lt;a href=&quot;http://www.mycollege.vip&quot;&gt;&lt;/a&gt;nav2 text&lt;/li&gt;
+        &lt;li class=&quot;nav33&quot;&gt;&lt;a href=&quot;http://www.mycollege.vip&quot;&gt;&lt;/a&gt;nav33 text&lt;/li&gt;
+        &lt;li class=&quot;clz1&quot;&gt;&lt;a href=&quot;http://www.mycollege.vip/xx.png&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;clz1 clz2&quot;&gt;&lt;a href=&quot;https://www.mycollege.vip&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+&#39;&#39;&#39;
+
+selector = Selector(text=content, type=&quot;html&quot;)
+
+# 选择class值匹配正则表达式nav\d$的li
+print(selector.xpath(r&#39;//li[re:test(@class, &quot;nav\d$&quot;)]//text()&#39;).getall())
+
+# 选择类包含clz1的li
+print(selector.xpath(&#39;//li[has-class(&quot;clz1&quot;)]&#39;).getall())
+# 选择类既包含clz1又包含clz2的li
+print(selector.xpath(&#39;//li[has-class(&quot;clz1&quot;, &quot;clz2&quot;)]&#39;).getall())
+# 选择属性href包含png的a标签
+print(selector.xpath(&#39;//a[contains(@href, &quot;png&quot;)]/@href&#39;).getall())
+# 选取href属性以https开头的a标签
+print(selector.xpath(&#39;//a[starts-with(@href, &quot;https&quot;)]/@href&#39;).getall())
+</code></pre>
+<p>对于xpath的扩展主要有判断是否包含指定类的has-class方法，属性是否包含指定字符串的contains方法，属性是否以指定字符串开头的starts-with方法。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/trayvontang/article/details/103298913" target="_blank" rel="noopener">Scrapy之Selector详解</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-18T04:21:25.000Z" itemprop="dateUpdated">2022-06-18 12:21:25</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scrapy/" rel="tag">Scrapy</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/&title=《Scrapy之Selector详解》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/&title=《Scrapy之Selector详解》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Scrapy之Selector详解》 — Will的博客&url=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/18/YAML%E4%B8%AD%E5%A4%9A%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">YAML中多行字符串的配置方法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/18/Git-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git-版本发布</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/&title=《Scrapy之Selector详解》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/&title=《Scrapy之Selector详解》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Scrapy之Selector详解》 — Will的博客&url=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/18/Scrapy%E4%B9%8BSelector%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>HTTP协议的基础 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="网络,协议">
+    <meta name="description" content="小编是一个非典型面试官，对于HTTP协议的第一个问题，一般人会问常用的状态码有哪些。小编不这么问，小编的问题是HTTP的全称是什么，把英语给我说出来！ HTTP的全称是什么？超文本传输协议，HyperText Transfer Protocol，这几个单词可别发走音了。所谓的超文本就是带标记的文本，刚开始的时候是指HTML。现在HTTP协议传输的东西可不只是HTML了，什么表单啊JSON啊XML啊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP协议的基础">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="小编是一个非典型面试官，对于HTTP协议的第一个问题，一般人会问常用的状态码有哪些。小编不这么问，小编的问题是HTTP的全称是什么，把英语给我说出来！ HTTP的全称是什么？超文本传输协议，HyperText Transfer Protocol，这几个单词可别发走音了。所谓的超文本就是带标记的文本，刚开始的时候是指HTML。现在HTTP协议传输的东西可不只是HTML了，什么表单啊JSON啊XML啊">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pgw1315.github.io/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942891.695849.webp">
+<meta property="og:image" content="http://pgw1315.github.io/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942891.876003.webp">
+<meta property="og:image" content="http://pgw1315.github.io/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942892.10225.webp">
+<meta property="og:image" content="http://pgw1315.github.io/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942892.30924.webp">
+<meta property="article:published_time" content="2022-06-09T03:01:07.000Z">
+<meta property="article:modified_time" content="2022-06-11T10:50:03.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="协议">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pgw1315.github.io/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942891.695849.webp">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">HTTP协议的基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">HTTP协议的基础</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-09T03:01:07.000Z" itemprop="datePublished" class="page-time">
+  2022-06-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTTP的全称是什么？"><span class="post-toc-number">1.</span> <span class="post-toc-text">HTTP的全称是什么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTTP常用的状态码有哪些？"><span class="post-toc-number">2.</span> <span class="post-toc-text">HTTP常用的状态码有哪些？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTTP有哪些Method？"><span class="post-toc-number">3.</span> <span class="post-toc-text">HTTP有哪些Method？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTTP协议格式是怎样的？"><span class="post-toc-number">4.</span> <span class="post-toc-text">HTTP协议格式是怎样的？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是分块传送？"><span class="post-toc-number">5.</span> <span class="post-toc-text">什么是分块传送？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#持久连接的机制是怎样的？"><span class="post-toc-number">6.</span> <span class="post-toc-text">持久连接的机制是怎样的？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么叫Pipeline管线化？"><span class="post-toc-number">7.</span> <span class="post-toc-text">什么叫Pipeline管线化？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何理解HTTP协议的无状态性？"><span class="post-toc-number">8.</span> <span class="post-toc-text">如何理解HTTP协议的无状态性？</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number"></span> <span class="post-toc-text">参考文章</span></a>
+        </nav>
+    </aside>
+
+
+<article id="post-HTTP协议的基础"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">HTTP协议的基础</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-09 11:01:07" datetime="2022-06-09T03:01:07.000Z"  itemprop="datePublished">2022-06-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>小编是一个非典型面试官，对于HTTP协议的第一个问题，一般人会问常用的状态码有哪些。小编不这么问，小编的问题是HTTP的全称是什么，把英语给我说出来！</p>
+<h3 id="HTTP的全称是什么？"><a href="#HTTP的全称是什么？" class="headerlink" title="HTTP的全称是什么？"></a>HTTP的全称是什么？</h3><p>超文本传输协议，HyperText Transfer Protocol，这几个单词可别发走音了。所谓的超文本就是带标记的文本，刚开始的时候是指HTML。现在HTTP协议传输的东西可不只是HTML了，什么表单啊JSON啊XML啊文件啊都可以传输。</p>
+<h3 id="HTTP常用的状态码有哪些？"><a href="#HTTP常用的状态码有哪些？" class="headerlink" title="HTTP常用的状态码有哪些？"></a>HTTP常用的状态码有哪些？</h3><p>大部分同学都知道200、404、500、302状态码。如果连404都不知道，是要被小编鄙视的。500错误为什么这么常见呢，因为在开发的时候老是出bug，一个大异常抛出来，浏览器就500了。500表示InternalServerError，也就是内部服务器错误，如果不是bug，一般就是数据库挂了。</p>
+<p>再多问几个状态码很多人就不知道了，因为大多数公司的软件服务没有走标准的HTTP状态码，很多状态码从来就不会出现，同学们自然也不会知道。</p>
+<p>400 Bad Request 用于参数验证，少了一个参数或者参数类型错误之类的。</p>
+<p>502 Bad Gateway 后端服务挂掉或者压力过大的时候， Nginx接到的请求无法及时传递给后端的服务进行处理，这个时候就会出现502错误。这个也非常常见，知乎豆瓣网站经常开小差的时候发生的错误就是这个。</p>
+<p>304 Not Modified 极少人知道这个状态码，因为大部分后端开发者的前端Javascript开发经验都严重不足。当你用Chrome打开一个经常访问的网站，看看Network传输的静态资源就可以看到很多304状态码。它表示该资源被浏览器缓存了不需要重新请求服务器。</p>
+<p>401 Unauthorized 权限不足，这个很好理解，就是资源存在但是不让你访问。</p>
+<p>403 Forbidden 资源禁止访问，如果你的IP列为黑名单了，就会发生这种错误。</p>
+<p>其实还有很多状态码，小编也没去好好研究了，因为实在不会在工作中用到。感兴趣的请继续阅读维基百科</p>
+<h3 id="HTTP有哪些Method？"><a href="#HTTP有哪些Method？" class="headerlink" title="HTTP有哪些Method？"></a>HTTP有哪些Method？</h3><p>GET 不解释，如果读者不知道，建议别在IT圈混了。</p>
+<p>POST 一般用于创建或者修改资源，在RESTFUL规范里面POST只用来创建资源，并返回201 Created状态码表示创建成功。不过大多数网站都不遵循严格的RESTFUL规范，POST拿来做修改资源的事也是非常常见的。</p>
+<p>PUT 对应于POST表示创建资源，PUT用于修改资源，PUT的参数必须是对象的全部属性，修改是覆盖式全部修改。</p>
+<p>PATCH 对应于PUT的参数是对象的全部属性，PATCH的参数是部分属性，修改是局部字段修改。</p>
+<p>DELETE 用于删除资源。</p>
+<p>HEAD 不常用，跟GET差不多，区别就是不返回Body内容，只返回HTTP头信息。一般用于获取资源的元信息，比如长度，修改时间等</p>
+<p>OPTIONS 跨域相关，后面再讲。</p>
+<p>TRACE 小编没用过。</p>
+<p>CONNECT 小编没用过。</p>
+<p>后面三个感兴趣的去阅读一下RPC规范。小编大概看了一下，表示没怎么看懂，你行你上去挑战一下。</p>
+<h3 id="HTTP协议格式是怎样的？"><a href="#HTTP协议格式是怎样的？" class="headerlink" title="HTTP协议格式是怎样的？"></a>HTTP协议格式是怎样的？</h3><p>HTTP的请求和响应的消息协议是一样的，分为三个部分，起始行、消息头和消息体。这三个部分以CRLF作为分隔符。最后一个消息头有两个CRLF，用来表示消息头部的结束。</p>
+<p><img src="/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942891.695849.webp"></p>
+<p>HTTP请求的起始行称为请求行，形如GET /index.html HTTP/1.1</p>
+<p>HTTP响应的起始行称为状态行，形如200 ok</p>
+<p>消息头部有很多键值对组成，多个键值对之间使用CRLF作为分隔符，也可以完全没有键值对。形如Content-Encoding: gzip</p>
+<p>消息体是一个字符串，字符串的长度是由消息头部的Content-Length键指定的。如果没有Content-Length字段说明没有消息体，譬如GET请求就是没有消息体的，POST请求的消息体一般用来放置表单数据。GET请求的响应返回的页面内容也是放在消息体里面的。我们平时调用API返回的JSON内容都是放在消息体里面的。</p>
+<h3 id="什么是分块传送？"><a href="#什么是分块传送？" class="headerlink" title="什么是分块传送？"></a>什么是分块传送？</h3><p>当浏览器向服务器请求一个资源时，这个资源是一个动态资源，服务器无法提前预知资源的大小，这个时候就可以使用分块传输。</p>
+<p>服务器先生成一个thunk，发送这个chunk，再生成一个chunk，再发送一个chunk，直到全部资源传送完成。</p>
+<p>分块传送需要在请求头增加一个特殊的键值对transfer-encoding: thunked，那么消息体的内容便是分块传送的。</p>
+<p><img src="/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942891.876003.webp"><br>chunked传输格式如图所示，由一段一段的分块组合而成，每个块由一个长度行和一个分块体组成，最后一个分块长度为0表示结束。</p>
+<h3 id="持久连接的机制是怎样的？"><a href="#持久连接的机制是怎样的？" class="headerlink" title="持久连接的机制是怎样的？"></a>持久连接的机制是怎样的？</h3><p>HTTP早期版本中每个请求都会发起一个连接，一个网页除了页面的HTML之外还会有很多静态资源以及诸多的API调用，如果每个请求都一个连接，势必网页的一次加载就会和服务器创建多次连接，这是非常浪费服务器资源的，同时也让客户端的访问速度慢了不少。HTTP1.0之后引入了Keep-Alive持久连接，在HTTP1.1版本中成为默认选项。它使得HTTP的一个连接可以连续服务多个请求，有效节省了资源，增加了客户端页面的加载速度。</p>
+<p>持久连接也不宜一直保持，毕竟每个连接都会占用服务器资源，如果打开网页的人太多，那服务器资源也会紧张，所以一般服务器都会配置一个KeepAlive Timeout参数和KeepAlive Requests参数限制单个连接持续时长和最多服务的请求次数。</p>
+<p>如果服务器设置的timeout时长为0，就退化到非持久连接。非持久连接会在响应头部增加一个头信息Connection: Close通知客户端在接受完当前响应后连接需要立即关闭。</p>
+<p>同样浏览器也不会因为服务器将KeepAlive Timeout配置了无限长就不管不问一直持续保持连接。每个浏览器都有它自己的内置限制，具体限制浏览器厂商各有不同。</p>
+<h3 id="什么叫Pipeline管线化？"><a href="#什么叫Pipeline管线化？" class="headerlink" title="什么叫Pipeline管线化？"></a>什么叫Pipeline管线化？</h3><p>HTTP1.0不支持管线化，同一个连接处理请求的顺序是逐个应答模式，处理一个请求就需要耗费一个TTL，也就是客户端到服务器的往返时间，处理N个请求就是N个TTL时长。当页面的请求非常多时，页面加载速度就会非常缓慢。</p>
+<p><img src="/images/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/1654942892.10225.webp"></p>
+<p>从HTTP1.1开始要求服务器支持管线化，可以同时将多个请求发送到服务器，然后逐个读取响应。这个管线化和Redis的管线化原理是一样的，响应的顺序必须和请求的顺序保持一致。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/HTTP协议的基础/1654942892.30924.webp" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="如何理解HTTP协议的无状态性？"><a href="#如何理解HTTP协议的无状态性？" class="headerlink" title="如何理解HTTP协议的无状态性？"></a>如何理解HTTP协议的无状态性？</h3><p>所谓HTTP协议的无状态性是指服务器的协议层无需为不同的请求之间建立任何相关关系，它特指的是协议层的无状态性。但是这并不代表建立在HTTP协议之上的应用程序就无法维持状态。应用层可以通过会话Session来跟踪用户请求之间的相关性，服务器会为每个会话对象绑定一个唯一的会话ID，浏览器可以将会话ID记录在本地缓存LocalStorage或者Cookie，在后续的请求都带上这个会话ID，服务器就可以为每个请求找到相应的会话状态。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://juejin.cn/post/6844903581431103502" target="_blank" rel="noopener">天下无难试之HTTP协议面试刁难大全（上）</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-11T10:50:03.000Z" itemprop="dateUpdated">2022-06-11 18:50:03</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8F%E8%AE%AE/" rel="tag">协议</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/&title=《HTTP协议的基础》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/&title=《HTTP协议的基础》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTTP协议的基础》 — Will的博客&url=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/09/Selenium%E8%B6%85%E7%BA%A7%E8%AF%A6%E7%BB%86%E7%9A%84%E6%95%99%E7%A8%8B/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Selenium超级详细的教程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">鲜为人知的HTTP协议头字段详解大全「原创」</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/&title=《HTTP协议的基础》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/&title=《HTTP协议的基础》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTTP协议的基础》 — Will的博客&url=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

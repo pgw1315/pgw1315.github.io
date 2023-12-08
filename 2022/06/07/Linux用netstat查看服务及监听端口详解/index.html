@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Linux用netstat查看服务及监听端口详解 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,网络">
+    <meta name="description" content="在Linux使用过程中，需要了解当前系统开放了哪些端口，并且要查看开放这些端口的具体进程和用户，可以通过netstat命令进行简单查询 netstat命令各个参数说明如下： -a   或–all                             显示所有连线中的Socket。  -A                                       &lt;网络类型&gt;或–&amp;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux用netstat查看服务及监听端口详解">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="在Linux使用过程中，需要了解当前系统开放了哪些端口，并且要查看开放这些端口的具体进程和用户，可以通过netstat命令进行简单查询 netstat命令各个参数说明如下： -a   或–all                             显示所有连线中的Socket。  -A                                       &lt;网络类型&gt;或–&amp;l">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pgw1315.github.io/images/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/1654944231.708832.jpg">
+<meta property="og:image" content="http://pgw1315.github.io/images/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/1654944231.880319.jpg">
+<meta property="article:published_time" content="2022-06-07T05:12:58.000Z">
+<meta property="article:modified_time" content="2022-06-11T10:46:22.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pgw1315.github.io/images/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/1654944231.708832.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux用netstat查看服务及监听端口详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux用netstat查看服务及监听端口详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-07T05:12:58.000Z" itemprop="datePublished" class="page-time">
+  2022-06-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#netstat命令各个参数说明如下："><span class="post-toc-number">1.</span> <span class="post-toc-text">netstat命令各个参数说明如下：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看当前所有tcp端口使用情况："><span class="post-toc-number">2.</span> <span class="post-toc-text">查看当前所有tcp端口使用情况：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number"></span> <span class="post-toc-text">参考文章</span></a>
+        </nav>
+    </aside>
+
+
+<article id="post-Linux用netstat查看服务及监听端口详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux用netstat查看服务及监听端口详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-07 13:12:58" datetime="2022-06-07T05:12:58.000Z"  itemprop="datePublished">2022-06-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在Linux使用过程中，需要了解当前系统开放了哪些端口，并且要查看开放这些端口的具体进程和用户，可以通过netstat命令进行简单查询</p>
+<h3 id="netstat命令各个参数说明如下："><a href="#netstat命令各个参数说明如下：" class="headerlink" title="netstat命令各个参数说明如下："></a>netstat命令各个参数说明如下：</h3><ul>
+<li>-a   或–all                             显示所有连线中的Socket。</li>
+<li> -A                                       &lt;网络类型&gt;或–&lt;网络类型&gt; 列出该网络类型连线中的相关地址。</li>
+<li> -c   或–continuous               持续列出网络状态。</li>
+<li> -C 或–cache                       显示路由器配置的快取信息。</li>
+<li> -e  或–extend                     显示网络其他相关信息。</li>
+<li> -F  或 –fib                          显示FIB。</li>
+<li> -g  或–groups                     显示多重广播功能群组组员名单。</li>
+<li> -h  或–help                        在线帮助。</li>
+<li> -i   或–interfaces                 显示网络界面信息表单。</li>
+<li> -l  或–listening                    显示监控中的服务器的Socket。</li>
+<li> -M   或–masquerade           显示伪装的网络连线。</li>
+<li> -n  或–numeric                   直接使用IP地址，而不通过域名服务器。</li>
+<li> -N   或–netlink或–symbolic  显示网络硬件外围设备的符号连接名称。</li>
+<li> -o  或–timers                      显示计时器。</li>
+<li> -p   或–programs                显示正在使用Socket的程序识别码和程序名称。</li>
+<li> -r  或–route                        显示 Routing Table。</li>
+<li> -s  或–statistice 显示网络工作信息统计表。</li>
+<li> -t  或–tcp 显示TCP 传输协议的连线状况。</li>
+<li> -u或–udp 显示UDP传输协议的连线状况。</li>
+<li> -v或–verbose 显示指令执行过程。</li>
+<li> -V 或–version 显示版本信息。</li>
+<li> -w或–raw 显示RAW传输协议的连线状况。</li>
+<li> -x或–unix 此参数的效果和指定”-A unix”参数相同。</li>
+<li> –ip或–inet 此参数的效果和指定”-A inet”参数相同。</li>
+</ul>
+<p>即可显示当前服务器上所有端口及进程服务，于grep结合可查看某个具体端口及服务情况：</p>
+<pre><code class="bash">[root@localhost ~]# netstat -ntlp   //查看当前所有tcp端口·
+[root@localhost ~]# netstat -ntulp |grep 80   //查看所有80端口使用情况·
+[root@localhost ~]# netstat -an | grep 3306   //查看所有3306端口使用情况·
+
+[root@localhost ~]# netstat -nlp |grep LISTEN   //查看当前所有监听端口·
+</code></pre>
+<h3 id="查看当前所有tcp端口使用情况："><a href="#查看当前所有tcp端口使用情况：" class="headerlink" title="查看当前所有tcp端口使用情况："></a>查看当前所有tcp端口使用情况：</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Linux用netstat查看服务及监听端口详解/1654944231.708832.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>这里解释一下：</p>
+<ul>
+<li>1、0.0.0.0代表本机上可用的任意地址。 比如0.0.0.0:135 表示本机上所有地址的135端口，这样多ip计算机就不用重复显示了。</li>
+<li> 2、TCP 0.0.0.0:80表示在所有的可用接口上监听TCP80端口 </li>
+<li> 3、0.0.0.0为默认路由，即要到达不再路由表里面的网段的包都走0.0.0.0这条规则</li>
+</ul>
+<p>然后127.0.0.1就是表示你本机ip地址的意思了。</p>
+<p>然后[::]:21这又是什么鬼？</p>
+<p>这个表示ipv6的21号端口的意思。</p>
+<p>还有UDP的外部链接怎么都是*:*呢？</p>
+<p><em>：</em>是网址的通配符，就是192.168.15.12，这个类型的整体描述。</p>
+<p>解释一下状态（state）了</p>
+<ul>
+<li>LISTEN：(Listening for a connection.)侦听来自远方的TCP端口的连接请求</li>
+<li>SYN-SENT：(Active; sent SYN. Waiting for a matching connection request after having sent a connection request.)再发送连接请求后等待匹配的连接请求</li>
+<li>SYN-RECEIVED：(Sent and received SYN. Waiting for a confirming connection request acknowledgment after having both received and sent connection requests.)再收到和发送一个连接请求后等待对方对连接请求的确认</li>
+<li>ESTABLISHED：(Connection established.)代表一个打开的连接</li>
+<li>FIN-WAIT-1：(Closed; sent FIN.)等待远程TCP连接中断请求，或先前的连接中断请求的确认</li>
+<li>FIN-WAIT-2：(Closed; FIN is acknowledged; awaiting FIN.)从远程TCP等待连接中断请求</li>
+<li>CLOSE-WAIT：(Received FIN; waiting to receive CLOSE.)等待从本地用户发来的连接中断请求</li>
+<li>CLOSING：(Closed; exchanged FIN; waiting for FIN.)等待远程TCP对连接中断的确认</li>
+<li>LAST-ACK：(Received FIN and CLOSE; waiting for FIN ACK.)等待原来的发向远程TCP的连接中断请求的确认</li>
+<li>TIME-WAIT：(In 2 MSL (twice the maximum segment length) quiet wait after close. )等待足够的时间以确保远程TCP接收到连接中断请求的确认</li>
+<li>CLOSED：(Connection is closed.)没有任何连接状态</li>
+</ul>
+<p>例如要查看当前Mysql默认端口80是否启动可以做如下操作</p>
+<p><img src="/images/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/1654944231.880319.jpg"></p>
+<p>netstat -ano来显示协议统计信息和TCP/IP网络连接</p>
+<p>netstat -t/-u/-l/-r/-n【显示网络相关信息,-t:TCP协议,-u:UDP协议,-l:监听,-r:路由,-n:显示IP地址和端口号】</p>
+<p>netstat -tlun【查看本机监听的端口】</p>
+<p>netstat -an【查看本机所有的网络】</p>
+<p>netstat -rn【查看本机路由表】</p>
+<p>列出所有端口：netstat -a </p>
+<p>列出所有的TCP端口：netstat -at </p>
+<p>列出所有的UDP端口：netstat -au </p>
+<p>列出所有处于监听状态的socket：netstat -l </p>
+<p>列出所有监听TCP端口的socket：netstat -lt </p>
+<p>列出所有监听UDP端口的socket：netstat -lu </p>
+<p>找出程序运行的端口：netstat -ap | grep ssh </p>
+<p>找出运行在指定端口的进程：netstat -an | grep ‘:80’</p>
+<p>几个有用查找：</p>
+<pre><code class="bash">1.查找请求数前20个IP（常用于查找攻来源）：
+netstat -anlp|grep 80|grep tcp|awk &#39;{print $5}&#39;|awk -F: &#39;{print $1}&#39;|sort|uniq -c|sort -nr|head -n20
+ 
+netstat -ant |awk &#39;/:80/{split($5,ip,”:”);++A[ip[1]]}END{for(i in A) print A[i],i}&#39; |sort -rn|head -n20
+ 
+2.用tcpdump嗅探80端口的访问看看谁最高
+tcpdump -i eth0 -tnn dst port 80 -c 1000 | awk -F”.” &#39;{print $1″.”$2″.”$3″.”$4}&#39; | sort | uniq -c | sort -nr |head -20
+ 
+3.查找较多time_wait连接
+netstat -n|grep TIME_WAIT|awk &#39;{print $5}&#39;|sort|uniq -c|sort -rn|head -n20
+ 
+4.找查较多的SYN连接
+netstat -an | grep SYN | awk &#39;{print $5}&#39; | awk -F: &#39;{print $1}&#39; | sort | uniq -c | sort -nr | more
+ 
+5.根据端口列进程
+netstat -ntlp | grep 80 | awk &#39;{print $7}&#39; | cut -d/ -f1
+</code></pre>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://blog.csdn.net/wade3015/article/details/90779669" target="_blank" rel="noopener">Linux用netstat查看服务及监听端口详解</a></p>
+<p> </p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-11T10:46:22.000Z" itemprop="dateUpdated">2022-06-11 18:46:22</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/&title=《Linux用netstat查看服务及监听端口详解》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/&title=《Linux用netstat查看服务及监听端口详解》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux用netstat查看服务及监听端口详解》 — Will的博客&url=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">virtualenvwrapper：Python_环境管理工具</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">systemctl命令介绍和使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/&title=《Linux用netstat查看服务及监听端口详解》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/&title=《Linux用netstat查看服务及监听端口详解》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux用netstat查看服务及监听端口详解》 — Will的博客&url=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

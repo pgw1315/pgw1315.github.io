@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Will的博客">
+<meta property="og:url" content="http://pgw1315.github.io/page/3/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Will Holmes">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Will的博客</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Will的博客</h1>
+        <h5 class="subtitle">
+            
+                 
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-systemctl命令介绍和使用"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2022-06-06 09:25:00" datetime="2022-06-06T01:25:00.000Z"  itemprop="datePublished">2022-06-06</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/">systemctl命令介绍和使用</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Systemd程序Systemd其实是Linux系统用来管理系统的一个程序，用来代替原来的init进程(用来管理启动系统其它的服务进程)，现在很多Linux发行版都已经自带Systemd程序了。
+systemctl命令1. Unitsystemctl命令是Systemd中最重要的一个命令，用于对服务进行启动，停止等操作，在Systemd中有Unit的概念，每个进程都是一个Unit，总共有十二...
+    
+
+        <a href="/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" rel="tag">系统管理</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-PyCharm 自定义文件和代码模板"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-23 09:49:17" datetime="2021-11-23T01:49:17.000Z"  itemprop="datePublished">2021-11-23</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/23/PyCharm%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E5%92%8C%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/">PyCharm 自定义文件和代码模板</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        　　PyCharm提供了文件和代码模板功能，可以利用此模板来快捷新建代码或文件。比如在PyCharm中新建一个html文件，新的文件并不是空的，而是会自动填充了一些基础的必备的内容，就像这样:
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8...
+    
+
+        <a href="/2021/11/23/PyCharm%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E5%92%8C%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyCharm/" rel="tag">PyCharm</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Linux中查看各文件夹大小命令du -h --max-depth=1"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-21 01:27:07" datetime="2021-11-20T17:27:07.000Z"  itemprop="datePublished">2021-11-21</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/">Linux中查看各文件夹大小命令du -h --max-depth=1</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        du [-abcDhHklmsSx] [-L &lt;符号连接&gt;][-X &lt;文件&gt;][–block-size][–exclude=&lt;目录或文件&gt;] [–max-depth=&lt;目录层数&gt;][–help][–version][目录或文件]常用参数：-a或-all 为每个指定文件显示磁盘使用情况，或者为目录中每个文件显示各自磁盘使用情况。-b或-bytes...
+    
+
+        <a href="/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="tag">文件管理</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Intellij IDEA破解教程，IDEA破解补丁FineAgent，可破解至 2099 年"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-18 09:33:41" datetime="2021-11-18T01:33:41.000Z"  itemprop="datePublished">2021-11-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/18/Intellij%20IDEA%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B%EF%BC%8CIDEA%E7%A0%B4%E8%A7%A3%E8%A1%A5%E4%B8%81FineAgent%EF%BC%8C%E5%8F%AF%E7%A0%B4%E8%A7%A3%E8%87%B3%202099%20%E5%B9%B4/">Intellij IDEA破解补丁FineAgent，可破解至2099</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        有网友问我，IDEA 产品能否永久激活呢？目前，我在网上逛了一圈，又发现某大佬开发了一款新的破解补丁，叫FineAgent，如下图所示：
+
+                
+                    
+                    
+                
+                IDEA破解成功
+            
+
+说明
+本教程适用于**J...
+    
+
+        <a href="/2021/11/18/Intellij%20IDEA%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B%EF%BC%8CIDEA%E7%A0%B4%E8%A7%A3%E8%A1%A5%E4%B8%81FineAgent%EF%BC%8C%E5%8F%AF%E7%A0%B4%E8%A7%A3%E8%87%B3%202099%20%E5%B9%B4/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A0%B4%E8%A7%A3/" rel="tag">破解</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Mac下PyCharm快捷键大全"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-17 09:40:08" datetime="2021-11-17T01:40:08.000Z"  itemprop="datePublished">2021-11-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/17/Mac%E4%B8%8BPyCharm%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8/">Mac下PyCharm快捷键大全</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Mac键盘符号和修饰键说明
+⌘ Command
+⇧ Shift
+⌥ Option
+⌃ Control
+↩︎ Return/Enter
+⌫ Delete
+⌦ 向前删除键（Fn+Delete）
+↑ 上箭头
+↓ 下箭头
+← 左箭头
+→ 右箭头
+⇞ Page Up（Fn+↑）
+⇟ Page Down（Fn+↓）
+Home Fn + ←
+End Fn + →
+⇥ 右制表符（Tab键）
+⇤ 左制表符（S...
+    
+
+        <a href="/2021/11/17/Mac%E4%B8%8BPyCharm%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MacOS/" rel="tag">MacOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyCharm/" rel="tag">PyCharm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-MacOS提示“打不开xxx,因为Apple无法检查其是否包含恶意软件...”"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-15 13:16:49" datetime="2021-11-15T05:16:49.000Z"  itemprop="datePublished">2021-11-15</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MacOS/">MacOS</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/15/MacOS%E6%8F%90%E7%A4%BA%E2%80%9C%E6%89%93%E4%B8%8D%E5%BC%80xxx,%E5%9B%A0%E4%B8%BAApple%E6%97%A0%E6%B3%95%E6%A3%80%E6%9F%A5%E5%85%B6%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6...%E2%80%9D/">MacOS提示“打不开xxx,因为Apple无法检查其是否包含恶意软件...”</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+当你的mac提示“打不开xxx,因为Apple无法检查其是否包含恶意软件…”时，一般是由于你下载了非App Store且不受苹果信任的开发者的软件，怎么解决呢？
+
+[
+                
+                    
+                    
+                
+                ](https://i.loli.net...
+    
+
+        <a href="/2021/11/15/MacOS%E6%8F%90%E7%A4%BA%E2%80%9C%E6%89%93%E4%B8%8D%E5%BC%80xxx,%E5%9B%A0%E4%B8%BAApple%E6%97%A0%E6%B3%95%E6%A3%80%E6%9F%A5%E5%85%B6%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6...%E2%80%9D/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MacOS/" rel="tag">-MacOS</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Hexo 博客备份与恢复"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-15 12:55:46" datetime="2021-11-15T04:55:46.000Z"  itemprop="datePublished">2021-11-15</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Hexo/">Hexo</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/">Hexo 博客备份与恢复</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Hexo 博客备份与恢复本文旨在解决在不同电脑上都能维护博客或配置、发布的内容丢失可恢复的问题。观察部署到仓库的内容，我们可以看到上传的内容是 public 文件夹下的所有内容。事实上 hexo-deploy-git 插件是通过拷贝 public 文件夹内容到 .deploy_git 文件夹下，然后提交推送到远程分支上实现了网站文件的部署。那我们的备份思路也可以这样，上传目录下的其他所有文件...
+    
+
+        <a href="/2021/11/15/Hexo%20%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%81%A2%E5%A4%8D/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%87%E4%BB%BD/" rel="tag">备份</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Python图像处理库PIL中图像格式转换（一）"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-07 04:51:04" datetime="2021-11-06T20:51:04.000Z"  itemprop="datePublished">2021-11-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/07/Python%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%BA%93PIL%E4%B8%AD%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%EF%BC%88%E4%B8%80%EF%BC%89/">Python图像处理库PIL中图像格式转换（一）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        在数字图像处理中，针对不同的图像格式有其特定的处理算法。所以，在做图像处理之前，我们需要考虑清楚自己要基于哪种格式的图像进行算法设计及其实现。本文基于这个需求，使用python中的图像处理库PIL来实现不同图像格式的转换。
+对于彩色图像，不管其图像格式是PNG，还是BMP，或者JPG，在PIL中，使用Image模块的open()函数打开后，返回的图像对象的模式都是“RGB”。而对于灰度图像，...
+    
+
+        <a href="/2021/11/07/Python%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E5%BA%93PIL%E4%B8%AD%E5%9B%BE%E5%83%8F%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PIL/" rel="tag">PIL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PIL%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/" rel="tag">PIL从入门到精通</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="tag">图像处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/" rel="tag">格式转换</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%BC%8F%E8%BD%AC%E6%8D%A2/" rel="tag">模式转换</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-CentOS7-定时计划任务设置"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-07 04:38:29" datetime="2021-11-06T20:38:29.000Z"  itemprop="datePublished">2021-11-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/07/CentOS7-%E5%AE%9A%E6%97%B6%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E8%AE%BE%E7%BD%AE/">CentOS7 定时计划任务设置</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        概述就像再windows上有计划任务一样，centos7 自然也有计划任务，而且设置更为灵活，好用。再centos7 上可以利用crontab 来执行计划任务，依赖与 crond 的系统服务，这个服务是系统自带的，可以直接查看状态，启动，停止。  
+安装 crontabs服务并设置开机自启yum install crontabs  
+systemctl enable crond （设为开机启...
+    
+
+        <a href="/2021/11/07/CentOS7-%E5%AE%9A%E6%97%B6%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E8%AE%BE%E7%BD%AE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS7/" rel="tag">CentOS7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crontabs/" rel="tag">Crontabs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" rel="tag">定时任务</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-CentOS使用yum安装ffmpeg工具"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-07 04:28:07" datetime="2021-11-06T20:28:07.000Z"  itemprop="datePublished">2021-11-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/07/CentOS%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85ffmpeg%E5%B7%A5%E5%85%B7/">CentOS使用yum安装ffmpeg工具</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        第一种方法安装ffmpegyum -y install ffmpeg
+
+安装yasmyum install -y yasm
+
+查看是否安装成功ffmpeg -version
+
+
+第二种方法升级系统epel-release软件包yum install epel-release -y //安装第三方软件包
+yum update -y //更新系统软件包
+shutdown -r now  //也可...
+    
+
+        <a href="/2021/11/07/CentOS%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85ffmpeg%E5%B7%A5%E5%85%B7/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yum/" rel="tag">Yum</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6/" rel="tag">软件</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-IDEA导入-导出Live templates或者其他设置"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-07 04:21:42" datetime="2021-11-06T20:21:42.000Z"  itemprop="datePublished">2021-11-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/">IDEA导入/导出Live templates或者其他设置</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        IDEA导入/导出live templates或者其他设置导出
+在菜单栏选择 File | Manage IDE Settings | Export Settings
+
+在打开的导出弹窗中，选择需要导出的项目，如果我们只需要导出 Live templates ，那就只选择 Live templates 即可，然后选择一个需要导出的位置并设置一个存储的文件名（默认是settings.zip）
+...
+    
+
+        <a href="/2021/11/07/IDEA%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BALive%20templates%E6%88%96%E8%80%85%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-CentOS7-yum安装python3-6"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2021-11-03 10:42:26" datetime="2021-11-03T02:42:26.000Z"  itemprop="datePublished">2021-11-03</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2021/11/03/CentOS7-yum%E5%AE%89%E8%A3%85python3-6/">CentOS7 yum安装python3.6</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+CentOS7 使用yum 安装Python3 
+
+1.配epel源_阿里wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+2.安装python3.6yum install python36 -y
+
+3.安装pip3# 搜索pip3的安装包名称
+yum  whatprovides p...
+    
+
+        <a href="/2021/11/03/CentOS7-yum%E5%AE%89%E8%A3%85python3-6/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+    </ul>
+
+    
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    </div>
+</nav>
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/page/3/&title=Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/page/3/&title=Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/page/3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Will的博客&url=http://pgw1315.github.io/page/3/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/page/3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/page/3/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

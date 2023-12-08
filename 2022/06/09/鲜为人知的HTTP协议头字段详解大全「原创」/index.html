@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>鲜为人知的HTTP协议头字段详解大全「原创」 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="网络,协议">
+    <meta name="description" content="继上篇讲了HTTP协议的基础之后，本篇重点介绍一下HTTP常用的Header。 HTTP Header非常之多，很少有人能完全分清这些Header到底是干什么的。鉴于RFC文件规范艰深晦涩难懂，本文对协议规范中列出的HTTP Header进行了梳理，用通俗的语言进行表达，便于读者吃透HTTP协议。 作者在阅读RFC文档的时候发现了很多以前没注意到的知识，估计做web开发的小伙伴们也大多忽视了这些知">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鲜为人知的HTTP协议头字段详解大全「原创」">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="继上篇讲了HTTP协议的基础之后，本篇重点介绍一下HTTP常用的Header。 HTTP Header非常之多，很少有人能完全分清这些Header到底是干什么的。鉴于RFC文件规范艰深晦涩难懂，本文对协议规范中列出的HTTP Header进行了梳理，用通俗的语言进行表达，便于读者吃透HTTP协议。 作者在阅读RFC文档的时候发现了很多以前没注意到的知识，估计做web开发的小伙伴们也大多忽视了这些知">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586bc251399fb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586d170635751~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586e758846bfa~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586f22829c30a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586fbf1ce6825~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/16258703f0d9dbfe~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/16257fe9b60eb4c0~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/16257d74bf4f123a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/1625870c7cc549fb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="article:published_time" content="2022-06-09T02:44:31.000Z">
+<meta property="article:modified_time" content="2022-06-11T10:50:05.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="协议">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586bc251399fb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">鲜为人知的HTTP协议头字段详解大全「原创」</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">鲜为人知的HTTP协议头字段详解大全「原创」</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-09T02:44:31.000Z" itemprop="datePublished" class="page-time">
+  2022-06-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Accept"><span class="post-toc-number">1.</span> <span class="post-toc-text">Accept</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Accept-Charset"><span class="post-toc-number">2.</span> <span class="post-toc-text">Accept-Charset</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Content-Type"><span class="post-toc-number">3.</span> <span class="post-toc-text">Content-Type</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Accept-Language"><span class="post-toc-number">4.</span> <span class="post-toc-text">Accept-Language</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Content-Language"><span class="post-toc-number">5.</span> <span class="post-toc-text">Content-Language</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Content-Length"><span class="post-toc-number">6.</span> <span class="post-toc-text">Content-Length</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Content-Location"><span class="post-toc-number">7.</span> <span class="post-toc-text">Content-Location</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Content-MD5"><span class="post-toc-number">8.</span> <span class="post-toc-text">Content-MD5</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Date"><span class="post-toc-number">9.</span> <span class="post-toc-text">Date</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Age"><span class="post-toc-number">10.</span> <span class="post-toc-text">Age</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Expires"><span class="post-toc-number">11.</span> <span class="post-toc-text">Expires</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ETag"><span class="post-toc-number">12.</span> <span class="post-toc-text">ETag</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#If-Match"><span class="post-toc-number">13.</span> <span class="post-toc-text">If-Match</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#If-None-Match"><span class="post-toc-number">14.</span> <span class="post-toc-text">If-None-Match</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Allow"><span class="post-toc-number">15.</span> <span class="post-toc-text">Allow</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Connection"><span class="post-toc-number">16.</span> <span class="post-toc-text">Connection</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Expect"><span class="post-toc-number">17.</span> <span class="post-toc-text">Expect</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#From"><span class="post-toc-number">18.</span> <span class="post-toc-text">From</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Host"><span class="post-toc-number">19.</span> <span class="post-toc-text">Host</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Last-Modified"><span class="post-toc-number">20.</span> <span class="post-toc-text">Last-Modified</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#If-Modified-Since"><span class="post-toc-number">21.</span> <span class="post-toc-text">If-Modified-Since</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#If-Unmodified-Since"><span class="post-toc-number">22.</span> <span class="post-toc-text">If-Unmodified-Since</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Range"><span class="post-toc-number">23.</span> <span class="post-toc-text">Range</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Content-Range"><span class="post-toc-number">24.</span> <span class="post-toc-text">Content-Range</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#If-Range"><span class="post-toc-number">25.</span> <span class="post-toc-text">If-Range</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Location"><span class="post-toc-number">26.</span> <span class="post-toc-text">Location</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Max-Forwards"><span class="post-toc-number">27.</span> <span class="post-toc-text">Max-Forwards</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Pragma"><span class="post-toc-number">28.</span> <span class="post-toc-text">Pragma</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Referer"><span class="post-toc-number">29.</span> <span class="post-toc-text">Referer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Retry-After"><span class="post-toc-number">30.</span> <span class="post-toc-text">Retry-After</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Server"><span class="post-toc-number">31.</span> <span class="post-toc-text">Server</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#User-Agent"><span class="post-toc-number">32.</span> <span class="post-toc-text">User-Agent</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Transfer-Encoding"><span class="post-toc-number">33.</span> <span class="post-toc-text">Transfer-Encoding</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Upgrade"><span class="post-toc-number">34.</span> <span class="post-toc-text">Upgrade</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vary"><span class="post-toc-number">35.</span> <span class="post-toc-text">Vary</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Via"><span class="post-toc-number">36.</span> <span class="post-toc-text">Via</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Warning"><span class="post-toc-number">37.</span> <span class="post-toc-text">Warning</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#WWW-Authenticate"><span class="post-toc-number">38.</span> <span class="post-toc-text">WWW-Authenticate</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Authorization"><span class="post-toc-number">39.</span> <span class="post-toc-text">Authorization</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Proxy-Authenticate"><span class="post-toc-number">40.</span> <span class="post-toc-text">Proxy-Authenticate</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Proxy-Authorization"><span class="post-toc-number">41.</span> <span class="post-toc-text">Proxy-Authorization</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ETag-vs-Last-Modified-vs-Expires"><span class="post-toc-number">42.</span> <span class="post-toc-text">ETag vs Last-Modified vs Expires</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Cache-Control"><span class="post-toc-number">43.</span> <span class="post-toc-text">Cache-Control</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-鲜为人知的HTTP协议头字段详解大全「原创」"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">鲜为人知的HTTP协议头字段详解大全「原创」</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-09 10:44:31" datetime="2022-06-09T02:44:31.000Z"  itemprop="datePublished">2022-06-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>继上篇讲了<a href="/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/">HTTP协议的基础</a>之后，本篇重点介绍一下HTTP常用的Header。</p>
+<p>HTTP Header非常之多，很少有人能完全分清这些Header到底是干什么的。鉴于RFC文件规范艰深晦涩难懂，本文对协议规范中列出的HTTP Header进行了梳理，用通俗的语言进行表达，便于读者吃透HTTP协议。</p>
+<p>作者在阅读RFC文档的时候发现了很多以前没注意到的知识，估计做web开发的小伙伴们也大多忽视了这些知识，阅读文本会给你们带来很多意外的惊喜。</p>
+<p>免责声明：如果下面有那句话有不对的地方，还请喷少点口水。</p>
+<h3 id="Accept"><a href="#Accept" class="headerlink" title="Accept"></a>Accept</h3><p>表示客户端期望服务器返回的媒体格式。客户端期望的资源类型服务器可能没有，所以客户端会期望多种类型，并且设置优先级，服务器根据优先级寻找相应的资源返回给客户端。</p>
+<pre><code class="bash">### 注意：先逗号分割类型，再分号分割属性
+Accept: audio/*; q=0.2, audio/basic
+</code></pre>
+<p>表示audio/basic类型的资源优先，如果没有，就随便其它什么格式的audio资源都可以。q的取值范围是(0-1]，其具体值并没有意义，它仅用来排序优先级，如果没有q，默认q=1，也就是最高优先级。</p>
+<h3 id="Accept-Charset"><a href="#Accept-Charset" class="headerlink" title="Accept-Charset"></a>Accept-Charset</h3><p>表示客户端期望服务器返回的内容的编码格式。它同Accept头一样，也可以指定多个编码，以q值代表优先级。</p>
+<pre><code class="bash">### 注意：先逗号分割类型，再分号分割属性
+Accept-Charset: utf8, gbk; q=0.6
+</code></pre>
+<p>表示utf8编码优先，如果不行，就拿gbk编码返回.</p>
+<h3 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h3><p>Content-Type是服务器向客户端发送的头，代表内容的媒体类型和编码格式，是对Accept头和Accept-Charset头的统一应答。</p>
+<pre><code class="bash">Content-Type: text/html; charset=utf8
+</code></pre>
+<p>表示返回的Body是个html文本，编码为utf8</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586bc251399fb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Accept-Language"><a href="#Accept-Language" class="headerlink" title="Accept-Language"></a>Accept-Language</h3><p>表示客户端期望服务器返回的内容的语言。很多大型互联网公司是全球化的，它的技术文档一般有有多种语言，通过这个字段可以实现文档的本地化，对国内用户呈现简体中文文档，对英语系用户呈现英文文档。</p>
+<pre><code class="bash">Accept-Language:zh-CN,en-US;q=0.8,zh-TW;q=0.6
+</code></pre>
+<p>表示大陆简体中文优先，其次英语，再其次台湾繁体中文</p>
+<h3 id="Content-Language"><a href="#Content-Language" class="headerlink" title="Content-Language"></a>Content-Language</h3><p>这个头字段内容是对Accept-Language的应答。服务器通过此字段告知客户端返回的Body信息的语言是什么。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586d170635751~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Content-Length"><a href="#Content-Length" class="headerlink" title="Content-Length"></a>Content-Length</h3><p>表示传输的请求／响应的Body的长度。GET请求因为没有Body，所以不需要这个头。携带Body的并且可以提前知道Body长度的请求／响应必须带上这个字段，以便对方可以方便的分辨出报文的边界，也就是Body数据何时结束。如果Body太大，需要边计算边传输，不到最后计算结束是无法知道整个Body大小的，这个时候可以使用http分块传输，这个时候也是不需要Content-Length字段的。</p>
+<h3 id="Content-Location"><a href="#Content-Location" class="headerlink" title="Content-Location"></a>Content-Location</h3><p>当客户端请求的资源在服务器有多个地址时，服务器可以通过Content-Location字段告知客户端其它的可选地址。这个字段比较少见。</p>
+<h3 id="Content-MD5"><a href="#Content-MD5" class="headerlink" title="Content-MD5"></a>Content-MD5</h3><p>在Header中提供这个信息是用来做Body内容校验。它表示Body信息被md5算法处理后的base64字符串。这个字段也比较少见。因为校验机制在TCP层已经有实现了，再来一层校验并没有多大意义。另外资源的md5值往往用来放在后面的ETag头信息中作为资源的唯一标识来使用。</p>
+<h3 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h3><p>如果服务器没有缓存，那么Date就是响应的即时生成时间。如果服务器设有缓存，那么Date就是响应内容被缓存的时间。它必须符合规范里定义的特定格式，这种格式叫着HTTP-Date，不支持随意定义自己的时间格式。</p>
+<pre><code class="bash">Date: Tue, 15 Nov 1994 08:12:31 GMT
+</code></pre>
+<h3 id="Age"><a href="#Age" class="headerlink" title="Age"></a>Age</h3><p>表示资源缓存的年龄，也就是资源自缓存以来到现在已经过去了多少时间，单位是秒。</p>
+<pre><code class="bash">Age: 86400
+</code></pre>
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p>服务器使用Expect头来告知对方资源何时失效。如果它的值等于Date头的值，就表示资源已经实效。</p>
+<pre><code class="bash">Expires: Thu, 01 Dec 1994 16:00:00 GMT
+</code></pre>
+<h3 id="ETag"><a href="#ETag" class="headerlink" title="ETag"></a>ETag</h3><p>资源标签，每个资源可以提供多个标签信息。它一般用来和下面的If-Match和If-None-Match配合使用，用来判断缓存资源的有效性。比较常见的标签是资源的版本号，比如可以拿资源数据的md5校验码作为版本号。</p>
+<h3 id="If-Match"><a href="#If-Match" class="headerlink" title="If-Match"></a>If-Match</h3><p>If-Match的值一般是上面提到的ETag的值，它常用于HTTP的乐观锁。所谓HTTP乐观锁，是指客户端先GET这个资源得到ETag中的版本号，然后发起一个资源修改请求PUT|PATCH时通过If-Match头来指定资源的版本号，如果服务器资源满足If-Match中指定的版本号，请求就会被执行。如果不满足，说明资源被并发修改了，就需要返回状态码为412 Precondition failed 的错误。客户端可以选择放弃或者重试整个过程。</p>
+<h3 id="If-None-Match"><a href="#If-None-Match" class="headerlink" title="If-None-Match"></a>If-None-Match</h3><p>类似于If-Match，只是条件相反。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586e758846bfa~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Allow"><a href="#Allow" class="headerlink" title="Allow"></a>Allow</h3><p>表示资源支持访问的HTTP Method类型。它是服务器对客户端的建议，告知对方请使用Allow中提到的Method来访问资源。</p>
+<pre><code class="bash">Allow: GET, HEAD, PUT
+</code></pre>
+<h3 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a>Connection</h3><p>当客户端和服务器需要协商连接的属性时，可以使用Connection头部。比较常用的一个值是close，用来通知对方在当前请求结束后关闭连接。</p>
+<pre><code class="bash">Connection: close
+</code></pre>
+<h3 id="Expect"><a href="#Expect" class="headerlink" title="Expect"></a>Expect</h3><p>用于请求发送之前向服务器询问许可。譬如要向服务器发送一个很大的文件而不确定是否超出限制，就可以在请求头里携带一个Expect头部</p>
+<pre><code class="bash">Expect: 100-continue
+</code></pre>
+<p>如果服务器说不行，就会返回417 Expectation Failed错误告知客户端放弃。如果可以那就返回100 continue状态码告知客户端放马过来吧，于是客户端就会继续上传Body内容。如果服务器提前收到Body内容就会放弃返回100 continue响应。</p>
+<h3 id="From"><a href="#From" class="headerlink" title="From"></a>From</h3><p>该字段一般用来标记请求发起者的邮件地址，相当于给请求赋予一个责任人。如果服务器发现请求存在问题，就会通过此字段联系到发起人进行处理。因为邮件地址涉及到隐私信息，所以请求携带From头需要征得用户的同意。RFC协议建议所有的机器人代理发起的请求应该携带此头部，以免遇到问题时可以找到责任人。不过如果是恶意的机器人，估计这样的建议也只是耳边风而已。</p>
+<h3 id="Host"><a href="#Host" class="headerlink" title="Host"></a>Host</h3><p>RFC协议规定所有的HTTP请求必须携带Host头，即使Host没有值，也必须带上这个Host头附加一个空串，如果不满足，应用服务器应该抛出400 Bad Request。协议虽然这样规定，不过大部分网关或者服务器都比较仁慈，既然没有指定Host字段，那就给你默认加上一个。<br>网关代理可以根据不同的Host值转发到不同的upstream服务节点，它常用于虚拟主机服务业务。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586f22829c30a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Last-Modified"><a href="#Last-Modified" class="headerlink" title="Last-Modified"></a>Last-Modified</h3><p>标记资源的最近修改时间，它和Date比较类似，区别是Last-Modified代表修改时间，而Date是创建时间。</p>
+<h3 id="If-Modified-Since"><a href="#If-Modified-Since" class="headerlink" title="If-Modified-Since"></a>If-Modified-Since</h3><p>浏览器向服务器请求静态资源时，如果浏览器本地已经有了缓存，就会携带If-Modified-Since头，值为资源的Last-Modified时间，询问服务器该资源自从这个Last-Modified时间之后有没有被修改。如果没有修改过，就会向浏览器返回304 Not Modified通知浏览器可以放心使用缓存内的资源。如果资源修改过，那就像正常的GET请求一样，携带资源的内容返回200 OK。</p>
+<h3 id="If-Unmodified-Since"><a href="#If-Unmodified-Since" class="headerlink" title="If-Unmodified-Since"></a>If-Unmodified-Since</h3><p>类似于If-Modified-Since，意义相反。区别是当服务器资源条件不满足时，不是返回304 Not Modified，而是返回412 Precondition Failed。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/162586fbf1ce6825~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h3><p>支持断点续传的服务器必须处理Range头，它表示客户端请求资源的一部分时指定的请求字节范围。它是客户端向服务器发送的请求头。</p>
+<pre><code class="bash">Range: bytes=500-999
+</code></pre>
+<h3 id="Content-Range"><a href="#Content-Range" class="headerlink" title="Content-Range"></a>Content-Range</h3><p>针对上面的Range头，服务器响应客户端时也需提供相应的Content-Range头，表示传输的Body数据在整体资源块中的字节范围。比如下面的例子表示该资源总共有47022字节，当前响应的内容是21010-47021字节之间的内容。</p>
+<pre><code class="bash">Content-Range: bytes 21010-47021/47022
+</code></pre>
+<p>之所以是47021而不是47022是因为offset是以0开始的，47021就是最后一个字节。</p>
+<h3 id="If-Range"><a href="#If-Range" class="headerlink" title="If-Range"></a>If-Range</h3><p>在断点续传时，为确保连续2个请求之间服务器资源本身没有发生变化，需要If-Range头带上ETag的资源版本号。服务器资源根据这个版本号来判定资源是否改变了。如果没变，就返回206 Partial Content将部分资源返回。如果资源变了，那就相当于一个普通的GET请求，返回200 OK和整个资源内容。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/16258703f0d9dbfe~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Location"><a href="#Location" class="headerlink" title="Location"></a>Location</h3><p>服务器向客户端发送302跳转的时候，总会携带Location头信息，它的值为目标URL。</p>
+<pre><code class="bash">HTTP/1.1 302 Temporary Redirect
+Location: https://www-temp.example.org/
+</code></pre>
+<h3 id="Max-Forwards"><a href="#Max-Forwards" class="headerlink" title="Max-Forwards"></a>Max-Forwards</h3><p>用来限定网关或者代理的层数，也就是最大转发次数。HTTP每经过一个网关或者代理层，Max-Forwards值就要减1。如果nginx接收到前端请求的时候Max-Forwards已经等于0，那么它就不应该再将请求转发到upstream指定的服务节点上。</p>
+<h3 id="Pragma"><a href="#Pragma" class="headerlink" title="Pragma"></a>Pragma</h3><p>这个头是比较常见的，在前端开发模式下经常会加上这个头部。</p>
+<pre><code class="bash">Pragma: no-cache
+</code></pre>
+<p>当网关收到一个带有这样请求的头部时，即使内部存在该请求资源的缓存并且有效也不可以直接发送给客户端，而必须转发给后面的upstream进行处理。<br>不过如果真的所有的网关都遵循这个协议的话，攻击是很容易构造的，所以它一般仅用于开发模式，防止静态资源修改后前端得不到即时更新。其它值的pragma值没有遇到过。</p>
+<h3 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h3><p>Referer是非常常用的头，它表示请求的发起来源URI，也就是当前页面资源的父页面。如果你从A页面跳转到B页面，那么请求B页面的请求头里面就会有Referer信息，它的值就是A页面的访问地址。通过追踪Referer，可得出资源页面之间复杂的跳转链，它非常适合用于网页的数据分析和路径优化。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/16257fe9b60eb4c0~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Retry-After"><a href="#Retry-After" class="headerlink" title="Retry-After"></a>Retry-After</h3><p>服务器升级时，来自客户端的请求会直接给予503(Service Unavailable)错误，通过在返回头里面加入Retry-After字段告知客户端何时服务可以恢复正常访问。Retry-After的头可以是HTTP-Date，也可以是整数，表示多少秒后服务可以恢复正常访问。浏览器在拿到这个值之后可以考虑增加一个定时器在未来的某个时间进行重试。</p>
+<h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><p>用于返回服务器相关的软件信息，来告知客户端当前的HTTP服务是由某某软件提供的，可以看成是一种软件广告。<br>RFC协议里对这个头信息做了警告：暴露出服务器信息可能会导致黑客更易于攻击你的服务，建议谨慎使用。</p>
+<h3 id="User-Agent"><a href="#User-Agent" class="headerlink" title="User-Agent"></a>User-Agent</h3><p>携带当前的用户代理信息，一般包含浏览器、浏览器内核和操作系统的版本型号信息。它和Server头是对应的，一个是表达服务器信息，一个是表达客户端信息。服务器可以根据用户代理信息统计出网页服务的浏览器、操作系统的使用占比情况，服务器也可以根据UA的信息来定制不一样的内容。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/16257d74bf4f123a~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Transfer-Encoding"><a href="#Transfer-Encoding" class="headerlink" title="Transfer-Encoding"></a>Transfer-Encoding</h3><p>传送Body信息时需要对Body数据采取何种变换。当HTTP对Body进行分块传送时，需要增加下面的头部信息才可以进行分块传送。其它类型目前没有遇到过。</p>
+<pre><code class="bash">Transfer-Encoding: chunked
+</code></pre>
+<h3 id="Upgrade"><a href="#Upgrade" class="headerlink" title="Upgrade"></a>Upgrade</h3><p>服务器建议客户端升级传输协议。比如当客户端使用HTTP/1.0发送请求时，服务器就可以建议客户端升级到HTTP/1.1。<br>这个时候就可以使用Upgrade头。客户端收到这个Upgrade后就会将后续请求转成HTTP/1.1格式继续进行交流。可以支持多个参数，使用逗号分割即可。</p>
+<pre><code class="bash">Upgrade: HTTP/1.1
+</code></pre>
+<p>当客户端要和服务器进行Websocket进行通讯时，在握手阶段服务器也会向客户端发送Upgrade头部信息，提示客户端将协议切换到Websocket。</p>
+<pre><code class="bash">Upgrade: WebSocket
+</code></pre>
+<h3 id="Vary"><a href="#Vary" class="headerlink" title="Vary"></a>Vary</h3><p>该头部用于缓存控制。对于一些缓存服务器，我们在请求里加入Vary参数可以告知缓存服务器对不同的Vary参数的响应使用不同的缓存单元。比如Vary参数里放入编码参数，那么不同编码的网页就会有不同的缓存。Vary的值可以有多个，只要任意一个值不一样就会有不同的缓存。<br>比如下面的这个例子告知缓存服务器对不同语言和不同编码的网页响应使用不同的缓存单元。</p>
+<pre><code class="bash">Vary: Accept-Encoding,Accept-Language
+</code></pre>
+<h3 id="Via"><a href="#Via" class="headerlink" title="Via"></a>Via</h3><p>该字段用来标识一个请求经过的网关路由节点。如果这个请求经过了多个代理层，Via头部就会有多个网关信息。</p>
+<h3 id="Warning"><a href="#Warning" class="headerlink" title="Warning"></a>Warning</h3><p>用于在响应中添加一些附加的警告信息，警告信息包含一个错误码和错误说明。通用的一些错误码在RFC协议中有具体规定。比如111号错误码表示缓存服务器的缓存项目已经过期，并且尝试reload资源，但是reload失败了，所以只好返回了旧的已经过期的内容，这个时候就需要通过warning头反馈客户端。</p>
+<pre><code class="bash">Warning: 111 Revalidation failed
+</code></pre>
+<h3 id="WWW-Authenticate"><a href="#WWW-Authenticate" class="headerlink" title="WWW-Authenticate"></a>WWW-Authenticate</h3><p>WWW-Authenticate是401 Unauthorized错误码返回时必须携带的头，该头会携带一个问题Challenge给客户端，告知客户端需要携带这个问题的答案来请求服务器才可以继续访问目标资源。这种问题Challenge可以自定义，比较常见的是Basic认证。</p>
+<pre><code class="bash">WWW-Authenticate: Basic realm=xxx
+</code></pre>
+<p>Basic指代base64加密算法(不安全)，realm指代认证范围/场合/情景名称。</p>
+<h3 id="Authorization"><a href="#Authorization" class="headerlink" title="Authorization"></a>Authorization</h3><p>对于某些需要特殊权限才能访问的资源需要客户端在请求里提供用户名密码的认证信息。它是对WWW-Authenticate的应答。</p>
+<pre><code class="bash">### value = base64(user_name:password)
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+</code></pre>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/3/24/1625870c7cc549fb~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp"></p>
+<h3 id="Proxy-Authenticate"><a href="#Proxy-Authenticate" class="headerlink" title="Proxy-Authenticate"></a>Proxy-Authenticate</h3><p>同WWW-Authorization头部，用于代理服务器认证。</p>
+<h3 id="Proxy-Authorization"><a href="#Proxy-Authorization" class="headerlink" title="Proxy-Authorization"></a>Proxy-Authorization</h3><p>同Authorization头部，用于代理服务器认证。</p>
+<h3 id="ETag-vs-Last-Modified-vs-Expires"><a href="#ETag-vs-Last-Modified-vs-Expires" class="headerlink" title="ETag vs Last-Modified vs Expires"></a>ETag vs Last-Modified vs Expires</h3><p>ETag一般携带的是资源的版本号，协议没有具体规定版本号是什么。它可以是资源的md5校验码，也可以是uuid，甚至可以是自增的数字，也可以是资源的修改时间。它的匹配方式是相等/不相等。因为服务器需要维护版本号，取决的版本号是什么，这可能是一个存储和计算的负担。</p>
+<p>Last-Modified携带的资源的修改时间。它的匹配方式是大于/小于。如果是静态资源文件，一般就是操作系统记录的文件修改时间。</p>
+<p>Expires是服务器告知客户端资源的过期时间。客户端缓存的资源在这个时间之后自动过期，而不需要非得向服务器确认一下是不是304 Not Modified才认为没过期。</p>
+<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p>这可能是HTTP头里面最复杂的一个头了。这个头既可以用于请求，也可以用于响应。在请求和响应的取值不一样，分别代表了不同的意思。</p>
+<ul>
+<li><p>no-cache 如果no-cache没有指定值，那就表示不允许缓存。对于请求来说，服务器不得使用缓存内容直接返回。对于响应来说，客户端不得缓存响应的资源内容。如果no-cache指定了值，那就表示值对应的头信息不得使用缓存，其它的信息还是可以缓存的。告知对方我只要新鲜刚出浴的数据。</p>
+</li>
+<li><p>no-store 告知对方不要持久化请求/响应数据到其它地方，这种信息是敏感的，要保持它的易失性。告知对方记在心里(memory)就行，别写在纸上(disk)。</p>
+</li>
+<li><p>no-transform 告知对方不要转换数据。比如客户端上传了raw图像数据，服务器一般都会选择性压缩图像数据进行存储。no-transform告知对方保留原始数据信息，不要进行任何转换。告知对方不要乱动我发过来的东西。</p>
+</li>
+<li><p>only-if-cached 用于请求头，告知服务器只要那些已经缓存的内容，不要去reload。如果没有缓存内容就返回504 Gateway Timeout错误。表示客户端不想太麻烦服务器，有就给，没就算了。</p>
+</li>
+<li><p>max-age 用于请求头。限制缓存内容的年龄，如果超过max-age年龄的，需要服务器去reload内容资源。这叫客户端的年龄歧视。</p>
+</li>
+<li><p>max-stale 用于请求头。客户端允许服务器返回缓存已过期的资源内容，但是限定了最大过期时间。表示客户端虽然很宽容，那是也是有限度的。</p>
+</li>
+<li><p>min-fresh 用于请求头。客户端限制服务器不要那些即将过期的资源内容。就好比我们去超市买牛奶，如果牛奶快过期了虽然还在保质期内咱们也就不会考虑。</p>
+</li>
+<li><p>public 用于响应头。表示允许客户端缓存响应信息，并可以给别人使用。比如代理服务器缓存静态资源供所有代理用户使用。</p>
+</li>
+<li><p>private 用于响应头。表示仅允许客户端缓存响应信息给自己使用，不得分享给别人。这样是为了禁止代理服务器进行缓存，而允许客户端自己缓存资源内容。意思是你个人留着用就行，别借给别人用。</p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-11T10:50:05.000Z" itemprop="dateUpdated">2022-06-11 18:50:05</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8F%E8%AE%AE/" rel="tag">协议</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/&title=《鲜为人知的HTTP协议头字段详解大全「原创」》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/&title=《鲜为人知的HTTP协议头字段详解大全「原创」》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《鲜为人知的HTTP协议头字段详解大全「原创」》 — Will的博客&url=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%9F%BA%E7%A1%80/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">HTTP协议的基础</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/08/virtualenvwrapper%EF%BC%9APython_%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">virtualenvwrapper：Python_环境管理工具</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/&title=《鲜为人知的HTTP协议头字段详解大全「原创」》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/&title=《鲜为人知的HTTP协议头字段详解大全「原创」》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《鲜为人知的HTTP协议头字段详解大全「原创」》 — Will的博客&url=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/09/%E9%B2%9C%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84HTTP%E5%8D%8F%E8%AE%AE%E5%A4%B4%E5%AD%97%E6%AE%B5%E8%AF%A6%E8%A7%A3%E5%A4%A7%E5%85%A8%E3%80%8C%E5%8E%9F%E5%88%9B%E3%80%8D/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>油猴脚本编写教程 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="油猴脚本,JS">
+    <meta name="description" content="油猴脚本（Tampermonkey）是一个非常流行的浏览器扩展，它可以运行由广大社区编写的扩展脚本，来实现各式各样的功能，常见的去广告、修改样式文件、甚至是下载视频。今天我们就来看看如何编写自己的油猴脚本。当然为了运行油猴脚本，你应该在浏览器中安装油猴插件。 安装油猴插件安装油猴插件非常简单，直接在浏览器的扩展商店中安装即可。国产浏览器的话一般可以通过下载扩展文件手动拖动的方式来安装。下图是微软新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="油猴脚本编写教程">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="油猴脚本（Tampermonkey）是一个非常流行的浏览器扩展，它可以运行由广大社区编写的扩展脚本，来实现各式各样的功能，常见的去广告、修改样式文件、甚至是下载视频。今天我们就来看看如何编写自己的油猴脚本。当然为了运行油猴脚本，你应该在浏览器中安装油猴插件。 安装油猴插件安装油猴插件非常简单，直接在浏览器的扩展商店中安装即可。国产浏览器的话一般可以通过下载扩展文件手动拖动的方式来安装。下图是微软新">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/3843056900-8983f8db535e19d8_fix732.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/3094194886-b721a19ba853294b_fix732.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/4224078242-f7656f879d3066fa_fix732.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/3073214562-a785d8e2c4712cef_fix732.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/2630308594-5ea670883f9dcd05_fix732.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/3346250129-51af0aada1db5227_fix732.png">
+<meta property="og:image" content="http://pgw1315.github.io/images/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/2044765339-3bf40f378ab7c24b_fix732.png">
+<meta property="article:published_time" content="2022-06-24T04:57:28.000Z">
+<meta property="article:modified_time" content="2022-06-24T05:09:22.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="油猴脚本">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pgw1315.github.io/images/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/3843056900-8983f8db535e19d8_fix732.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">油猴脚本编写教程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">油猴脚本编写教程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-24T04:57:28.000Z" itemprop="datePublished" class="page-time">
+  2022-06-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装油猴插件"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装油猴插件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新建脚本"><span class="post-toc-number">2.</span> <span class="post-toc-text">新建脚本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#脚本编写方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">脚本编写方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#功能注释"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">功能注释</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#脚本权限"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">脚本权限</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编写脚本"><span class="post-toc-number">4.</span> <span class="post-toc-text">编写脚本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#等vagrant更新时候提醒我的脚本"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">等vagrant更新时候提醒我的脚本</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#调试脚本"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">调试脚本</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#将文章同步复制到Csdn和思否编辑器的脚本"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">将文章同步复制到Csdn和思否编辑器的脚本</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他注意事项"><span class="post-toc-number">5.</span> <span class="post-toc-text">其他注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#脚本编写流程"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">脚本编写流程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发布脚本"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">发布脚本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#更新URL"><span class="post-toc-number">5.2.1.</span> <span class="post-toc-text">更新URL</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#上传脚本"><span class="post-toc-number">5.2.2.</span> <span class="post-toc-text">上传脚本</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-油猴脚本编写教程-SegmentFault思否"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">油猴脚本编写教程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-24 12:57:28" datetime="2022-06-24T04:57:28.000Z"  itemprop="datePublished">2022-06-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>油猴脚本（Tampermonkey）是一个非常流行的浏览器扩展，它可以运行由广大社区编写的扩展脚本，来实现各式各样的功能，常见的去广告、修改样式文件、甚至是下载视频。今天我们就来看看如何编写自己的油猴脚本。当然为了运行油猴脚本，你应该在浏览器中安装油猴插件。</p>
+<h3 id="安装油猴插件"><a href="#安装油猴插件" class="headerlink" title="安装油猴插件"></a>安装油猴插件</h3><p>安装油猴插件非常简单，直接在浏览器的扩展商店中安装即可。国产浏览器的话一般可以通过下载扩展文件手动拖动的方式来安装。下图是微软新版Edge浏览器的扩展商店，直接搜索Tampermonkey即可。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/油猴脚本编写教程-SegmentFault思否/3843056900-8983f8db535e19d8_fix732.png" alt="新版Edge扩展商店" title="">
+                </div>
+                <div class="image-caption">新版Edge扩展商店</div>
+            </figure>
+
+<h3 id="新建脚本"><a href="#新建脚本" class="headerlink" title="新建脚本"></a>新建脚本</h3><p>首先在浏览器右上角找到并点击油猴插件，选择添加新脚本。</p>
+<ul>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/油猴脚本编写教程-SegmentFault思否/3094194886-b721a19ba853294b_fix732.png" alt="添加新脚本" title="">
+                </div>
+                <div class="image-caption">添加新脚本</div>
+            </figure></li>
+</ul>
+<p>然后就会打开如图所示的编辑器窗口，我们就可以在其中编辑自己的脚本文件了。如果你喜欢的话，还可以将脚本内容复制到合适的编辑器中编辑，完成之后再复制回来。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/油猴脚本编写教程-SegmentFault思否/4224078242-f7656f879d3066fa_fix732.png" alt="编辑脚本文件" title="">
+                </div>
+                <div class="image-caption">编辑脚本文件</div>
+            </figure>
+
+<p>如果你点击开发者菜单的话，可以选择ES6模板，然后就可以在脚本中使用新版JavaScript的特性了，它会有Babel转译回ES5。不过这个模板貌似有点问题，用了它就没办法使用代码纠错功能了。所以这里我还是选择了默认的ES5模板。</p>
+<h3 id="脚本编写方法"><a href="#脚本编写方法" class="headerlink" title="脚本编写方法"></a>脚本编写方法</h3><h4 id="功能注释"><a href="#功能注释" class="headerlink" title="功能注释"></a>功能注释</h4><p>首先来看看脚本的内容，上面是一大排注释，这些注释可以非常有用的，它表明了脚本的各个属性。下面来简单介绍一下。</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>油猴脚本的名字</td>
+</tr>
+<tr>
+<td>namespace</td>
+<td>命名空间，类似于Java的包名，用来区分相同名称的脚本，一般写成作者名字或者网址就可以了</td>
+</tr>
+<tr>
+<td>version</td>
+<td>脚本版本，油猴脚本的更新会读取这个版本号</td>
+</tr>
+<tr>
+<td>description</td>
+<td>描述，用来告诉用户这个脚本是干什么用的</td>
+</tr>
+<tr>
+<td>author</td>
+<td>作者名字</td>
+</tr>
+<tr>
+<td>match</td>
+<td>只有匹配的网址才会执行对应的脚本，例如<code>*</code>、<code>http://*</code>、<code>http://www.baidu.com/*</code>等，参见<a href="https://developer.chrome.com/docs/extensions/mv3/match_patterns/" target="_blank" rel="noopener">谷歌开发者文档</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>grant</td>
+<td>指定脚本运行所需权限，如果脚本拥有相应的权限，就可以调用油猴扩展提供的API与浏览器进行交互。如果设置为<code>none</code>的话，则不使用沙箱环境，脚本会直接运行在网页的环境中，这时候无法使用大部分油猴扩展的API。如果不指定的话，油猴会默认添加几个最常用的API</td>
+</tr>
+<tr>
+<td>require</td>
+<td>如果脚本依赖其他js库的话，可以使用require指令，在运行脚本之前先加载其他库，常见用法是加载jquery</td>
+</tr>
+<tr>
+<td>connect</td>
+<td>当用户使用<a href="https://www.tampermonkey.net/documentation.php?version=4.9&ext=dhdg&show=dhdg#GM_xmlhttpRequest" target="_blank" rel="noopener">GM_xmlhttpRequest</a>请求远程数据的时候，需要使用connect指定允许访问的域名，支持域名、子域名、IP地址以及<code>*</code>通配符</td>
+</tr>
+<tr>
+<td>updateURL</td>
+<td>脚本更新网址，当油猴扩展检查更新的时候，会尝试从这个网址下载脚本，然后比对版本号确认是否更新</td>
+</tr>
+</tbody></table>
+<h4 id="脚本权限"><a href="#脚本权限" class="headerlink" title="脚本权限"></a>脚本权限</h4><p>下面简单介绍一下grant指令那里可以填写的一些权限，详情请查看<a href="https://www.tampermonkey.net/documentation.php" target="_blank" rel="noopener">油猴脚本文档</a>。这里就简单介绍几个常用的，可以调用的函数全部以GM_作为开头。</p>
+<table>
+<thead>
+<tr>
+<th>权限名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unsafeWindow</td>
+<td>允许脚本可以完整访问原始页面，包括原始页面的脚本和变量。</td>
+</tr>
+<tr>
+<td>GM_getValue(name,defaultValue)</td>
+<td>从油猴扩展的存储中访问数据。可以设置默认值，在没成功获取到数据的时候当做初始值。如果保存的是日期等类型的话，取出来的数据会变成文本，需要自己转换一下。</td>
+</tr>
+<tr>
+<td>GM_setValue(name,value)</td>
+<td>将数据保存到存储中</td>
+</tr>
+<tr>
+<td>GM_xmlhttpRequest(details)</td>
+<td>异步访问网页数据的API，这个方法比较复杂，有大量参数和回调，详情请参考官方文档。</td>
+</tr>
+<tr>
+<td>GM_setClipboard(data, info)</td>
+<td>将数据复制到剪贴板中，第一个参数是要复制的数据，第二个参数是MIME类型，用于指定复制的数据类型。</td>
+</tr>
+<tr>
+<td>GM_log(message)</td>
+<td>将日志打印到控制台中，可以使用F12开发者工具查看。</td>
+</tr>
+<tr>
+<td>GM_addStyle(css)</td>
+<td>像网页中添加自己的样式表。</td>
+</tr>
+<tr>
+<td>GM_notification(details, ondone), GM_notification(text, title, image, onclick)</td>
+<td>设置网页通知，请参考文档获取用法。</td>
+</tr>
+<tr>
+<td>GM_openInTab(url, loadInBackground)</td>
+<td>在浏览器中打开网页，可以设置是否在后台打开等几个选项</td>
+</tr>
+</tbody></table>
+<p>还有一些API没有介绍，请大家直接查看官方文档吧。</p>
+<h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><p>编写脚本就很简单了，编写到<code>// Your code here ..</code>那里即可。可以编写函数，然后在最后调用这几个函数，这样的模块化编写方法写出来的脚本比较容易维护。</p>
+<h4 id="等vagrant更新时候提醒我的脚本"><a href="#等vagrant更新时候提醒我的脚本" class="headerlink" title="等vagrant更新时候提醒我的脚本"></a>等vagrant更新时候提醒我的脚本</h4><p>前段时间了解了vagrant这个东西，感觉很有意思，准备研究一下，但是照着官网教程运行的时候，第一步就发生了错误。我上网一搜，原来我更新的virtualbox比较新，vagrant恰好不支持。但是如今几个月过去了，vagrant还是没有更新，所以我要写一个脚本，等到vagrant更新的时候，给我网页上弹出一个对话框。</p>
+<p>首先访问<a href="https://www.vagrantup.com/" target="_blank" rel="noopener">vagrant官网</a>，然后就可以看到中间下载按钮上大大的版本号2.2.6了。因为版本肯定是不会倒退的，所以只要判断一下版本号不是2.2.6，就可以弹出提示了。通过F12开发者工具可以看到，这三个按钮其实都是链接，只不过显示成了按钮的样子，而且他们恰好都位于<code>header</code>标签之中。如果如果可以的话，直接用选择器就可以非常轻松的获取到版本号。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/油猴脚本编写教程-SegmentFault思否/3073214562-a785d8e2c4712cef_fix732.png" alt="vagrant官网" title="">
+                </div>
+                <div class="image-caption">vagrant官网</div>
+            </figure>
+
+<p>为了能在更新的时候及时获取到提示，我需要脚本在所有网站上生效，来检测版本。但是这样做会导致另外一个问题，那就是每次打开一个网页都会运行一次检查vagrant的脚本，而这是完全不必要的。所以需要一个额外的判断，这就需要利用油猴提供的API来保存当前日期，只有每天第一次的时候才会执行检查代码。本来我想的很复杂，需要一个日期变量，然后还要额外一个变量保存是否是今天第一次更新。后来我发现我想的太多了，做法其实很简单。每天先获取一次日期，然后和事先保存的日期比较，如果不一样的话才执行脚本，并将日期设置为今天的日期；如果日期一样的话无事发生。</p>
+<p>最后一个问题就是如何来判断版本号，有两种方法：第一种就是上面提到的，直接解析HTML代码并找到版本号；第二种是更直接的办法， 因为vagrant也是Github上开源的项目，所以可以直接调用Github的API来获取最新发布的版本号。可惜的是，第二种办法我试了一下居然不成功，不知为何，没办法获取到发布信息，但是换成其他项目就可以。所以最后没办法只好采用第一种办法。有兴趣的同学可以自己试一下第二种方法。</p>
+<p>好了，所有相关的坑我都已经解释完毕了，相信大家应该很容易就可以看懂下面的代码，我就不介绍了。虽然看着简单，但是我其实还是踩了不少的坑，就这点代码花了我好几天的时间。而且确实这个代码写的也并不是很好，因为ajax取回来的代码是完整一个html页面，貌似用原版DOM API没办法解析，最后只好用jQuery的<code>parseHTML</code>方法解析的。而且我还因为原生方法和jQuery之间的方法名搞混了，浪费了很多时间。</p>
+<pre><code class="js">// ==UserScript==
+// @name         remind_me_vagrant_update
+// @namespace    https://github.com/techstay/myscripts
+// @version      0.1
+// @description  remind me if vagrant support virtualbox
+// @author       techstay
+// @match        *
+// @require      https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js
+// @connect vagrantup.com
+// @grant GM_setValue
+// @grant GM_getValue
+// @grant GM_setClipboard
+// @grant GM_log
+// @grant GM_xmlhttpRequest
+// @grant unsafeWindow
+// @grant window.close
+// @grant window.focus
+// ==/UserScript==
+
+(function () {
+    &#39;use strict&#39;;
+
+    const CHECKED_DATE = &#39;checkedDate&#39;;
+
+    function checkDateEquals(a, b) {
+        return a.getFullYear() === b.getFullYear() &amp;&amp;
+            a.getMonth() === b.getMonth() &amp;&amp;
+            a.getDate() === b.getDate();
+    }
+
+    function checkVagrantVersion() {
+        GM_setValue(CHECKED_DATE, new Date());
+        GM_xmlhttpRequest({
+            &quot;method&quot;: &quot;GET&quot;,
+            &quot;url&quot;: &quot;https://www.vagrantup.com/&quot;,
+            &quot;headers&quot;: {
+                &quot;user-agent&quot;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&#39;
+            },
+            &quot;onload&quot;: function (result) {
+                var list = jQuery.parseHTML(result.response);
+                jQuery.each(list, function (i, el) {
+                    if (el.nodeName == &#39;HEADER&#39;) {
+                        var header = jQuery.parseXML(el.innerHTML);
+                        var version = header.getElementsByTagName(&#39;a&#39;)[1].textContent.replace(&#39;Download &#39;, &#39;&#39;);
+                        if (version != &#39;2.2.6&#39;) {
+                            alert(&#39;Vagrant update!&#39;);
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
+    }
+
+    var today = new Date();
+    var lastCheckedDay = new Date(GM_getValue(CHECKED_DATE, new Date(&#39;2006-1-1&#39;)));
+    if (!checkDateEquals(lastCheckedDay, today)) {
+        checkVagrantVersion();
+    }
+
+})();
+</code></pre>
+<h4 id="调试脚本"><a href="#调试脚本" class="headerlink" title="调试脚本"></a>调试脚本</h4><p>编写脚本很难一次成功，大部分时间都花在了调试上面。调试油猴脚本的话有几种调试方法。</p>
+<p>第一种方法就是最原始的打印日志，可以利用<code>console.log</code>和<code>GM_log</code>来将关键信息打印出来，上面的脚本就是我靠打印日志一点点发现各种参数错误的。说实话这种办法有点笨。</p>
+<p>第二种就是利用浏览器的调试功能，在脚本需要调试的地方插入<code>debugger;</code>语句，然后在打开F12开发者工具的情况下刷新页面，就会发现网页已经暂停在相应位置上。这样就可以利用F12开发者工具进行单步调试、监视变量等操作了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/油猴脚本编写教程-SegmentFault思否/2630308594-5ea670883f9dcd05_fix732.png" alt="调试脚本" title="">
+                </div>
+                <div class="image-caption">调试脚本</div>
+            </figure>
+
+<h4 id="将文章同步复制到Csdn和思否编辑器的脚本"><a href="#将文章同步复制到Csdn和思否编辑器的脚本" class="headerlink" title="将文章同步复制到Csdn和思否编辑器的脚本"></a>将文章同步复制到Csdn和思否编辑器的脚本</h4><p>我的文章一般都是简书首发，然后复制粘贴到Csdn中，但是后来我发现每次手动操作太蠢了，为什么不用脚本来自动化呢？所以我又写了个脚本帮忙完成自动化工作。本来以为这个脚本应该比较简单，不过还是踩了很多坑才凑合把功能写出来。</p>
+<p>首先是数据的保存，利用油猴提供的<code>GM_setValue</code>倒是可以很简单的将文章标题和内容保存起来。不过问题来了，如何在不同页面之间共享呢？有几种方案：第一种最简单粗暴，直接复制两份，对应页面首先判断是否存在数据，存在的话才执行复制操作，然后清空数据。这种方案最简单，而且如果自己直接新建文章的话也不会出问题。第二种就是数据只保存一份，通过几个变量来确定什么时候复制完成，清空数据，但是这样比较复杂，要理清逻辑顺序很麻烦。所以最后我就采用了第一种办法。</p>
+<p>然后又遇到一个问题，那就是如果编辑器自带了保存和恢复功能，很可能会把我复制过去的文章给覆盖了，所以需要等页面加载完之后，延迟一段时间才进行复制操作。然后我又谷歌了一番，差不多解决了这个问题。</p>
+<p>然后遇到了一个非常棘手的问题，就是SF的编辑器设计比较复杂，没办法通过直接填充<code>value</code>或者<code>text</code>属性的方式来写入文章，我想了很久也没有想出来怎么解决。没办法只好改用剪贴板的方式来糊弄了，也就是将文章内容复制到剪贴板里头，然后手动粘贴到编辑器中。</p>
+<p>最后一个问题就是简书上这个复制按钮应该如何实现，其实简书编辑器的工具栏倒是空了一些部分，我本来想把按钮直接加到那个上面。但是我发现貌似一旦添加东西，那个工具栏会自动重载取消更改，所以水平所限没做到，只好利用jQueryUI加了一个很丑的浮动按钮，而且因为拖动的时候会触发单击，没办法把按钮改成了双击触发。</p>
+<p>最后的脚本就是下面这样的。相比第一个脚本多了几个打开新页面、删除变量、访问剪贴板的API。</p>
+<pre><code class="js">// ==UserScript==
+// @name         copy_jianshu_to_csdn_and_segmentfault
+// @namespace    https://github.com/techstay/myscripts
+// @version      0.1
+// @description  将简书文章复制到csdn和思否编辑器中
+// @author       techstay
+// @match        https://editor.csdn.net/md/
+// @match https://segmentfault.com/write
+// @match https://www.jianshu.com/writer*
+// @require      https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js
+// @require      https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js
+// @grant GM_setValue
+// @grant GM_getValue
+// @grant GM_deleteValue
+// @grant unsafeWindow
+// @grant GM_setClipboard
+// @grant window.close
+// @grant window.focus
+// @grant GM_openInTab
+// ==/UserScript==
+(function () {
+    &#39;use strict&#39;;
+
+    const SF_URL = &#39;https://segmentfault.com/write&#39;
+    const CSDN_URL = &#39;https://editor.csdn.net/md/&#39;
+
+    const SF_TITLE = &#39;sf_title&#39;
+    const SF_CONTENT = &#39;sf_content&#39;
+    const CSDN_TITLE = &#39;csdn_title&#39;
+    const CSDN_CONTENT = &#39;csdn_content&#39;
+
+    function saveArticle() {
+        GM_setValue(CSDN_TITLE, $(&#39;._24i7u&#39;).val())
+        GM_setValue(CSDN_CONTENT, $(&#39;#arthur-editor&#39;).val())
+        GM_setValue(SF_TITLE, $(&#39;._24i7u&#39;).val())
+        GM_setValue(SF_CONTENT, $(&#39;#arthur-editor&#39;).val())
+    }
+
+    function copyToCsdn() {
+        var title = GM_getValue(CSDN_TITLE, &#39;&#39;)
+        var content = GM_getValue(CSDN_CONTENT, &#39;&#39;)
+        if (title != &#39;&#39; &amp;&amp; content != &#39;&#39;) {
+            $(&#39;.article-bar__title&#39;).delay(2000).queue(function () {
+                $(&#39;.article-bar__title&#39;).val(title)
+                $(&#39;.editor__inner&#39;).text(content)
+                GM_deleteValue(CSDN_TITLE)
+                GM_deleteValue(CSDN_CONTENT)
+                $(this).dequeue()
+            })
+        }
+    }
+
+    function copyToSegmentFault() {
+        $(document).ready(function () {
+            var title = GM_getValue(SF_TITLE, &#39;&#39;)
+            var content = GM_getValue(SF_CONTENT, &#39;&#39;)
+            if (title != &#39;&#39; &amp;&amp; content != &#39;&#39;) {
+                $(&#39;#title&#39;).delay(2000).queue(function () {
+                    $(&#39;#title&#39;).val(title)
+                    GM_setClipboard(content, &#39;text&#39;)
+                    GM_deleteValue(SF_TITLE)
+                    GM_deleteValue(SF_CONTENT)
+                    $(this).dequeue()
+                })
+
+            }
+        })
+
+    }
+
+    function addCopyButton() {
+        $(&#39;body&#39;).append(&#39;&lt;div id=&quot;copyToCS&quot;&gt;双击复制到CSDN和思否&lt;/div&gt;&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;width&#39;, &#39;200px&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;position&#39;, &#39;absolute&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;top&#39;, &#39;70px&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;left&#39;, &#39;350px&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;background-color&#39;, &#39;#28a745&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;color&#39;, &#39;white&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;font-size&#39;, &#39;large&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;z-index&#39;, 100)
+        $(&#39;#copyToCS&#39;).css(&#39;border-radius&#39;, &#39;25px&#39;)
+        $(&#39;#copyToCS&#39;).css(&#39;text-align&#39;, &#39;center&#39;)
+        $(&#39;#copyToCS&#39;).dblclick(function () {
+            saveArticle()
+            GM_openInTab(SF_URL, true)
+            GM_openInTab(CSDN_URL, true)
+        })
+        $(&#39;#copyToCS&#39;).draggable()
+    }
+
+    $(document).ready(function () {
+        if (window.location.href.startsWith(&#39;https://www.jianshu.com&#39;)) {
+            addCopyButton()
+        } else if (window.location.href.startsWith(SF_URL)) {
+            copyToSegmentFault()
+        } else if (window.location.href.startsWith(CSDN_URL)) {
+            copyToCsdn()
+        }
+    })
+})()
+</code></pre>
+<h3 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h3><h4 id="脚本编写流程"><a href="#脚本编写流程" class="headerlink" title="脚本编写流程"></a>脚本编写流程</h4><p>踩了几天坑，最后总结一下编写油猴脚本的一点步骤。首先要思考脚本的实现方式，需要用到什么API和权限，然后填写好脚本的注释信息。</p>
+<p>然后将功能封装成函数的形式，最后在脚本末尾调用实现的函数。写的差不多的时候复制到浏览器中尝试运行。</p>
+<p>遇到困难的时候，可能需要直接在F12开发者工具里进行调试。有些网页不用jQuery，为了方便，我们需要自己将jQuery导入到页面中，可以将下面的代码复制到浏览器控制台中。</p>
+<pre><code class="js">var jq = document.createElement(&#39;script&#39;);
+jq.src = &quot;https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js&quot;;
+document.getElementsByTagName(&#39;head&#39;)[0].appendChild(jq);
+</code></pre>
+<h4 id="发布脚本"><a href="#发布脚本" class="headerlink" title="发布脚本"></a>发布脚本</h4><h5 id="更新URL"><a href="#更新URL" class="headerlink" title="更新URL"></a>更新URL</h5><p>脚本做完了，自然是要共享出来让大家一起使用的。当然既然要发布，自然要支持更新方便日后维护。方法也很简单，直接在上面的注释部分添加<code>updateURL</code>即可，然后设置脚本访问地址。例如我要将脚本发布到Github上，就添加下面的注释。</p>
+<pre><code class="js">// @updateURL https://raw.githubusercontent.com/techstay/myscripts/master/tampermonkey/remind_me_vagrant_update.js
+</code></pre>
+<h5 id="上传脚本"><a href="#上传脚本" class="headerlink" title="上传脚本"></a>上传脚本</h5><p>油猴脚本支持好几个网站，其中目前最主流的是<a href="https://greasyfork.org/zh-CN" target="_blank" rel="noopener">GreasyFork</a>，登录这个网站注册一个账号，然后进入用户页面选择提交脚本，然后填写脚本代码和各项信息。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/油猴脚本编写教程-SegmentFault思否/3346250129-51af0aada1db5227_fix732.png" alt="提交脚本" title="">
+                </div>
+                <div class="image-caption">提交脚本</div>
+            </figure>
+
+<p>这样脚本就提交上去了，其他人也可以搜索到并安装脚本了！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/油猴脚本编写教程-SegmentFault思否/2044765339-3bf40f378ab7c24b_fix732.png" alt="提交脚本完成" title="">
+                </div>
+                <div class="image-caption">提交脚本完成</div>
+            </figure>
+
+
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://segmentfault.com/a/1190000021654926" target="_blank" rel="noopener">油猴脚本编写教程-SegmentFault思否</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-24T05:09:22.000Z" itemprop="dateUpdated">2022-06-24 13:09:22</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/" rel="tag">油猴脚本</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/&title=《油猴脚本编写教程》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/&title=《油猴脚本编写教程》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《油猴脚本编写教程》 — Will的博客&url=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/26/python%E7%AC%94%E8%AE%B0---%E9%9C%80%E6%B1%82%E6%96%87%E4%BB%B6requirements.txt%E7%9A%84%E5%88%9B%E5%BB%BA%E5%8F%8A%E4%BD%BF%E7%94%A8/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python需求文件requirements.txt的创建及使用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2022/06/22/python%20os%E6%A8%A1%E5%9D%97%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">python os模块文件目录操作详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/&title=《油猴脚本编写教程》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/&title=《油猴脚本编写教程》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《油猴脚本编写教程》 — Will的博客&url=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/24/%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%95%99%E7%A8%8B-SegmentFault%E6%80%9D%E5%90%A6/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

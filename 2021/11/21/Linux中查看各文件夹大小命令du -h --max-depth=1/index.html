@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Linux中查看各文件夹大小命令du -h --max-depth=1 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,文件管理">
+    <meta name="description" content="du [-abcDhHklmsSx] [-L &lt;符号连接&gt;][-X &lt;文件&gt;][–block-size][–exclude&#x3D;&lt;目录或文件&gt;] [–max-depth&#x3D;&lt;目录层数&gt;][–help][–version][目录或文件]常用参数：-a或-all 为每个指定文件显示磁盘使用情况，或者为目录中每个文件显示各自磁盘使用情况。-b或-bytes 显示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux中查看各文件夹大小命令du -h --max-depth&#x3D;1">
+<meta property="og:url" content="http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="du [-abcDhHklmsSx] [-L &lt;符号连接&gt;][-X &lt;文件&gt;][–block-size][–exclude&#x3D;&lt;目录或文件&gt;] [–max-depth&#x3D;&lt;目录层数&gt;][–help][–version][目录或文件]常用参数：-a或-all 为每个指定文件显示磁盘使用情况，或者为目录中每个文件显示各自磁盘使用情况。-b或-bytes 显示">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-20T17:27:07.000Z">
+<meta property="article:modified_time" content="2022-06-06T03:10:35.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="文件管理">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux中查看各文件夹大小命令du -h --max-depth=1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux中查看各文件夹大小命令du -h --max-depth=1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-11-20T17:27:07.000Z" itemprop="datePublished" class="page-time">
+  2021-11-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-Linux中查看各文件夹大小命令du -h --max-depth=1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux中查看各文件夹大小命令du -h --max-depth=1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-11-21 01:27:07" datetime="2021-11-20T17:27:07.000Z"  itemprop="datePublished">2021-11-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>du [-abcDhHklmsSx] [-L &lt;符号连接&gt;][-X &lt;文件&gt;][–block-size][–exclude=&lt;目录或文件&gt;] [–max-depth=&lt;目录层数&gt;][–help][–version][目录或文件]<br>常用参数：<br>-a或-all 为每个指定文件显示磁盘使用情况，或者为目录中每个文件显示各自磁盘使用情况。<br>-b或-bytes 显示目录或文件大小时，以byte为单位。<br>-c或–total 除了显示目录或文件的大小外，同时也显示所有目录或文件的总和。<br>-D或–dereference-args 显示指定符号连接的源文件大小。<br>-h或–human-readable 以K，M，G为单位，提高信息的可读性。<br>-H或–si 与-h参数相同，但是K，M，G是以1000为换算单位,而不是以1024为换算单位。<br>-k或–kilobytes 以1024 bytes为单位。<br>-l或–count-links 重复计算硬件连接的文件。<br>-L&lt;符号连接&gt;或–dereference&lt;符号连接&gt; 显示选项中所指定符号连接的源文件大小。<br>-m或–megabytes 以1MB为单位。<br>-s或–summarize 仅显示总计，即当前目录的大小。<br>-S或–separate-dirs 显示每个目录的大小时，并不含其子目录的大小。<br>-x或–one-file-xystem 以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过。<br>-X&lt;文件&gt;或–exclude-from=&lt;文件&gt; 在&lt;文件&gt;指定目录或文件。<br>–exclude=&lt;目录或文件&gt; 略过指定的目录或文件。<br>–max-depth=&lt;目录层数&gt; 超过指定层数的目录后，予以忽略。<br>–help 显示帮助。<br>–version 显示版本信息。</p>
+<p><strong>1&gt; 要显示一个目录树及其每个子树的磁盘使用情况</strong><br>du /home/linux<br>这在/home/linux目录及其每个子目录中显示了磁盘块数。  </p>
+<p><strong>2&gt; 要通过以1024字节为单位显示一个目录树及其每个子树的磁盘使用情况</strong><br>du -k /home/linux<br>这在/home/linux目录及其每个子目录中显示了 1024 字节磁盘块数。  </p>
+<p><strong>3&gt; 以MB为单位显示一个目录树及其每个子树的磁盘使用情况</strong><br>du -m /home/linux<br>这在/home/linux目录及其每个子目录中显示了 MB 磁盘块数。  </p>
+<p><strong>4&gt; 以GB为单位显示一个目录树及其每个子树的磁盘使用情况</strong><br>du -g /home/linux<br>这在/home/linux目录及其每个子目录中显示了 GB 磁盘块数。  </p>
+<p><strong>5&gt;查看当前目录下所有目录以及子目录的大小：</strong><br>du -h .<br>“.”代表当前目录下。也可以换成一个明确的路径<br>-h表示用K、M、G的人性化形式显示  </p>
+<p><strong>6&gt;查看当前目录下user目录的大小，并不想看其他目录以及其子目录：</strong><br>du -sh user<br>-s表示总结的意思，即只列出一个总结的值<br>du -h –max-depth=0 user<br>–max-depth=n表示只深入到第n层目录，此处设置为0，即表示不深入到子目录。  </p>
+<p><strong>7&gt;列出user目录及其子目录下所有目录和文件的大小：</strong><br>du -ah user<br>-a表示包括目录和文件  </p>
+<p><strong>8&gt;列出当前目录中的目录名不包括xyz字符串的目录的大小：</strong><br>du -h –exclude=’<em>xyz</em>‘  </p>
+<p><strong>9&gt;想在一个屏幕下列出更多的关于user目录及子目录大小的信息：</strong><br>du -0h user<br>-0（杠零）表示每列出一个目录的信息，不换行，而是直接输出下一个目录的信息。  </p>
+<p><strong>10&gt;只显示一个目录树的全部磁盘使用情况</strong><br>du -s /home/linux</p>
+<p><strong>11&gt;查看各文件夹大小:du -h –max-depth=1</strong><br> 查看指定目录：<br> 代码如下：  其中 /path表示路径</p>
+<pre><code class="bash">du -h --max-depth=1 /path
+</code></pre>
+<p> 具体如下所示：</p>
+<pre><code class="bash">root@ubuntu4146:~# du -h --max-depth=1 /data/
+1.1G    /data/gitlabDataa
+8.0K    /data/test
+241G    /data/gitlabData
+809G    /data/home
+15G    /data/OpenGrok
+16K    /data/lost+found
+1.1T    /data/
+</code></pre>
+<p> 我们发现  /data/home/ 目录占用最多，因此我们可以继续看那个目录占用的最多，如下所示：</p>
+<pre><code class="bash">root@ubuntu4146:/data/home# du -h --max-depth=1 /data/home/
+141G    /data/home/wzm
+62G    /data/home/lwc
+421G    /data/home/hcy
+16K    /data/home/zzp
+16K    /data/home/zl
+54G    /data/home/drj
+122G    /data/home/sjq
+4.1G    /data/home/ljs
+6.7G    /data/home/ywm
+809G    /data/home/
+root@ubuntu4146:/data/home# 
+</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-06T03:10:35.000Z" itemprop="dateUpdated">2022-06-06 11:10:35</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/" target="_blank" rel="external">http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="tag">文件管理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/&title=《Linux中查看各文件夹大小命令du -h --max-depth=1》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/&title=《Linux中查看各文件夹大小命令du -h --max-depth=1》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux中查看各文件夹大小命令du -h --max-depth=1》 — Will的博客&url=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/11/23/PyCharm%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E5%92%8C%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">PyCharm 自定义文件和代码模板</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/11/18/Intellij%20IDEA%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B%EF%BC%8CIDEA%E7%A0%B4%E8%A7%A3%E8%A1%A5%E4%B8%81FineAgent%EF%BC%8C%E5%8F%AF%E7%A0%B4%E8%A7%A3%E8%87%B3%202099%20%E5%B9%B4/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Intellij IDEA破解补丁FineAgent，可破解至2099</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/&title=《Linux中查看各文件夹大小命令du -h --max-depth=1》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/&title=《Linux中查看各文件夹大小命令du -h --max-depth=1》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux中查看各文件夹大小命令du -h --max-depth=1》 — Will的博客&url=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2021/11/21/Linux%E4%B8%AD%E6%9F%A5%E7%9C%8B%E5%90%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%A7%E5%B0%8F%E5%91%BD%E4%BB%A4du%20-h%20--max-depth=1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>systemctl命令介绍和使用 | Will的博客 |  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,系统管理">
+    <meta name="description" content="Systemd程序Systemd其实是Linux系统用来管理系统的一个程序，用来代替原来的init进程(用来管理启动系统其它的服务进程)，现在很多Linux发行版都已经自带Systemd程序了。 systemctl命令1. Unitsystemctl命令是Systemd中最重要的一个命令，用于对服务进行启动，停止等操作，在Systemd中有Unit的概念，每个进程都是一个Unit，总共有十二种Un">
+<meta property="og:type" content="article">
+<meta property="og:title" content="systemctl命令介绍和使用">
+<meta property="og:url" content="http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Will的博客">
+<meta property="og:description" content="Systemd程序Systemd其实是Linux系统用来管理系统的一个程序，用来代替原来的init进程(用来管理启动系统其它的服务进程)，现在很多Linux发行版都已经自带Systemd程序了。 systemctl命令1. Unitsystemctl命令是Systemd中最重要的一个命令，用于对服务进行启动，停止等操作，在Systemd中有Unit的概念，每个进程都是一个Unit，总共有十二种Un">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-06T01:25:00.000Z">
+<meta property="article:modified_time" content="2022-06-06T05:16:57.000Z">
+<meta property="article:author" content="Will Holmes">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="系统管理">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zjl.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Will Holmes</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">systemctl命令介绍和使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">systemctl命令介绍和使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-06-06T01:25:00.000Z" itemprop="datePublished" class="page-time">
+  2022-06-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Systemd程序"><span class="post-toc-number">1.</span> <span class="post-toc-text">Systemd程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#systemctl命令"><span class="post-toc-number">2.</span> <span class="post-toc-text">systemctl命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-Unit"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. Unit</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-常用命令"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. 常用命令</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#systemctl中Unit的配置文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">systemctl中Unit的配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-查看Unit的配置文件"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. 查看Unit的配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-Unit配置文件的含义"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. Unit配置文件的含义</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义服务启动"><span class="post-toc-number">4.</span> <span class="post-toc-text">自定义服务启动</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-创建Unit配置文件"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">1. 创建Unit配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-创建脚本"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">2. 创建脚本</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-载入配置文件并启动"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">3. 载入配置文件并启动</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看Unit启动日志"><span class="post-toc-number">5.</span> <span class="post-toc-text">查看Unit启动日志</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-systemctl命令介绍和使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">systemctl命令介绍和使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-06-06 09:25:00" datetime="2022-06-06T01:25:00.000Z"  itemprop="datePublished">2022-06-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="Systemd程序"><a href="#Systemd程序" class="headerlink" title="Systemd程序"></a>Systemd程序</h3><p>Systemd其实是Linux系统用来管理系统的一个程序，用来代替原来的init进程(用来管理启动系统其它的服务进程)，现在很多Linux发行版都已经自带Systemd程序了。</p>
+<h3 id="systemctl命令"><a href="#systemctl命令" class="headerlink" title="systemctl命令"></a>systemctl命令</h3><h4 id="1-Unit"><a href="#1-Unit" class="headerlink" title="1. Unit"></a>1. Unit</h4><p>systemctl命令是Systemd中最重要的一个命令，用于对服务进行启动，停止等操作，在Systemd中有Unit的概念，每个进程都是一个Unit，总共有十二种Unit类型。</p>
+<ul>
+<li>Service unit，系统服务</li>
+<li>Target unit，多个 Unit 构成的一个组</li>
+<li>Device Unit，硬件设备</li>
+<li>Mount Unit，文件系统的挂载点</li>
+<li>Automount Unit，自动挂载点</li>
+<li>Path Unit，文件或路径</li>
+<li>Scope Unit，不是由 Systemd 启动的外部进程</li>
+<li>Slice Unit，进程组</li>
+<li>Snapshot Unit，Systemd 快照，可以切回某个快照</li>
+<li>Socket Unit，进程间通信的 socket</li>
+<li>Swap Unit，swap 文件</li>
+<li>Timer Unit，定时器</li>
+</ul>
+<h4 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h4><pre><code class="bash"># 列出正在运行的Unit
+systemctl list-units，可以直接使用systemctl
+
+# 列出所有Unit，包括没有找到配置文件的或者启动失败的
+systemctl list-units --all
+
+# 列出所有没有运行的 Unit
+systemctl list-units --all --state=inactive
+
+# 列出所有加载失败的 Unit
+systemctl list-units --failed
+
+# 列出所有正在运行的、类型为service的Unit
+systemctl list-units --type=service
+
+# 显示某个 Unit 是否正在运行
+systemctl is-active application.service
+
+# 显示某个 Unit 是否处于启动失败状态
+systemctl is-failed application.service
+
+# 显示某个 Unit 服务是否建立了启动链接
+systemctl is-enabled application.service
+
+# 立即启动一个服务
+sudo systemctl start apache.service
+
+# 立即停止一个服务
+sudo systemctl stop apache.service
+
+# 重启一个服务
+sudo systemctl restart apache.service
+
+# 重新加载一个服务的配置文件
+sudo systemctl reload apache.service
+
+# 重载所有修改过的配置文件
+sudo systemctl daemon-reload
+</code></pre>
+<h3 id="systemctl中Unit的配置文件"><a href="#systemctl中Unit的配置文件" class="headerlink" title="systemctl中Unit的配置文件"></a>systemctl中Unit的配置文件</h3><p>上面说了每个服务都是一个Unit，那每个Unit都会有它的配置文件，这样启动的时候才知道要按照什么方式去启动。Systemd默认从目录<code>/etc/systemd/system/</code>读取配置文件。但是里面存放的大部分文件都是符号链接，指向目录<code>/usr/lib/systemd/system/</code>，真正的配置文件存放在那个目录。</p>
+<h4 id="1-查看Unit的配置文件"><a href="#1-查看Unit的配置文件" class="headerlink" title="1. 查看Unit的配置文件"></a>1. 查看Unit的配置文件</h4><p>可以使用<code>systemctl cat</code>命令来查看服务的配置文件，下面是Mysql的配置文件，很多软件已经支持Systemd程序了，安装的时候会自动配置它的Unit配置文件，例如Mysql和Nginx等等。</p>
+<pre><code class="bash">[root@VM_0_11_centos ~]# systemctl cat mysqld
+# /usr/lib/systemd/system/mysqld.service
+
+[Unit]
+Description=MySQL Server
+Documentation=man:mysqld(8)
+Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=mysql
+Group=mysql
+Type=forking
+PIDFile=/var/run/mysqld/mysqld.pid
+# Disable service start and stop timeout logic of systemd for mysqld service.
+TimeoutSec=0
+# Execute pre and post scripts as root
+PermissionsStartOnly=true
+# Needed to create system tables
+ExecStartPre=/usr/bin/mysqld_pre_systemd
+# Start main service
+ExecStart=/usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid $MYSQLD_OPTS
+# Use this to switch malloc implementation
+EnvironmentFile=-/etc/sysconfig/mysql
+# Sets open_files_limit
+LimitNOFILE = 5000
+Restart=on-failure
+RestartPreventExitStatus=1
+PrivateTmp=false
+
+</code></pre>
+<h4 id="2-Unit配置文件的含义"><a href="#2-Unit配置文件的含义" class="headerlink" title="2. Unit配置文件的含义"></a>2. Unit配置文件的含义</h4><pre><code class="bash">
+可以看到Unit配置文件有很多标签，不同的标签都代表了不同的意思，这里只列出部分介绍，可以去官网查看Unit配置文件文档介绍，https://www.freedesktop.org/software/systemd/man/systemd.unit.html。
+
+- Unit
+   - Description，服务的描述
+   - Documentation，文档介绍
+   - After，该服务要在什么服务启动之后启动，比如Mysql需要在network和syslog启动之后再启动
+- Install
+   - WantedBy，值是一个或多个Target，当前Unit激活时(enable)符号链接会放入/etc/systemd/system目录下面以Target名+.wants后缀构成的子目录中
+   - RequiredBy，它的值是一个或多个Target，当前Unit激活(enable)时，符号链接会放入/etc/systemd/system目录下面以Target名+.required后缀构成的子目录中
+   - Alias，当前Unit可用于启动的别名
+   - Also，当前Unit激活(enable)时，会被同时激活的其他Unit
+- Service
+   - Type，定义启动时的进程行为。它有以下几种值。
+   - Type=simple，默认值，执行ExecStart指定的命令，启动主进程
+   - Type=forking，以 fork 方式从父进程创建子进程，创建后父进程会立即退出
+   - Type=oneshot，一次性进程，Systemd 会等当前服务退出，再继续往下执行
+   - Type=dbus，当前服务通过D-Bus启动
+   - Type=notify，当前服务启动完毕，会通知Systemd，再继续往下执行
+   - Type=idle，若有其他任务执行完毕，当前服务才会运行
+   - ExecStart，启动当前服务的命令
+   - ExecStartPre，启动当前服务之前执行的命令
+   - ExecStartPost，启动当前服务之后执行的命令
+   - ExecReload，重启当前服务时执行的命令
+   - ExecStop，停止当前服务时执行的命令
+   - ExecStopPost，停止当其服务之后执行的命令
+   - RestartSec，自动重启当前服务间隔的秒数
+   - Restart，定义何种情况 Systemd 会自动重启当前服务，可能的值包括always（总是重启）、on-success、on-failure、on-abnormal、on-abort、on-watchdog
+   - TimeoutSec，定义 Systemd 停止当前服务之前等待的秒数
+   - Environment，指定环境变量
+</code></pre>
+<h3 id="自定义服务启动"><a href="#自定义服务启动" class="headerlink" title="自定义服务启动"></a>自定义服务启动</h3><p>既然Systemd的作用就是控制服务的启动，那么就可以把自己的服务添加进去，就可以直接使用systemctl命令来控制服务的启动，或者是设置开机自动启动等等。</p>
+<h4 id="1-创建Unit配置文件"><a href="#1-创建Unit配置文件" class="headerlink" title="1. 创建Unit配置文件"></a>1. 创建Unit配置文件</h4><p>在<code>/usr/lib/systemd/system</code>目录中创建自己的配置文件，一般都是<code>.service</code>结尾，例如这里创建了一个<code>test-sh.service</code>配置文件，这个Unit是为了启动我们自己的一个shell脚本。</p>
+<pre><code class="bash"># /usr/lib/systemd/system/test-sh.service
+[Unit]
+Description= test sh log
+
+[Service]
+ExecStart=/opt/dev/shell/test.sh
+Type=forking
+KillMode=process
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<h4 id="2-创建脚本"><a href="#2-创建脚本" class="headerlink" title="2. 创建脚本"></a>2. 创建脚本</h4><pre><code class="bash">
+在上面配置文件指定的启动路径`/opt/dev/shell/`下创建shell脚本，这里只是每秒打印当前时间，并输出到一个文本中。
+
+#!/bin/bash
+while true
+do
+sleep 1
+ date=`date -d today +&quot;%Y-%m-%d %T&quot;`
+ echo ${date} &gt;&gt; /opt/dev/shell/test.txt
+done
+
+</code></pre>
+<h4 id="3-载入配置文件并启动"><a href="#3-载入配置文件并启动" class="headerlink" title="3. 载入配置文件并启动"></a>3. 载入配置文件并启动</h4><pre><code class="bash">
+使用`systemctl daemon-reload`命令来载入新添加的配置文件，然后使用`systemctl start test-sh.service`命令启动，再使用`systemctl status test-sh.service`命令来查看状态，可以看到已经启动，`/opt/dev/shell/test.txt`也确实在不停的写入内容，最后使用`systemctl stop test-sh.service`命令停止服务，可以看到状态也是停止了。
+
+注意的是修改配置文件后一定要使用`systemctl daemon-reload`命令来载入新添加的配置文件，然后再启动服务。
+
+[root@VM_0_11_centos ~]# systemctl start test-sh.service
+^C
+[root@VM_0_11_centos ~]# systemctl status test-sh.service
+● test-sh.service - test sh log
+   Loaded: loaded (/usr/lib/systemd/system/test-sh.service; enabled; vendor preset: disabled)
+   Active: activating (start) since Fri 2020-06-26 05:46:45 CST; 11s ago
+   Control: 9295 (test.sh)
+   CGroup: /system.slice/test-sh.service
+       ├─9295 /bin/bash /opt/dev/shell/test.sh
+       └─9343 sleep 1
+
+Jun 26 05:46:45 VM_0_11_centos systemd[1]: Starting test sh log...
+[root@VM_0_11_centos ~]# systemctl stop test-sh.service
+[root@VM_0_11_centos ~]# systemctl status test-sh.service
+● test-sh.service - test sh log
+   Loaded: loaded (/usr/lib/systemd/system/test-sh.service; enabled; vendor preset: disabled)
+   Active: inactive (dead) since Fri 2020-06-26 05:47:52 CST; 2s ago
+  Process: 9295 ExecStart=/opt/dev/shell/test.sh (code=killed, signal=TERM)
+
+Jun 26 05:46:45 VM_0_11_centos systemd[1]: Starting test sh log...
+Jun 26 05:47:52 VM_0_11_centos systemd[1]: Stopped test sh log.
+</code></pre>
+<h3 id="查看Unit启动日志"><a href="#查看Unit启动日志" class="headerlink" title="查看Unit启动日志"></a>查看Unit启动日志</h3><p>Systemd统一管理了所有Unit的启动日志，因此只需要使用journalctl命令就可以查看到服务的日志</p>
+<pre><code class="bash"># 查看所有日志（默认情况下 ，只保存本次启动的日志）
+journalctl
+
+# 查看指定时间的日志
+journalctl --since=&quot;2012-10-30 18:17:16&quot;
+journalctl --since &quot;20 min ago&quot;
+journalctl --since yesterday
+journalctl --since &quot;2015-01-10&quot; --until &quot;2015-01-11 03:00&quot;
+journalctl --since 09:00 --until &quot;1 hour ago&quot;
+
+# 显示尾部的最新10行日志
+journalctl -n
+
+# 显示尾部指定行数的日志
+journalctl -n 20
+
+# 实时滚动显示最新日志
+journalctl -f
+
+# 查看指定服务的日志
+journalctl /usr/lib/systemd/systemd
+
+# 查看指定进程的日志
+journalctl _PID=1
+
+# 查看某个路径的脚本的日志
+journalctl /usr/bin/bash
+
+# 查看指定用户的日志
+journalctl _UID=33 --since today
+
+# 查看某个 Unit 的日志
+journalctl -u nginx.service
+journalctl -u nginx.service --since today
+
+# 实时滚动显示某个 Unit 的最新日志
+journalctl -u nginx.service -f
+
+# 合并显示多个 Unit 的日志
+$ journalctl -u nginx.service -u php-fpm.service --since today
+</code></pre>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2022-06-06T05:16:57.000Z" itemprop="dateUpdated">2022-06-06 13:16:57</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" target="_blank" rel="external">http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://pgw1315.github.io">
+            <img src="/img/zjl.jpg" alt="Will Holmes">
+            Will Holmes
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" rel="tag">系统管理</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/&title=《systemctl命令介绍和使用》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/&title=《systemctl命令介绍和使用》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《systemctl命令介绍和使用》 — Will的博客&url=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2022/06/07/Linux%E7%94%A8netstat%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%E8%AF%A6%E8%A7%A3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Linux用netstat查看服务及监听端口详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/11/23/PyCharm%20%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E5%92%8C%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">PyCharm 自定义文件和代码模板</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Will Holmes &copy; 2015 - 2023</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/&title=《systemctl命令介绍和使用》 — Will的博客&pic=http://pgw1315.github.io/img/zjl.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/&title=《systemctl命令介绍和使用》 — Will的博客&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《systemctl命令介绍和使用》 — Will的博客&url=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/&via=http://pgw1315.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://pgw1315.github.io/2022/06/06/systemctl%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
